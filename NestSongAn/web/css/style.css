@@ -105,6 +105,14 @@ hr.duongLine {
 }
 /*-- chat-luong-to-yen --*/ 
 
+/*--line 2--*/
+hr.line2-index {
+  border-top: 1px solid #010101;
+  border-bottom-width: 20px;
+}
+/*--line 2--*/
+
+
 ul li,ol li{
     font-size:14px;
 }
@@ -1156,7 +1164,7 @@ button.submit.check_out{
 /*-- footer --*/
 .footer{
     padding:4em 0;
-    background:#212121;
+    background:#495b3f;
 }
 .w3_footer_grid h3{
     font-size:1.2em;
