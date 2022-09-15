@@ -13,8 +13,8 @@ html, body{
 .ve-song-an{
     background:url(../images/ve_song-an.PNG) no-repeat 0px 0px;
     background-size:cover;
-    width: 450px;
-    height: 450px;
+    width: 500px;
+    height: 652px;
     margin-right: 20px;
     display: block;
 }
@@ -45,6 +45,65 @@ hr.duongLine {
     margin-left: 200px;
     margin-top: -70px;
 }
+/*-- category: to yen tinh che, to yen tho, yen chung san, yen tuoi --*/
+.service-item{
+    /*background-color:rgba(0, 0, 0, 0.6);*/
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 295px;
+
+}
+.service-row{
+    position: relative;
+    margin-bottom: 25px;
+}
+.sertice-item-titile{
+    font-size: 30px;
+    font-family: 'Nunito Sans', sans-serif; font-weight: bold;
+}
+
+.san-pham-cung-cap{
+    margin-bottom: 50px;
+    background-color: #f5f5f5;
+}
+
+/*-- category: to yen tinh che, to yen tho, yen chung san, yen tuoi --*/
+
+/*-- a button : Xem them --*/
+.btn1{
+    font-weight: bold;
+   font-size: 1em;
+   /*letter-spacing: 0.1em;*/
+   text-decoration: none;
+   color: #3C2B2B;
+   display: inline-block;
+   padding: 5px 10px 5px 10px;
+   position: relative;
+   border: 3px solid #ffffff;
+   border-radius: 20px;
+   background-color: #ffffff;
+}
+    
+ /*-- a button : Xem them --*/
+ 
+/*-- chat-luong-to-yen --*/ 
+.item{
+    background-color: #F9F7F7;
+    /*padding: 10px 10px 0px 10px;*/
+    padding: 10px 60px;
+    border-radius: 10%;
+    /*box-shadow: 5px 10px;*/
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.item-title{
+    border-bottom: 2px dashed rgb(134, 133, 133);
+}
+.item-description{
+    margin-bottom: 20px;
+}
+/*-- chat-luong-to-yen --*/ 
 
 ul li,ol li{
     font-size:14px;
