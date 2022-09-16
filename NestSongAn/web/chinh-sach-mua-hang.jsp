@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Đăng ký</title>
+        <title>Chính Sách Mua Hàng</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -32,44 +32,11 @@
                 });
             });
         </script>
+        <!-- start-smoth-scrolling -->
     </head>
     <body>
         <jsp:include page="header.jsp" />
-        <div class="w3_login">
-            <h3 style="color: #4a5d43; font-family: 'Nunito Sans', sans-serif; font-weight: bold;">Đăng ký</h3>
-            <div class="w3_login_module">
-                <div class="module form-module">
-                    <div class="toggle"><i class="fa fa-times fa-pencil"></i>
-                    </div>
-
-                    <div class="form">
-                        <h2 style="color: #4a5d43; font-family: 'Nunito Sans', sans-serif;">Tạo tài khoản</h2>
-                        <form action="#" method="post">
-                            <input type="text" name="Username" placeholder="Username" required=" ">
-                            <input type="password" name="Password" placeholder="Password" required=" ">
-                            <input type="email" name="Email" placeholder="Email Address" required=" ">
-                            <input type="text" name="Phone" placeholder="Phone Number" required=" ">
-                            <input type="submit" value="Đăng ký">
-                        </form>
-                        <a href="login.jsp">Đã có tài khoản, đăng nhập ngay</a>
-
-                    </div>
-                </div>
-            </div>
-            <script>
-                $('.toggle').click(function () {
-                    // Switches the Icon
-                    $(this).children('i').toggleClass('fa-pencil');
-                    // Switches the forms  
-                    $('.form').animate({
-                        height: "toggle",
-                        'padding-top': 'toggle',
-                        'padding-bottom': 'toggle',
-                        opacity: "toggle"
-                    }, "slow");
-                });
-            </script>
-        </div>
+        
         <jsp:include page="footer.jsp" />
     </body>
 </html>

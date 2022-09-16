@@ -272,7 +272,7 @@ ul.dropdown-menu.drp-mnu li a i {
     display: block;
     background: url(../images/logo.png);
     line-height: 1;
-    height: ;
+    /*height: ;*/
 }
 .profile_details_drop a {
     display: block;

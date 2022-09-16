@@ -405,7 +405,12 @@
             <!-- fresh-vegetables -->
             <div class="fresh-vegetables">
                 <div class="container">
-                    <h3>Top Products</h3>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <span style="font-size: 40px; color: #4a5d43; font-family: 'Nunito Sans', sans-serif; font-weight: bold;">Sản</span>&nbsp;&nbsp;
+                            <span style="color: #d5a554; font-size: 35px; font-family: 'Nunito Sans', sans-serif; font-weight: bold;">Phẩm</span>
+                        </div>
+                    </div>
                     <div class="w3l_fresh_vegetables_grids">
                         <div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
                             <div class="w3l_fresh_vegetables_grid2">

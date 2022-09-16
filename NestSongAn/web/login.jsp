@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sign In</title>
+        <title>Đăng nhập</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,24 +36,23 @@
     <body>
         <jsp:include page="header.jsp" />
         <div class="w3_login">
-            <h3>Sign In</h3>
+            <h3 style="color: #4a5d43; font-family: 'Nunito Sans', sans-serif; font-weight: bold;">Đăng nhập</h3>
             <div class="w3_login_module">
                 <div class="module form-module">
                     <div class="toggle"><i class="fa fa-times fa-pencil"></i>
-                        <div class="tooltip">Click Me</div>
                     </div>
                     <div class="form">
-                        <h2>Login to your account</h2>
+                        <h2 style="color: #4a5d43; font-family: 'Nunito Sans', sans-serif">Đăng nhập tài khoản của bạn</h2>
                         <form action="#" method="post">
                             <input type="text" name="Username" placeholder="Username" required=" ">
                             <input type="password" name="Password" placeholder="Password" required=" ">
-                            <input type="submit" value="Login">
+                            <input type="submit" value="Đăng nhập">
                         </form>
                     </div>
                     <div style="margin-bottom: 30px;">
-                        <a href="register.jsp">Create an account</a>
+                        <a href="register.jsp">Tạo tài khoản</a>
                     </div>
-                    <div class="cta"><a href="#">Forgot your password?</a></div>
+                    <div class="cta"><a href="#">Quên mật khẩu?</a></div>
                 </div>
             </div>
             <script>

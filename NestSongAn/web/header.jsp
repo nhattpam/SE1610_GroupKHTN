@@ -39,8 +39,8 @@
             </div>
             <div class="w3l_search">
                 <form action="#" method="post">
-                    <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value === '') {
-                                this.value = 'Search a product...';
+                    <input type="text" name="Product" value="Tìm kiếm sản phẩm..." onfocus="this.value = '';" onblur="if (this.value === '') {
+                                this.value = 'Tìm kiếm sản phẩm...';
                             }" required="">
                     <input type="submit" value=" ">
                 </form>
@@ -61,8 +61,8 @@
                         <div class="mega-dropdown-menu">
                             <div class="w3ls_vegetables">
                                 <ul class="dropdown-menu drp-mnu">
-                                    <li><a href="login.jsp">Login</a></li> 
-                                    <li><a href="register.jsp">Sign Up</a></li>
+                                    <li><a href="login.jsp">Đăng nhập</a></li> 
+                                    <li><a href="register.jsp">Đăng ký</a></li>
                                 </ul>
                             </div>                  
                         </div>	
@@ -70,7 +70,7 @@
                 </ul>
             </div>
             <div class="w3l_header_right1">
-                <h2><a href="mail.html">Contact Us</a></h2>
+                <h2><a href="mail.html">Liên Hệ</a></h2>
             </div>
             <div class="clearfix"> </div>
         </div>
@@ -93,14 +93,14 @@
         <div class="logo_products">
             <div class="container">
                 <div class="w3ls_logo_products_left">
-                    <h1><a href="index.html"><span>Nest</span> Song Ân</a></h1>
+                    <h1><a href="index.jsp"><span>Nest</span> Song Ân</a></h1>
                 </div>
                 <div class="w3ls_logo_products_left1">
                     <ul class="special_items">
-                        <li><a href="events.html">VỀ SONG ÂN</a><i>/</i></li>
+                        <li><a href="introduction-song-an.jsp">VỀ SONG ÂN</a><i>/</i></li>
                         <li><a href="about.html">SẢN PHẨM TỔ YẾN</a><i>/</i></li>
                         <li><a href="products.html">CẨM NANG YẾN SÀO</a><i>/</i></li>
-                        <li><a href="services.html">LIÊN HỆ</a></li>
+                        <li><a href="services.html">DỊCH VỤ</a></li>
                     </ul>
                 </div>
                 <div class="w3ls_logo_products_left1">
