@@ -27,17 +27,17 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
-        
+
     </head>
     <body>
         <div class="col-lg-3">
             <div class="hero__categories">
-                <div class="hero__categories__all">
+                <div class="hero__categories__all" style="background: #6a0e13;">
                     <i class="fa fa-bars"></i>
-                    <span>Danh Mục Yến Sào</span>
+                    <span>Danh Mục</span>
                 </div>
                 <ul>
-                    <li><a href="#">Fresh Meat</a></li>
+                    <li><a href="#">Yến Dạng Lọ</a></li>
                     <li><a href="#">Vegetables</a></li>
                     <li><a href="#">Fruit & Nut Gifts</a></li>
                     <li><a href="#">Fresh Berries</a></li>

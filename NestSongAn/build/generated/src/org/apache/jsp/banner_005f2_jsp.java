@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class category_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class banner_005f2_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -47,6 +47,7 @@ public final class category_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("        <meta charset=\"UTF-8\">\r\n");
       out.write("        <meta name=\"description\" content=\"Ogani Template\">\r\n");
       out.write("        <meta name=\"keywords\" content=\"Ogani, unica, creative, html\">\r\n");
@@ -66,30 +67,27 @@ public final class category_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"css/owl.carousel.min.css\" type=\"text/css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"css/slicknav.min.css\" type=\"text/css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"css/style.css\" type=\"text/css\">\r\n");
-      out.write("\r\n");
+      out.write("        \r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
-      out.write("        <div class=\"col-lg-3\">\r\n");
-      out.write("            <div class=\"hero__categories\">\r\n");
-      out.write("                <div class=\"hero__categories__all\" style=\"background: #6a0e13;\">\r\n");
-      out.write("                    <i class=\"fa fa-bars\"></i>\r\n");
-      out.write("                    <span>Danh Mục</span>\r\n");
+      out.write("        <!-- Banner Begin -->\r\n");
+      out.write("        <div class=\"banner\">\r\n");
+      out.write("            <div class=\"container\">\r\n");
+      out.write("                <div class=\"row\">\r\n");
+      out.write("                    <div class=\"col-lg-6 col-md-6 col-sm-6\">\r\n");
+      out.write("                        <div class=\"banner__pic\">\r\n");
+      out.write("                            <img src=\"img/banner/banner-1.jpg\" alt=\"\">\r\n");
+      out.write("                        </div>\r\n");
+      out.write("                    </div>\r\n");
+      out.write("                    <div class=\"col-lg-6 col-md-6 col-sm-6\">\r\n");
+      out.write("                        <div class=\"banner__pic\">\r\n");
+      out.write("                            <img src=\"img/banner/banner-2.jpg\" alt=\"\">\r\n");
+      out.write("                        </div>\r\n");
+      out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
-      out.write("                <ul>\r\n");
-      out.write("                    <li><a href=\"#\">Yến Dạng Lọ</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Vegetables</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Fruit & Nut Gifts</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Fresh Berries</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Ocean Foods</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Butter & Eggs</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Fastfood</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Fresh Onion</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Papayaya & Crisps</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Oatmeal</a></li>\r\n");
-      out.write("                    <li><a href=\"#\">Fresh Bananas</a></li>\r\n");
-      out.write("                </ul>\r\n");
       out.write("            </div>\r\n");
       out.write("        </div>\r\n");
+      out.write("        <!-- Banner End -->\r\n");
       out.write("        <!-- Js Plugins -->\r\n");
       out.write("        <script src=\"js/jquery-3.3.1.min.js\"></script>\r\n");
       out.write("        <script src=\"js/bootstrap.min.js\"></script>\r\n");

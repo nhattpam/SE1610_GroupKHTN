@@ -100,36 +100,36 @@
 
         <!-- Header Section Begin -->
         <header class="header">
-            <div class="header__top">
+            <div class="header__top" style="background: #6a0e13;">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="header__top__left">
                                 <ul>
-                                    <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                    <li>Free Shipping for all Order of $1000</li>
+                                    <li style="color: white;"><i class="fa fa-envelope" style="color: white;"></i> khtnholdings.work@gmail.com</li>
+                                    <li style="color: white;">Giao Hàng Tận Nơi</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="header__top__right">
-                                <div class="header__top__right__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                                <div class="header__top__right__social" >
+                                    <a href="#"><i class="fa fa-facebook" style="color: white;"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" style="color: white;"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" style="color: white;"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest-p" style="color: white;"></i></a>
                                 </div>
                                 <div class="header__top__right__language">
                                     <img src="img/language.png" alt="">
-                                    <div>English</div>
+                                    <div style="color: white;">English</div>
                                     <span class="arrow_carrot-down"></span>
                                     <ul>
-                                        <li><a href="#">Spanis</a></li>
-                                        <li><a href="#">English</a></li>
+                                        <li><a href="#" style="color: white;">Spanis</a></li>
+                                        <li><a href="#" style="color: white;">English</a></li>
                                     </ul>
                                 </div>
                                 <div class="header__top__right__auth">
-                                    <a href="#"><i class="fa fa-user"></i> Login</a>
+                                    <a href="#" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
                                 </div>
                             </div>
                         </div>
@@ -140,13 +140,13 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="header__logo">
-                            <a href="./index.html"><img src="img/logo-song-an.jpg" alt=""></a>
+                            <a href="./index.html"><img src="img/logo-song-an.jpg" alt="" style="width: 30%;"></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="./index.html">Home</a></li>
+                                <li class="active"><a href="./index.html" style="color: #6a0e13;">Trang Chủ</a></li>
                                 <li><a href="./shop-grid.html">Shop</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="header__menu__dropdown">
@@ -164,8 +164,8 @@
                     <div class="col-lg-3">
                         <div class="header__cart">
                             <ul>
-                                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i> <span style="background: #6a0e13;">1</span></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span style="background: #6a0e13;">3</span></a></li>
                             </ul>
                             <div class="header__cart__price">item: <span>410000</span></div>
                         </div>

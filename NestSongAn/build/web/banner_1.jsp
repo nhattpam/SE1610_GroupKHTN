@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/style.css" type="text/css" />
         
     </head>
     <body>
@@ -38,26 +38,22 @@
                             All Categories
                             <span class="arrow_carrot-down"></span>
                         </div>
-                        <input type="text" placeholder="What do yo u need?">
-                        <button type="submit" class="site-btn">SEARCH</button>
+                        <input type="text" placeholder="Bạn tìm gì?">
+                        <button type="submit" class="site-btn" style="background: #6a0e13;">TÌM KIẾM</button>
                     </form>
                 </div>
                 <div class="hero__search__phone">
                     <div class="hero__search__phone__icon">
-                        <i class="fa fa-phone"></i>
+                        <i class="fa fa-phone" style="color: #6a0e13;"></i>
                     </div>
                     <div class="hero__search__phone__text">
-                        <h5>+65 11.188.888</h5>
-                        <span>support 24/7 time</span>
+                        <h5>+84 1235548 48</h5>
+                        <span>Hỗ trợ 24/7</span>
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+            <div class="hero__item set-bg" data-setbg="img/banner_1_changed.png">
                 <div class="hero__text">
-                    <span>FRUIT FRESH</span>
-                    <h2>Vegetable <br />100% Organic</h2>
-                    <p>Free Pickup and Delivery Available</p>
-                    <a href="#" class="primary-btn">SHOP NOW</a>
                 </div>
             </div>
         </div>
