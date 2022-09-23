@@ -129,7 +129,7 @@
                                     </ul>
                                 </div>
                                 <div class="header__top__right__auth">
-                                    <a href="#" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
+                                    <a href="login.jsp" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
                                 </div>
                             </div>
                         </div>
@@ -140,13 +140,13 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="header__logo">
-                            <a href="./index.html"><img src="img/logo-song-an.jpg" alt="" style="width: 30%;"></a>
+                            <a href="./index.jsp"><img src="img/logo-song-an.jpg" alt="" style="width: 30%;"></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="./index.html" style="color: #6a0e13;">Trang Chủ</a></li>
+                                <li class="active"><a href="./index.jsp" style="color: #6a0e13;">Trang Chủ</a></li>
                                 <li><a href="./shop-grid.html">Shop</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="header__menu__dropdown">

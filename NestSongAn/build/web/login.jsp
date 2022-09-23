@@ -47,6 +47,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            <a href="register.jsp">Bạn chưa có tài khoản? Đăng ký ngay.</a>
         </div>
         <jsp:include page="footer.jsp" />
         <!-- Js Plugins -->
