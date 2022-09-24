@@ -5,11 +5,13 @@
  */
 package dtos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Admin
  */
-public class UsersDTO {
+public class UsersDTO implements Serializable{
     private int user_id;
     private String full_name;
     private String user_name;
@@ -25,6 +27,14 @@ public class UsersDTO {
     public UsersDTO() {
     }
 
+    public UsersDTO(String full_name, String user_name, String email, String phone, UserRoleDTO role_id) {
+        this.full_name = full_name;
+        this.user_name = user_name;
+        this.email = email;
+        this.phone = phone;
+        this.role_id = role_id;
+    }
+    
     public UsersDTO(int user_id, String full_name, String user_name, String password, String reset_key, String email, String phone, int status, String create_date, String edit_date, UserRoleDTO role_id) {
         this.user_id = user_id;
         this.full_name = full_name;

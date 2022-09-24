@@ -1,8 +1,13 @@
 package utils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 
 
 /**
@@ -34,6 +39,19 @@ public class DBUtils {
     private final static String userID = "sa";
     private final static String password = "12345";
     
+    public static Properties getProperties(ServletContext context, String filePath){
+        
+        String siteMapFile = context.getInitParameter("SITEMAPS_PATH");
+        InputStream input = context.getResourceAsStream(filePath);
+        Properties properties =null;
+        try {
+           properties=new Properties();
+           properties.load(input);
+        }catch(IOException ex){
+            Logger.getLogger("Get properties "+ex.getMessage());
+        }
+        return properties;
+    }
     public static void main(String[] args) {
         System.out.println(DBUtils.getConnection());
     }
