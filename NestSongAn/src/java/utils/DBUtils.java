@@ -41,7 +41,6 @@ public class DBUtils {
     
     public static Properties getProperties(ServletContext context, String filePath){
         
-        String siteMapFile = context.getInitParameter("SITEMAPS_PATH");
         InputStream input = context.getResourceAsStream(filePath);
         Properties properties =null;
         try {

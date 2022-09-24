@@ -118,8 +118,8 @@ public class AuthenticationFilter implements Filter {
             //check authentication
             String rule=(String)authenticationProperties.getProperty(resource);
             if (rule!=null && rule.equals("restricted")) {
-                if (session==null||session.getAttribute("")==null) {
-                    ((HttpServletResponse)response).sendRedirect("login.jsp");
+                if (session==null||session.getAttribute("USER")==null) {
+                    ((HttpServletResponse)response).sendRedirect("loginPage");
                 }else{
                     chain.doFilter(request, response);
                 }
