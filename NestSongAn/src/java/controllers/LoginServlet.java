@@ -6,12 +6,14 @@
 package controllers;
 
 import daos.UserDAO;
-import dtos.UserDTO;
+import dtos.UsersDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Properties;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +28,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
+    private static final String LOGIN_PAGE = "loginPage";
+    private static final String HOME_PAGE ="";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,46 +46,48 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
         
-        String url="login.jsp";                                          // default to login page if error
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
+        String url=siteMaps.getProperty(LOGIN_PAGE);                                          // default to login page if error
         try {
 
             //1:call DAO
             //new obj DAO && call method from DAO
             UserDAO dao = new UserDAO();
-            UserDTO result = dao.checkLogin(username, password);                
+            UsersDTO result = dao.checkLogin(username, password);                
             //2.process 
-            if (result != null && result.getRole().getRoleName().equals("customer")) {          // Role name = customer 
-                url = "homepage.jsp";                                                   // to home page
+            if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer 
+                url = siteMaps.getProperty(HOME_PAGE);                                                   // to home page
 
                 HttpSession session = request.getSession();//true
-                session.setAttribute("ACCOUNT", result);
+                session.setAttribute("USER", result);
 
             }
-            if (result != null && result.getRole().getRoleName().equals("staff")) {          // Role name = staff 
+            if (result != null && result.getRole_id().getRole().equals("staff")) {          // Role name = staff 
                 url = "staff.jsp";                                                       // to staff page
 
                 HttpSession session = request.getSession();//true
-                session.setAttribute("ACCOUNT", result);
+                session.setAttribute("USER", result);
 
             }
-            if (result != null && result.getRole().getRoleName().equals("admin")) {             // Role id = admin 
+            if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role id = admin 
                 url = "admin.jsp";                                                      // to admin page
 
                 HttpSession session = request.getSession();//true
-                session.setAttribute("ACCOUNT", result);
+                session.setAttribute("USER", result);
 
             }
-            if (result != null && result.getRole().getRoleName().equals("supplier")) {          // Role id = supplier 
+            if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role id = supplier 
                 url = "supplier.jsp";                                                    // to supplier page
 
                 HttpSession session = request.getSession();//true
-                session.setAttribute("ACCOUNT", result);
+                session.setAttribute("USER", result);
 
-            }if (result != null && result.getRole().getRoleName().equals("shipper")) {          // Role id = shipper 
+            }if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role id = shipper 
                 url = "shipper.jsp";                                                    // to shipper page
 
                 HttpSession session = request.getSession();//true
-                session.setAttribute("ACCOUNT", result);
+                session.setAttribute("USER", result);
 
             }
         } catch (NamingException ex) {            

@@ -5,15 +5,15 @@
  */
 package daos;
 
-import dtos.RoleDTO;
-import dtos.UserDTO;
+import dtos.UserRoleDTO;
+import dtos.UsersDTO;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.NamingException;
-import utils.DBHelper;
+import utils.DBUtils;
 
 /**
  *
@@ -21,17 +21,17 @@ import utils.DBHelper;
  */
 public class UserDAO implements Serializable {
 
-    public UserDTO checkLogin(String username, String password) throws SQLException, NamingException {
+    public UsersDTO checkLogin(String username, String password) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        UserDTO result = null;
+        UsersDTO result = null;
         try {
             //1. Make connection
-            con=DBHelper.makeConnection();                            
+            con=DBUtils.getConnection();                            
             //2. sql statement
             if (con != null) {
-                String sql = "Select user_name, email, r.role_id, role " 
+                String sql = "Select full_name, user_name, email, phone, r.role_id, role " 
                         + "From users u, user_role r "
                         + "Where user_name = ? "
                         + "And password = ? "
@@ -44,10 +44,12 @@ public class UserDAO implements Serializable {
                 rs = stm.executeQuery();
                 //5.process result
                 if (rs.next()) {
+                    String fullname=rs.getString("full_name");
                     String email = rs.getString("email");
+                    String phone=rs.getString("phone");
                     int roleId = rs.getInt("role_id");
                     String role=rs.getString("role");
-                    result = new UserDTO(username, null, email, new RoleDTO(roleId, role));
+                    result = new UsersDTO(fullname, username, email, phone, new UserRoleDTO(roleId, role));
                 }
             }
         } finally {
