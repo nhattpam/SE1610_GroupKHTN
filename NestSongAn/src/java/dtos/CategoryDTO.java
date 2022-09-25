@@ -16,6 +16,11 @@ public class CategoryDTO {
 
     public CategoryDTO() {
     }
+    
+    public CategoryDTO(int category_id) {
+        this.category_id = category_id;
+    }
+    
 
     public CategoryDTO(int category_id, String name, String big_category) {
         this.category_id = category_id;

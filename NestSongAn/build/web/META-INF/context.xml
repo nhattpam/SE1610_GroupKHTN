@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/NestSongAn">
-    <Resource name="DS01" auth="Container" type="javax.sql.DataSource"
-    driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url="jdbc:sqlserver://localhost:1433;databaseName=YenSao;instanceName=users"
-    username="sa" password="12345"/>
+
 </Context>
