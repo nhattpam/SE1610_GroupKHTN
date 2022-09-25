@@ -1,10 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page isELIgnored="false" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Nhân Viên</title>
+        <title>Thêm Sản Phẩm</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -183,7 +186,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../staff/add_product.jsp" class="nav-link">
+                                <a href="../staff/" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thêm Sản Phẩm
@@ -200,7 +203,87 @@
             </aside>
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper"></div>
+            <div class="content-wrapper">
+                <div class="container">
+                    <div class="row crd-ho">
+                        <div class="col-md-4 offset-md-4 mt-3 ">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="text-center">Thêm Sản Phẩm</h4>
+
+                                    <c:if test="${ not empty succMsg }">
+                                        <h5 class="text-center text-success">${succMsg}</h5>
+                                        <c:remove var="succMsg" scope="session"/>
+                                    </c:if>
+
+                                    <c:if test="${ not empty failedMsg }">
+                                        <h5 class="text-center text-danger">${failedMsg}</h5>
+                                        <c:remove var="failedMsg" scope="session"/>
+                                    </c:if>
+
+
+                                    <form action="../../AddProductController" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Tên Sản Phẩm*</label>
+                                            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Code*</label>
+                                            <input name="code" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Mô Tả Ngắn*</label>
+                                            <input name="short_description" type="text" class="form-control" id="exampleInputPassword1" required="required">
+                                        </div> 
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Mô Tả Dài*</label>
+                                            <input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required">
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Giá*</label>
+                                            <input name="price" type="number" class="form-control" id="exampleInputPassword1" required="required">
+                                        </div> 
+                                        
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Trọng Lượng*</label>
+                                            <input name="weight" type="number" class="form-control" id="exampleInputPassword1" required="required">
+                                        </div> 
+                                        
+                                         <div class="form-group">
+                                            <label for="exampleFormControlFile1">Upload Ảnh</label>
+                                            <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1" required="required"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputState">Danh Mục</label>
+                                            <select id="inputState" name="category_id" class="form-control" required="required">
+                                                <option selected>--chọn--</option>
+                                                <option value="1">Yến Hũ</option>
+                                                <option value="2">Yến Tinh Chế</option>
+                                                <option value="3">Yến Tươi</option>
+                                                <option value="4">Yến Thô Còn Lông</option>
+                                                <option value="5">Chân Tổ Yến</option>
+                                                <option value="6">Nước Yến</option>
+                                            </select>
+                                        </div> 
+                                        
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Số Lượng*</label>
+                                            <input name="quantity" type="number" class="form-control" id="exampleInputPassword1" required="required">
+                                        </div> 
+
+                                       
+                                        <button type="submit" class="btn btn-dark mt-2">Thêm</button>
+                                    </form>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- /.content-wrapper -->
             <footer class="main-footer">
