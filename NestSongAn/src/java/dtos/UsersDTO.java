@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Admin
  */
-public class UsersDTO implements Serializable{
+public class UsersDTO implements Serializable{ 
     private int user_id;
     private String full_name;
     private String user_name;
@@ -26,6 +26,20 @@ public class UsersDTO implements Serializable{
 
     public UsersDTO() {
     }
+
+    public UsersDTO(String full_name, String user_name, String password, String email, String phone, int status, String create_date, String edit_date, UserRoleDTO role_id) {
+        this.full_name = full_name;
+        this.user_name = user_name;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.status = status;
+        this.create_date = create_date;
+        this.edit_date = edit_date;
+        this.role_id = role_id;
+    }
+    
+    
     
     public UsersDTO(String full_name, String user_name, String email, String phone, UserRoleDTO role_id) {
         this.full_name = full_name;
@@ -135,6 +149,11 @@ public class UsersDTO implements Serializable{
 
     public void setRole_id(UserRoleDTO role_id) {
         this.role_id = role_id;
+    }
+
+    @Override
+    public String toString() {
+        return "UsersDTO{" + "full_name=" + full_name + ", user_name=" + user_name + ", password=" + password + ", email=" + email + ", phone=" + phone + ", status=" + status + ", create_date=" + create_date + ", edit_date=" + edit_date + ", role_id=" + role_id.getRole_id() + '}';
     }
     
     

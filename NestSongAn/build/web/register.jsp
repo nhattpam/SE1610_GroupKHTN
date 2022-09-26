@@ -3,7 +3,7 @@
     Created on : Sep 19, 2022, 9:42:17 AM
     Author     : Admin
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,23 +30,44 @@
     </head>
     <body>
         <jsp:include page="header.jsp" />
+
+
+
         <div class="container mb-3">
-            <form>
+            <form action="RegisterAccountController" method="post">
+                
+                <h4>Đăng Ký tài khoản</h4>
+                <c:if test="${ not empty succMsg }">
+                    <h5 class="text-center text-success">${succMsg}</h5>
+                    <c:remove var="succMsg" scope="session"/>
+                </c:if>
+
+                <c:if test="${ not empty failedMsg }">
+                    <h5 class="text-center text-danger">${failedMsg}</h5>
+                    <c:remove var="failedMsg" scope="session"/>
+                </c:if>
+                    
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Họ và tên</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="full_name">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Tên đăng nhập</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="user_name">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Số điện thoại</label>
+                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="phone">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Địa chỉ email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="email">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" class="form-control" id="exampleInputPassword1"  required="" name="password">
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary">Đăng ký</button>
             </form>
             <a href="login.jsp">Bạn đã có tài khoản? Đăng nhập ngay</a>

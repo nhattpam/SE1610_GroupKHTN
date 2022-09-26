@@ -6,6 +6,7 @@
 package controllers;
 
 import daos.UserDAO;
+import daos.UserDAOImpl;
 import dtos.UsersDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.DBUtils;
 
 /**
  *
@@ -53,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 
             //1:call DAO
             //new obj DAO && call method from DAO
-            UserDAO dao = new UserDAO();
+            UserDAO dao = new UserDAOImpl(DBUtils.getConnection());
             UsersDTO result = dao.checkLogin(username, password);                
             //2.process 
             if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer 
