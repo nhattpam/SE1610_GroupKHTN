@@ -20,6 +20,7 @@ public class ProductDTO implements Comparable<ProductDTO> {
     private boolean is_out_standing;
     private boolean is_latest;
     private float price;
+    private int weight;
     private String photo;
     private String create_date;
     private String edit_date;
@@ -30,7 +31,21 @@ public class ProductDTO implements Comparable<ProductDTO> {
     public ProductDTO() {
     }
 
-    public ProductDTO(int product_id, String name, String code, String short_description, String full_description, boolean is_hot_selling, boolean is_out_standing, boolean is_latest, float price, String photo, String create_date, String edit_date, CategoryDTO category_id, int quantity, SupplierDTO supplier_id) {
+    public ProductDTO(String name, String code, String short_description, String full_description, float price, int weight, String photo, String create_date, String edit_date, CategoryDTO category_id, int quantity) {
+        this.name = name;
+        this.code = code;
+        this.short_description = short_description;
+        this.full_description = full_description;
+        this.price = price;
+        this.weight = weight;
+        this.photo = photo;
+        this.create_date = create_date;
+        this.edit_date = edit_date;
+        this.category_id = category_id;
+        this.quantity = quantity;
+    }
+
+    public ProductDTO(int product_id, String name, String code, String short_description, String full_description, boolean is_hot_selling, boolean is_out_standing, boolean is_latest, float price, int weight, String photo, String create_date, String edit_date, CategoryDTO category_id, int quantity, SupplierDTO supplier_id) {
         this.product_id = product_id;
         this.name = name;
         this.code = code;
@@ -40,6 +55,7 @@ public class ProductDTO implements Comparable<ProductDTO> {
         this.is_out_standing = is_out_standing;
         this.is_latest = is_latest;
         this.price = price;
+        this.weight = weight;
         this.photo = photo;
         this.create_date = create_date;
         this.edit_date = edit_date;
@@ -48,6 +64,15 @@ public class ProductDTO implements Comparable<ProductDTO> {
         this.supplier_id = supplier_id;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    
     public int getProduct_id() {
         return product_id;
     }
@@ -168,6 +193,13 @@ public class ProductDTO implements Comparable<ProductDTO> {
         this.supplier_id = supplier_id;
     }
 
+    @Override
+    public String toString() {
+        return "ProductDTO{" + "name=" + name + ", code=" + code + ", short_description=" + short_description + ", full_description=" + full_description + ", price=" + price + " , weight =" + weight + ", photo=" + photo + ", create_date=" + create_date + ", edit_date=" + edit_date + ", category_id=" + category_id.getCategory_id() + ", quantity=" + quantity + '}';
+    }
+     
+    
+    
     @Override
     public int compareTo(ProductDTO p) {
 //        return Integer.parseInt(this.product_id) - Integer.parseInt(p.product_id);
