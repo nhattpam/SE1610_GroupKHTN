@@ -166,7 +166,6 @@ public class UsersDTO implements Serializable{
     @Override
     public String toString() {
         return "UsersDTO{" + "full_name=" + full_name + ", user_name=" + user_name + ", password=" + password + ", email=" + email + ", phone=" + phone + ", status=" + status + ", create_date=" + create_date + ", edit_date=" + edit_date + ", role_id=" + role_id.getRole_id() + '}';
-        return "UsersDTO{" + "full_name=" + full_name + ", user_name=" + user_name + ", password=" + password + ", email=" + email + ", phone=" + phone + ", create_date=" + create_date + ", edit_date=" + edit_date + '}';
     }
     
     

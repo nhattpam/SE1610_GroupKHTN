@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 
             //1:call DAO
             //new obj DAO && call method from DAO
-            UserDAO dao = new UserDAOImpl(DBUtils.getConnection());
+            UserDAO dao = new UserDAOImpl();
             UsersDTO result = dao.checkLogin(username, password);                
             //2.process 
             if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer 

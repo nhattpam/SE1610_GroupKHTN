@@ -30,6 +30,8 @@ public class UserDAOImpl implements UserDAO {
     public UserDAOImpl(Connection conn) {
         this.conn = conn;
     }
+     public UserDAOImpl() {
+    }
 
     @Override
     public UsersDTO checkLogin(String username, String password) throws SQLException, NamingException {
