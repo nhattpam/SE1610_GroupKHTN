@@ -102,5 +102,93 @@ public class UserDAOImpl implements UserDAO{
             e.printStackTrace();
         }
         return f;
+    }//Minh thanh 
+
+    public boolean resetPassword(String password, String email) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean check = false;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                con = DBUtils.getConnection();
+                String sql = ("update users set password = ? where email = ? ");
+                stm = con.prepareStatement(sql);
+                stm.setString(1, password);
+                stm.setString(2, email);
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return check;
+    }
+//Minh thanh
+
+    @Override
+    public boolean updateUser(UsersDTO user) throws SQLException {
+        boolean check = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            String sql = "update users set full_name=?, email=?, phone=? where user_name=? ";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, user.getFull_name());
+            stm.setString(2, user.getEmail());
+            stm.setString(3, user.getPhone());
+            stm.setString(4, user.getUser_name());
+            check = stm.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return check;
+    }
+//Minh thanh
+
+    public boolean checkDuplicateEmail(String email) throws SQLException {
+        boolean check = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select email from users where email=? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return check;
     }
 }
+
