@@ -27,6 +27,18 @@ public class UsersDTO implements Serializable{
     public UsersDTO() {
     }
 
+    public UsersDTO(int user_id, String full_name, String user_name, String password, String email, String phone, String create_date, String edit_date) {
+        this.user_id = user_id;
+        this.full_name = full_name;
+        this.user_name = user_name;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.create_date = create_date;
+        this.edit_date = edit_date;
+    }
+    
+
     public UsersDTO(String full_name, String user_name, String password, String email, String phone, int status, String create_date, String edit_date, UserRoleDTO role_id) {
         this.full_name = full_name;
         this.user_name = user_name;
@@ -154,6 +166,7 @@ public class UsersDTO implements Serializable{
     @Override
     public String toString() {
         return "UsersDTO{" + "full_name=" + full_name + ", user_name=" + user_name + ", password=" + password + ", email=" + email + ", phone=" + phone + ", status=" + status + ", create_date=" + create_date + ", edit_date=" + edit_date + ", role_id=" + role_id.getRole_id() + '}';
+        return "UsersDTO{" + "full_name=" + full_name + ", user_name=" + user_name + ", password=" + password + ", email=" + email + ", phone=" + phone + ", create_date=" + create_date + ", edit_date=" + edit_date + '}';
     }
     
     

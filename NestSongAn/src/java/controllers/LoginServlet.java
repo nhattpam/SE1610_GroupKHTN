@@ -60,38 +60,20 @@ public class LoginServlet extends HttpServlet {
             //2.process 
             if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer 
                 url = siteMaps.getProperty(HOME_PAGE);                                                   // to home page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
             }
             if (result != null && result.getRole_id().getRole().equals("staff")) {          // Role name = staff 
                 url = "staff.jsp";                                                       // to staff page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
             }
             if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role id = admin 
                 url = "admin.jsp";                                                      // to admin page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
             }
             if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role id = supplier 
                 url = "supplier.jsp";                                                    // to supplier page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
             }if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role id = shipper 
                 url = "shipper.jsp";                                                    // to shipper page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
             }
+            HttpSession session = request.getSession();//true
+            session.setAttribute("USER", result);
         } catch (NamingException ex) {            
             log("LoginServlet_Naming" + ex.getMessage());
         } catch (SQLException ex) {
