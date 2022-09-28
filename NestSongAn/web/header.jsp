@@ -134,12 +134,12 @@
                                 <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
                                 <c:if test="${not empty USER}">
                                     <div class="header__top__right__auth">
-                                        <a href="" style="color: white;"><i class="fa fa-user"></i> <%=u.getUser_name()%></a>
+                                        <a href="" style="color: white;"><i class="fa fa-user"></i> <%=u.getFull_name()%></a>
                                     </div>
                                 </c:if>
                                 <c:if test="${empty USER}">
                                     <div class="header__top__right__auth">
-                                        <a href="login.jsp" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
+                                        <a href="loginPage" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
                                     </div>
                                 </c:if>
 
@@ -158,7 +158,7 @@
                     <div class="col-lg-6">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="./index.jsp" style="color: #6a0e13;">Trang Chủ</a></li>
+                                <li class="active"><a href="" style="color: #6a0e13;">Trang Chủ</a></li>
                                 <li><a href="./shop-grid.html">Shop</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="header__menu__dropdown">

@@ -11,6 +11,8 @@ import dtos.UsersDTO;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +34,8 @@ public class RegisterAccountController extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         req.setCharacterEncoding("utf-8");
         //
-
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         try {
             String full_name = req.getParameter("full_name");
             String user_name = req.getParameter("user_name");
@@ -48,7 +51,7 @@ public class RegisterAccountController extends HttpServlet {
 
             String edited_date = null;
 
-            UserRoleDTO role_id = new UserRoleDTO(3);
+            UserRoleDTO role_id = new UserRoleDTO(1);
             UsersDTO us = new UsersDTO(full_name, user_name, password, email, phone, status, create_date, edited_date, role_id);
 
             UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
@@ -59,10 +62,10 @@ public class RegisterAccountController extends HttpServlet {
 
             if (f) {
                 session.setAttribute("succMsg", "Đăng ký tài khoản thành công...");
-                resp.sendRedirect("register.jsp");
+                resp.sendRedirect(siteMaps.getProperty("registerPage"));
             } else {
                 session.setAttribute("failedMsg", "Đăng ký tài khoản không thành công...");
-                resp.sendRedirect("register.jsp");
+                resp.sendRedirect(siteMaps.getProperty("registerPage"));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -32,6 +32,8 @@ public class LoginServlet extends HttpServlet {
 
     private static final String LOGIN_PAGE = "loginPage";
     private static final String HOME_PAGE ="";
+    private static final String STAFF_PAGE ="staffPage";
+    private static final String ADMIN_PAGE ="adminPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -51,6 +53,7 @@ public class LoginServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url=siteMaps.getProperty(LOGIN_PAGE);                                          // default to login page if error
+        String errorMessage="Wrong username or password";
         try {
 
             //1:call DAO
@@ -58,14 +61,17 @@ public class LoginServlet extends HttpServlet {
             UserDAO dao = new UserDAOImpl();
             UsersDTO result = dao.checkLogin(username, password);                
             //2.process 
+            if(result==null){
+                request.setAttribute("LoginError", errorMessage);
+            }
             if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer 
                 url = siteMaps.getProperty(HOME_PAGE);                                                   // to home page
             }
             if (result != null && result.getRole_id().getRole().equals("staff")) {          // Role name = staff 
-                url = "staff.jsp";                                                       // to staff page
+                url = siteMaps.getProperty(STAFF_PAGE);                                                       // to staff page
             }
             if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role id = admin 
-                url = "admin.jsp";                                                      // to admin page
+                url = siteMaps.getProperty(ADMIN_PAGE);                                                      // to admin page
             }
             if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role id = supplier 
                 url = "supplier.jsp";                                                    // to supplier page
