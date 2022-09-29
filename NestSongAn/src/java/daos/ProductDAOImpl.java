@@ -8,20 +8,21 @@ package daos;
 import dtos.ProductDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
-public class ProductDAOImpl implements ProductDAO{
-    
+public class ProductDAOImpl implements ProductDAO {
+
     private Connection conn;
 
     public ProductDAOImpl(Connection conn) {
         this.conn = conn;
     }
-    
-    
 
     //nhatpham: function Them san pham
     @Override
@@ -42,7 +43,6 @@ public class ProductDAOImpl implements ProductDAO{
             ps.setString(9, p.getEdit_date());
             ps.setInt(10, p.getCategory_id().getCategory_id());
             ps.setInt(11, p.getQuantity());
-           
 
             int i = ps.executeUpdate();
             if (i == 1) {
@@ -55,5 +55,30 @@ public class ProductDAOImpl implements ProductDAO{
         return f;
     }
     
-   
+    
+    //khang tran: function View All Product List
+    @Override
+    public List<ProductDTO> getAllProduct() {
+
+        List<ProductDTO> list = new ArrayList<>();
+
+        try {
+            String sql = "select photo, name, price from product";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductDTO p = new ProductDTO();
+                p.setPhoto(rs.getString("photo"));
+                p.setName(rs.getString("name"));
+                p.setPrice(rs.getFloat("price"));
+                list.add(p);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+
+    }
+
 }
