@@ -57,24 +57,24 @@ public class AddProductController extends HttpServlet {
             HttpSession sessionValidate = req.getSession();
             boolean check = true;
             if (name == null || "".equals(name.trim())) {
-                sessionValidate.setAttribute("wrongName", "Tên sản phẩm không được rỗng hoặc có khoảng trắng đầu");
+                sessionValidate.setAttribute("wrongName", "Tên sản phẩm không được rỗng");
                 check = false;
-                resp.sendRedirect("AddProductController");
+//                resp.sendRedirect("AddProductController");
             }
             if (code == null || "".equals(code.trim())) {
-                sessionValidate.setAttribute("wrongCode", "Code sản phẩm không được rỗng hoặc có khoảng trắng đầu");
+                sessionValidate.setAttribute("wrongCode", "Code sản phẩm không được rỗng");
                 check = false;
-                resp.sendRedirect("AddProductController");
+//                resp.sendRedirect("AddProductController");
             }
             if (short_description == null || "".equals(short_description.trim())) {
-                sessionValidate.setAttribute("wrongShortDes", "Mô tả sản phẩm không được rỗng hoặc có khoảng trắng đầu");
+                sessionValidate.setAttribute("wrongShortDes", "Mô tả sản phẩm không được rỗng");
                 check = false;
-                resp.sendRedirect("AddProductController");
+//                resp.sendRedirect("AddProductController");
             }
             if (full_descripion == null || "".equals(full_descripion.trim())) {
-                sessionValidate.setAttribute("wrongFullDes", "Mô tả sản phẩm không được rỗng hoặc có khoảng trắng đầu");
+                sessionValidate.setAttribute("wrongFullDes", "Mô tả sản phẩm không được rỗng");
                 check = false;
-                resp.sendRedirect("AddProductController");
+//                resp.sendRedirect("AddProductController");
             }
             if (check) {
                 ProductDTO p = new ProductDTO(name, code, short_description, full_descripion, price, weight, fileName, createdDate, editedDate, category_id, quantity);
@@ -102,6 +102,8 @@ public class AddProductController extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally{
+            resp.sendRedirect("AddProductController");
         }
     }
 
