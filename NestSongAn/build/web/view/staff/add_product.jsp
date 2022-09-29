@@ -11,23 +11,23 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/fontawesome-free/css/all.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Tempusdominus Bbootstrap 4 -->
-        <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
         <!-- iCheck -->
-        <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
         <!-- JQVMap -->
-        <link rel="stylesheet" href="../../plugins/jqvmap/jqvmap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}//plugins/jqvmap/jqvmap.min.css">
         <!-- Theme style -->
-        <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
         <!-- overlayScrollbars -->
-        <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
         <!-- Daterange picker -->
-        <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.css">
         <!-- summernote -->
-        <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/summernote/summernote-bs4.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     </head>
@@ -164,7 +164,7 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                            <img src="${pageContext.request.contextPath}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
                             <a href="#" class="d-block">Alexander Pierce</a>
@@ -178,7 +178,7 @@
                                  with font-awesome or any other icon font library -->
 
                             <li class="nav-item">
-                                <a href="../staff/" class="nav-link">
+                                <a href="staff-dashboard" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thống Kê
@@ -186,7 +186,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../staff/" class="nav-link">
+                                <a href="AddProductController" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thêm Sản Phẩm
@@ -222,22 +222,38 @@
                                     </c:if>
 
 
-                                    <form action="../../AddProductController" method="post" enctype="multipart/form-data">
+                                    <form action="AddProductController" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
+                                            <c:if test="${ not empty wrongName }">
+                                                <p class="text-danger">${wrongName}</p>
+                                                <c:remove var="wrongName" scope="session"/>
+                                            </c:if>
                                             <label for="exampleInputEmail1">Tên Sản Phẩm*</label>
                                             <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
                                         </div> 
 
                                         <div class="form-group">
+                                            <c:if test="${ not empty wrongCode }">
+                                                <p class="text-danger">${wrongCode}</p>
+                                                <c:remove var="wrongCode" scope="session"/>
+                                            </c:if>
                                             <label for="exampleInputEmail1">Code*</label>
                                             <input name="code" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
                                         </div> 
 
                                         <div class="form-group">
+                                            <c:if test="${ not empty wrongShortDes }">
+                                                <p class="text-danger">${wrongShortDes}</p>
+                                                <c:remove var="wrongShortDes" scope="session"/>
+                                            </c:if>
                                             <label for="exampleInputPassword1">Mô Tả Ngắn*</label>
                                             <input name="short_description" type="text" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
                                         <div class="form-group">
+                                            <c:if test="${ not empty wrongFullDes }">
+                                                <p class="text-danger">${wrongFullDes}</p>
+                                                <c:remove var="wrongFullDes" scope="session"/>
+                                            </c:if>
                                             <label for="exampleInputPassword1">Mô Tả Dài*</label>
                                             <input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
@@ -246,13 +262,13 @@
                                             <label for="exampleInputPassword1">Giá*</label>
                                             <input name="price" type="number" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
-                                        
+
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Trọng Lượng*</label>
                                             <input name="weight" type="number" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
-                                        
-                                         <div class="form-group">
+
+                                        <div class="form-group">
                                             <label for="exampleFormControlFile1">Upload Ảnh</label>
                                             <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1" required="required"/>
                                         </div>
@@ -269,13 +285,13 @@
                                                 <option value="6">Nước Yến</option>
                                             </select>
                                         </div> 
-                                        
+
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Số Lượng*</label>
                                             <input name="quantity" type="number" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
 
-                                       
+
                                         <button type="submit" class="btn btn-dark mt-2">Thêm</button>
                                     </form>
                                 </div> 
@@ -303,38 +319,38 @@
         <!-- ./wrapper -->
 
         <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/jquery/jquery.min.js"></script>
         <!-- jQuery UI 1.11.4 -->
-        <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/jquery-ui/jquery-ui.min.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
             $.widget.bridge('uibutton', $.ui.button);
         </script>
         <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- ChartJS -->
-        <script src="../../plugins/chart.js/Chart.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/chart.js/Chart.min.js"></script>
         <!-- Sparkline -->
-        <script src="../../plugins/sparklines/sparkline.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/sparklines/sparkline.js"></script>
         <!-- JQVMap -->
-        <script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
-        <script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/jqvmap/jquery.vmap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
         <!-- jQuery Knob Chart -->
-        <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/jquery-knob/jquery.knob.min.js"></script>
         <!-- daterangepicker -->
-        <script src="../../plugins/moment/moment.min.js"></script>
-        <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/moment/moment.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.js"></script>
         <!-- Tempusdominus Bootstrap 4 -->
-        <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
         <!-- Summernote -->
-        <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/summernote/summernote-bs4.min.js"></script>
         <!-- overlayScrollbars -->
-        <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <script src="${pageContext.request.contextPath}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
         <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.js"></script>
+        <script src="${pageContext.request.contextPath}/dist/js/adminlte.js"></script>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="../../dist/js/pages/dashboard.js"></script>
+        <script src="${pageContext.request.contextPath}/dist/js/pages/dashboard.js"></script>
         <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
+        <script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
     </body>
 </html>

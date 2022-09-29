@@ -53,33 +53,63 @@ public class AddProductController extends HttpServlet {
             int quantity = Integer.parseInt(req.getParameter("quantity"));
             CategoryDTO category_id = new CategoryDTO(Integer.parseInt(req.getParameter("category_id")));
 
-            ProductDTO p = new ProductDTO(name, code, short_description, full_descripion, price, weight, fileName, createdDate, editedDate, category_id, quantity);
+            //validation
+            HttpSession sessionValidate = req.getSession();
+            boolean check = true;
+            if (name == null || "".equals(name.trim())) {
+                sessionValidate.setAttribute("wrongName", "Tên sản phẩm không được rỗng");
+                check = false;
+//                resp.sendRedirect("AddProductController");
+            }
+            if (code == null || "".equals(code.trim())) {
+                sessionValidate.setAttribute("wrongCode", "Code sản phẩm không được rỗng");
+                check = false;
+//                resp.sendRedirect("AddProductController");
+            }
+            if (short_description == null || "".equals(short_description.trim())) {
+                sessionValidate.setAttribute("wrongShortDes", "Mô tả sản phẩm không được rỗng");
+                check = false;
+//                resp.sendRedirect("AddProductController");
+            }
+            if (full_descripion == null || "".equals(full_descripion.trim())) {
+                sessionValidate.setAttribute("wrongFullDes", "Mô tả sản phẩm không được rỗng");
+                check = false;
+//                resp.sendRedirect("AddProductController");
+            }
+            if (check) {
+                ProductDTO p = new ProductDTO(name, code, short_description, full_descripion, price, weight, fileName, createdDate, editedDate, category_id, quantity);
+                ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
+                
+                boolean f = dao.addProduct(p);
 
-//            System.out.println(category_id.getCategory_id());
-//            System.out.println(p);
-            ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
+                HttpSession session = req.getSession();
 
-            boolean f = dao.addProduct(p);
-
-            HttpSession session = req.getSession();
-
-            if (f) {
-                String path = getServletContext().getRealPath("") + "\\products";
+                if (f) {
+                    String path = getServletContext().getRealPath("") + "\\products";
 
 //                System.out.println(path);
-                File file = new File(path);
+                    File file = new File(path);
 
-                part.write(path + File.separator + fileName);
+                    part.write(path + File.separator + fileName);
 
-                session.setAttribute("succMsg", "Thêm sản phẩm thành công...");
-                resp.sendRedirect("view/staff/add_product.jsp");
-            } else {
-                session.setAttribute("failedMsg", "Có lỗi trên hệ thống...");
-                resp.sendRedirect("view/staff/add_product.jsp");
+                    session.setAttribute("succMsg", "Thêm sản phẩm thành công...");
+                    resp.sendRedirect("AddProductController");
+                } else {
+                    session.setAttribute("failedMsg", "Có lỗi trên hệ thống...");
+                    resp.sendRedirect("AddProductController");
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally{
+            resp.sendRedirect("AddProductController");
         }
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("view/staff/add_product.jsp").forward(req, resp);
+    }
+
 }
