@@ -11,10 +11,23 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List<String> _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_remove_var_scope_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_if_test;
+
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _jspx_tagPool_c_remove_var_scope_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_c_if_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _jspx_tagPool_c_remove_var_scope_nobody.release();
+    _jspx_tagPool_c_if_test.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -71,23 +84,44 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        ");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "header.jsp", out, false);
       out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("        <div class=\"container mb-3\">\r\n");
-      out.write("            <form>\r\n");
+      out.write("            <form action=\"RegisterAccountController\" method=\"post\">\r\n");
+      out.write("                \r\n");
+      out.write("                <h4>Đăng Ký tài khoản</h4>\r\n");
+      out.write("                ");
+      if (_jspx_meth_c_if_0(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("                ");
+      if (_jspx_meth_c_if_1(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("                    \r\n");
       out.write("                <div class=\"mb-3\">\r\n");
       out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Họ và tên</label>\r\n");
-      out.write("                    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\">\r\n");
-      out.write("                    <div id=\"emailHelp\" class=\"form-text\">We'll never share your email with anyone else.</div>\r\n");
+      out.write("                    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" required=\"\" name=\"full_name\">\r\n");
+      out.write("                </div>\r\n");
+      out.write("                <div class=\"mb-3\">\r\n");
+      out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Tên đăng nhập</label>\r\n");
+      out.write("                    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" required=\"\" name=\"user_name\">\r\n");
+      out.write("                </div>\r\n");
+      out.write("                <div class=\"mb-3\">\r\n");
+      out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Số điện thoại</label>\r\n");
+      out.write("                    <input type=\"number\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" required=\"\" name=\"phone\">\r\n");
       out.write("                </div>\r\n");
       out.write("                <div class=\"mb-3\">\r\n");
       out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Địa chỉ email</label>\r\n");
-      out.write("                    <input type=\"email\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\">\r\n");
-      out.write("                    <div id=\"emailHelp\" class=\"form-text\">We'll never share your email with anyone else.</div>\r\n");
+      out.write("                    <input type=\"email\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" required=\"\" name=\"email\">\r\n");
       out.write("                </div>\r\n");
       out.write("                <div class=\"mb-3\">\r\n");
       out.write("                    <label for=\"exampleInputPassword1\" class=\"form-label\">Mật khẩu</label>\r\n");
-      out.write("                    <input type=\"password\" class=\"form-control\" id=\"exampleInputPassword1\">\r\n");
+      out.write("                    <input type=\"password\" class=\"form-control\" id=\"exampleInputPassword1\"  required=\"\" name=\"password\">\r\n");
       out.write("                </div>\r\n");
-      out.write("                \r\n");
+      out.write("\r\n");
       out.write("                <button type=\"submit\" class=\"btn btn-primary\">Đăng ký</button>\r\n");
       out.write("            </form>\r\n");
       out.write("            <a href=\"login.jsp\">Bạn đã có tài khoản? Đăng nhập ngay</a>\r\n");
@@ -116,5 +150,111 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     } finally {
       _jspxFactory.releasePageContext(_jspx_page_context);
     }
+  }
+
+  private boolean _jspx_meth_c_if_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_0 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_0.setParent(null);
+    _jspx_th_c_if_0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ not empty succMsg }", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_0 = _jspx_th_c_if_0.doStartTag();
+    if (_jspx_eval_c_if_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                    <h5 class=\"text-center text-success\">");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${succMsg}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("</h5>\r\n");
+        out.write("                    ");
+        if (_jspx_meth_c_remove_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_if_0, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("                ");
+        int evalDoAfterBody = _jspx_th_c_if_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_0);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_remove_0(javax.servlet.jsp.tagext.JspTag _jspx_th_c_if_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:remove
+    org.apache.taglibs.standard.tag.common.core.RemoveTag _jspx_th_c_remove_0 = (org.apache.taglibs.standard.tag.common.core.RemoveTag) _jspx_tagPool_c_remove_var_scope_nobody.get(org.apache.taglibs.standard.tag.common.core.RemoveTag.class);
+    _jspx_th_c_remove_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_remove_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_if_0);
+    _jspx_th_c_remove_0.setVar("succMsg");
+    _jspx_th_c_remove_0.setScope("session");
+    int _jspx_eval_c_remove_0 = _jspx_th_c_remove_0.doStartTag();
+    if (_jspx_th_c_remove_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_remove_var_scope_nobody.reuse(_jspx_th_c_remove_0);
+      return true;
+    }
+    _jspx_tagPool_c_remove_var_scope_nobody.reuse(_jspx_th_c_remove_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_1 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_1.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_1.setParent(null);
+    _jspx_th_c_if_1.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ not empty failedMsg }", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_1 = _jspx_th_c_if_1.doStartTag();
+    if (_jspx_eval_c_if_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                    <h5 class=\"text-center text-danger\">");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${failedMsg}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("</h5>\r\n");
+        out.write("                    ");
+        if (_jspx_meth_c_remove_1((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_if_1, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("                ");
+        int evalDoAfterBody = _jspx_th_c_if_1.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_1);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_remove_1(javax.servlet.jsp.tagext.JspTag _jspx_th_c_if_1, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:remove
+    org.apache.taglibs.standard.tag.common.core.RemoveTag _jspx_th_c_remove_1 = (org.apache.taglibs.standard.tag.common.core.RemoveTag) _jspx_tagPool_c_remove_var_scope_nobody.get(org.apache.taglibs.standard.tag.common.core.RemoveTag.class);
+    _jspx_th_c_remove_1.setPageContext(_jspx_page_context);
+    _jspx_th_c_remove_1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_if_1);
+    _jspx_th_c_remove_1.setVar("failedMsg");
+    _jspx_th_c_remove_1.setScope("session");
+    int _jspx_eval_c_remove_1 = _jspx_th_c_remove_1.doStartTag();
+    if (_jspx_th_c_remove_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_remove_var_scope_nobody.reuse(_jspx_th_c_remove_1);
+      return true;
+    }
+    _jspx_tagPool_c_remove_var_scope_nobody.reuse(_jspx_th_c_remove_1);
+    return false;
   }
 }
