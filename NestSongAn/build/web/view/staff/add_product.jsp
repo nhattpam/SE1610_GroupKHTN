@@ -19,7 +19,7 @@
         <!-- iCheck -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
         <!-- JQVMap -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/jqvmap/jqvmap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}//plugins/jqvmap/jqvmap.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
         <!-- overlayScrollbars -->
@@ -178,7 +178,7 @@
                                  with font-awesome or any other icon font library -->
 
                             <li class="nav-item">
-                                <a href="../staff/" class="nav-link">
+                                <a href="staff-dashboard" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thống Kê
@@ -186,7 +186,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../staff/" class="nav-link">
+                                <a href="AddProductController" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thêm Sản Phẩm
@@ -220,24 +220,39 @@
                                         <h5 class="text-center text-danger">${failedMsg}</h5>
                                         <c:remove var="failedMsg" scope="session"/>
                                     </c:if>
-
-
                                     <form action="addProductController" method="post" enctype="multipart/form-data">
+
                                         <div class="form-group">
+                                            <c:if test="${ not empty wrongName }">
+                                                <p class="text-danger">${wrongName}</p>
+                                                <c:remove var="wrongName" scope="session"/>
+                                            </c:if>
                                             <label for="exampleInputEmail1">Tên Sản Phẩm*</label>
                                             <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
                                         </div> 
 
                                         <div class="form-group">
+                                            <c:if test="${ not empty wrongCode }">
+                                                <p class="text-danger">${wrongCode}</p>
+                                                <c:remove var="wrongCode" scope="session"/>
+                                            </c:if>
                                             <label for="exampleInputEmail1">Code*</label>
                                             <input name="code" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
                                         </div> 
 
                                         <div class="form-group">
+                                            <c:if test="${ not empty wrongShortDes }">
+                                                <p class="text-danger">${wrongShortDes}</p>
+                                                <c:remove var="wrongShortDes" scope="session"/>
+                                            </c:if>
                                             <label for="exampleInputPassword1">Mô Tả Ngắn*</label>
                                             <input name="short_description" type="text" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
                                         <div class="form-group">
+                                            <c:if test="${ not empty wrongFullDes }">
+                                                <p class="text-danger">${wrongFullDes}</p>
+                                                <c:remove var="wrongFullDes" scope="session"/>
+                                            </c:if>
                                             <label for="exampleInputPassword1">Mô Tả Dài*</label>
                                             <input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
@@ -246,13 +261,13 @@
                                             <label for="exampleInputPassword1">Giá*</label>
                                             <input name="price" type="number" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
-                                        
+
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Trọng Lượng*</label>
                                             <input name="weight" type="number" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
-                                        
-                                         <div class="form-group">
+
+                                        <div class="form-group">
                                             <label for="exampleFormControlFile1">Upload Ảnh</label>
                                             <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1" required="required"/>
                                         </div>
@@ -269,13 +284,13 @@
                                                 <option value="6">Nước Yến</option>
                                             </select>
                                         </div> 
-                                        
+
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Số Lượng*</label>
                                             <input name="quantity" type="number" class="form-control" id="exampleInputPassword1" required="required">
                                         </div> 
 
-                                       
+
                                         <button type="submit" class="btn btn-dark mt-2">Thêm</button>
                                     </form>
                                 </div> 

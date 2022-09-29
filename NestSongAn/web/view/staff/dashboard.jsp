@@ -175,7 +175,7 @@
                                  with font-awesome or any other icon font library -->
 
                             <li class="nav-item">
-                                <a href="../staff/" class="nav-link">
+                                <a href="staff-dashboard" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thống Kê
@@ -183,7 +183,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="addProductPage" class="nav-link">
+                                <a href="AddProductController" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thêm Sản Phẩm
