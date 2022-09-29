@@ -72,10 +72,10 @@ public class AddProductController extends HttpServlet {
                 part.write(path + File.separator + fileName);
 
                 session.setAttribute("succMsg", "Thêm sản phẩm thành công...");
-                resp.sendRedirect("view/staff/add_product.jsp");
+                resp.sendRedirect("addProductPage");
             } else {
                 session.setAttribute("failedMsg", "Có lỗi trên hệ thống...");
-                resp.sendRedirect("view/staff/add_product.jsp");
+                resp.sendRedirect("addProductPage");
             }
 
         } catch (Exception e) {

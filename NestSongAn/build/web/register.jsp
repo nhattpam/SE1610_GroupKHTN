@@ -34,7 +34,7 @@
 
 
         <div class="container mb-3">
-            <form action="RegisterAccountController" method="post">
+            <form action="RegisterController" method="post">
                 
                 <h4>Đăng Ký tài khoản</h4>
                 <c:if test="${ not empty succMsg }">
@@ -70,7 +70,6 @@
 
                 <button type="submit" class="btn btn-primary">Đăng ký</button>
             </form>
-            <a href="login.jsp">Bạn đã có tài khoản? Đăng nhập ngay</a>
         </div>
         <jsp:include page="footer.jsp" />
         <!-- Js Plugins -->

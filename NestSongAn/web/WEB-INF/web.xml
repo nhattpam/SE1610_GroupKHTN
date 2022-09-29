@@ -28,6 +28,22 @@
         <description>ServletContextListener</description>
         <listener-class>listener.ContextListener</listener-class>
     </listener>
+    <servlet>
+        <servlet-name>MyProfileController</servlet-name>
+        <servlet-class>controllers.MyProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-class>controllers.EditProfileController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyProfileController</servlet-name>
+        <url-pattern>/MyProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileController</servlet-name>
+        <url-pattern>/EditProfile</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

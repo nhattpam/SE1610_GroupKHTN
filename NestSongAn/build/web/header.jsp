@@ -4,6 +4,8 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="dtos.UsersDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,7 +38,7 @@
         <script src="js/mixitup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
-        
+
     </head>
     <body>
         <!-- Humberger Begin -->
@@ -122,15 +124,25 @@
                                 <div class="header__top__right__language">
                                     <img src="img/language.png" alt="">
                                     <div style="color: white;">English</div>
-                                    <span class="arrow_carrot-down"></span>
-                                    <ul>
-                                        <li><a href="#" style="color: white;">Spanis</a></li>
-                                        <li><a href="#" style="color: white;">English</a></li>
-                                    </ul>
                                 </div>
-                                <div class="header__top__right__auth">
-                                    <a href="login.jsp" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
-                                </div>
+                                <!--login-->
+                                <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
+                                <c:if test="${not empty USER}">
+                                    <div class="header__top__right__language">
+                                        <a href="" style="color: white;"><i class="fa fa-user"></i> <%=u.getUser_name()%></a>
+                                        <span class="arrow_carrot-down"></span>
+                                        <ul>
+                                            <li><a href="MyProfile?uid=<%=u.getUser_id()%>" style="color: white;">My Profile</a></li>
+                                            <li><a href="#" style="color: white;">English</a></li>
+                                        </ul>
+                                    </div>
+                                </c:if>
+                                <c:if test="${empty USER}">
+                                    <div class="header__top__right__auth">
+                                        <a href="loginPage" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
+                                    </div>
+                                </c:if>
+
                             </div>
                         </div>
                     </div>
@@ -146,7 +158,7 @@
                     <div class="col-lg-6">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="./index.jsp" style="color: #6a0e13;">Trang Chủ</a></li>
+                                <li class="active"><a href="" style="color: #6a0e13;">Trang Chủ</a></li>
                                 <li><a href="./shop-grid.html">Shop</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="header__menu__dropdown">
@@ -177,6 +189,6 @@
             </div>
         </header>
         <!-- Header Section End -->
-        
+
     </body>
 </html>
