@@ -6,6 +6,7 @@
 package daos;
 
 import dtos.ProductDTO;
+import java.util.List;
 
 /**
  *
@@ -16,4 +17,7 @@ public interface ProductDAO {
     //nhattpham: function add product
     public boolean addProduct(ProductDTO p);
     
+    
+    //quoc khang: function View All Product List
+    public List<ProductDTO> getAllProduct();
 }

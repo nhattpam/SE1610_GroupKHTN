@@ -146,8 +146,8 @@
                     <div class="col-lg-6">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="./index.jsp" style="color: #6a0e13;">Trang Chủ</a></li>
-                                <li><a href="./shop-grid.html">Shop</a></li>
+                                <li class="active"><a href="home" style="color: #6a0e13;">Trang Chủ</a></li>
+                                <li><a href="shop-products">Shop</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="header__menu__dropdown">
                                         <li><a href="./shop-details.html">Shop Details</a></li>
