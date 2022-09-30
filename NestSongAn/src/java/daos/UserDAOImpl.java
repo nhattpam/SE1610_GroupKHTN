@@ -150,7 +150,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void editAccount(int user_id, String full_name, String user_name, String password, String email, String phone) throws SQLException {
+    public void editAccount(UsersDTO us) throws SQLException {
+        boolean f = false;
         Connection con = null;
         PreparedStatement stm = null;
         try {
@@ -164,13 +165,14 @@ public class UserDAOImpl implements UserDAO {
                         + "phone = ?\n"
                         + "WHERE user_id = ?";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, full_name);
-                stm.setString(2, user_name);
-                stm.setString(3, password);
-                stm.setString(4, email);
-                stm.setString(5, phone);
-                stm.setInt(6, user_id);
-                stm.executeQuery();
+                stm.setString(1, us.getFull_name());
+                stm.setString(2, us.getUser_name());
+                stm.setString(3, us.getPassword());
+                stm.setString(4, us.getEmail());
+                stm.setString(5, us.getPhone());
+                stm.setInt(6, us.getUser_id());
+                stm.executeUpdate();
+                f= true;
             }
         } finally {
             if (stm != null) {

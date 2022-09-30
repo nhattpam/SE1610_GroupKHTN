@@ -19,7 +19,7 @@ public interface UserDAO{
     public boolean userRegister(UsersDTO us);
 
      public UsersDTO checkLogin(String username, String password) throws SQLException, NamingException;
-     public void editAccount(int user_id, String full_name, String user_name, String password, String email, String phone) throws SQLException;
+     public void editAccount(UsersDTO us) throws SQLException;
      
     public UsersDTO viewAccount(int userId) throws SQLException;
 

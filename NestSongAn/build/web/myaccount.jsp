@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="css/style1.css">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     </head>
     <body>
@@ -29,10 +30,11 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="MyProfile" method="post">
+                                <form action="EditProfile">
                                     <h6 class="heading-small text-muted mb-4">User information</h6>
                                     <div class="pl-lg-4">
                                         <div class="row">
+                                            <input type="hidden" name="uid" value="${inform.user_id}">
                                             <div class="col-lg-6">
                                                 <div class="form-group focused">
                                                     <label class="form-control-label">Full Name</label>

@@ -13,10 +13,12 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,9 +45,35 @@ public class EditProfileController extends HttpServlet {
             String password = request.getParameter("password");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
-            UserDAO user = new UserDAOImpl();
-            user.editAccount(uid, fullname, username, password, email, phone);
-            response.sendRedirect("index.jsp");
+            Pattern fullNameCheck = Pattern.compile("^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]+$");
+            boolean check = true;
+            if (fullname == null || "".equals(fullname.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
+                check = false;
+            }
+            if (!fullname.matches(fullNameCheck.pattern())) {
+                check = false;
+            }
+            Pattern userNameCheck = Pattern.compile("^[A-Za-z0-9]+$");
+            if (username == null || "".equals(username.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
+                check = false;
+            }
+            if (!username.matches(userNameCheck.pattern())) {
+                check = false;
+            }
+            Pattern phoneCheck = Pattern.compile("^[0][0-9]{9}$");
+            if (!phone.matches(phoneCheck.pattern())) { // dấu ! là phủ định có nghĩa là k đúng định dạng
+                check = false;
+            }
+            if (password == null || "".equals(password.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
+                check = false;
+            }
+            if (check) {
+                UserDAOImpl user = new UserDAOImpl();
+                UsersDTO us = new UsersDTO(uid, fullname, username, password, email, phone);
+                user.editAccount(us);
+            }
+            response.sendRedirect("index.jsp"); 
+
         } catch (SQLException ex) {
             Logger.getLogger(MyProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
