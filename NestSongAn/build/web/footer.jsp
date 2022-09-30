@@ -72,7 +72,7 @@
                             <h6 style="color: white;">Join Our Newsletter Now</h6>
                             <p style="color: white;">Get E-mail updates about our latest shop and special offers.</p>
                             <form action="#">
-                                <input type="text" placeholder="Enter your mail" style="color: white;">
+                                <input type="text" placeholder="Enter your mail" style="color: black;">
                                 <button type="submit" class="site-btn">Subscribe</button>
                             </form>
                             <div class="footer__widget__social">

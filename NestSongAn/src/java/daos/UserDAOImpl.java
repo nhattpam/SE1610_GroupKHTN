@@ -5,6 +5,7 @@
  */
 package daos;
 
+import dtos.GoogleDTO;
 import dtos.UserRoleDTO;
 import dtos.UsersDTO;
 import java.sql.Connection;
@@ -46,6 +47,7 @@ public class UserDAOImpl implements UserDAO {
             if (con != null) {
                 //2. sql statement
                 String sql = "Select user_id, full_name, user_name, email, phone, r.role_id, role "
+
                         + "From users u, user_role r "
                         + "Where user_name = ? "
                         + "And password = ? "
@@ -111,6 +113,7 @@ public class UserDAOImpl implements UserDAO {
         return f;
     }
 
+
     @Override
     public UsersDTO viewAccount(int userId) throws SQLException {
         Connection con = null;
@@ -174,6 +177,57 @@ public class UserDAOImpl implements UserDAO {
                 stm.executeUpdate();
                 f = true;
             }
+        }finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+//Minh thanh
+    @Override
+    public boolean userRegister(GoogleDTO us) {
+
+        boolean f = false;
+
+        try {
+            String sql = "INSERT INTO users(email,full_name,status,create_date,edited_date) VALUES (?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, us.getEmail());
+            ps.setString(2, us.getName());
+            ps.setInt(3, us.getStatus());
+            ps.setString(4, us.getCreate_date());
+            ps.setString(5, us.getEdit_date());
+//            ps.setInt(6, us.getRole());
+            int i = ps.executeUpdate();
+            if (i == 1) {
+                f = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return f;
+    }//Minh thanh 
+
+    public boolean resetPassword(String password, String email) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean check = false;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                con = DBUtils.getConnection();
+                String sql = ("UPDATE users SET password = ? WHERE email = ? ");
+                stm = con.prepareStatement(sql);
+                stm.setString(1, password);
+                stm.setString(2, email);
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
         } finally {
             if (stm != null) {
                 stm.close();
@@ -182,5 +236,6 @@ public class UserDAOImpl implements UserDAO {
                 con.close();
             }
         }
+        return check;
     }
 }
