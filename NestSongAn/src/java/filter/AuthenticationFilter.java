@@ -113,13 +113,14 @@ public class AuthenticationFilter implements Filter {
             //get authentication
             ServletContext context = request.getServletContext();
             Properties authenticationProperties = 
-                    (Properties) context.getAttribute("AUTHENTICATION_LIST");     
+                    (Properties) context.getAttribute("AUTHENTICATION_LIST");
+            Properties sitemap=(Properties)context.getAttribute("SITE_MAP");
             HttpSession session=req.getSession(false);
             //check authentication
             String rule=(String)authenticationProperties.getProperty(resource);
             if (rule!=null && rule.equals("restricted")) {
                 if (session==null||session.getAttribute("USER")==null) {
-                    ((HttpServletResponse)response).sendRedirect("loginPage");
+                    ((HttpServletResponse)response).sendRedirect(sitemap.getProperty("loginPage"));
                 }else{
                     chain.doFilter(request, response);
                 }

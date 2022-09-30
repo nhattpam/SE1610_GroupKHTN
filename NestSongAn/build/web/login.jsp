@@ -31,6 +31,9 @@
     <body>
         <jsp:include page="header.jsp" />
         <div class="container mb-3">
+            <c:if test="${ not empty LoginError }">
+                <h5 class="text-center text-danger">${LoginError}</h5>
+            </c:if>
             <form action="loginController" method="POST">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
@@ -42,7 +45,7 @@
                 </div>
                 <button type="submit" value="Login" class="btn btn-primary">Submit</button>
             </form>
-            <a href="RegisterAccountController">Bạn chưa có tài khoản? Đăng ký ngay.</a>
+            <a href="registerPage">Bạn chưa có tài khoản? Đăng ký ngay.</a>
         </div>
         <jsp:include page="footer.jsp" />
         <!-- Js Plugins -->

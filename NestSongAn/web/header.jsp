@@ -4,6 +4,8 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="dtos.UsersDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,7 +38,7 @@
         <script src="js/mixitup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
-        
+
     </head>
     <body>
         <!-- Humberger Begin -->
@@ -128,9 +130,19 @@
                                         <li><a href="#" style="color: white;">English</a></li>
                                     </ul>
                                 </div>
-                                <div class="header__top__right__auth">
-                                    <a href="login.jsp" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
-                                </div>
+                                <!--login-->
+                                <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
+                                <c:if test="${not empty USER}">
+                                    <div class="header__top__right__auth">
+                                        <a href="" style="color: white;"><i class="fa fa-user"></i> <%=u.getFull_name()%></a>
+                                    </div>
+                                </c:if>
+                                <c:if test="${empty USER}">
+                                    <div class="header__top__right__auth">
+                                        <a href="loginPage" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
+                                    </div>
+                                </c:if>
+
                             </div>
                         </div>
                     </div>
@@ -177,6 +189,6 @@
             </div>
         </header>
         <!-- Header Section End -->
-        
+
     </body>
 </html>

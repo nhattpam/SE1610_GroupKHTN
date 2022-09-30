@@ -45,7 +45,7 @@ public class ProductDAOImpl implements ProductDAO {
             ps.setInt(11, p.getQuantity());
 
             int i = ps.executeUpdate();
-            if (i == 1) {
+            if (i >0) {
                 f = true;
             }
 

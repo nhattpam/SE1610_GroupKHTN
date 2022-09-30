@@ -32,6 +32,10 @@ public class LoginServlet extends HttpServlet {
 
     private static final String LOGIN_PAGE = "loginPage";
     private static final String HOME_PAGE ="";
+    private static final String STAFF_PAGE ="staffPage";
+    private static final String ADMIN_PAGE ="adminPage";
+    private static final String SHIPPER_PAGE ="shipperPage";
+    private static final String SUPPLIER_PAGE ="supplierPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -51,47 +55,34 @@ public class LoginServlet extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url=siteMaps.getProperty(LOGIN_PAGE);                                          // default to login page if error
+        String errorMessage="Wrong username or password";
         try {
 
             //1:call DAO
             //new obj DAO && call method from DAO
-            UserDAO dao = new UserDAOImpl(DBUtils.getConnection());
+            UserDAO dao = new UserDAOImpl();
             UsersDTO result = dao.checkLogin(username, password);                
             //2.process 
+            if(result==null){
+                request.setAttribute("LoginError", errorMessage);
+            }
             if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer 
                 url = siteMaps.getProperty(HOME_PAGE);                                                   // to home page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
             }
             if (result != null && result.getRole_id().getRole().equals("staff")) {          // Role name = staff 
-                url = "staff.jsp";                                                       // to staff page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
+                url = siteMaps.getProperty(STAFF_PAGE);                                                       // to staff page
             }
-            if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role id = admin 
-                url = "admin.jsp";                                                      // to admin page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
+            if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role name = admin 
+                url = siteMaps.getProperty(ADMIN_PAGE);                                                      // to admin page
             }
-            if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role id = supplier 
-                url = "supplier.jsp";                                                    // to supplier page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
-            }if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role id = shipper 
-                url = "shipper.jsp";                                                    // to shipper page
-
-                HttpSession session = request.getSession();//true
-                session.setAttribute("USER", result);
-
+            if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role name = supplier 
+                url = siteMaps.getProperty(SUPPLIER_PAGE);                                                        // to supplier page
             }
+            if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role name = shipper 
+                url = siteMaps.getProperty(SHIPPER_PAGE);                                                     // to shipper page
+            }
+            HttpSession session = request.getSession();//true
+            session.setAttribute("USER", result);
         } catch (NamingException ex) {            
             log("LoginServlet_Naming" + ex.getMessage());
         } catch (SQLException ex) {

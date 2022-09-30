@@ -167,7 +167,7 @@
                             <img src="${pageContext.request.contextPath}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">Alexander Pierce</a>
+                            <a href="#" class="d-block">${sessionScope.USER.full_name}</a>
                         </div>
                     </div>
 
@@ -220,9 +220,8 @@
                                         <h5 class="text-center text-danger">${failedMsg}</h5>
                                         <c:remove var="failedMsg" scope="session"/>
                                     </c:if>
+                                    <form action="addProductController" method="post" >
 
-
-                                    <form action="AddProductController" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <c:if test="${ not empty wrongName }">
                                                 <p class="text-danger">${wrongName}</p>
