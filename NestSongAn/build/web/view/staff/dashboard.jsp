@@ -183,7 +183,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="AddProductController" class="nav-link">
+                                <a href="add-product" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thêm Sản Phẩm

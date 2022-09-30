@@ -186,7 +186,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="AddProductController" class="nav-link">
+                                <a href="add-product" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thêm Sản Phẩm
@@ -220,8 +220,9 @@
                                         <h5 class="text-center text-danger">${failedMsg}</h5>
                                         <c:remove var="failedMsg" scope="session"/>
                                     </c:if>
-                                    <form action="addProductController" method="post" >
 
+
+                                    <form action="add-product" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <c:if test="${ not empty wrongName }">
                                                 <p class="text-danger">${wrongName}</p>

@@ -12,9 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Properties;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -30,10 +27,8 @@ import utils.DBUtils;
  * @author Admin
  */
 @MultipartConfig
-@WebServlet("/AddProductController")
+@WebServlet("/add-product")
 public class AddProductController extends HttpServlet {
-
-    private static final String ADD_PRODUCT_PAGE = "addProductPage";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -59,25 +54,25 @@ public class AddProductController extends HttpServlet {
             CategoryDTO category_id = new CategoryDTO(Integer.parseInt(req.getParameter("category_id")));
 
             //validation
-            HttpSession session = req.getSession();
+            HttpSession sessionValidate = req.getSession();
             boolean check = true;
             if (name == null || "".equals(name.trim())) {
-                session.setAttribute("wrongName", "Tên sản phẩm không được rỗng");
+                sessionValidate.setAttribute("wrongName", "Tên sản phẩm không được rỗng");
                 check = false;
 //                resp.sendRedirect("AddProductController");
             }
             if (code == null || "".equals(code.trim())) {
-                session.setAttribute("wrongCode", "Code sản phẩm không được rỗng");
+                sessionValidate.setAttribute("wrongCode", "Code sản phẩm không được rỗng");
                 check = false;
 //                resp.sendRedirect("AddProductController");
             }
             if (short_description == null || "".equals(short_description.trim())) {
-                session.setAttribute("wrongShortDes", "Mô tả sản phẩm không được rỗng");
+                sessionValidate.setAttribute("wrongShortDes", "Mô tả sản phẩm không được rỗng");
                 check = false;
 //                resp.sendRedirect("AddProductController");
             }
             if (full_descripion == null || "".equals(full_descripion.trim())) {
-                session.setAttribute("wrongFullDes", "Mô tả sản phẩm không được rỗng");
+                sessionValidate.setAttribute("wrongFullDes", "Mô tả sản phẩm không được rỗng");
                 check = false;
 //                resp.sendRedirect("AddProductController");
             }
@@ -86,6 +81,8 @@ public class AddProductController extends HttpServlet {
                 ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
 
                 boolean f = dao.addProduct(p);
+
+                HttpSession session = req.getSession();
 
                 if (f) {
                     String path = getServletContext().getRealPath("") + "\\products";
@@ -96,24 +93,23 @@ public class AddProductController extends HttpServlet {
                     part.write(path + File.separator + fileName);
 
                     session.setAttribute("succMsg", "Thêm sản phẩm thành công...");
+                    resp.sendRedirect("add-product");
+                } else {
+                    session.setAttribute("failedMsg", "Có lỗi trên hệ thống...");
+                    resp.sendRedirect("add-product");
                 }
-            } else {
-                session.setAttribute("failedMsg", "Có lỗi trên hệ thống...");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            RequestDispatcher rd = req.getRequestDispatcher(ADD_PRODUCT_PAGE);
-            rd.forward(req, resp);
+            resp.sendRedirect("add-product");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext context = this.getServletContext();
-        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
-        req.getRequestDispatcher(siteMaps.getProperty(ADD_PRODUCT_PAGE)).forward(req, resp);
+        req.getRequestDispatcher("view/staff/add_product.jsp").forward(req, resp);
     }
 
 }
