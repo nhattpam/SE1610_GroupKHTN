@@ -1,9 +1,11 @@
 <!doctype html>
 <html>
     <head>
-        <meta charset='utf-8'>
+        <meta charset="UTF-8">
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <title>Forgot Password</title>
+        <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
         <link
             href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'
             rel='stylesheet'>
@@ -13,6 +15,7 @@
         src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     </head>
     <body oncontextmenu='return false' class='snippet-body'>
+        <jsp:include page="header.jsp" />
         <div class="container padding-bottom-3x mb-2 mt-5">
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-10">
@@ -48,6 +51,8 @@
                 </div>
             </div>
         </div>
+        <jsp:include page="footer.jsp" />
+
         <script type='text/javascript'
         src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
         <script type='text/javascript' src=''></script>

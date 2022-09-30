@@ -30,7 +30,7 @@ public final class forgotPassword_jsp extends org.apache.jasper.runtime.HttpJspB
     PageContext _jspx_page_context = null;
 
     try {
-      response.setContentType("text/html");
+      response.setContentType("text/html;charset=UTF-8");
       pageContext = _jspxFactory.getPageContext(this, request, response,
       			null, true, 8192, true);
       _jspx_page_context = pageContext;
@@ -44,9 +44,11 @@ public final class forgotPassword_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("<!doctype html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
-      out.write("        <meta charset='utf-8'>\r\n");
+      out.write("        <meta charset=\"UTF-8\">\r\n");
       out.write("        <meta name='viewport' content='width=device-width, initial-scale=1'>\r\n");
       out.write("        <title>Forgot Password</title>\r\n");
+      out.write("        \r\n");
+      out.write("\r\n");
       out.write("        <link\r\n");
       out.write("            href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'\r\n");
       out.write("            rel='stylesheet'>\r\n");
@@ -56,6 +58,9 @@ public final class forgotPassword_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("        src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body oncontextmenu='return false' class='snippet-body'>\r\n");
+      out.write("        ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "header.jsp", out, false);
+      out.write("\r\n");
       out.write("        <div class=\"container padding-bottom-3x mb-2 mt-5\">\r\n");
       out.write("            <div class=\"row justify-content-center\">\r\n");
       out.write("                <div class=\"col-lg-8 col-md-10\">\r\n");
@@ -91,6 +96,10 @@ public final class forgotPassword_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("        </div>\r\n");
+      out.write("        ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "footer.jsp", out, false);
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("        <script type='text/javascript'\r\n");
       out.write("        src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>\r\n");
       out.write("        <script type='text/javascript' src=''></script>\r\n");

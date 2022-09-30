@@ -5,6 +5,7 @@
  */
 package daos;
 
+import dtos.GoogleDTO;
 import dtos.UserRoleDTO;
 import dtos.UsersDTO;
 import java.sql.Connection;
@@ -18,15 +19,14 @@ import utils.DBUtils;
  *
  * @author Admin
  */
-public class UserDAOImpl implements UserDAO{
-    
+public class UserDAOImpl implements UserDAO {
+
     private Connection conn;
 
     public UserDAOImpl(Connection conn) {
         this.conn = conn;
     }
-    
-    
+
     @Override
     public UsersDTO checkLogin(String username, String password) throws SQLException, NamingException {
         Connection con = null;
@@ -35,10 +35,10 @@ public class UserDAOImpl implements UserDAO{
         UsersDTO result = null;
         try {
             //1. Make connection
-            con=DBUtils.getConnection();                            
+            con = DBUtils.getConnection();
             //2. sql statement
             if (con != null) {
-                String sql = "Select full_name, user_name, email, phone, r.role_id, role " 
+                String sql = "Select full_name, user_name, email, phone, r.role_id, role "
                         + "From users u, user_role r "
                         + "Where user_name = ? "
                         + "And password = ? "
@@ -51,11 +51,11 @@ public class UserDAOImpl implements UserDAO{
                 rs = stm.executeQuery();
                 //5.process result
                 if (rs.next()) {
-                    String fullname=rs.getString("full_name");
+                    String fullname = rs.getString("full_name");
                     String email = rs.getString("email");
-                    String phone=rs.getString("phone");
+                    String phone = rs.getString("phone");
                     int roleId = rs.getInt("role_id");
-                    String role=rs.getString("role");
+                    String role = rs.getString("role");
                     result = new UsersDTO(fullname, username, email, phone, new UserRoleDTO(roleId, role));
                 }
             }
@@ -76,13 +76,13 @@ public class UserDAOImpl implements UserDAO{
     //khangtran: function register account
     @Override
     public boolean userRegister(UsersDTO us) {
-        
+
         boolean f = false;
-        
+
         try {
             String sql = "INSERT INTO users(full_name,user_name,password,email,phone,status,create_date,edited_date,role_id) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             ps.setString(1, us.getFull_name());
             ps.setString(2, us.getUser_name());
             ps.setString(3, us.getPassword());
@@ -92,12 +92,38 @@ public class UserDAOImpl implements UserDAO{
             ps.setString(7, us.getCreate_date());
             ps.setString(8, us.getEdit_date());
             ps.setInt(9, us.getRole_id().getRole_id());
-            
+
             int i = ps.executeUpdate();
-            if(i == 1){
+            if (i == 1) {
                 f = true;
-            } 
-            
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+//Minh thanh
+    @Override
+    public boolean userRegister(GoogleDTO us) {
+
+        boolean f = false;
+
+        try {
+            String sql = "INSERT INTO users(email,full_name,status,create_date,edited_date) VALUES (?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, us.getEmail());
+            ps.setString(2, us.getName());
+            ps.setInt(3, us.getStatus());
+            ps.setString(4, us.getCreate_date());
+            ps.setString(5, us.getEdit_date());
+//            ps.setInt(6, us.getRole());
+            int i = ps.executeUpdate();
+            if (i == 1) {
+                f = true;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,7 +138,7 @@ public class UserDAOImpl implements UserDAO{
             con = DBUtils.getConnection();
             if (con != null) {
                 con = DBUtils.getConnection();
-                String sql = ("update users set password = ? where email = ? ");
+                String sql = ("UPDATE users SET password = ? WHERE email = ? ");
                 stm = con.prepareStatement(sql);
                 stm.setString(1, password);
                 stm.setString(2, email);
@@ -129,66 +155,4 @@ public class UserDAOImpl implements UserDAO{
         }
         return check;
     }
-//Minh thanh
-
-    @Override
-    public boolean updateUser(UsersDTO user) throws SQLException {
-        boolean check = false;
-        Connection con = null;
-        PreparedStatement stm = null;
-        try {
-            con = DBUtils.getConnection();
-            String sql = "update users set full_name=?, email=?, phone=? where user_name=? ";
-            stm = con.prepareStatement(sql);
-            stm.setString(1, user.getFull_name());
-            stm.setString(2, user.getEmail());
-            stm.setString(3, user.getPhone());
-            stm.setString(4, user.getUser_name());
-            check = stm.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return check;
-    }
-//Minh thanh
-
-    public boolean checkDuplicateEmail(String email) throws SQLException {
-        boolean check = false;
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            con = DBUtils.getConnection();
-            if (con != null) {
-                String sql = "select email from users where email=? ";
-                stm = con.prepareStatement(sql);
-                stm.setString(1, sql);
-                rs = stm.executeQuery();
-                if (rs.next()) {
-                    check = true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return check;
-    }
 }
-

@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -52,7 +52,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <meta name=\"keywords\" content=\"Ogani, unica, creative, html\">\r\n");
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n");
       out.write("        <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n");
-      out.write("        <title>Đăng ký</title>\r\n");
+      out.write("        <title>Đăng Nhập</title>\r\n");
       out.write("\r\n");
       out.write("        <!-- Google Font -->\r\n");
       out.write("        <link href=\"https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap\" rel=\"stylesheet\">\r\n");
@@ -70,27 +70,22 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <body>\r\n");
       out.write("        ");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "header.jsp", out, false);
-      out.write("\r\n");
+      out.write("   \r\n");
       out.write("        <div class=\"container mb-3\">\r\n");
-      out.write("            <form>\r\n");
+      out.write("            <form action=\"loginController\" method=\"POST\">\r\n");
       out.write("                <div class=\"mb-3\">\r\n");
-      out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Họ và tên</label>\r\n");
-      out.write("                    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\">\r\n");
-      out.write("                    <div id=\"emailHelp\" class=\"form-text\">We'll never share your email with anyone else.</div>\r\n");
+      out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Username</label>\r\n");
+      out.write("                    <input type=\"text\" class=\"form-control\" name=\"txtUsername\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\">\r\n");
       out.write("                </div>\r\n");
       out.write("                <div class=\"mb-3\">\r\n");
-      out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Địa chỉ email</label>\r\n");
-      out.write("                    <input type=\"email\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\">\r\n");
-      out.write("                    <div id=\"emailHelp\" class=\"form-text\">We'll never share your email with anyone else.</div>\r\n");
+      out.write("                    <label for=\"exampleInputPassword1\" class=\"form-label\">Password</label>\r\n");
+      out.write("                    <input type=\"password\" class=\"form-control\" name=\"txtPassword\" id=\"exampleInputPassword1\">\r\n");
       out.write("                </div>\r\n");
-      out.write("                <div class=\"mb-3\">\r\n");
-      out.write("                    <label for=\"exampleInputPassword1\" class=\"form-label\">Mật khẩu</label>\r\n");
-      out.write("                    <input type=\"password\" class=\"form-control\" id=\"exampleInputPassword1\">\r\n");
-      out.write("                </div>\r\n");
-      out.write("                \r\n");
-      out.write("                <button type=\"submit\" class=\"btn btn-primary\">Đăng ký</button>\r\n");
+      out.write("                <button type=\"submit\" value=\"Login\" class=\"btn btn-primary\">Submit</button>\r\n");
+      out.write("                <a href=\"https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/NestSongAn/login-google&response_type=code\r\n");
+      out.write("                   &client_id=34728737226-pshthan6um4e9qkcndvrrmvhr1b9mqqp.apps.googleusercontent.com&approval_prompt=force\">Login With Google</a>\r\n");
       out.write("            </form>\r\n");
-      out.write("            <a href=\"login.jsp\">Bạn đã có tài khoản? Đăng nhập ngay</a>\r\n");
+      out.write("            <a href=\"register.jsp\">Bạn chưa có tài khoản? Đăng ký ngay.</a>\r\n");
       out.write("        </div>\r\n");
       out.write("        ");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "footer.jsp", out, false);

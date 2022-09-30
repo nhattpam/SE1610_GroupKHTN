@@ -1,3 +1,5 @@
+        <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html>
     <head>
@@ -16,6 +18,8 @@
 
     </head>
     <body oncontextmenu='return false' class='snippet-body bg-info'>
+                <jsp:include page="header.jsp" />
+
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
         <div>
@@ -32,7 +36,7 @@
                                 </h1>
                             </div>
                             <div class="pt-3 pb-3">
-                                <form class="form-horizontal" action="newPassword" method="POST">
+                                <form class="form-horizontal" action="resetPassword" method="POST">
                                     <!-- User Name Input -->
                                     <div class="form-group row justify-content-center px-3">
                                         <div class="col-9 px-0">
@@ -85,6 +89,8 @@
                 </div>
             </div>
         </div>
+                <jsp:include page="footer.jsp" />
+
         <script type='text/javascript'
         src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
 

@@ -5,6 +5,7 @@
  */
 package daos;
 
+import dtos.GoogleDTO;
 import dtos.UsersDTO;
 import java.sql.SQLException;
 import javax.naming.NamingException;
@@ -17,12 +18,10 @@ public interface UserDAO {
 
     //khangtran: function register account
     public boolean userRegister(UsersDTO us);
+    
+    public boolean userRegister(GoogleDTO us);
 
     public UsersDTO checkLogin(String username, String password) throws SQLException, NamingException;
 
     public boolean resetPassword(String password, String email) throws SQLException;
-
-    public boolean updateUser(UsersDTO user) throws SQLException;
-
-    public boolean checkDuplicateEmail(String email) throws SQLException;
 }

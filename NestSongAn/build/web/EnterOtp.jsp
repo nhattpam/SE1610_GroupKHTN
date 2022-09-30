@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <html>
     <head>
 
@@ -15,6 +17,8 @@
     </head>
 
     <body>
+        <jsp:include page="header.jsp" />
+
         <div class="form-gap"></div>
         <div class="container">
             <div class="row">
@@ -51,7 +55,6 @@
                                                    class="btn btn-lg btn-primary btn-block"
                                                    value="Reset Password" type="submit">
                                         </div>
-
                                         <input type="hidden" class="hide" name="token" id="token"
                                                value="">
                                     </form>
@@ -63,5 +66,7 @@
                 </div>
             </div>
         </div>
+        <jsp:include page="footer.jsp" />
+
     </body>
 </html>
