@@ -35,7 +35,6 @@
 
         <div class="container mb-3">
             <form action="RegisterController" method="post">
-               
                 <h4>Đăng Ký tài khoản</h4>
                 <c:if test="${ not empty requestScope.succMsg }">
                     <h5 class="text-center text-success">${requestScope.succMsg}</h5>

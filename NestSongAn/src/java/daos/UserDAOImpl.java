@@ -30,7 +30,8 @@ public class UserDAOImpl implements UserDAO {
     public UserDAOImpl(Connection conn) {
         this.conn = conn;
     }
-     public UserDAOImpl() {
+
+    public UserDAOImpl() {
     }
 
     @Override
@@ -44,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 //2. sql statement
-                String sql = "Select full_name, user_name, email, phone, r.role_id, role "
+                String sql = "Select user_id, full_name, user_name, email, phone, r.role_id, role "
                         + "From users u, user_role r "
                         + "Where user_name = ? "
                         + "And password = ? "
@@ -57,13 +58,13 @@ public class UserDAOImpl implements UserDAO {
                 rs = stm.executeQuery();
                 //5.process result
                 if (rs.next()) {
-
+                    int userId = rs.getInt("user_id");
                     String fullname = rs.getString("full_name");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     int roleId = rs.getInt("role_id");
                     String role = rs.getString("role");
-                    result = new UsersDTO(fullname, username, email, phone, new UserRoleDTO(roleId, role));
+                    result = new UsersDTO(userId, fullname, username, email, phone, new UserRoleDTO(roleId, role));
                 }
 
             }
@@ -119,7 +120,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "Select full_name, user_name, email, phone, create_date, edited_date\n"
+                String sql = "Select full_name, user_name , password, email, phone\n"
                         + "from users\n"
                         + "where user_id = ?";
                 stm = con.prepareStatement(sql);
@@ -128,11 +129,10 @@ public class UserDAOImpl implements UserDAO {
                 if (rs.next()) {
                     String fullname = rs.getString("full_name");
                     String username = rs.getString("user_name");
+                    String password = rs.getString("password");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
-                    String create_date = rs.getString("create_date");
-                    String edited_date = rs.getString("edited_date");
-                    result = new UsersDTO(userId, fullname, username, phone, email, phone, create_date, edited_date);
+                    result = new UsersDTO(userId, fullname, username, password, email, phone);
                 }
             }
         } finally {
@@ -149,16 +149,38 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
-    public static void main(String[] args) {
+    @Override
+    public void editAccount(UsersDTO us) throws SQLException {
+        boolean f = false;
+        Connection con = null;
+        PreparedStatement stm = null;
         try {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Input user_id:");
-            int id = sc.nextInt();
-            UserDAO user = new UserDAOImpl(DBUtils.getConnection());
-            UsersDTO us = user.viewAccount(id);
-            System.out.println(us.toString());
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE users\n"
+                        + "SET full_name = ?,\n"
+                        + "user_name = ?,\n"
+                        + "password = ?,\n"
+                        + "email = ?,\n"
+                        + "phone = ?\n"
+                        + "WHERE user_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, us.getFull_name());
+                stm.setString(2, us.getUser_name());
+                stm.setString(3, us.getPassword());
+                stm.setString(4, us.getEmail());
+                stm.setString(5, us.getPhone());
+                stm.setInt(6, us.getUser_id());
+                stm.executeUpdate();
+                f = true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
     }
 }

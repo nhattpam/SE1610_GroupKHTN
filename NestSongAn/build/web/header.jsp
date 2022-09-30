@@ -124,17 +124,17 @@
                                 <div class="header__top__right__language">
                                     <img src="img/language.png" alt="">
                                     <div style="color: white;">English</div>
-                                    <span class="arrow_carrot-down"></span>
-                                    <ul>
-                                        <li><a href="#" style="color: white;">Spanis</a></li>
-                                        <li><a href="#" style="color: white;">English</a></li>
-                                    </ul>
                                 </div>
                                 <!--login-->
                                 <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
                                 <c:if test="${not empty USER}">
-                                    <div class="header__top__right__auth">
+                                    <div class="header__top__right__language">
                                         <a href="" style="color: white;"><i class="fa fa-user"></i> <%=u.getFull_name()%></a>
+                                        <span class="arrow_carrot-down"></span>
+                                        <ul>
+                                            <li><a href="MyProfile?uid=<%=u.getUser_id()%>" style="color: white;">My Profile</a></li>
+                                            <li><a href="#" style="color: white;">English</a></li>
+                                        </ul>
                                     </div>
                                 </c:if>
                                 <c:if test="${empty USER}">

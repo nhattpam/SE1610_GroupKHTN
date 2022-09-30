@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.regex.Pattern;
 import java.util.Properties;
 import javax.servlet.RequestDispatcher;
+import java.util.Properties;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,7 +59,6 @@ public class RegisterAccountController extends HttpServlet {
             String edited_date = null;
 
             UserRoleDTO role_id = new UserRoleDTO(1);
-
             //check du lieu nguoi dung
             boolean check = true;
             //check fullname
