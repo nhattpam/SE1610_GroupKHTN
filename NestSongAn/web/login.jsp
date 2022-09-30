@@ -44,9 +44,11 @@
                     <input type="password" class="form-control" name="txtPassword" id="exampleInputPassword1">
                 </div>
                 <button type="submit" value="Login" class="btn btn-primary">Submit</button>
+                <br/>
                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/NestSongAn/login-google&response_type=code
                    &client_id=34728737226-pshthan6um4e9qkcndvrrmvhr1b9mqqp.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>
             </form>
+            <a href="forgotPassword.jsp">Forgot password?</a>
             <a href="registerPage">Bạn chưa có tài khoản? Đăng ký ngay.</a>
         </div>
         <jsp:include page="footer.jsp" />
