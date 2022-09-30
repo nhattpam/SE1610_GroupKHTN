@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 import java.util.Properties;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,7 @@ import utils.DBUtils;
 //khangtran: function register account
 @WebServlet("/RegisterAccountController")
 public class RegisterAccountController extends HttpServlet {
-
+    private static final String REGISTER_PAGE="registerPage";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -59,40 +60,39 @@ public class RegisterAccountController extends HttpServlet {
             UserRoleDTO role_id = new UserRoleDTO(1);
 
             //check du lieu nguoi dung
-            HttpSession sessionValidate = req.getSession();
             boolean check = true;
             //check fullname
             Pattern fullNameCheck = Pattern.compile("^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]+$");
             if (full_name == null || "".equals(full_name.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
-                sessionValidate.setAttribute("wrongFullName", "Họ và tên không được trống và không chứa kí tự đặc biệt");
+                req.setAttribute("wrongFullName", "Họ và tên không được trống và không chứa kí tự đặc biệt");
                 check = false;
 //                resp.sendRedirect("RegisterAccountController");
             }
             if (!full_name.matches(fullNameCheck.pattern())) {
-                sessionValidate.setAttribute("wrongFullName", "Họ và tên không được trống và không chứa kí tự đặc biệt");
+                req.setAttribute("wrongFullName", "Họ và tên không được trống và không chứa kí tự đặc biệt");
                 check = false;
             }
             //check username
             Pattern userNameCheck = Pattern.compile("^[A-Za-z0-9]+$");
             if (user_name == null || "".equals(user_name.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
-                sessionValidate.setAttribute("wrongUser_name", "Tên đăng nhập không được trống và không chứa kí tự đặc biệt");
+                req.setAttribute("wrongUser_name", "Tên đăng nhập không được trống và không chứa kí tự đặc biệt");
                 check = false;
 //                resp.sendRedirect("RegisterAccountController");
             }
             if (!user_name.matches(userNameCheck.pattern())) {
-                sessionValidate.setAttribute("wrongUser_name", "Tên đăng nhập không được trống và không chứa kí tự đặc biệt và dấu cách");
+                req.setAttribute("wrongUser_name", "Tên đăng nhập không được trống và không chứa kí tự đặc biệt và dấu cách");
                 check = false;
             }
             //check sdt
             Pattern phoneCheck = Pattern.compile("^[0][0-9]{9}$");
             if (!phone.matches(phoneCheck.pattern())) { // dấu ! là phủ định có nghĩa là k đúng định dạng
-                sessionValidate.setAttribute("wrongPhone", "Số điện thoại phải bắt đầu là số 0 và dài 10 kí tự");
+                req.setAttribute("wrongPhone", "Số điện thoại phải bắt đầu là số 0 và dài 10 kí tự");
                 check = false;
 //                resp.sendRedirect("RegisterAccountController");
             }
             //check Mk + SHA256 hashcode
             if (password == null || "".equals(password.trim()) || password.length() < 6) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
-                sessionValidate.setAttribute("wrongPassword", "Mật khẩu không được trống và độ dài phải lớn hơn 6 kí tự");
+                req.setAttribute("wrongPassword", "Mật khẩu không được trống và độ dài phải lớn hơn 6 kí tự");
                 check = false;
 //                resp.sendRedirect("RegisterAccountController");
             }
@@ -104,32 +104,29 @@ public class RegisterAccountController extends HttpServlet {
 
                 UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
 
-                boolean f = dao.userRegister(us);
+                boolean result = dao.userRegister(us);
 
-                HttpSession session = req.getSession();
-
-                if (f) {
-                    session.setAttribute("succMsg", "Đăng ký tài khoản thành công...");
-                    resp.sendRedirect("RegisterAccountController");
+                if (result==true) {
+                    req.setAttribute("succMsg", "Đăng ký tài khoản thành công...");
                 } else {
-                    session.setAttribute("failedMsg", "Đăng ký tài khoản không thành công...");
-                    resp.sendRedirect("RegisterAccountController");
-
-                    req.getRequestDispatcher("error.jsp").forward(req, resp);
+                    req.setAttribute("failedMsg", "Đăng ký tài khoản không thành công...");
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            resp.sendRedirect("RegisterAccountController");
+            RequestDispatcher rd = req.getRequestDispatcher(siteMaps.getProperty(REGISTER_PAGE));
+                rd.forward(req, resp);
         }
 
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("register.jsp").forward(req, resp);
+        ServletContext context = this.getServletContext();
+        Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
+        req.getRequestDispatcher(siteMaps.getProperty(REGISTER_PAGE)).forward(req, resp);
     }
 
     //hàm mã hóa sha256

@@ -34,6 +34,8 @@ public class LoginServlet extends HttpServlet {
     private static final String HOME_PAGE ="";
     private static final String STAFF_PAGE ="staffPage";
     private static final String ADMIN_PAGE ="adminPage";
+    private static final String SHIPPER_PAGE ="shipperPage";
+    private static final String SUPPLIER_PAGE ="supplierPage";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -70,13 +72,14 @@ public class LoginServlet extends HttpServlet {
             if (result != null && result.getRole_id().getRole().equals("staff")) {          // Role name = staff 
                 url = siteMaps.getProperty(STAFF_PAGE);                                                       // to staff page
             }
-            if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role id = admin 
+            if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role name = admin 
                 url = siteMaps.getProperty(ADMIN_PAGE);                                                      // to admin page
             }
-            if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role id = supplier 
-                url = "supplier.jsp";                                                    // to supplier page
-            }if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role id = shipper 
-                url = "shipper.jsp";                                                    // to shipper page
+            if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role name = supplier 
+                url = siteMaps.getProperty(SUPPLIER_PAGE);                                                        // to supplier page
+            }
+            if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role name = shipper 
+                url = siteMaps.getProperty(SHIPPER_PAGE);                                                     // to shipper page
             }
             HttpSession session = request.getSession();//true
             session.setAttribute("USER", result);

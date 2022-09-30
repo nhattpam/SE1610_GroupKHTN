@@ -101,7 +101,7 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(8, us.getEdit_date());
             ps.setInt(9, us.getRole_id().getRole_id());
             int i = ps.executeUpdate();
-            if (i == 1) {
+            if (i > 0) {
                 f = true;
             }
         } catch (Exception e) {
