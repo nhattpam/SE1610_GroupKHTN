@@ -4,6 +4,12 @@
     Author     : Admin
 --%>
 
+<%@page import="dtos.UsersDTO"%>
+<%@page import="dtos.ProductDTO"%>
+<%@page import="dtos.CartDTO"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="utils.DBUtils"%>
+<%@page import="daos.ProductDAOImpl"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -145,6 +151,21 @@
                         </div>
                     </div>
                 </div>
+
+                <%
+                    UsersDTO u = (UsersDTO) session.getAttribute("USER");
+                    //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
+                    //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
+                    NumberFormat nf = NumberFormat.getInstance();
+                    nf.setMinimumIntegerDigits(0);
+
+                    CartDTO cart = (CartDTO) session.getAttribute("cart");
+                    if (cart == null) {
+                        cart = new CartDTO();
+                        session.setAttribute("cart", cart);
+                    }
+                %>
+
                 <div class="row featured__filter">
                     <c:forEach items="${listAllProduct}" var="l">
                         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
@@ -154,7 +175,14 @@
                                     <ul class="featured__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <%
+                                            if (u == null){%>
+                                                <li><a href="login.jsp"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <%} else {%>
+                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <%}
+                                        %>
+                                        
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">

@@ -1,3 +1,8 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.Map"%>
+<%@page import="dtos.ProductDTO"%>
+<%@page import="java.util.TreeMap"%>
+<%@page import="dtos.CartDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +28,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
         <style>
             .breadcrumbs {
-                
+
             }
 
             .breadcrumbs .breadcrumb {
@@ -172,6 +177,17 @@
     <body>
         <jsp:include page="header.jsp" />
 
+        <%
+            CartDTO cart = (CartDTO) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new CartDTO();
+                session.setAttribute("cart", cart);
+            }
+            TreeMap<ProductDTO, Integer> list = cart.getList();
+            NumberFormat nf = NumberFormat.getInstance();
+            nf.setMinimumIntegerDigits(0);
+        %>
+
         <section id="cart_items">
             <div class="container">
                 <div class="breadcrumbs">
@@ -188,87 +204,45 @@
                                 <td class="description"></td>
                                 <td class="price">Giá</td>
                                 <td class="quantity">Số Lượng</td>
-                                <td class="total">Total</td>
+                                <td class="total">Tổng</td>
                                 <td></td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/one.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
+
+                            <%
+                                for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
+                            %>
 
                             <tr>
                                 <td class="cart_product">
-                                    <a href=""><img src="images/cart/two.png" alt=""></a>
+                                    <a href=""><img src="products/<%= ds.getKey().getPhoto()%>" alt="" style="width: 50px; height: 60px;"></a>
                                 </td>
                                 <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
+                                    <h4><a href=""><%= ds.getKey().getName()%></a></h4>
+                                    <p>Code: <%= ds.getKey().getCode()%></p>
                                 </td>
                                 <td class="cart_price">
-                                    <p>$59</p>
+                                    <p><%= nf.format(ds.getKey().getPrice()) %> VNĐ</p>
                                 </td>
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
+                                        <a class="cart_quantity_up" href="add-cart?command=plus&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"> + </a>
+                                        <input class="cart_quantity_input" type="text" value="<%= ds.getValue()%>" autocomplete="off" size="2" disabled="">
+                                        <a class="cart_quantity_down" href="add-cart?command=sub&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"> - </a>
                                     </div>
                                 </td>
                                 <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
+                                    <p class="cart_total_price"><%= nf.format(ds.getValue() * ds.getKey().getPrice()) %> VNĐ</p>
                                 </td>
                                 <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                    <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/three.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
+
+                            <%
+                                }
+                            %>
                         </tbody>
                     </table>
                     </section> <!--/#cart_items-->

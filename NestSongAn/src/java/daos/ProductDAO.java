@@ -20,4 +20,7 @@ public interface ProductDAO {
     
     //quoc khang: function View All Product List
     public List<ProductDTO> getAllProduct();
+    
+    //nhattpam: get ma sp de add to cart
+    public ProductDTO getProductId(String product_id);
 }

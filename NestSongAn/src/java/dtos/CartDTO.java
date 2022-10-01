@@ -41,7 +41,7 @@ public class CartDTO {
         this.cartID = cartID;
     }
     
-    public void insertToCart(ProductDTO p, int quantity){
+    public void addToCart(ProductDTO p, int quantity){
         boolean bln = list.containsKey(p);
         if(bln){
             int ql = list.get(p);
@@ -49,6 +49,28 @@ public class CartDTO {
             list.put(p, quantity);
         } else {
             list.put(p, quantity);
+        }
+    }
+    
+    public void subToCart(ProductDTO p , int quantity){
+        boolean bln = list.containsKey(p);
+        if(bln){
+            int ql = list.get(p);
+            quantity = ql - quantity;
+            if(quantity <= 0){
+                list.remove(p);
+            } else {
+                list.remove(p);
+                list.put(p, quantity);
+            }
+            
+        }
+    }
+    
+    public void removeToCart(ProductDTO p){
+        boolean bln = list.containsKey(p);
+        if(bln){
+            list.remove(p);
         }
     }
     

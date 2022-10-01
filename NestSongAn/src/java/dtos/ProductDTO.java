@@ -202,8 +202,8 @@ public class ProductDTO implements Comparable<ProductDTO> {
     
     @Override
     public int compareTo(ProductDTO p) {
-//        return Integer.parseInt(this.product_id) - Integer.parseInt(p.product_id);
-        return 0;
+        return this.product_id - p.product_id;
+//        return 0;
     }
 
 }

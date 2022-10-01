@@ -21,17 +21,20 @@ import utils.DBUtils;
  * @author Admin
  */
 @WebServlet("/shop-products")
-public class ViewAllProductPageController extends HttpServlet{
+public class ViewAllProductPageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
         ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
         List<ProductDTO> listAllProduct = dao.getAllProduct();
-        
+
         req.setAttribute("listAllProduct", listAllProduct);
-        
+
+        ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
+        ProductDTO p = productDAO.getProductId(req.getParameter("product_id"));
+
         req.getRequestDispatcher("shop_all_product.jsp").forward(req, resp);
     }
-    
+
 }

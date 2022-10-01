@@ -5,12 +5,16 @@
  */
 package daos;
 
+import com.sun.istack.internal.logging.Logger;
+import dtos.CategoryDTO;
 import dtos.ProductDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  *
@@ -45,7 +49,7 @@ public class ProductDAOImpl implements ProductDAO {
             ps.setInt(11, p.getQuantity());
 
             int i = ps.executeUpdate();
-            if (i >0) {
+            if (i > 0) {
                 f = true;
             }
 
@@ -54,8 +58,7 @@ public class ProductDAOImpl implements ProductDAO {
         }
         return f;
     }
-    
-    
+
     //khang tran: function View All Product List
     @Override
     public List<ProductDTO> getAllProduct() {
@@ -63,11 +66,12 @@ public class ProductDAOImpl implements ProductDAO {
         List<ProductDTO> list = new ArrayList<>();
 
         try {
-            String sql = "select photo, name, price from product";
+            String sql = "select product_id, photo, name, price from product";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ProductDTO p = new ProductDTO();
+                p.setProduct_id(rs.getInt("product_id"));
                 p.setPhoto(rs.getString("photo"));
                 p.setName(rs.getString("name"));
                 p.setPrice(rs.getFloat("price"));
@@ -79,6 +83,34 @@ public class ProductDAOImpl implements ProductDAO {
         }
         return list;
 
+    }
+
+    @Override
+    public ProductDTO getProductId(String product_id) {
+        ProductDTO p = new ProductDTO();
+
+        try {
+            String sql = "SELECT product_id, name, code, short_description, full_description, weight, price, photo, category_id, quantity FROM product WHERE product_id = '" + product_id + "'";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                CategoryDTO category_id = new CategoryDTO(rs.getInt("category_id"));
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setCategory_id(category_id);
+                p.setName(rs.getString("name"));
+                p.setCode(rs.getString("code"));
+                p.setShort_description(rs.getString("short_description"));
+                p.setFull_description(rs.getString("full_description"));
+                p.setWeight(rs.getInt("weight"));
+                p.setPhoto(rs.getString("photo"));
+                p.setQuantity(rs.getInt("quantity"));
+                p.setPrice(rs.getFloat("price"));
+            }
+        } catch (SQLException ex) {
+        }
+        return p;
     }
 
 }
