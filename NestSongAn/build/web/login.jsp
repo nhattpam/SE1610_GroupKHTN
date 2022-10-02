@@ -29,7 +29,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
     <body>
-        <jsp:include page="header.jsp" />   
+        <jsp:include page="header.jsp"/>   
         <div class="container mb-3">
             <c:if test="${ not empty LoginError }">
                 <h5 class="text-center text-danger">${LoginError}</h5>

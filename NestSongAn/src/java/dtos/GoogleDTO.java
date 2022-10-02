@@ -13,59 +13,41 @@ public class GoogleDTO {
 
     private String id;
     private String email;
-    private boolean verified_email;
     private String name;
-    private String given_name;
-    private String family_name;
     private int status;
     private String create_date;
     private String edit_date;
-    private String phone;
-    private int role;
+    private UserRoleDTO role_id;
 
     // getter-setter
     public GoogleDTO() {
     }
 
-    public GoogleDTO(String email, String name,int status, String create_date, String edit_date) {
+    public GoogleDTO(String email, String name, int status, String create_date, String edit_date, UserRoleDTO role_id) {
         this.email = email;
         this.name = name;
         this.status = status;
         this.create_date = create_date;
         this.edit_date = edit_date;
-//        this.role = role;
+        this.role_id = role_id;
     }
 
-    public GoogleDTO(String id, String email, boolean verified_email, String name, String given_name, String family_name, int status, String create_date, String edit_date, String phone, int role) {
+    public GoogleDTO(String id, String email, String name, int status, String create_date, String edit_date, UserRoleDTO role_id) {
         this.id = id;
         this.email = email;
-        this.verified_email = verified_email;
         this.name = name;
-        this.given_name = given_name;
-        this.family_name = family_name;
         this.status = status;
         this.create_date = create_date;
         this.edit_date = edit_date;
-        this.phone = phone;
-        this.role = role;
+        this.role_id = role_id;
     }
 
-    public int getRole() {
-        return role;
+    public UserRoleDTO getRole_id() {
+        return role_id;
     }
 
-    public void setRole(int role) {
-        this.role = role;
-    }
-
-  
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setRole_id(UserRoleDTO role_id) {
+        this.role_id = role_id;
     }
 
     public int getStatus() {
@@ -94,7 +76,7 @@ public class GoogleDTO {
 
     @Override
     public String toString() {
-        return "GoogleDTO{" + "id=" + id + ", email=" + email + ", verified_email=" + verified_email + ", name=" + name + ", given_name=" + given_name + ", family_name=" + family_name + ", status=" + status + ", create_date=" + create_date + ", edit_date=" + edit_date + '}';
+        return "GoogleDTO{" + "id=" + id + ", email=" + email + ", name=" + name + ", status=" + status + ", create_date=" + create_date + ", edit_date=" + edit_date + ", role_id=" + role_id + '}';
     }
 
     public String getId() {
@@ -113,35 +95,11 @@ public class GoogleDTO {
         this.email = email;
     }
 
-    public boolean isVerified_email() {
-        return verified_email;
-    }
-
-    public void setVerified_email(boolean verified_email) {
-        this.verified_email = verified_email;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getGiven_name() {
-        return given_name;
-    }
-
-    public void setGiven_name(String given_name) {
-        this.given_name = given_name;
-    }
-
-    public String getFamily_name() {
-        return family_name;
-    }
-
-    public void setFamily_name(String family_name) {
-        this.family_name = family_name;
     }
 }
