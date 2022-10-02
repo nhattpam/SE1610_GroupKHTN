@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import utils.DBUtils;
 
 /**
  *
@@ -112,5 +113,4 @@ public class ProductDAOImpl implements ProductDAO {
         }
         return p;
     }
-
 }
