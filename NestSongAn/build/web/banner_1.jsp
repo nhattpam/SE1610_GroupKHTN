@@ -30,12 +30,12 @@
         
     </head>
     <body>
-        <div class="col-lg-9">
+        <!--<div class="col-lg-9">-->
             <div class="hero__search">
                 <div class="hero__search__form">
                     <form action="#">
                         <div class="hero__search__categories">
-                            All Categories
+                            Danh Mục
                             <span class="arrow_carrot-down"></span>
                         </div>
                         <input type="text" placeholder="Bạn tìm gì?">
@@ -52,11 +52,11 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="img/banner_1_changed.png">
+<!--            <div class="hero__item set-bg" data-setbg="img/banner_1_changed.png">
                 <div class="hero__text">
                 </div>
-            </div>
-        </div>
+            </div>-->
+        <!--</div>-->
         <!-- Js Plugins -->
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

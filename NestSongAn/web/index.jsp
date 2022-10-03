@@ -41,7 +41,13 @@
             <div class="container">
                 <div class="row">
                     <jsp:include page="category.jsp" />
-                    <jsp:include page="banner_1.jsp" />
+                    <div class="col-lg-9">
+                        <jsp:include page="banner_1.jsp" />
+                        <div class="hero__item set-bg" data-setbg="img/banner_1_changed.png">
+                            <div class="hero__text">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -70,5 +76,4 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
     </body>
-
 </html>

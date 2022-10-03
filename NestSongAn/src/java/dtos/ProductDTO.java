@@ -64,6 +64,21 @@ public class ProductDTO implements Comparable<ProductDTO> {
         this.supplier_id = supplier_id;
     }
 
+    public ProductDTO(int product_id, String name, String code, String short_description, String full_description, float price, int weight, String photo, CategoryDTO category_id, int quantity) {
+        this.product_id = product_id;
+        this.name = name;
+        this.code = code;
+        this.short_description = short_description;
+        this.full_description = full_description;
+        this.price = price;
+        this.weight = weight;
+        this.photo = photo;
+        this.category_id = category_id;
+        this.quantity = quantity;
+    }
+
+ 
+
     public int getWeight() {
         return weight;
     }
@@ -202,8 +217,8 @@ public class ProductDTO implements Comparable<ProductDTO> {
     
     @Override
     public int compareTo(ProductDTO p) {
-//        return Integer.parseInt(this.product_id) - Integer.parseInt(p.product_id);
-        return 0;
+        return this.product_id - p.product_id;
+//        return 0;
     }
 
 }

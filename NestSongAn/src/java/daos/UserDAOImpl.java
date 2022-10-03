@@ -5,16 +5,13 @@
  */
 package daos;
 
+import dtos.GoogleDTO;
 import dtos.UserRoleDTO;
 import dtos.UsersDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.naming.NamingException;
 import utils.DBUtils;
@@ -26,6 +23,9 @@ import utils.DBUtils;
 public class UserDAOImpl implements UserDAO {
 
     private Connection conn;
+    Connection con = null;
+    PreparedStatement stm = null;
+    ResultSet rs = null;
 
     public UserDAOImpl(Connection conn) {
         this.conn = conn;
@@ -64,7 +64,7 @@ public class UserDAOImpl implements UserDAO {
                     String phone = rs.getString("phone");
                     int roleId = rs.getInt("role_id");
                     String role = rs.getString("role");
-                    result = new UsersDTO( userId, fullname, username, email, phone, new UserRoleDTO(roleId, role));
+                    result = new UsersDTO(userId, fullname, username, email, phone, new UserRoleDTO(roleId, role));
                 }
 
             }
@@ -102,7 +102,7 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(8, us.getEdit_date());
             ps.setInt(9, us.getRole_id().getRole_id());
             int i = ps.executeUpdate();
-            if (i == 1) {
+            if (i > 0) {
                 f = true;
             }
         } catch (Exception e) {
@@ -172,7 +172,7 @@ public class UserDAOImpl implements UserDAO {
                 stm.setString(5, us.getPhone());
                 stm.setInt(6, us.getUser_id());
                 stm.executeUpdate();
-                f= true;
+                f = true;
             }
         } finally {
             if (stm != null) {
@@ -183,4 +183,91 @@ public class UserDAOImpl implements UserDAO {
             }
         }
     }
+//Minh thanh
+
+    @Override
+    public boolean userRegister(GoogleDTO us) {
+
+        boolean f = false;
+
+        try {
+            String sql = "INSERT INTO users(email,full_name,status,create_date,edited_date,role_id) VALUES (?,?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, us.getEmail());
+            ps.setString(2, us.getName());
+            ps.setInt(3, us.getStatus());
+            ps.setString(4, us.getCreate_date());
+            ps.setString(5, us.getEdit_date());
+            ps.setInt(6, us.getRole_id().getRole_id());
+            int i = ps.executeUpdate();
+            if (i == 1) {
+                f = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+//Minh thanh 
+
+    public boolean resetPassword(String password, String email) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean check = false;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                con = DBUtils.getConnection();
+                String sql = ("UPDATE users SET password = ? WHERE email = ? ");
+                stm = con.prepareStatement(sql);
+                stm.setString(1, password);
+                stm.setString(2, email);
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return check;
+    }
+//Minh thanh
+    @Override
+    public boolean checkDuplicateEmail(String email) throws SQLException {
+        boolean check = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT email FROM users WHERE email =? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                rs = stm.executeQuery();
+                if(rs.next()){
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+        return check;
+    }
+
 }
