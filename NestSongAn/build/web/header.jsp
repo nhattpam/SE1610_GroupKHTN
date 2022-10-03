@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="dtos.GoogleDTO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="dtos.UsersDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -137,7 +138,18 @@
                                         </ul>
                                     </div>
                                 </c:if>
-                                <c:if test="${empty USER}">
+                                <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>
+                                <c:if test="${not empty USERG}">
+                                    <div class="header__top__right__language">
+                                        <a href="" style="color: white;"><i class="fa fa-user"></i> <%=us.getName()%></a>
+                                        <span class="arrow_carrot-down"></span>
+                                        <ul>
+                                            <li><a href="MyProfile?uid=<%=us.getId()%>" style="color: white;">My Profile</a></li>
+                                            <li><a href="#" style="color: white;">English</a></li>
+                                        </ul>
+                                    </div>
+                                </c:if>
+                                <c:if test="${empty USER && empty USERG}">
                                     <div class="header__top__right__auth">
                                         <a href="loginPage" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
                                     </div>
@@ -180,13 +192,22 @@
                             <ul>
                                 <li><a href="#"><i class="fa fa-heart"></i> </a></li>
                                     <%
-                                    if (u == null) {%>
-                                         <li><a href="login.jsp"><i class="fa fa-shopping-bag"></i> </a></li>
-                                <%} else {%>
-                                         <li><a href="my-cart?uid=<%=u.getUser_id()%>"><i class="fa fa-shopping-bag"></i> </a></li>
+                                        if (u == null) {%>
+                                <li><a href="login.jsp"><i class="fa fa-shopping-bag"></i> </a></li>
+                                    <%} else {%>
+                                <li><a href="my-cart?uid=<%=u.getUser_id()%>"><i class="fa fa-shopping-bag"></i> </a></li>
                                     <%}
-                                %>
-                               
+                                    %>
+                            </ul>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-heart"></i> </a></li>
+                                    <%
+                                        if (us == null) {%>
+                                <li><a href="login.jsp"><i class="fa fa-shopping-bag"></i> </a></li>
+                                    <%} else {%>
+                                <li><a href="my-cart?uid=<%=us.getId()%>"><i class="fa fa-shopping-bag"></i> </a></li>
+                                    <%}
+                                    %>
                             </ul>
                             <div class="header__cart__price">item: <span>410000</span></div>
                         </div>
