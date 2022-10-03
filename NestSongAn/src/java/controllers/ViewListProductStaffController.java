@@ -20,25 +20,19 @@ import utils.DBUtils;
  *
  * @author Admin
  */
-@WebServlet("/shop-products")
-public class ViewAllProductPageController extends HttpServlet{
+@WebServlet("/list-products")
+public class ViewListProductStaffController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
-        List<ProductDTO> listAllProduct = dao.getAllProduct();
         
-        req.setAttribute("listAllProduct", listAllProduct);
-<<<<<<< Updated upstream
+        List<ProductDTO> listProduct = dao.getAllListProduct();
         
-=======
-
-//        ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
-//        ProductDTO p = productDAO.getProductId(Integer.parseInt(req.getParameter("product_id")));
-
->>>>>>> Stashed changes
-        req.getRequestDispatcher("shop_all_product.jsp").forward(req, resp);
+        req.setAttribute("listProduct", listProduct);
+        
+        req.getRequestDispatcher("view/staff/list_products.jsp").forward(req, resp);
     }
     
 }

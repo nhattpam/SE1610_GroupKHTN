@@ -19,6 +19,11 @@ public class SupplierDTO {
     public SupplierDTO() {
     }
 
+    public SupplierDTO(int supplier_id) {
+        this.supplier_id = supplier_id;
+    }
+    
+
     public SupplierDTO(int supplier_id, String name, String user_name, String password, String bill) {
         this.supplier_id = supplier_id;
         this.name = name;

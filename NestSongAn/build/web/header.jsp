@@ -179,7 +179,6 @@
                                 <li><a href="#"><i class="fa fa-heart"></i> <span style="background: #6a0e13;">1</span></a></li>
                                 <li><a href="#"><i class="fa fa-shopping-bag"></i> <span style="background: #6a0e13;">3</span></a></li>
                             </ul>
-                            <div class="header__cart__price">item: <span>410000</span></div>
                         </div>
                     </div>
                 </div>

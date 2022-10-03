@@ -31,6 +31,13 @@ public class ProductDTO implements Comparable<ProductDTO> {
     public ProductDTO() {
     }
 
+    public ProductDTO(int product_id, String name, String code) {
+        this.product_id = product_id;
+        this.name = name;
+        this.code = code;
+    }
+    
+
     public ProductDTO(String name, String code, String short_description, String full_description, float price, int weight, String photo, String create_date, String edit_date, CategoryDTO category_id, int quantity) {
         this.name = name;
         this.code = code;
@@ -46,6 +53,25 @@ public class ProductDTO implements Comparable<ProductDTO> {
     }
 
     public ProductDTO(int product_id, String name, String code, String short_description, String full_description, boolean is_hot_selling, boolean is_out_standing, boolean is_latest, float price, int weight, String photo, String create_date, String edit_date, CategoryDTO category_id, int quantity, SupplierDTO supplier_id) {
+        this.product_id = product_id;
+        this.name = name;
+        this.code = code;
+        this.short_description = short_description;
+        this.full_description = full_description;
+        this.is_hot_selling = is_hot_selling;
+        this.is_out_standing = is_out_standing;
+        this.is_latest = is_latest;
+        this.price = price;
+        this.weight = weight;
+        this.photo = photo;
+        this.create_date = create_date;
+        this.edit_date = edit_date;
+        this.category_id = category_id;
+        this.quantity = quantity;
+        this.supplier_id = supplier_id;
+    }
+    
+    public ProductDTO(int product_id, String name, String code, String short_description, String full_description, boolean is_hot_selling, boolean is_out_standing, boolean is_latest, int weight, float price, String photo, String create_date, String edit_date, CategoryDTO category_id, int quantity, SupplierDTO supplier_id) {
         this.product_id = product_id;
         this.name = name;
         this.code = code;

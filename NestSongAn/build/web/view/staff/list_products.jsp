@@ -1,10 +1,17 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="dtos.ProductDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page isELIgnored="false" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Nhân Viên</title>
+        <title>Danh Sách Sản Phẩm</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -16,7 +23,7 @@
         <!-- iCheck -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
         <!-- JQVMap -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/jqvmap/jqvmap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}//plugins/jqvmap/jqvmap.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
         <!-- overlayScrollbars -->
@@ -183,7 +190,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="AddProductController" class="nav-link">
+                                <a href="add-product" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thêm Sản Phẩm
@@ -199,7 +206,6 @@
                                 </a>
                             </li>
 
-
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -208,7 +214,66 @@
             </aside>
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper"></div>
+            <div class="content-wrapper">
+                <div class="container">
+                    <div class="row crd-ho">
+                        <table class="table table-striped">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Ảnh</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <!--<th scope="col">Code</th>-->
+                                    <!--                                    <th scope="col">M.Tả Ngắn</th>
+                                                                        <th scope="col">M.Tả dài</th>-->
+                                    <th scope="col">Trọng lượng</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Ngày sửa</th>
+                                    <th scope="col">Danh mục</th>
+                                    <th scope="col">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <c:if test="${ not empty succMsg }">
+                                    <h5 class="text-center text-success">${succMsg}</h5>
+                                    <c:remove var="succMsg" scope="session"/>
+                                </c:if>
+
+                                 <c:if test="${ not empty failedMsg }">
+                                     <h5 class="text-center text-danger">${failedMsg}</h5>
+                                     <c:remove var="failedMsg" scope="session"/>
+                                </c:if>
+
+                            <c:forEach items="${listProduct}" var="l">
+                                <%--<c:set var="price" value="123.2" />--%>  
+                                <tr>
+                                    <!--<th scope="row">1</th>-->
+                                    <td>${l.product_id}</td>
+                                    <td><img src="products/${l.photo}" style="width: 50px; height: 50px;"></td>
+                                    <td>${l.name}</td>
+                                    <!--<td>${l.code}</td>-->
+<!--                                        <td>${l.short_description}</td>
+                                    <td>${l.full_description}</td>-->
+                                    <td>${l.weight}</td>
+                                    <td> 
+                                        <fmt:formatNumber type="number" groupingUsed="true" value="${l.price}" /> VNĐ
+                                    </td>
+                                    <td>${l.create_date}</td>
+                                    <td>${l.edit_date}</td>
+                                    <td>${l.category_id.category_id}</td>
+                                    <td>
+                                        <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary"> Sửa</a>
+                                        <a href="" class="btn btn-sm btn-danger"> Xoá</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             <!-- /.content-wrapper -->
             <footer class="main-footer">
