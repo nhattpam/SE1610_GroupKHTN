@@ -1,13 +1,17 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="dtos.ProductDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page isELIgnored="false" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Thêm Sản Phẩm</title>
+        <title>Danh Sách Sản Phẩm</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -202,7 +206,6 @@
                                 </a>
                             </li>
 
-
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -214,97 +217,60 @@
             <div class="content-wrapper">
                 <div class="container">
                     <div class="row crd-ho">
-                        <div class="col-md-4 offset-md-4 mt-3 ">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="text-center">Thêm Sản Phẩm</h4>
+                        <table class="table table-striped">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Ảnh</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <!--<th scope="col">Code</th>-->
+                                    <!--                                    <th scope="col">M.Tả Ngắn</th>
+                                                                        <th scope="col">M.Tả dài</th>-->
+                                    <th scope="col">Trọng lượng</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Ngày sửa</th>
+                                    <th scope="col">Danh mục</th>
+                                    <th scope="col">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                                    <c:if test="${ not empty succMsg }">
-                                        <h5 class="text-center text-success">${succMsg}</h5>
-                                        <c:remove var="succMsg" scope="session"/>
-                                    </c:if>
+                                <c:if test="${ not empty succMsg }">
+                                    <h5 class="text-center text-success">${succMsg}</h5>
+                                    <c:remove var="succMsg" scope="session"/>
+                                </c:if>
 
-                                    <c:if test="${ not empty failedMsg }">
-                                        <h5 class="text-center text-danger">${failedMsg}</h5>
-                                        <c:remove var="failedMsg" scope="session"/>
-                                    </c:if>
+                                 <c:if test="${ not empty failedMsg }">
+                                     <h5 class="text-center text-danger">${failedMsg}</h5>
+                                     <c:remove var="failedMsg" scope="session"/>
+                                </c:if>
 
-
-                                    <form action="add-product" method="post" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <c:if test="${ not empty wrongName }">
-                                                <p class="text-danger">${wrongName}</p>
-                                                <c:remove var="wrongName" scope="session"/>
-                                            </c:if>
-                                            <label for="exampleInputEmail1">Tên Sản Phẩm*</label>
-                                            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
-                                        </div> 
-
-                                        <div class="form-group">
-                                            <c:if test="${ not empty wrongCode }">
-                                                <p class="text-danger">${wrongCode}</p>
-                                                <c:remove var="wrongCode" scope="session"/>
-                                            </c:if>
-                                            <label for="exampleInputEmail1">Code*</label>
-                                            <input name="code" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
-                                        </div> 
-
-                                        <div class="form-group">
-                                            <c:if test="${ not empty wrongShortDes }">
-                                                <p class="text-danger">${wrongShortDes}</p>
-                                                <c:remove var="wrongShortDes" scope="session"/>
-                                            </c:if>
-                                            <label for="exampleInputPassword1">Mô Tả Ngắn*</label>
-                                            <input name="short_description" type="text" class="form-control" id="exampleInputPassword1" required="required">
-                                        </div> 
-                                        <div class="form-group">
-                                            <c:if test="${ not empty wrongFullDes }">
-                                                <p class="text-danger">${wrongFullDes}</p>
-                                                <c:remove var="wrongFullDes" scope="session"/>
-                                            </c:if>
-                                            <label for="exampleInputPassword1">Mô Tả Dài*</label>
-                                            <input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required">
-                                        </div> 
-
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Giá*</label>
-                                            <input name="price" type="number" class="form-control" id="exampleInputPassword1" required="required">
-                                        </div> 
-
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Trọng Lượng*</label>
-                                            <input name="weight" type="number" class="form-control" id="exampleInputPassword1" required="required">
-                                        </div> 
-
-                                        <div class="form-group">
-                                            <label for="exampleFormControlFile1">Upload Ảnh</label>
-                                            <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1" required="required"/>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputState">Danh Mục</label>
-                                            <select id="inputState" name="category_id" class="form-control" required="required">
-                                                <option selected>--chọn--</option>
-                                                <option value="1">Yến Hũ</option>
-                                                <option value="2">Yến Tinh Chế</option>
-                                                <option value="3">Yến Tươi</option>
-                                                <option value="4">Yến Thô Còn Lông</option>
-                                                <option value="5">Chân Tổ Yến</option>
-                                                <option value="6">Nước Yến</option>
-                                            </select>
-                                        </div> 
-
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Số Lượng*</label>
-                                            <input name="quantity" type="number" class="form-control" id="exampleInputPassword1" required="required">
-                                        </div> 
-
-
-                                        <button type="submit" class="btn btn-dark mt-2">Thêm</button>
-                                    </form>
-                                </div> 
-                            </div>
-                        </div>
+                            <c:forEach items="${listProduct}" var="l">
+                                <%--<c:set var="price" value="123.2" />--%>  
+                                <tr>
+                                    <!--<th scope="row">1</th>-->
+                                    <td>${l.product_id}</td>
+                                    <td><img src="products/${l.photo}" style="width: 50px; height: 50px;"></td>
+                                    <td>${l.name}</td>
+                                    <!--<td>${l.code}</td>-->
+<!--                                        <td>${l.short_description}</td>
+                                    <td>${l.full_description}</td>-->
+                                    <td>${l.weight}</td>
+                                    <td> 
+                                        <fmt:formatNumber type="number" groupingUsed="true" value="${l.price}" /> VNĐ
+                                    </td>
+                                    <td>${l.create_date}</td>
+                                    <td>${l.edit_date}</td>
+                                    <td>${l.category_id.category_id}</td>
+                                    <td>
+                                        <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary"> Sửa</a>
+                                        <a href="" class="btn btn-sm btn-danger"> Xoá</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

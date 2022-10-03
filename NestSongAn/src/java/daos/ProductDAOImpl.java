@@ -113,4 +113,35 @@ public class ProductDAOImpl implements ProductDAO {
         return p;
     }
 
+    @Override
+    public List<ProductDTO> getAllListProduct() {
+        List<ProductDTO> list = new ArrayList<>();
+
+        try {
+            String sql = "select * from product";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductDTO p = new ProductDTO();
+                CategoryDTO category_id = new CategoryDTO(rs.getInt("category_id"));
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setName(rs.getString("name"));
+                p.setCode(rs.getString("code"));
+                p.setShort_description(rs.getString("short_description"));
+                p.setFull_description(rs.getString("full_description"));
+                p.setWeight(rs.getInt("weight"));
+                p.setPrice(rs.getFloat("price"));
+                p.setCreate_date(rs.getString("create_date"));
+                p.setPhoto(rs.getString("photo"));
+                p.setEdit_date(rs.getString("edit_date"));
+                p.setCategory_id(category_id);
+
+                list.add(p);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
