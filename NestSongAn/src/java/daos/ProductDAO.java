@@ -23,4 +23,7 @@ public interface ProductDAO {
     
     //nhattpam: get ma sp de add to cart
     public ProductDTO getProductId(String product_id);
+    
+    //nhatpam: get tat ca san pham cho viec edit product
+     public List<ProductDTO> getAllListProduct();
 }

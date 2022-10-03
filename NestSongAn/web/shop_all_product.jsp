@@ -11,6 +11,7 @@
 <%@page import="utils.DBUtils"%>
 <%@page import="daos.ProductDAOImpl"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -187,7 +188,7 @@
                                 </div>
                                 <div class="featured__item__text">
                                     <h6><a href="#">${l.name}</a></h6>
-                                    <h5>${l.price}</h5>
+                                    <h5><fmt:formatNumber type="number" groupingUsed="true" value="${l.price}" /> VNĐ</h5>
                                 </div>
 
                             </div>
