@@ -84,13 +84,15 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public ProductDTO getProductId(String product_id) {
+    public ProductDTO getProductId(int product_id) {
         ProductDTO p = new ProductDTO();
 
         try {
-            String sql = "SELECT product_id, name, code, short_description, full_description, weight, price, photo, category_id, quantity FROM product WHERE product_id = '" + product_id + "'";
+            String sql = "SELECT product_id, name, code, short_description, full_description, weight, price, photo, category_id, quantity FROM product WHERE product_id = ?";
+//            String sql = "SELECT product_id, name, code, short_description, full_description, weight, price, photo, category_id, quantity FROM product WHERE product_id = '" + product_id + "'";
 
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, product_id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -141,5 +143,22 @@ public class ProductDAOImpl implements ProductDAO {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    public void editProduct1(ProductDTO p) {
+
+        try {
+            String sql = "update product set name=?,code=? where product_id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, p.getName());
+            ps.setString(2, p.getCode());
+            ps.setInt(3, p.getProduct_id());
+
+             ps.executeUpdate();
+     
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

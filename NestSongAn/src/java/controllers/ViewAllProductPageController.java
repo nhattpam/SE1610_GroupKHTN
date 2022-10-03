@@ -31,9 +31,6 @@ public class ViewAllProductPageController extends HttpServlet {
 
         req.setAttribute("listAllProduct", listAllProduct);
 
-        ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
-        ProductDTO p = productDAO.getProductId(req.getParameter("product_id"));
-
         req.getRequestDispatcher("shop_all_product.jsp").forward(req, resp);
     }
 
