@@ -28,5 +28,7 @@ public interface UserDAO {
     public boolean userRegister(GoogleDTO us);
 
     public boolean resetPassword(String password, String email) throws SQLException;
+    
+    public boolean checkDuplicateEmail(String email) throws SQLException;
 
 }
