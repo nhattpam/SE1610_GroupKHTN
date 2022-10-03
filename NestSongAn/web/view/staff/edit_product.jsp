@@ -230,14 +230,15 @@
                                     </c:if>
 
 
-                                    <form action="AddProductController" method="post" enctype="multipart/form-data">
+                                    <form action="EditProductController" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="product_id" value="${p.product_id}" />
                                         <div class="form-group">
                                             <c:if test="${ not empty wrongName }">
                                                 <p class="text-danger">${wrongName}</p>
                                                 <c:remove var="wrongName" scope="session"/>
                                             </c:if>
                                             <label for="exampleInputEmail1">Tên Sản Phẩm*</label>
-                                            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
+                                            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required" value="${p.name}"/>
                                         </div> 
 
                                         <div class="form-group">
@@ -246,7 +247,7 @@
                                                 <c:remove var="wrongCode" scope="session"/>
                                             </c:if>
                                             <label for="exampleInputEmail1">Code*</label>
-                                            <input name="code" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required">
+                                            <input name="code" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required" value="${p.code}"/>
                                         </div> 
 
                                         <div class="form-group">
@@ -255,7 +256,7 @@
                                                 <c:remove var="wrongShortDes" scope="session"/>
                                             </c:if>
                                             <label for="exampleInputPassword1">Mô Tả Ngắn*</label>
-                                            <input name="short_description" type="text" class="form-control" id="exampleInputPassword1" required="required">
+                                            <input name="short_description" type="text" class="form-control" id="exampleInputPassword1" required="required" value="${p.short_description}"/>
                                         </div> 
                                         <div class="form-group">
                                             <c:if test="${ not empty wrongFullDes }">
@@ -263,27 +264,27 @@
                                                 <c:remove var="wrongFullDes" scope="session"/>
                                             </c:if>
                                             <label for="exampleInputPassword1">Mô Tả Dài*</label>
-                                            <input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required">
+                                            <input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required" value="${p.full_description}"/>
                                         </div> 
 
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Giá*</label>
-                                            <input name="price" type="number" class="form-control" id="exampleInputPassword1" required="required">
+                                            <input name="price" type="number" class="form-control" id="exampleInputPassword1" required="required" value="${p.price}"/>
                                         </div> 
 
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Trọng Lượng*</label>
-                                            <input name="weight" type="number" class="form-control" id="exampleInputPassword1" required="required">
+                                            <input name="weight" type="number" class="form-control" id="exampleInputPassword1" required="required" value="${p.weight}"/>
                                         </div> 
 
                                         <div class="form-group">
                                             <label for="exampleFormControlFile1">Upload Ảnh</label>
-                                            <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1" required="required"/>
+                                            <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1" required="required" value="${p.photo}"/>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="inputState">Danh Mục</label>
-                                            <select id="inputState" name="category_id" class="form-control" required="required">
+                                            <select id="inputState" name="category_id" class="form-control" required="required" value="${p.category_id}"/>
                                                 <option selected>--chọn--</option>
                                                 <option value="1">Yến Hũ</option>
                                                 <option value="2">Yến Tinh Chế</option>
@@ -293,12 +294,6 @@
                                                 <option value="6">Nước Yến</option>
                                             </select>
                                         </div> 
-
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Số Lượng*</label>
-                                            <input name="quantity" type="number" class="form-control" id="exampleInputPassword1" required="required">
-                                        </div> 
-
 
                                         <button type="submit" class="btn btn-dark mt-2">Thêm</button>
                                     </form>

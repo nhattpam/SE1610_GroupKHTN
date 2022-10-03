@@ -22,7 +22,7 @@ public interface ProductDAO {
     public List<ProductDTO> getAllProduct();
     
     //nhattpam: get ma sp de add to cart
-    public ProductDTO getProductId(String product_id);
+    public ProductDTO getProductId(int product_id);
     
     //nhatpam: get tat ca san pham cho viec edit product
      public List<ProductDTO> getAllListProduct();

@@ -41,7 +41,7 @@ public class CartController extends HttpServlet {
 
         HttpSession session = request.getSession();
         CartDTO cart = (CartDTO) session.getAttribute("cart");
-        String product_id = request.getParameter("product_id");
+        int product_id = Integer.parseInt(request.getParameter("product_id"));
         String command = request.getParameter("command");
         ArrayList<Long> listBuy = null;
         String url = "/cart.jsp";
