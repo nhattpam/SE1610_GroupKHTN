@@ -9,7 +9,10 @@ import daos.UserDAO;
 import daos.UserDAOImpl;
 import dtos.UsersDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Properties;
 import javax.naming.NamingException;
@@ -21,7 +24,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utils.DBUtils;
 
 /**
  *
@@ -57,11 +59,11 @@ public class LoginServlet extends HttpServlet {
         String url=siteMaps.getProperty(LOGIN_PAGE);                                          // default to login page if error
         String errorMessage="Wrong username or password";
         try {
-
+            String hashedPassword=toHexString(getSHA(password));
             //1:call DAO
             //new obj DAO && call method from DAO
             UserDAO dao = new UserDAOImpl();
-            UsersDTO result = dao.checkLogin(username, password);                
+            UsersDTO result = dao.checkLogin(username, hashedPassword);                
             //2.process 
             if(result==null){
                 request.setAttribute("LoginError", errorMessage);
@@ -87,6 +89,8 @@ public class LoginServlet extends HttpServlet {
             log("LoginServlet_Naming" + ex.getMessage());
         } catch (SQLException ex) {
             log("LoginServlet_SQL" + ex.getMessage());
+        } catch (NoSuchAlgorithmException ex) {
+            log("HashPassword error"+ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
@@ -131,5 +135,31 @@ public class LoginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+//hàm mã hóa sha256
+    public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
+        // Static getInstance method is called with hashing SHA
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+        // digest() method called
+        // to calculate message digest of an input
+        // and return array of byte
+        return md.digest(input.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String toHexString(byte[] hash) {
+        // Convert byte array into signum representation
+        BigInteger number = new BigInteger(1, hash);
+
+        // Convert message digest into hex value
+        StringBuilder hexString = new StringBuilder(number.toString(16));
+
+        // Pad with leading zeros
+        while (hexString.length() < 64) {
+            hexString.insert(0, '0');
+        }
+
+        return hexString.toString();
+    }
+    //hàm mã hóa sha256
 
 }
