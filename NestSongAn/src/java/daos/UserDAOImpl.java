@@ -269,5 +269,67 @@ public class UserDAOImpl implements UserDAO {
         }
         return check;
     }
+    @Override
+    public boolean checkDuplicateUserName(String username) throws SQLException {
+        boolean check = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT user_name FROM users WHERE user_name =? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, username);
+                rs = stm.executeQuery();
+                if(rs.next()){
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+        return check;
+    }
+    @Override
+    public boolean checkDuplicatePhone(String phone) throws SQLException {
+        boolean check = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT phone FROM users WHERE phone =? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, phone);
+                rs = stm.executeQuery();
+                if(rs.next()){
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+        return check;
+    }
 
 }

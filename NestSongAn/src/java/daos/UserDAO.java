@@ -22,6 +22,7 @@ public interface UserDAO {
      public void editAccount(UsersDTO us) throws SQLException;
      
     public UsersDTO viewAccount(int userId) throws SQLException;
+    
     //khangtran: function register account
     public boolean userRegister(UsersDTO us);
     
@@ -30,5 +31,9 @@ public interface UserDAO {
     public boolean resetPassword(String password, String email) throws SQLException;
     
     public boolean checkDuplicateEmail(String email) throws SQLException;
+    
+    public boolean checkDuplicatePhone(String phone) throws SQLException;
+    
+    public boolean checkDuplicateUserName(String username) throws SQLException;
 
 }

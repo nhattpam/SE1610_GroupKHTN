@@ -36,43 +36,53 @@
         <div class="container mb-3">
             <form action="RegisterController" method="post">
                 <h4>Đăng Ký tài khoản</h4>
-                <c:if test="${ not empty requestScope.succMsg }">
-                    <h5 class="text-center text-success">${requestScope.succMsg}</h5>
+                <c:if test="${ not empty succMsg }">
+                    <h5 class="text-center text-success">${succMsg}</h5>
+                    <c:remove var="succMsg" scope="session"/>
                 </c:if>
 
-                    <c:if test="${ not empty requestScope.failedMsg }">
-                        <h5 class="text-center text-danger">${requestScope.failedMsg}</h5>
+                <c:if test="${ not empty failedMsg }">
+                    <h5 class="text-center text-danger">${failedMsg}</h5>
+                    <c:remove var="failedMsg" scope="session"/>
                 </c:if>
 
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Họ và tên</label>
-                    <c:if test="${ not empty requestScope.wrongFullName }">
-                        <p class="text-danger">${requestScope.wrongFullName}</p>                        
+                    <c:if test="${ not empty wrongFullName }">
+                        <p class="text-danger">${wrongFullName}</p>   
+                        <c:remove var="wrongFullName" scope="session"/>
                     </c:if>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="full_name">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="full_name">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Tên đăng nhập</label>
-                    <c:if test="${ not empty requestScope.wrongUser_name }">
-                        <p class="text-danger">${requestScope.wrongUser_name}</p>                        
+                    <c:if test="${ not empty wrongUser_name }">
+                        <p class="text-danger">${wrongUser_name}</p>     
+                        <c:remove var="wrongUser_name" scope="session"/>
                     </c:if>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="user_name">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="user_name">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Số điện thoại</label>
-                    <c:if test="${ not empty requestScope.wrongPhone }">
-                        <p class="text-danger">${requestScope.wrongPhone}</p>                        
+                    <c:if test="${ not empty wrongPhone }">
+                        <p class="text-danger">${wrongPhone}</p>   
+                        <c:remove var="wrongPhone" scope="session"/>
                     </c:if>
                     <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="phone">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Địa chỉ email</label>
+                    <c:if test="${ not empty wrongEmail }">
+                        <p class="text-danger">${wrongEmail}</p>  
+                        <c:remove var="wrongEmail" scope="session"/>
+                    </c:if>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="email">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                    <c:if test="${ not empty requestScope.wrongPassword }">
-                        <p class="text-danger">${requestScope.wrongPassword}</p>                      
+                    <c:if test="${ not empty wrongPassword }">
+                        <p class="text-danger">${wrongPassword}</p> 
+                        <c:remove var="wrongPassword" scope="session"/>
                     </c:if>
                     <input type="password" class="form-control" id="exampleInputPassword1"  required="" name="password">
                 </div>
