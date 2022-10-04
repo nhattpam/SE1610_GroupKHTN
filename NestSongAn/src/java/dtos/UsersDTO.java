@@ -16,7 +16,6 @@ public class UsersDTO implements Serializable{
     private String full_name;
     private String user_name;
     private String password;
-    private String reset_key;
     private String email;
     private String phone;
     private int status;
@@ -77,12 +76,11 @@ public class UsersDTO implements Serializable{
         this.password = password;
     }
     
-    public UsersDTO(int user_id, String full_name, String user_name, String password, String reset_key, String email, String phone, int status, String create_date, String edit_date, UserRoleDTO role_id) {
+    public UsersDTO(int user_id, String full_name, String user_name, String password, String email, String phone, int status, String create_date, String edit_date, UserRoleDTO role_id) {
         this.user_id = user_id;
         this.full_name = full_name;
         this.user_name = user_name;
         this.password = password;
-        this.reset_key = reset_key;
         this.email = email;
         this.phone = phone;
         this.status = status;
@@ -121,14 +119,6 @@ public class UsersDTO implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getReset_key() {
-        return reset_key;
-    }
-
-    public void setReset_key(String reset_key) {
-        this.reset_key = reset_key;
     }
 
     public String getEmail() {
