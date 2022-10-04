@@ -200,14 +200,13 @@ public class ProductDAOImpl implements ProductDAO {
          List<CategoryDTO> list = new ArrayList<>();
 
         try {
-            String sql = "SELECT category_id,name,big_category from category";
+            String sql = "SELECT category_id,name from category";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 CategoryDTO c = new CategoryDTO();
                 c.setCategory_id(rs.getInt("category_id"));
                 c.setName(rs.getString("name"));
-                c.setBig_category(rs.getString("big_category"));
                 list.add(c);
             }
 

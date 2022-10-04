@@ -12,7 +12,6 @@ package dtos;
 public class CategoryDTO {
     private int category_id;
     private String name;
-    private String big_category;
 
     public CategoryDTO() {
     }
@@ -22,10 +21,9 @@ public class CategoryDTO {
     }
     
 
-    public CategoryDTO(int category_id, String name, String big_category) {
+    public CategoryDTO(int category_id, String name) {
         this.category_id = category_id;
         this.name = name;
-        this.big_category = big_category;
     }
 
     public int getCategory_id() {
@@ -43,13 +41,4 @@ public class CategoryDTO {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getBig_category() {
-        return big_category;
-    }
-
-    public void setBig_category(String big_category) {
-        this.big_category = big_category;
-    }
-    
 }

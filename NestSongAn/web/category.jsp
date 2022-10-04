@@ -39,7 +39,7 @@
                 </div>
                 <ul>
                     <c:forEach items="${cList}" var="l">
-                        <li><a href="${l.big_category}">${l.name}</a></li>
+                        <li><a href="#">${l.name}</a></li>
                     </c:forEach>
                 </ul>
             </div>
