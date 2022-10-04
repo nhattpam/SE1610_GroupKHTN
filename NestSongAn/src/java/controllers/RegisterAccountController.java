@@ -35,7 +35,9 @@ import utils.DBUtils;
 //khangtran: function register account
 @WebServlet("/RegisterAccountController")
 public class RegisterAccountController extends HttpServlet {
-    private static final String REGISTER_PAGE="registerPage";
+
+    private static final String REGISTER_PAGE = "registerPage";
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -49,6 +51,7 @@ public class RegisterAccountController extends HttpServlet {
             String phone = req.getParameter("phone");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
+            UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
 
             int status = 1; //1: tai khoan active: dang hoat dong
 
@@ -59,6 +62,9 @@ public class RegisterAccountController extends HttpServlet {
             String edited_date = null;
 
             UserRoleDTO role_id = new UserRoleDTO(1);
+            boolean checkDuplicateEmail = dao.checkDuplicateEmail((String) req.getAttribute("email"));
+            boolean checkDuplicateUserName = dao.checkDuplicateEmail((String) req.getAttribute("user_name"));
+            boolean checkDuplicatePhone = dao.checkDuplicateEmail((String) req.getAttribute("phone"));
             //check du lieu nguoi dung
             boolean check = true;
             //check fullname
@@ -98,15 +104,24 @@ public class RegisterAccountController extends HttpServlet {
             }
 
 //            resp.sendRedirect("RegisterAccountController");
+            if (!checkDuplicateEmail) {
+                req.setAttribute("wrongEmail", "Email da ton tai roi!!!");
+                check = false;
+            }
+            if (!checkDuplicatePhone) {
+                req.setAttribute("wrongPhone", "Số điện thoại da ton tai roi!!!");
+                check = false;
+            }
+            if (!checkDuplicateUserName) {
+                req.setAttribute("wrongUser_name", "Tai khoan da toan tai roi!!!");
+                check = false;
+            }
             if (check) {
                 String checkPassword = toHexString(getSHA(password));
                 UsersDTO us = new UsersDTO(full_name, user_name, checkPassword, email, phone, status, create_date, edited_date, role_id);
 
-                UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
-
                 boolean result = dao.userRegister(us);
-
-                if (result==true) {
+                if (result == true) {
                     req.setAttribute("succMsg", "Đăng ký tài khoản thành công...");
                 } else {
                     req.setAttribute("failedMsg", "Đăng ký tài khoản không thành công...");
@@ -117,7 +132,7 @@ public class RegisterAccountController extends HttpServlet {
             e.printStackTrace();
         } finally {
             RequestDispatcher rd = req.getRequestDispatcher(siteMaps.getProperty(REGISTER_PAGE));
-                rd.forward(req, resp);
+            rd.forward(req, resp);
         }
 
     }

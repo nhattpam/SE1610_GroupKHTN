@@ -40,8 +40,8 @@
                     <h5 class="text-center text-success">${requestScope.succMsg}</h5>
                 </c:if>
 
-                    <c:if test="${ not empty requestScope.failedMsg }">
-                        <h5 class="text-center text-danger">${requestScope.failedMsg}</h5>
+                <c:if test="${ not empty requestScope.failedMsg }">
+                    <h5 class="text-center text-danger">${requestScope.failedMsg}</h5>
                 </c:if>
 
                 <div class="mb-3">
@@ -67,6 +67,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Địa chỉ email</label>
+                    <c:if test="${ not empty requestScope.wrongEmail }">
+                        <p class="text-danger">${requestScope.wrongEmail}</p>                        
+                    </c:if>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="email">
                 </div>
                 <div class="mb-3">
