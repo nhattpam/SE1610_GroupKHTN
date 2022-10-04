@@ -40,7 +40,7 @@
         <section class="hero">
             <div class="container">
                 <div class="row">
-                    <jsp:include page="category.jsp" />
+                    <jsp:include page="/left-category" />
                     <div class="col-lg-9">
                         <jsp:include page="banner_1.jsp" />
                         <div class="hero__item set-bg" data-setbg="img/banner_1_changed.png">

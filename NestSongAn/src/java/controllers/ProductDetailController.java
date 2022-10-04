@@ -34,7 +34,7 @@ public class ProductDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String product_id = request.getParameter("product_id");
+        int product_id = Integer.parseInt(request.getParameter("product_id"));
         ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
         ProductDTO p = dao.getProductId(product_id);
         request.setAttribute("detail", p);

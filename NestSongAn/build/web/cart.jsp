@@ -192,7 +192,7 @@
             <div class="container">
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
-                        <li><a href="index.jsp">Trang Chủ</a></li>
+                        <li><a href="home">Trang Chủ</a></li>
                         <li class="active">Giỏ Hàng</li>
                     </ol>
                 </div>

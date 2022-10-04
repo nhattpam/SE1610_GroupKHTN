@@ -7,9 +7,9 @@ package controllers;
 
 import daos.ProductDAOImpl;
 import dtos.CategoryDTO;
-import dtos.ProductDTO;
 import java.io.IOException;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,23 +21,23 @@ import utils.DBUtils;
  *
  * @author Admin
  */
-@WebServlet("/shop-products")
-public class ViewAllProductPageController extends HttpServlet {
+@WebServlet("/left-category")
+public class ViewLeftCategoryController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("utf-8");
         ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
-        List<ProductDTO> listAllProduct = dao.getAllProduct();
+        List<CategoryDTO> cList = dao.getAllCategory();
 
-        req.setAttribute("listAllProduct", listAllProduct);
+        req.setAttribute("cList", cList);
+
+//        req.getRequestDispatcher("category.jsp").forward(req, resp);
+        RequestDispatcher view = req.getRequestDispatcher("/category.jsp");
+        view.include(req, resp);
         
-        ProductDAOImpl dao2 = new ProductDAOImpl(DBUtils.getConnection());
-        List<CategoryDTO> l = dao2.getAllCategory();
 
-        req.setAttribute("cList", l);
-
-        req.getRequestDispatcher("shop_all_product.jsp").forward(req, resp);
     }
 
 }

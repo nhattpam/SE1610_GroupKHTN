@@ -119,7 +119,7 @@
                         <div class="product__details__pic">
                             <div class="product__details__pic__item">
                                 <img class="product__details__pic__item--large"
-                                     src="${detail.photo}" alt="">
+                                     src="products/${detail.photo}" alt="">
                             </div>
                             <div class="product__details__pic__slider owl-carousel">
                                 <img data-imgbigurl="img/product/details/product-details-2.jpg"

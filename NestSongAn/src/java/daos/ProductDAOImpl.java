@@ -113,12 +113,13 @@ public class ProductDAOImpl implements ProductDAO {
         return p;
     }
 
+    //nhatpam: function View all product (staff)
     @Override
     public List<ProductDTO> getAllListProduct() {
         List<ProductDTO> list = new ArrayList<>();
 
         try {
-            String sql = "select * from product";
+            String sql = "SELECT product_id,name,code,short_description,full_description,weight,price,create_date,photo,category_id,edit_date FROM product";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -148,17 +149,72 @@ public class ProductDAOImpl implements ProductDAO {
     public void editProduct1(ProductDTO p) {
 
         try {
-            String sql = "update product set name=?,code=? where product_id=?";
+            String sql = "UPDATE product set name=?,code=? WHERE product_id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, p.getName());
             ps.setString(2, p.getCode());
             ps.setInt(3, p.getProduct_id());
 
-             ps.executeUpdate();
+            ps.executeUpdate();
      
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
+    //nhatpham: function edit product
+    @Override
+    public boolean editProduct(ProductDTO p) {
+        boolean f = false;
+        try {
+            String sql = "UPDATE product set name=?,code=?,short_description=?,full_description=?,weight=?,price=?,"
+                    + "photo=?,edit_date=?,category_id=? WHERE product_id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, p.getName());
+            ps.setString(2, p.getCode());
+            ps.setString(3, p.getShort_description());
+            ps.setString(4, p.getFull_description());
+            ps.setInt(5, p.getWeight());
+            ps.setFloat(6, p.getPrice());
+            ps.setString(7, p.getPhoto());
+            ps.setString(8, p.getEdit_date());
+            ps.setInt(9, p.getCategory_id().getCategory_id());
+            ps.setInt(10, p.getProduct_id());
+
+            int i = ps.executeUpdate();
+            
+            if(i == 1){
+                f = true;
+            }
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+
+    @Override
+    public List<CategoryDTO> getAllCategory() {
+         List<CategoryDTO> list = new ArrayList<>();
+
+        try {
+            String sql = "SELECT category_id,name,big_category from category";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CategoryDTO c = new CategoryDTO();
+                c.setCategory_id(rs.getInt("category_id"));
+                c.setName(rs.getString("name"));
+                c.setBig_category(rs.getString("big_category"));
+                list.add(c);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
 }
