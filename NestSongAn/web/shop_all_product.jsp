@@ -77,7 +77,7 @@
                                         Danh Mục
                                         <span class="arrow_carrot-down"></span>
                                     </div>
-                                    <input type="text" placeholder="What do yo u need?">
+                                    <input type="text" placeholder="Bạn tìm gì?">
                                     <button type="submit" class="site-btn">TÌM KIẾM</button>
                                 </form>
                             </div>
