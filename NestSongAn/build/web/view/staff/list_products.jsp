@@ -235,12 +235,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <c:if test="${ not empty successUpdate }">
-                                    <h5 class="text-center text-success">${successUpdate}</h5>
-                                    <c:remove var="successUpdate" scope="session"/>
-                                </c:if>
-
                                  <c:if test="${ not empty failedMsg }">
                                      <h5 class="text-center text-danger">${failedMsg}</h5>
                                      <c:remove var="failedMsg" scope="session"/>
@@ -264,7 +258,7 @@
                                     <td>${l.edit_date}</td>
                                     <td>${l.category_id.category_id}</td>
                                     <td>
-                                        <a href="EditProductController?product_id=${l.product_id}" class="btn btn-sm btn-primary"> Sửa</a>
+                                        <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary"> Sửa</a>
                                         <a href="" class="btn btn-sm btn-danger"> Xoá</a>
                                     </td>
                                 </tr>
