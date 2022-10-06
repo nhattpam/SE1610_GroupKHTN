@@ -92,7 +92,9 @@ public class CheckoutController extends HttpServlet {
                 p.setProduct_id(ds.getKey().getProduct_id());
                 orderDetailsDAO.addOrderDetails(new OrderDetailsDTO(od, p,  ds.getKey().getPrice(), ds.getValue()));
             }
+            session.removeAttribute("cart");
             response.sendRedirect("home");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

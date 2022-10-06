@@ -180,6 +180,11 @@
             .cart_delete a:hover {
                 background:#FE980F
             }
+            
+            #button{
+                background: #6a0e13;
+                color: white;
+            }
 
         </style>
     </head>
@@ -191,14 +196,14 @@
         </div>
         <jsp:include page="header.jsp" />
         <%
-                CartDTO cart = (CartDTO) session.getAttribute("cart");
-                if (cart == null) {
-                    cart = new CartDTO();
-                    session.setAttribute("cart", cart);
-                }
-                TreeMap<ProductDTO, Integer> list = cart.getList();
-                NumberFormat nf = NumberFormat.getInstance();
-                nf.setMinimumIntegerDigits(0);
+            CartDTO cart = (CartDTO) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new CartDTO();
+                session.setAttribute("cart", cart);
+            }
+            TreeMap<ProductDTO, Integer> list = cart.getList();
+            NumberFormat nf = NumberFormat.getInstance();
+            nf.setMinimumIntegerDigits(0);
         %>
 
         <section id="cart_items">
@@ -217,10 +222,19 @@
                             <div class="col-md-6 offset-md-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="text-center">Thông Tin Đặt Hàng</h4><br>
+                                        <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;">Thông Tin Đặt Hàng</h4><br>
                                         <form action="checkout" method="post">
                                             <input type="hidden" value="${user.user_id}" name="id">
-                                            <div class="form-row">
+                                            <div class="form-group" style="font-weight: bold;">
+                                                Họ và tên<input type="text" class="form-control" id="exampleInputPassword1" value="${user.full_name}" disabled="">
+                                            </div> 
+                                            <div class="form-group" style="font-weight: bold;">
+                                                Số điện thoại<input type="text" class="form-control" id="exampleInputPassword1" value="${user.phone}" disabled="">
+                                            </div> 
+                                            <div style="font-weight: bold;" class="form-group">
+                                                Địa chỉ giao hàng
+                                            </div>
+                                            <div class="form-row" >
                                                 <div class="col-6" >
                                                     <select name="branch_id">
                                                         <option selected>--Chọn Miền-- </option>
@@ -311,7 +325,7 @@
                                                 </select><br>
                                             </div> <br>
                                             <div  class="form-group">
-                                                <input type="submit" value="Xác nhận thanh toán" class="btn btn-danger btn-lg btn-block">
+                                                <input type="submit" value="Xác nhận thanh toán" class="btn btn-custom btn-lg btn-block" id="button">
                                             </div>
 
                                         </form>

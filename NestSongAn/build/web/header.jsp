@@ -39,7 +39,20 @@
         <script src="js/mixitup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
-
+        <style>
+            *{
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+            }
+            .header__menu ul li:hover>a {
+                color: black;
+            }
+            .header__menu ul li .header__menu__dropdown li:hover>a {
+                color: black;
+            }
+            .header__menu ul li.active a {
+	color: black;
+}
+        </style>
     </head>
     <body>
         <!-- Humberger Begin -->
@@ -171,7 +184,7 @@
                         <nav class="header__menu">
                             <ul>
                                 <li class="active"><a href="home" style="color: #6a0e13;">Trang Chủ</a></li>
-                                <li><a href="shop-products">Shop</a></li>
+                                <li><a href="shop-products">Sản Phẩm</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="header__menu__dropdown">
                                         <li><a href="./shop-details.html">Shop Details</a></li>
@@ -181,7 +194,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="./blog.html">Blog</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
+                                <!--<li><a href="./contact.html">Contact</a></li>-->
                             </ul>
                         </nav>
                     </div>

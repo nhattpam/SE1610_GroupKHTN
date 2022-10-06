@@ -171,6 +171,10 @@
             .cart_delete a:hover {
                 background:#FE980F
             }
+            #button{
+                background: #6a0e13;
+                color: white;
+            }
 
         </style>
     </head>
@@ -253,7 +257,7 @@
 
                 </div>
                         <div  class="container-fluid mb-5" style="color: white">
-                            <a class="btn btn-danger btn-lg btn-block" href="checkout" >Thanh Toán</a>
+                            <a class="btn btn-custom btn-lg btn-block" href="checkout" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
                 </div>
             </div>
 

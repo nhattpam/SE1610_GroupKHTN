@@ -4,7 +4,13 @@
     Author     : Admin
 --%>
 
+<%@page import="dtos.CartDTO"%>
+<%@page import="dtos.CartDTO"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="dtos.UsersDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -14,7 +20,7 @@
         <meta name="keywords" content="Ogani, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Ogani | Template</title>
+        <title>Chi Tiết Sản Phẩm</title>
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -28,6 +34,11 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <style>
+            *{
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+            }
+        </style>
     </head>
 
     <body>
@@ -50,29 +61,21 @@
                                 <span>Danh Mục</span>
                             </div>
                             <ul>
-                                <li><a href="#">Fresh Meat</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit & Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter & Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya & Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
-                                <li><a href="#">Fresh Bananas</a></li>
+                                <c:forEach items="${CList}" var="l">
+                                    <li><a href="">${l.name}</a></li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="hero__search">
                             <div class="hero__search__form">
-                                <form action="#">
+                                <form action="search-result">
                                     <div class="hero__search__categories">
-                                        All Categories
+                                        Danh Mục
                                         <span class="arrow_carrot-down"></span>
                                     </div>
-                                    <input type="text" placeholder="Bạn tìm gì?">
+                                    <input type="text" placeholder="Bạn tìm gì?" name="character">
                                     <button type="submit" class="site-btn" style="background: #6a0e13;">TÌM KIẾM</button>
                                 </form>
                             </div>
@@ -98,11 +101,10 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="breadcrumb__text">
-                            <h2>Vegetable’s Package</h2>
+                            <h2>Sản Phẩm Chính Hãng</h2>
                             <div class="breadcrumb__option">
-                                <a href="./index.html">Home</a>
-                                <a href="./index.html">Vegetables</a>
-                                <span>Vegetable’s Package</span>
+                                <a href="home">Trang Chủ</a>
+                                <span>Chi Tiết Sản Phẩm</span>
                             </div>
                         </div>
                     </div>
@@ -110,7 +112,19 @@
             </div>
         </section>
         <!-- Breadcrumb Section End -->
+        <%
+                    UsersDTO u = (UsersDTO) session.getAttribute("USER");
+                    //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
+                    //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
+                    NumberFormat nf = NumberFormat.getInstance();
+                    nf.setMinimumIntegerDigits(0);
 
+                    CartDTO cart = (CartDTO) session.getAttribute("cart");
+                    if (cart == null) {
+                        cart = new CartDTO();
+                        session.setAttribute("cart", cart);
+                    }
+                %>
         <!-- Product Details Section Begin -->
         <section class="product-details spad">
             <div class="container">
@@ -144,16 +158,16 @@
                                 <i class="fa fa-star-half-o"></i>
                                 <span>(18 reviews)</span>
                             </div>
-                            <div class="product__details__price">${detail.price}</div>
+                            <div class="product__details__price"><fmt:formatNumber type="number" groupingUsed="true" value="${detail.price}" /> VNĐ</div>
                             <p>${detail.short_description}</p>
-                            <div class="product__details__quantity">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            <%
+                                if (u == null) {%>
+                            <a href="login.jsp" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            <%} else {%>
+                            <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=<%= System.currentTimeMillis()%>" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            <%}
+                            %>
+                            
                             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                             <ul>
                                 <li><b>Availability</b> <span>In Stock</span></li>

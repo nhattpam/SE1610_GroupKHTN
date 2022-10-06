@@ -42,6 +42,11 @@
         <script src="js/mixitup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <style>
+            *{
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+            }
+        </style>
     </head>
     <body>
         <!-- Page Preloder -->
@@ -97,7 +102,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title">
-                            <h2>Kết Quả Tìm Kiếm</h2>
+                            <h2 style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Kết Quả Tìm Kiếm</h2>
                             <style type="text/css">
                                 .section-title h2:after {
                                     position: absolute;
