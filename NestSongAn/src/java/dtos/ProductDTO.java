@@ -210,7 +210,7 @@ public class ProductDTO implements Comparable<ProductDTO> {
 
     @Override
     public String toString() {
-        return "ProductDTO{" + "name=" + name + ", code=" + code + ", short_description=" + short_description + ", full_description=" + full_description + ", price=" + price + " , weight =" + weight + ", photo=" + photo + ", create_date=" + create_date + ", edit_date=" + edit_date + ", category_id=" + category_id.getCategory_id() + ", quantity=" + quantity + '}';
+        return "ProductDTO{" + "name=" + name + ", code=" + code + ", short_description=" + short_description + ", full_description=" + full_description + ", price=" + price + " , weight =" + weight + ", photo=" + photo + ", create_date=" + create_date + ", edit_date=" + edit_date + ", category_id=" + category_id.getCategory_id() + ", quantity=" + quantity + '}' + "\n";
     }
      
     

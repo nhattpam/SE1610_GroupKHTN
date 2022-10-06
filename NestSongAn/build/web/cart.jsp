@@ -223,7 +223,7 @@
                                     <p>Code: <%= ds.getKey().getCode()%></p>
                                 </td>
                                 <td class="cart_price">
-                                    <p><%= nf.format(ds.getKey().getPrice()) %> VNĐ</p>
+                                    <p><%= nf.format(ds.getKey().getPrice())%> VNĐ</p>
                                 </td>
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
@@ -233,7 +233,7 @@
                                     </div>
                                 </td>
                                 <td class="cart_total">
-                                    <p class="cart_total_price"><%= nf.format(ds.getValue() * ds.getKey().getPrice()) %> VNĐ</p>
+                                    <p class="cart_total_price"><%= nf.format(ds.getValue() * ds.getKey().getPrice())%> VNĐ</p>
                                 </td>
                                 <td class="cart_delete">
                                     <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"><i class="fa fa-times"></i></a>
@@ -244,21 +244,29 @@
                                 }
                             %>
                         </tbody>
+
                     </table>
-                    </section> <!--/#cart_items-->
+
+                </div>
+                        <div  class="container-fluid mb-5" style="margin-left: 1000px; color: white">
+                            <a class="btn btn-danger" href="checkout" >Thanh Toán</a>
                 </div>
             </div>
 
+        </section> <!--/#cart_items-->
+    </div>
+</div>
 
-            <jsp:include page="footer.jsp" />
-            <!-- Js Plugins -->
-            <script src="js/jquery-3.3.1.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.nice-select.min.js"></script>
-            <script src="js/jquery-ui.min.js"></script>
-            <script src="js/jquery.slicknav.js"></script>
-            <script src="js/mixitup.min.js"></script>
-            <script src="js/owl.carousel.min.js"></script>
-            <script src="js/main.js"></script>
-    </body>
+
+<jsp:include page="footer.jsp" />
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>
