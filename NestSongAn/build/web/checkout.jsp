@@ -185,6 +185,10 @@
     </head>
 
     <body>
+        <!-- Page Preloder -->
+        <div id="preloder">
+            <div class="loader"></div>
+        </div>
         <jsp:include page="header.jsp" />
         <%
                 CartDTO cart = (CartDTO) session.getAttribute("cart");
@@ -201,7 +205,8 @@
             <div class="container">
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
-                        <li><a href="index.jsp">Trang Chủ</a></li>
+                        <li><a href="home">Trang Chủ</a></li>
+                        <li><a href="my-cart" style="padding: 2px 4px 1px 1px;" >Giỏ Hàng</a></li>
                         <li class="active">Thanh Toán</li>
                     </ol>
                 </div><!--/breadcrums-->
@@ -214,7 +219,7 @@
                                     <div class="card-body">
                                         <h4 class="text-center">Thông Tin Đặt Hàng</h4><br>
                                         <form action="checkout" method="post">
-                                            <input type="text" value="${user.user_id}" name="id">
+                                            <input type="hidden" value="${user.user_id}" name="id">
                                             <div class="form-row">
                                                 <div class="col-6" >
                                                     <select name="branch_id">
@@ -304,9 +309,9 @@
                                                     <option selected="">--Phương Thức Thanh Toán--</option>
                                                     <option value="cod">Thanh toán khi nhận hàng</option>
                                                 </select><br>
-                                            </div> 
-                                            <div  class="container-fluid">
-                                                <input type="submit" value="Xác nhận thanh toán" class="btn btn-danger"">
+                                            </div> <br>
+                                            <div  class="form-group">
+                                                <input type="submit" value="Xác nhận thanh toán" class="btn btn-danger btn-lg btn-block">
                                             </div>
 
                                         </form>
@@ -314,7 +319,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive cart_info">
+                        <div class="table-responsive cart_info mt-5">
                             <table class="table table-condensed">
                                 <thead>
                                     <tr class="cart_menu">

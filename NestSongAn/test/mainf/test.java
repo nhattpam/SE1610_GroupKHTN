@@ -19,9 +19,10 @@ public class test {
     public static void main(String[] args) {
         ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
         
-        List<CategoryDTO> list = dao.getAllCategory();
-        for (CategoryDTO object : list) {
-            System.out.println(object);
+        List<ProductDTO> lisst = (List<ProductDTO>) dao.getProductBySearch("t");
+        
+        for (ProductDTO p :lisst) {
+            System.out.println(p.getName() + ", " + p.getProduct_id() + ", " + p.getCategory_id().getCategory_id()+ ", "  + p.getPrice()+ ", "  + p.getPhoto()+ ", "  + p.getFull_description()+ ", "  + p.getWeight());
         }
     }
 }

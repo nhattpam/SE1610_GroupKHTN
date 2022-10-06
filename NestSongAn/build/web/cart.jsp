@@ -175,6 +175,10 @@
         </style>
     </head>
     <body>
+        <!-- Page Preloder -->
+        <div id="preloder">
+            <div class="loader"></div>
+        </div>
         <jsp:include page="header.jsp" />
 
         <%
@@ -248,8 +252,8 @@
                     </table>
 
                 </div>
-                        <div  class="container-fluid mb-5" style="margin-left: 1000px; color: white">
-                            <a class="btn btn-danger" href="checkout" >Thanh Toán</a>
+                        <div  class="container-fluid mb-5" style="color: white">
+                            <a class="btn btn-danger btn-lg btn-block" href="checkout" >Thanh Toán</a>
                 </div>
             </div>
 
