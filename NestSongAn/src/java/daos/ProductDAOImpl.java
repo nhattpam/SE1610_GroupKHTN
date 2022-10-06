@@ -215,5 +215,40 @@ public class ProductDAOImpl implements ProductDAO {
         }
         return list;
     }
+
+    
+    
+    //khang tran: function search by character
+    @Override
+    public List<ProductDTO> getProductBySearch(String character) {
+        List<ProductDTO> list = new ArrayList<>();
+        ProductDTO p = null;
+        try {
+            String sql = "SELECT product_id, name, code, short_description, full_description, weight, price, photo, category_id, quantity FROM product WHERE name like ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + character + "%");
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                p = new ProductDTO();
+                CategoryDTO category_id = new CategoryDTO(rs.getInt("category_id"));
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setCategory_id(category_id);
+                p.setName(rs.getString("name"));
+                p.setCode(rs.getString("code"));
+                p.setShort_description(rs.getString("short_description"));
+                p.setFull_description(rs.getString("full_description"));
+                p.setWeight(rs.getInt("weight"));
+                p.setPhoto(rs.getString("photo"));
+                p.setQuantity(rs.getInt("quantity"));
+                p.setPrice(rs.getFloat("price"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
     
 }

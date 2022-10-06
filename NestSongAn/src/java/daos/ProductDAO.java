@@ -32,4 +32,7 @@ public interface ProductDAO {
     public boolean editProduct(ProductDTO p);
     
     public List<CategoryDTO> getAllCategory();
+    
+    //khang tran: function search by character
+    public List<ProductDTO> getProductBySearch(String character);
 }

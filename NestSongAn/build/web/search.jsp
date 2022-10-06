@@ -4,6 +4,11 @@
     Author     : Admin
 --%>
 
+<%@page import="dtos.CartDTO"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="dtos.UsersDTO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -54,8 +59,8 @@
                                 <span>Danh Mục</span>
                             </div>
                             <ul>
-                                <c:forEach items="${cList}" var="l">
-                                    <li><a href="${l.big_category}">${l.name}</a></li>
+                                <c:forEach items="${CList}" var="l">
+                                    <li><a href="">${l.name}</a></li>
                                 </c:forEach>
 
                             </ul>
@@ -64,12 +69,12 @@
                     <div class="col-lg-9">
                         <div class="hero__search">
                             <div class="hero__search__form">
-                                <form action="#">
+                                <form action="search-result">
                                     <div class="hero__search__categories">
                                         Danh Mục
                                         <span class="arrow_carrot-down"></span>
                                     </div>
-                                    <input type="text" placeholder="Bạn tìm gì?">
+                                    <input type="text" placeholder="Bạn tìm gì?" name="character">
                                     <button type="submit" class="site-btn">TÌM KIẾM</button>
                                 </form>
                             </div>
@@ -84,6 +89,74 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section class="featured spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2>Kết Quả Tìm Kiếm</h2>
+                            <style type="text/css">
+                                .section-title h2:after {
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: -15px;
+                                    right: 0;
+                                    height: 4px;
+                                    width: 80px;
+                                    background: #6a0e13;
+                                    content: "";
+                                    margin: 0 auto;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+
+                <%
+                    UsersDTO u = (UsersDTO) session.getAttribute("USER");
+                    //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
+                    //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
+                    NumberFormat nf = NumberFormat.getInstance();
+                    nf.setMinimumIntegerDigits(0);
+
+                    CartDTO cart = (CartDTO) session.getAttribute("cart");
+                    if (cart == null) {
+                        cart = new CartDTO();
+                        session.setAttribute("cart", cart);
+                    }
+                %>
+
+                <div class="row featured__filter">
+                    <c:forEach items="${listSearch}" var="l">
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                            <div class="featured__item">
+
+                                <div class="featured__item__pic set-bg" data-setbg="products/${l.photo}">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <%
+                                            if (u == null){%>
+                                                <li><a href="login.jsp"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <%} else {%>
+                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <%}
+                                        %>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="detail?product_id=${l.product_id}">${l.name}</a></h6>
+                                    <h5><fmt:formatNumber type="number" groupingUsed="true" value="${l.price}" /> VNĐ</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </c:forEach>
+
                 </div>
             </div>
         </section>
