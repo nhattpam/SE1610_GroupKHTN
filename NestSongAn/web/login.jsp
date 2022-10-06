@@ -49,6 +49,7 @@
                    &client_id=34728737226-pshthan6um4e9qkcndvrrmvhr1b9mqqp.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>
             </form>
             <a href="forgotPassword.jsp">Forgot password?</a>
+            <br/>
             <a href="RegisterAccountController">Bạn chưa có tài khoản? Đăng ký ngay.</a>
         </div>
         <jsp:include page="footer.jsp" />

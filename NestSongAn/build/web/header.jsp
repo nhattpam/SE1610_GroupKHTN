@@ -147,7 +147,8 @@
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
                                             <li><a href="MyProfile?uid=<%=u.getUser_id()%>" style="color: white;">My Profile</a></li>
-                                            <li><a href="#" style="color: white;">English</a></li>
+                                            <c:url var="logout" value="logoutController"/>
+                                            <li><a href="${logout}" style="color: white;">Logout</a></li>
                                         </ul>
                                     </div>
                                 </c:if>
@@ -158,7 +159,8 @@
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
                                             <li><a href="MyProfile?uid=<%=us.getId()%>" style="color: white;">My Profile</a></li>
-                                            <li><a href="#" style="color: white;">English</a></li>
+                                            <c:url var="logout" value="logoutController"/>
+                                            <li><a href="${logout}" style="color: white;">Logout</a></li>
                                         </ul>
                                     </div>
                                 </c:if>
