@@ -4,11 +4,19 @@
     Author     : Admin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.TreeMap"%>
+<%@page import="dtos.ProductDTO"%>
+<%@page import="dtos.CartDTO"%>
+<%@page import="dtos.UsersDTO"%>
+<%--<%@page contentType="text/html" pageEncoding="UTF-8"%>--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
         <meta name="description" content="Ogani Template">
         <meta name="keywords" content="Ogani, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -178,6 +186,17 @@
 
     <body>
         <jsp:include page="header.jsp" />
+        <%
+                CartDTO cart = (CartDTO) session.getAttribute("cart");
+                if (cart == null) {
+                    cart = new CartDTO();
+                    session.setAttribute("cart", cart);
+                }
+                TreeMap<ProductDTO, Integer> list = cart.getList();
+                NumberFormat nf = NumberFormat.getInstance();
+                nf.setMinimumIntegerDigits(0);
+        %>
+
         <section id="cart_items">
             <div class="container">
                 <div class="breadcrumbs">
@@ -187,148 +206,174 @@
                     </ol>
                 </div><!--/breadcrums-->
 
+                <div class="content-wrapper " style="margin-bottom: 50px;">
+                    <div class="container ">
+                        <div class="row crd-ho">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="text-center">Thông Tin Đặt Hàng</h4><br>
+                                        <form action="checkout" method="post">
+                                            <input type="text" value="${user.user_id}" name="id">
+                                            <div class="form-row">
+                                                <div class="col-6" >
+                                                    <select name="branch_id">
+                                                        <option selected>--Chọn Miền-- </option>
+                                                        <option value="1">Miền Bắc </option>
+                                                        <option value="2">Miền Trung</option>
+                                                        <option value="3">Miền Nam</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6">
+                                                    <select name="province" class="form-select selectpicker">
+                                                        <option selected="">--Tỉnh/Thành Phố--</option>
+                                                        <option value="Hoà Bình">Hoà Bình</option>
+                                                        <option value="Sơn La">Sơn La</option>
+                                                        <option value="Điện Biên">Điện Biên</option>
+                                                        <option value="Lai Châu">Lai Châu</option>
+                                                        <option value="Lào Cai">Lào Cai</option>
+                                                        <option value="Yên Bái">Yên Bái</option>
+                                                        <option value="Phú Thọ">Phú Thọ</option>
+                                                        <option value="Hà Giang">Hà Giang</option>
+                                                        <option value="Tuyên Quang">Tuyên Quang</option>
+                                                        <option value="Cao Bằng">Cao Bằng</option>
+                                                        <option value="Bắc Kạn">Bắc Kạn</option>
+                                                        <option value="Thái Nguyên">Thái Nguyên</option>
+                                                        <option value="Lạng Sơn">Lạng Sơn</option>
+                                                        <option value="Bắc Giang">Bắc Giang</option>
+                                                        <option value="Quảng Ninh">Quảng Ninh</option>
+                                                        <option value="Hà Nội">Hà Nội</option>
+                                                        <option value="Bắc Ninh">Bắc Ninh</option>
+                                                        <option value="Hà Nam">Hà Nam</option>
+                                                        <option value="Hải Dương">Hải Dương</option>
+                                                        <option value="Hải Phòng">Hải Phòng</option>
+                                                        <option value="Hưng Yên">Hưng Yên</option>
+                                                        <option value="Nam Định">Nam Định</option>
+                                                        <option value="Thái Bình">Thái Bình</option>
+                                                        <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                                        <option value="Ninh Bình">Ninh Bình</option>
+                                                        <option value="Thanh Hoá">Thanh Hoá</option>
+                                                        <option value="Nghệ An">Nghệ An</option>
+                                                        <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                                        <option value="Quảng Bình">Quảng Bình</option>
+                                                        <option value="Quảng Trị">Quảng Trị</option>
+                                                        <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                                                        <option value="Đà Nẵng">Đà Nẵng</option>
+                                                        <option value="Quảng Nam">Quảng Nam</option>
+                                                        <option value="Quảng Nam">Quảng Nam</option>
+                                                        <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                                        <option value="Bình Định">Bình Định</option>
+                                                        <option value="Phú Yên">Phú Yên</option>
+                                                        <option value="Khánh Hoà">Khánh Hoà</option>
+                                                        <option value="Ninh Thuận">Ninh Thuận</option>
+                                                        <option value="Bình Thuận">Bình Thuận</option>
+                                                        <option value="Kon Tum">Kon Tum</option>
+                                                        <option value="Gia Lai">Gia Lai</option>
+                                                        <option value="Đắk Lắk">Đắk Lắk</option>
+                                                        <option value="Đắk Nông">Đắk Nông</option>
+                                                        <option value="Lâm Đồng">Lâm Đồng</option>
+                                                        <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
+                                                        <option value="Bà Rịa Vũng Tàu">Bà Rịa Vũng Tàu</option>
+                                                        <option value="Bình Dương">Bình Dương</option>
+                                                        <option value="Bình Phước">Bình Phước</option>
+                                                        <option value="Đồng Nai">Đồng Nai</option>
+                                                        <option value="Tây Ninh">Tây Ninh</option>
+                                                        <option value="An Giang">An Giang</option>
+                                                        <option value="Bạc Liêu">Bạc Liêu</option>
+                                                        <option value="Bến Tre">Bến Tre</option>
+                                                        <option value="Cà Mau">Cà Mau</option>
+                                                        <option value="Cần Thơ">Cần Thơ</option>
+                                                        <option value="Đồng Tháp">Đồng Tháp</option>
+                                                        <option value="Hậu Giang">Hậu Giang</option>
+                                                        <option value="Kiên Giang">Kiên Giang</option>
+                                                        <option value="Long An">Long An</option>
+                                                        <option value="Sóc Trăng">Sóc Trăng</option>
+                                                        <option value="Tiền Giang">Tiền Giang</option>
+                                                        <option value="Trà Vinh">Trà Vinh</option>
+                                                        <option value="Vĩnh Long">Vĩnh Long</option>
+                                                    </select>
+                                                </div>
+                                            </div> 
+                                            <br>
 
-                <div class="shopper-informations">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="shopper-info">
-                                <p>Thông Tin Thanh Toán</p>
-                                <form>
-                                    <p>Địa chỉ giao hàng</p>
-                                    <textarea name="message"  placeholder="" rows="5"></textarea>
-                                    <p>Phương thức thanh toán</p>
-                                    <input type="text">
-                                    <select name="phuong_thuc_thanh_toan">
-                                        <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
-                                        <option value="Chuyển khoản ngân hàng">Chuyển khoản ngân hàng</option>
-                                    </select><br>
-                                    <input type="submit" value="Xác nhận thanh toán" class="btn btn-primary">
-                                </form>
+                                            <div class="form-group">
+                                                <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết">
+                                            </div> 
+                                            <div class="form-group">
+                                                <select name="payment_method">
+                                                    <option selected="">--Phương Thức Thanh Toán--</option>
+                                                    <option value="cod">Thanh toán khi nhận hàng</option>
+                                                </select><br>
+                                            </div> 
+                                            <div  class="container-fluid">
+                                                <input type="submit" value="Xác nhận thanh toán" class="btn btn-danger"">
+                                            </div>
+
+                                        </form>
+                                    </div> 
+                                </div>
                             </div>
                         </div>
+                        <div class="table-responsive cart_info">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr class="cart_menu">
+                                        <td class="image">Sản Phẩm</td>
+                                        <td class="description"></td>
+                                        <td class="price">Giá</td>
+                                        <td class="quantity">Số Lượng</td>
+                                        <td class="total">Tổng</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <%
+                                        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
+                                    %>
+
+                                    <tr>
+                                        <td class="cart_product">
+                                            <a href=""><img src="products/<%= ds.getKey().getPhoto()%>" alt="" style="width: 50px; height: 60px;"></a>
+                                        </td>
+                                        <td class="cart_description">
+                                            <h4><a href=""><%= ds.getKey().getName()%></a></h4>
+                                            <p>Code: <%= ds.getKey().getCode()%></p>
+                                        </td>
+                                        <td class="cart_price">
+                                            <p><%= nf.format(ds.getKey().getPrice())%> VNĐ</p>
+                                        </td>
+                                        <td class="cart_quantity">
+                                            <div class="cart_quantity_button">
+                                                <a class="cart_quantity_up" href="add-cart?command=plus&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"> + </a>
+                                                <input class="cart_quantity_input" type="text" value="<%= ds.getValue()%>" autocomplete="off" size="2" disabled="">
+                                                <a class="cart_quantity_down" href="add-cart?command=sub&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"> - </a>
+                                            </div>
+                                        </td>
+                                        <td class="cart_total">
+                                            <p class="cart_total_price"><%= nf.format(ds.getValue() * ds.getKey().getPrice())%> VNĐ</p>
+                                        </td>
+                                        <td class="cart_delete">
+                                            <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+
+                                    <%
+                                        }
+                                    %>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
                     </div>
                 </div>
-                <div class="review-payment">
-                    <h2>Review & Payment</h2>
-                </div>
 
-                <div class="table-responsive cart_info">
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr class="cart_menu">
-                                <td class="image">Item</td>
-                                <td class="description"></td>
-                                <td class="price">Price</td>
-                                <td class="quantity">Quantity</td>
-                                <td class="total">Total</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/one.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/two.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/three.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="4">&nbsp;</td>
-                                <td colspan="2">
-                                    <table class="table table-condensed total-result">
-                                        <tr>
-                                            <td>Cart Sub Total</td>
-                                            <td>$59</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Exo Tax</td>
-                                            <td>$2</td>
-                                        </tr>
-                                        <tr class="shipping-cost">
-                                            <td>Shipping Cost</td>
-                                            <td>Free</td>										
-                                        </tr>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td><span>$61</span></td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </section> <!--/#cart_items-->
+
+
         <jsp:include page="footer.jsp" />
 
 
