@@ -37,13 +37,10 @@ public class LogoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        ServletContext context = this.getServletContext();
-//        Properties siteMaps = (Properties) context.getAttribute("SITEMAPS");
-        String url = "index.jsp";
+        String url = "home";
         try {
             HttpSession session = request.getSession(false);
             if (session != null) {
-                session.removeAttribute("USER");
                 session.invalidate();
             }
         } finally {
