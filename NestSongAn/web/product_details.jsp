@@ -162,7 +162,7 @@
                             <p>${detail.short_description}</p>
                             <%
                                 if (u == null) {%>
-                            <a href="login.jsp" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            <a href="loginController" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
                             <%} else {%>
                             <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=<%= System.currentTimeMillis()%>" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
                             <%}

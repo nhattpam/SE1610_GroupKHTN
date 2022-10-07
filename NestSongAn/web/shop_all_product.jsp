@@ -171,7 +171,7 @@
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                         <%
                                             if (u == null){%>
-                                                <li><a href="login.jsp"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
                                             <%} else {%>
                                                 <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                             <%}

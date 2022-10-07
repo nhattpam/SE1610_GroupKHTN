@@ -27,6 +27,13 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <style>
+            a:hover,
+            a:focus {
+                text-decoration: none;
+                outline: none;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="header.jsp"/>   
@@ -43,7 +50,7 @@
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" class="form-control" name="txtPassword" id="exampleInputPassword1">
                 </div>
-                <button type="submit" value="Login" class="btn btn-primary">Submit</button>
+                <button type="submit" value="Login" class="btn btn-primary">Đăng nhập</button>
                 <br/>
                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/NestSongAn/login-google&response_type=code
                    &client_id=34728737226-pshthan6um4e9qkcndvrrmvhr1b9mqqp.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>

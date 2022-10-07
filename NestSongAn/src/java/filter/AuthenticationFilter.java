@@ -120,7 +120,7 @@ public class AuthenticationFilter implements Filter {
             String rule=(String)authenticationProperties.getProperty(resource);
             if (rule!=null && rule.equals("restricted")) {
                 if (session==null||session.getAttribute("USER")==null) {
-                    ((HttpServletResponse)response).sendRedirect(sitemap.getProperty("loginPage"));
+                    ((HttpServletResponse)response).sendRedirect(sitemap.getProperty("loginController"));
                 }else{
                     chain.doFilter(request, response);
                 }
