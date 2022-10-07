@@ -5,24 +5,21 @@
  */
 package controllers;
 
-import daos.UserDAO;
-import daos.UserDAOImpl;
-import dtos.GoogleDTO;
-import dtos.UsersDTO;
+import daos.FeedbackDAOImpl;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.DBUtils;
 
 /**
  *
  * @author haph1
  */
-public class MyProfileController extends HttpServlet {
+public class AddFeedbackController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +32,8 @@ public class MyProfileController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            int uid = Integer.parseInt(request.getParameter("uid"));
-            UserDAO user = new UserDAOImpl();
-            UsersDTO profile = user.viewAccount(uid);
-            request.setAttribute("inform", profile);
-            request.getRequestDispatcher("myaccount.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MyProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+        response.setContentType("text/html;charset=UTF-8");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,7 +62,26 @@ public class MyProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+
+            String feedback = (String)request.getAttribute("feedback");
+//            UsersDTO u = (UsersDTO) request.getAttribute("USER");
+//            ProductDTO p = (ProductDTO) request.getAttribute("detail");
+            int uid = Integer.parseInt((String) request.getAttribute("uid"));
+            int pid = Integer.parseInt((String) request.getAttribute("pid"));
+            boolean check = true;
+            Date now = new Date();
+            SimpleDateFormat x = new SimpleDateFormat();
+            String createdDate = x.format(now);
+
+//            FeedbackDTO fb = new FeedbackDTO(feedback, u, createdDate, p);
+            FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
+            fed.addFeedback(feedback, uid, createdDate, pid);
+            response.sendRedirect("home");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

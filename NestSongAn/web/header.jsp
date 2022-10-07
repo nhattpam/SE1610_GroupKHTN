@@ -144,7 +144,7 @@
                                         <a href="" style="color: white;"><i class="fa fa-user"></i> <%=us.getName()%></a>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
-                                            <li><a href="MyProfile?uid=<%=us.getId()%>" style="color: white;">My Profile</a></li>
+                                            <li><a href="MyProfileGoogle?email=<%=us.getEmail()%>" style="color: white;">My Profile</a></li>
                                             <li><a href="#" style="color: white;">English</a></li>
                                         </ul>
                                     </div>

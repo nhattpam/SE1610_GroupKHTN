@@ -43,6 +43,10 @@
         <servlet-name>DeleteProductController</servlet-name>
         <servlet-class>controllers.DeleteProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddFeedbackController</servlet-name>
+        <servlet-class>controllers.AddFeedbackController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyProfileController</servlet-name>
         <url-pattern>/MyProfile</url-pattern>
@@ -54,6 +58,10 @@
     <servlet-mapping>
         <servlet-name>DeleteProductController</servlet-name>
         <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFeedbackController</servlet-name>
+        <url-pattern>/AddFeedback</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

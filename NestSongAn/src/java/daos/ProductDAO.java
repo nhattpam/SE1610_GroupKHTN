@@ -17,9 +17,9 @@ public interface ProductDAO {
     
     //nhattpham: function add product
     public boolean addProduct(ProductDTO p);
-    
     //hapham: function delete product
     public void deleteProduct(int pid) throws SQLException;
+    
     //quoc khang: function View All Product List
     public List<ProductDTO> getAllProduct();
     

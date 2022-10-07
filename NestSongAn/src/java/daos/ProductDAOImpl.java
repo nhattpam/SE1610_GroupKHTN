@@ -7,6 +7,7 @@ package daos;
 
 import dtos.CategoryDTO;
 import dtos.ProductDTO;
+import dtos.UsersDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,7 +87,6 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public ProductDTO getProductId(int product_id) {
-        ProductDTO p = new ProductDTO();
 
         try {
             String sql = "SELECT product_id, name, code, short_description, full_description, weight, price, photo, category_id, quantity FROM product WHERE product_id = ?";
@@ -98,20 +98,22 @@ public class ProductDAOImpl implements ProductDAO {
 
             while (rs.next()) {
                 CategoryDTO category_id = new CategoryDTO(rs.getInt("category_id"));
-                p.setProduct_id(rs.getInt("product_id"));
-                p.setCategory_id(category_id);
-                p.setName(rs.getString("name"));
-                p.setCode(rs.getString("code"));
-                p.setShort_description(rs.getString("short_description"));
-                p.setFull_description(rs.getString("full_description"));
-                p.setWeight(rs.getInt("weight"));
-                p.setPhoto(rs.getString("photo"));
-                p.setQuantity(rs.getInt("quantity"));
-                p.setPrice(rs.getFloat("price"));
+                return new ProductDTO(product_id, rs.getString("name"), rs.getString("code"), rs.getString("short_description"), rs.getString("full_description"),
+                        rs.getFloat("price"), rs.getInt("weight"), rs.getString("photo"), category_id, rs.getInt("quantity"));
+//                p.setProduct_id(rs.getInt("product_id"));
+//                p.setCategory_id(category_id);
+//                p.setName(rs.getString("name"));
+//                p.setCode(rs.getString("code"));
+//                p.setShort_description(rs.getString("short_description"));
+//                p.setFull_description(rs.getString("full_description"));
+//                p.setWeight(rs.getInt("weight"));
+//                p.setPhoto(rs.getString("photo"));
+//                p.setQuantity(rs.getInt("quantity"));
+//                p.setPrice(rs.getFloat("price"));
             }
         } catch (SQLException ex) {
         }
-        return p;
+        return null;
     }
 
     @Override
@@ -162,10 +164,16 @@ public class ProductDAOImpl implements ProductDAO {
             e.printStackTrace();
         }
     }
+    public static void main(String[] args) {
+        ProductDAOImpl user= new ProductDAOImpl(DBUtils.getConnection());
+        int id = 6;
+        ProductDTO u = user.getProductId(id);
+        System.out.println(u.getPhoto());
+    }
 
     @Override
     public void deleteProduct(int pid) throws SQLException {
-        Connection con = null;
+       Connection con = null;
         PreparedStatement stm = null;
         try {
             con = DBUtils.getConnection();

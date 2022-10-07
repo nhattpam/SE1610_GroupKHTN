@@ -4,6 +4,8 @@
     Author     : Admin
 --%>
 
+<%@page import="dtos.UsersDTO"%>
+<%@page import="dtos.ProductDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -183,7 +185,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                       aria-selected="false">Reviews <span>(1)</span></a>
+                                       aria-selected="false">Comments <span>(1)</span></a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -199,10 +201,81 @@
                                         <p>${detail.full_description}</p>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <div class="tab-pane" id="tabs-3" role="tabpane3">
                                     <div class="product__details__tab__desc">
-                                        <h6>Products Infomation</h6>
-                                        <p>${detail.full_description}</p>
+                                        <section style="background-color: #eee;">
+                                            <div class="container py-5">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-6 col-lg-7 col-xl-8">
+
+                                                        <ul class="list-unstyled">
+                                                            <li class="d-flex justify-content-between mb-4">
+                                                                <div class="card">
+                                                                    <div class="card-header d-flex justify-content-between p-3">
+                                                                        <p class="fw-bold mb-0">Brad Pitt</p>
+                                                                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> 12 mins ago</p>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <p class="mb-0">
+                                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                                                            labore et dolore magna aliqua.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between mb-4">
+                                                                <div class="card w-100">
+                                                                    <div class="card-header d-flex justify-content-between p-3">
+                                                                        <p class="fw-bold mb-0">Lara Croft</p>
+                                                                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> 13 mins ago</p>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <p class="mb-0">
+                                                                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                                                            laudantium.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between mb-4" width="60">
+                                                                <i class="fa fa-user" width="60"></i>
+                                                                <div class="card">
+                                                                    <div class="card-header d-flex justify-content-between p-3">
+                                                                        <p class="fw-bold mb-0">Brad Pitt</p>
+                                                                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> 10 mins ago</p>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <p class="mb-0">
+                                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                                                            labore et dolore magna aliqua.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <!--input-->
+                                                            <%UsersDTO u = (UsersDTO) request.getAttribute("USER");%>
+                                                            <form action="AddFeedback" method="POST">
+                                                                <li class="bg-white mb-3">
+                                                                    <div class="form-outline">
+                                                                        <input type="text" name="uid" value="${u.user_id}">
+                                                                        <input type="text" name="pid" value="${detail.product_id}">
+                                                                        <input class="form-control" id="textAreaExample2" rows="4" name="feedback">
+                                                                        <label class="form-label" for="textAreaExample2">Message</label>
+                                                                    </div>
+                                                                </li>
+                                                                <button type="input" class="btn btn-info btn-rounded float-end">Send</button>
+                                                            </form>
+
+                                                        </ul>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </section>
                                     </div>
                                 </div>
                             </div>

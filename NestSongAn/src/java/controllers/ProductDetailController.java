@@ -19,7 +19,7 @@ import utils.DBUtils;
  *
  * @author duong
  */
-@WebServlet("/detail")
+@WebServlet("/details")
 public class ProductDetailController extends HttpServlet {
 
     /**
