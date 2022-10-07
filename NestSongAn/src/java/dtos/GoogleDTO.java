@@ -10,7 +10,6 @@ package dtos;
  * @author Administrator
  */
 public class GoogleDTO {
-
     private String id;
     private String email;
     private String name;
@@ -23,6 +22,12 @@ public class GoogleDTO {
     public GoogleDTO() {
     }
 
+
+    public GoogleDTO(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
+    
     public GoogleDTO(String email, String name, int status, String create_date, String edit_date, UserRoleDTO role_id) {
         this.email = email;
         this.name = name;
@@ -32,6 +37,12 @@ public class GoogleDTO {
         this.role_id = role_id;
     }
 
+
+    public GoogleDTO(String id, String email, String name) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+    }
     public GoogleDTO(String id, String email, String name, int status, String create_date, String edit_date, UserRoleDTO role_id) {
         this.id = id;
         this.email = email;

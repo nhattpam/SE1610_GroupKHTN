@@ -7,9 +7,9 @@ package controllers;
 
 import daos.ProductDAOImpl;
 import dtos.CategoryDTO;
+import java.util.List;
 import dtos.ProductDTO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

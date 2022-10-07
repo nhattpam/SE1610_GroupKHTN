@@ -18,11 +18,15 @@ import javax.naming.NamingException;
 public interface UserDAO {
 
      public UsersDTO checkLogin(String username, String password) throws SQLException, NamingException;
-     
+     //hapham: function edit account
+
      public void editAccount(UsersDTO us) throws SQLException;
-     
+     //hapham: function view account
     public UsersDTO viewAccount(int userId) throws SQLException;
-    
+
+    //hapham: function view account by google login
+    public GoogleDTO viewAcc(String email) throws SQLException;
+
     //khangtran: function register account
     public boolean userRegister(UsersDTO us);
     
@@ -35,5 +39,6 @@ public interface UserDAO {
     public boolean checkDuplicatePhone(String phone) throws SQLException;
     
     public boolean checkDuplicateUserName(String username) throws SQLException;
+
 
 }

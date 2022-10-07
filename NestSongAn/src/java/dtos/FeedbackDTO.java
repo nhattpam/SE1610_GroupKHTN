@@ -27,6 +27,14 @@ public class FeedbackDTO {
         this.product_id = product_id;
     }
 
+    public FeedbackDTO(String feedback, UsersDTO user_id, String create_date, ProductDTO product_id) {
+        this.feedback = feedback;
+        this.user_id = user_id;
+        this.create_date = create_date;
+        this.product_id = product_id;
+    }
+    
+
     public int getFeedback_id() {
         return feedback_id;
     }

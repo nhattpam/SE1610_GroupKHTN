@@ -5,24 +5,24 @@
  */
 package controllers;
 
-import daos.UserDAO;
-import daos.UserDAOImpl;
-import dtos.GoogleDTO;
-import dtos.UsersDTO;
+import daos.FeedbackDAOImpl;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.DBUtils;
 
 /**
  *
  * @author haph1
  */
-public class MyProfileController extends HttpServlet {
+public class AddFeedbackController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,21 +33,6 @@ public class MyProfileController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            int uid = Integer.parseInt(request.getParameter("uid"));
-            UserDAO user = new UserDAOImpl();
-            UsersDTO profile = user.viewAccount(uid);
-            request.setAttribute("inform", profile);
-            request.getRequestDispatcher("myaccount.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MyProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -57,12 +42,6 @@ public class MyProfileController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -74,7 +53,37 @@ public class MyProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        try {
+            String feedback = request.getParameter("feedback");
+            int uid = Integer.parseInt(request.getParameter("uid"));
+            int pid = Integer.parseInt(request.getParameter("pid"));
+            boolean check = true;
+            Date now = new Date();
+            SimpleDateFormat x = new SimpleDateFormat();
+            String createdDate = x.format(now);
+            if (feedback == null) {
+                check = false;
+            }
+            if (uid == 0) {
+                check = false;
+            }
+            if (pid == 0) {
+                check = false;
+            }
+            if (check) {
+                FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
+                boolean f =fed.addFeedback(feedback, uid, createdDate, pid);
+                if(f){
+                    response.sendRedirect("detail?product_id="+pid);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

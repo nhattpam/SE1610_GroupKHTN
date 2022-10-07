@@ -1,3 +1,5 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,11 +7,9 @@
  */
 package controllers;
 
-import daos.UserDAO;
-import daos.UserDAOImpl;
-import dtos.GoogleDTO;
-import dtos.UsersDTO;
+import daos.ProductDAOImpl;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,12 +17,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.DBUtils;
 
 /**
  *
  * @author haph1
  */
-public class MyProfileController extends HttpServlet {
+public class DeleteProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +36,16 @@ public class MyProfileController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            int uid = Integer.parseInt(request.getParameter("uid"));
-            UserDAO user = new UserDAOImpl();
-            UsersDTO profile = user.viewAccount(uid);
-            request.setAttribute("inform", profile);
-            request.getRequestDispatcher("myaccount.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            int pid = Integer.parseInt(request.getParameter("pid"));
+            ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
+            dao.deleteProduct(pid);
+            response.sendRedirect("list-products");
         } catch (SQLException ex) {
-            Logger.getLogger(MyProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+            Logger.getLogger(DeleteProductController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

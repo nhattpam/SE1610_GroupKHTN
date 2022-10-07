@@ -7,12 +7,14 @@ package daos;
 
 import dtos.CategoryDTO;
 import dtos.ProductDTO;
+import dtos.UsersDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import utils.DBUtils;
 
 /**
  *
@@ -114,6 +116,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     //nhatpam: function View all product (staff)
+
     @Override
     public List<ProductDTO> getAllListProduct() {
         List<ProductDTO> list = new ArrayList<>();
@@ -144,23 +147,6 @@ public class ProductDAOImpl implements ProductDAO {
             e.printStackTrace();
         }
         return list;
-    }
-    
-    public void editProduct1(ProductDTO p) {
-
-        try {
-            String sql = "UPDATE product set name=?,code=? WHERE product_id=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, p.getName());
-            ps.setString(2, p.getCode());
-            ps.setInt(3, p.getProduct_id());
-
-            ps.executeUpdate();
-     
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     
     //nhatpham: function edit product
@@ -250,5 +236,27 @@ public class ProductDAOImpl implements ProductDAO {
         return list;
     }
     
-    
+
+    @Override
+    public void deleteProduct(int pid) throws SQLException {
+       Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "DELETE FROM product\n"
+                        + "WHERE product_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, pid);
+                stm.executeUpdate();
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 }

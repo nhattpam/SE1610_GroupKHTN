@@ -133,7 +133,6 @@ public class RegisterAccountController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-
             resp.sendRedirect("RegisterAccountController");
         }
 
@@ -141,9 +140,6 @@ public class RegisterAccountController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-    
-
         req.getRequestDispatcher("register.jsp").forward(req, resp);
     }
 

@@ -259,7 +259,7 @@
                                     <td>${l.category_id.category_id}</td>
                                     <td>
                                         <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary"> Sửa</a>
-                                        <a href="" class="btn btn-sm btn-danger"> Xoá</a>
+                                        <a href="delete?pid=${l.product_id}" class="btn btn-sm btn-danger"> Xoá</a>
                                     </td>
                                 </tr>
                             </c:forEach>

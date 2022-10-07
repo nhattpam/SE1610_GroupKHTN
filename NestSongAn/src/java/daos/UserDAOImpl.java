@@ -12,6 +12,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 import javax.naming.NamingException;
 import utils.DBUtils;
@@ -331,5 +334,38 @@ public class UserDAOImpl implements UserDAO {
         }
         return check;
     }
-
+    
+    @Override
+    public GoogleDTO viewAcc(String email) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        GoogleDTO result = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "Select full_name\n"
+                        + "from users\n"
+                        + "where email = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String fullname = rs.getString("full_name");
+                    result = new GoogleDTO(email, fullname);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }

@@ -7,6 +7,7 @@ package daos;
 
 import dtos.CategoryDTO;
 import dtos.ProductDTO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -17,7 +18,8 @@ public interface ProductDAO {
     
     //nhattpham: function add product
     public boolean addProduct(ProductDTO p);
-    
+    //hapham: function delete product
+    public void deleteProduct(int pid) throws SQLException;
     
     //quoc khang: function View All Product List
     public List<ProductDTO> getAllProduct();
