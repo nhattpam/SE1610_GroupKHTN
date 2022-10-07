@@ -9,6 +9,9 @@ import daos.FeedbackDAOImpl;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,12 +33,6 @@ public class AddFeedbackController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -45,12 +42,6 @@ public class AddFeedbackController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -62,22 +53,33 @@ public class AddFeedbackController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         try {
-
-            String feedback = (String)request.getAttribute("feedback");
-//            UsersDTO u = (UsersDTO) request.getAttribute("USER");
-//            ProductDTO p = (ProductDTO) request.getAttribute("detail");
-            int uid = Integer.parseInt((String) request.getAttribute("uid"));
-            int pid = Integer.parseInt((String) request.getAttribute("pid"));
+            String feedback = request.getParameter("feedback");
+            int uid = Integer.parseInt(request.getParameter("uid"));
+            int pid = Integer.parseInt(request.getParameter("pid"));
             boolean check = true;
             Date now = new Date();
             SimpleDateFormat x = new SimpleDateFormat();
             String createdDate = x.format(now);
+            if (feedback == null) {
+                check = false;
+            }
+            if (uid == 0) {
+                check = false;
+            }
+            if (pid == 0) {
+                check = false;
+            }
+            if (check) {
+                FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
+                boolean f =fed.addFeedback(feedback, uid, createdDate, pid);
+                if(f){
+                    response.sendRedirect("detail?product_id="+pid);
+                }
+            }
 
-//            FeedbackDTO fb = new FeedbackDTO(feedback, u, createdDate, p);
-            FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
-            fed.addFeedback(feedback, uid, createdDate, pid);
-            response.sendRedirect("home");
         } catch (Exception e) {
             e.printStackTrace();
         }

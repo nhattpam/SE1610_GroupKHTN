@@ -79,7 +79,7 @@ public class EditProfileController extends HttpServlet {
                 UsersDTO us = new UsersDTO(uid, fullname, username, checkPassword, email, phone);
                 user.editAccount(us);
             }
-            response.sendRedirect("home"); 
+            response.sendRedirect("MyProfile?uid="+uid); 
 
         } catch (SQLException ex) {
             Logger.getLogger(MyProfileController.class.getName()).log(Level.SEVERE, null, ex);

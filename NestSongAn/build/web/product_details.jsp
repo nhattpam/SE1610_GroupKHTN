@@ -255,13 +255,12 @@
                                                                 </div>
                                                             </li>
                                                             <!--input-->
-                                                            <%UsersDTO u = (UsersDTO) request.getAttribute("USER");%>
                                                             <form action="AddFeedback" method="POST">
                                                                 <li class="bg-white mb-3">
                                                                     <div class="form-outline">
-                                                                        <input type="text" name="uid" value="${u.user_id}">
-                                                                        <input type="text" name="pid" value="${detail.product_id}">
-                                                                        <input class="form-control" id="textAreaExample2" rows="4" name="feedback">
+                                                                        <input type="hidden" name="uid" value="${USER.user_id}">
+                                                                        <input type="hidden" name="pid" value="${detail.product_id}">
+                                                                        <textarea type="textarea" class="form-control" id="textAreaExample2" rows="4" name="feedback"></textarea>
                                                                         <label class="form-label" for="textAreaExample2">Message</label>
                                                                     </div>
                                                                 </li>

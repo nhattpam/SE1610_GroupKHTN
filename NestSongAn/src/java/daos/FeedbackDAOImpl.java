@@ -37,7 +37,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
     }
 
     @Override
-    public void addFeedback(String feedback, int user_id, String create_date, int product_id) throws SQLException {
+    public boolean addFeedback(String feedback, int user_id, String create_date, int product_id) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean check = false;
@@ -65,7 +65,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
                 con.close();
             }
         }
-//        return check;
+        return check;
     }
 
     public static void main(String[] args) {

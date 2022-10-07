@@ -7,6 +7,7 @@ package controllers;
 
 import daos.ProductDAOImpl;
 import dtos.ProductDTO;
+import dtos.UsersDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +20,7 @@ import utils.DBUtils;
  *
  * @author duong
  */
-@WebServlet("/details")
+@WebServlet("/detail")
 public class ProductDetailController extends HttpServlet {
 
     /**
