@@ -36,12 +36,14 @@
         <div class="container mb-3">
             <form action="RegisterController" method="post">
                 <h4>Đăng Ký tài khoản</h4>
-                <c:if test="${ not empty requestScope.succMsg }">
-                    <h5 class="text-center text-success">${requestScope.succMsg}</h5>
+                <c:if test="${ not empty succMsg }">
+                    <h5 class="text-center text-success">${succMsg}</h5>
+                    <c:remove var="wrongFullName" scope="session"/>
                 </c:if>
 
-                    <c:if test="${ not empty requestScope.failedMsg }">
-                        <h5 class="text-center text-danger">${requestScope.failedMsg}</h5>
+                    <c:if test="${ not empty failedMsg }">
+                        <h5 class="text-center text-danger">${failedMsg}</h5>
+                        <c:remove var="wrongFullName" scope="session"/>
                 </c:if>
 
                 <div class="mb-3">

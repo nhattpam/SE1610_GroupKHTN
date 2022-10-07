@@ -166,7 +166,7 @@
                                 </c:if>
                                 <c:if test="${empty USER && empty USERG}">
                                     <div class="header__top__right__auth">
-                                        <a href="loginPage" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
+                                        <a href="loginController" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
                                     </div>
                                 </c:if>
 
