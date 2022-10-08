@@ -62,10 +62,11 @@ public class CheckoutController extends HttpServlet {
         int getUser_id = (request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0);
         UsersDTO user_id = new UsersDTO(getUser_id);
 
-        int branch_id = Integer.parseInt(request.getParameter("branch_id"));
+//        int branch_id = Integer.parseInt(request.getParameter("branch_id"));
         String delivery_address = request.getParameter("delivery_address") + ", " + request.getParameter("province");
         String payment_method = request.getParameter("payment_method");
-        System.out.println("User_id: " + getUser_id + ", " + "branch: " + branch_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
+//        System.out.println("User_id: " + getUser_id + ", " + "branch: " + branch_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
+        System.out.println("User_id: " + getUser_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
 
         HttpSession session = request.getSession();
         CartDTO cart = (CartDTO) session.getAttribute("cart");
