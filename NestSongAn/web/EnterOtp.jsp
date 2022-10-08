@@ -14,6 +14,19 @@
 
         <link rel="stylesheet"
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <style>
+            body{
+                background:url('img/login.jpg') no-repeat center center fixed;
+                -webkit-background-size:cover;
+                -moz-background-size:cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+            
+            .panel-body{
+                background: url('img/login.jpg') no-repeat center center fixed;
+            }
+        </style>
     </head>
 
     <body>
