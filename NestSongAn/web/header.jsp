@@ -128,9 +128,9 @@
                                         <a href="" style="color: white;"><i class="fa fa-user"></i> <%=u.getFull_name()%></a>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
-                                            <li><a href="MyProfile?uid=<%=u.getUser_id()%>" style="color: white;">My Profile</a></li>
+                                            <li><a href="MyProfile?uid=<%=u.getUser_id()%>" style="color: white;">Tài khoản</a></li>
                                             <c:url var="logout" value="logoutController"/>
-                                            <li><a href="${logout}" style="color: white;">Logout</a></li>
+                                            <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
                                     </div>
                                 </c:if>
@@ -140,9 +140,9 @@
                                         <a href="" style="color: white;"><i class="fa fa-user"></i> <%=us.getName()%></a>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
-                                            <li><a href="MyProfile?uid=<%=us.getId()%>" style="color: white;">My Profile</a></li>
+                                            <li><a href="MyProfile?uid=<%=us.getId()%>" style="color: white;">Tài Khoản</a></li>
                                             <c:url var="logout" value="logoutController"/>
-                                            <li><a href="${logout}" style="color: white;">Logout</a></li>
+                                            <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
                                     </div>
                                 </c:if>

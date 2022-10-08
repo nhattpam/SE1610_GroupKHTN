@@ -38,6 +38,10 @@
             *{
                 font-family: Tahoma, Verdana, Segoe, sans-serif;
             }
+            .featured__item__pic__hover li:hover a {
+                background: #6a0e13;
+                border-color: #6a0e13;
+            }
         </style>
     </head>
 
@@ -72,8 +76,8 @@
                             <div class="hero__search__form">
                                 <form action="search-result">
                                     <div class="hero__search__categories">
-                                        Danh Mục
-                                        <span class="arrow_carrot-down"></span>
+                                        Yến Song Ân
+                                        <!--<span class="arrow_carrot-down"></span>-->
                                     </div>
                                     <input type="text" placeholder="Bạn tìm gì?" name="character">
                                     <button type="submit" class="site-btn" style="background: #6a0e13;">TÌM KIẾM</button>
@@ -170,17 +174,17 @@
                             
                             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                             <ul>
-                                <li><b>Availability</b> <span>In Stock</span></li>
-                                <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                                <li><b>Weight</b> <span>0.5 kg</span></li>
-                                <li><b>Share on</b>
+                                <li><b>Số lượng còn lại</b> <span>${detail.quantity}</span></li>
+                                <li><b>Vận chuyển</b> <span><samp>Miễn Phí Vận Chuyển Toàn Quốc</samp></span></li>
+                                <li><b>Trọng lượng</b> <span>${detail.weight} gam</span></li>
+<!--                                <li><b>Share on</b>
                                     <div class="share">
                                         <a href="#"><i class="fa fa-facebook"></i></a>
                                         <a href="#"><i class="fa fa-twitter"></i></a>
                                         <a href="#"><i class="fa fa-instagram"></i></a>
                                         <a href="#"><i class="fa fa-pinterest"></i></a>
                                     </div>
-                                </li>
+                                </li>-->
                             </ul>
                         </div>
                     </div>
@@ -189,28 +193,28 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                       aria-selected="true">Description</a>
+                                       aria-selected="true">Mô tả</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                       aria-selected="false">Information</a>
+                                       aria-selected="false">Thông tin bổ sung</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                       aria-selected="false">Comments <span>(1)</span></a>
+                                       aria-selected="false">Đánh giá <span>(1)</span></a>
                                 </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                     <div class="product__details__tab__desc">
-                                        <h6>Products Infomation</h6>
+                                        <h6>Giới thiệu về ${detail.name}</h6>
                                         <p>${detail.full_description}</p>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tabs-2" role="tabpanel">
                                     <div class="product__details__tab__desc">
-                                        <h6>Products Infomation</h6>
-                                        <p>${detail.full_description}</p>
+                                        <h6>Trọng lượng</h6>
+                                        <p>${detail.weight} gam</p>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tabs-3" role="tabpane3">
@@ -305,7 +309,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title related__product__title">
-                            <h2>Related Product</h2>
+                            <h2>Sản Phẩm Liên Quan</h2>
                         </div>
                     </div>
                 </div>

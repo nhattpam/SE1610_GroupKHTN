@@ -210,8 +210,8 @@
             <div class="container">
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
-                        <li><a href="home">Trang Chủ</a></li>
-                        <li><a href="my-cart" style="padding: 2px 4px 1px 1px;" >Giỏ Hàng</a></li>
+                        <!--<li><a href="home">Trang Chủ</a></li>-->
+                        <li><a href="my-cart" style="padding: 2px 4px 2px 2px;" >Giỏ Hàng</a></li>
                         <li class="active">Thanh Toán</li>
                     </ol>
                 </div><!--/breadcrums-->
@@ -235,16 +235,9 @@
                                                 Địa chỉ giao hàng
                                             </div>
                                             <div class="form-row" >
-                                                <div class="col-6" >
-                                                    <select name="branch_id">
-                                                        <option selected>--Chọn Miền-- </option>
-                                                        <option value="1">Miền Bắc </option>
-                                                        <option value="2">Miền Trung</option>
-                                                        <option value="3">Miền Nam</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6">
-                                                    <select name="province" class="form-select selectpicker">
+                                                
+                                                <div class="col-12">
+                                                    <select name="province" class="form-select selectpicker" required="">
                                                         <option selected="">--Tỉnh/Thành Phố--</option>
                                                         <option value="Hoà Bình">Hoà Bình</option>
                                                         <option value="Sơn La">Sơn La</option>
@@ -319,7 +312,7 @@
                                                 <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết">
                                             </div> 
                                             <div class="form-group">
-                                                <select name="payment_method">
+                                                <select name="payment_method" required=""> 
                                                     <option selected="">--Phương Thức Thanh Toán--</option>
                                                     <option value="cod">Thanh toán khi nhận hàng</option>
                                                 </select><br>

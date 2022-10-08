@@ -179,10 +179,10 @@
         </style>
     </head>
     <body>
-        <!-- Page Preloder -->
+<!--         Page Preloder 
         <div id="preloder">
             <div class="loader"></div>
-        </div>
+        </div>-->
         <jsp:include page="header.jsp" />
 
         <%
