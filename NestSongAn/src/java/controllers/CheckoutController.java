@@ -8,6 +8,7 @@ package controllers;
 import daos.OrderDAOImpl;
 import daos.OrderDetailsDAOImpl;
 import dtos.CartDTO;
+import dtos.GoogleDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import dtos.ProductDTO;
@@ -46,8 +47,11 @@ public class CheckoutController extends HttpServlet {
         HttpSession session = request.getSession();
 
         UsersDTO u = (UsersDTO) session.getAttribute("USER");
+        GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");
 
         request.setAttribute("user", u);
+        
+        request.setAttribute("usergg", us);
 
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }

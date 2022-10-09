@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="dtos.GoogleDTO"%>
 <%@page import="dtos.UsersDTO"%>
 <%@page import="dtos.ProductDTO"%>
 <%@page import="dtos.CartDTO"%>
@@ -145,9 +146,10 @@
                         </div>
                     </div>
                 </div>
-
+                <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>
                 <%
                     UsersDTO u = (UsersDTO) session.getAttribute("USER");
+                    
                     //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
                     //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
                     NumberFormat nf = NumberFormat.getInstance();
@@ -170,11 +172,13 @@
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                         <%
-                                            if (u == null){%>
+                                            if (u == null && us == null){%>
                                                 <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%} else {%>
+                                            <%} else if(u != null){%>
                                                 <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%}
+                                            <%} else if(us != null){%>
+                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <%}
                                         %>
                                         
                                     </ul>
