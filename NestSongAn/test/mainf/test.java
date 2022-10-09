@@ -16,13 +16,13 @@ import utils.DBUtils;
  * @author Admin
  */
 public class test {
+
     public static void main(String[] args) {
         ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
-        
-        List<ProductDTO> lisst = (List<ProductDTO>) dao.getProductBySearch("t");
-        
-        for (ProductDTO p :lisst) {
-            System.out.println(p.getName() + ", " + p.getProduct_id() + ", " + p.getCategory_id().getCategory_id()+ ", "  + p.getPrice()+ ", "  + p.getPhoto()+ ", "  + p.getFull_description()+ ", "  + p.getWeight());
+
+        List<ProductDTO> list = dao.pagingProduct(5);
+        for (ProductDTO productDTO : list) {
+            System.out.println(productDTO);
         }
     }
 }

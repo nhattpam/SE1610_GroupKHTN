@@ -27,7 +27,11 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
-
+        <style>
+            *{
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+            }
+        </style>
     </head>
     <body>
         <!-- Featured Section Begin -->
@@ -36,7 +40,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title">
-                            <h2>Sản Phẩm Mới Nhất</h2>
+                            <h2 style="color: #6a0e13; font-family: Tahoma, Verdana, Segoe, sans-serif;">Sản Phẩm Mới Nhất</h2>
                             <style type="text/css">
                                 .section-title h2:after {
                                     position: absolute;
@@ -54,16 +58,16 @@
                         <div class="featured__controls">
                             <ul>
                                 <li class="active" data-filter="*">All</li>
-                                <!--                                    <li data-filter=".oranges">Oranges</li>
-                                                                    <li data-filter=".fresh-meat">Fresh Meat</li>
-                                                                    <li data-filter=".vegetables">Vegetables</li>
-                                                                    <li data-filter=".fastfood">Fastfood</li>-->
+                                <!--                                                                    <li data-filter=".oranges">Oranges</li>
+                                                                                                    <li data-filter=".fresh-meat">Fresh Meat</li>
+                                                                                                    <li data-filter=".vegetables">Vegetables</li>
+                                                                                                    <li data-filter=".fastfood">Fastfood</li>-->
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="row featured__filter">
-<!--                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
                                 <ul class="featured__item__pic__hover">
@@ -77,7 +81,7 @@
                                 <h5>$30.00</h5>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>

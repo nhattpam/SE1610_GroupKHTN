@@ -36,6 +36,28 @@ public class ViewAllProductPageController extends HttpServlet {
         List<CategoryDTO> l = dao2.getAllCategory();
 
         req.setAttribute("cList", l);
+        
+        
+        //phan trang
+        ProductDAOImpl dao3 = new ProductDAOImpl(DBUtils.getConnection());
+        int count = dao3.getTotalProduct();
+        int endPage = count / 3; //moi trang 12 sp
+        if(count % 3 != 0){
+            endPage++;
+        }
+
+        //day qua shop-product
+        req.setAttribute("endPage", endPage);
+        //get index 
+        String indexPage = req.getParameter("index");
+        if(indexPage == null){
+           indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
+        ProductDAOImpl dao4 = new ProductDAOImpl(DBUtils.getConnection());
+        List<ProductDTO> listPaging = dao4.pagingProduct(index);
+        req.setAttribute("listPaging", listPaging);
+        
 
         req.getRequestDispatcher("shop_all_product.jsp").forward(req, resp);
     }
