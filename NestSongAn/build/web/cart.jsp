@@ -4,6 +4,8 @@
 <%@page import="java.util.TreeMap"%>
 <%@page import="dtos.CartDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -179,10 +181,10 @@
         </style>
     </head>
     <body>
-<!--         Page Preloder 
-        <div id="preloder">
-            <div class="loader"></div>
-        </div>-->
+        <!--         Page Preloder 
+                <div id="preloder">
+                    <div class="loader"></div>
+                </div>-->
         <jsp:include page="header.jsp" />
 
         <%
@@ -256,8 +258,15 @@
                     </table>
 
                 </div>
-                        <div  class="container-fluid mb-5" style="color: white">
-                            <a class="btn btn-custom btn-lg btn-block" href="checkout" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+                <div  class="container-fluid mb-5" style="color: white">
+                    <c:if test="${not empty USER }">
+                        <a class="btn btn-custom btn-lg btn-block" href="checkout" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+
+                    </c:if>
+                    <c:if test="${not empty USERG }">
+                        <a class="btn btn-custom btn-lg btn-block" href="checkoutgg" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+
+                    </c:if>
                 </div>
             </div>
 

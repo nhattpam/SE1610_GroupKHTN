@@ -368,4 +368,62 @@ public class UserDAOImpl implements UserDAO {
         }
         return result;
     }
+    
+    //test lay id gooogle
+    @Override
+    public UsersDTO viewAccountByEmail(String email) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        UsersDTO result = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "Select user_id, full_name, user_name , password, email, phone from users where email = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String fullname = rs.getString("full_name");
+                    String username = rs.getString("user_name");
+                    String password = rs.getString("password");
+                    int userId = rs.getInt("user_id");
+                    String phone = rs.getString("phone");
+                    result = new UsersDTO(userId, fullname, username, password, email, phone);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+    
+    
+    //insert phone to google account
+    @Override
+    public void addPhoneToGoogleAccount(UsersDTO us) {
+
+
+        try {
+            String sql = "UPDATE users\n"
+                    + "SET phone = ?\n"
+                    + "WHERE user_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, us.getPhone());
+            ps.setInt(2, us.getUser_id());
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

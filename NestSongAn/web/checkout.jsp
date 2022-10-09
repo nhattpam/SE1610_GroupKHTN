@@ -228,7 +228,7 @@
                                         
                                         
                                         <form action="checkout" method="post">
-                                            <input type="text" value="${user.user_id}" name="id">
+                                            <input type="hidden" value="${user.user_id}" name="id">
                                             <div class="form-group" style="font-weight: bold;">
                                                 Họ và tên<input type="text" class="form-control" id="exampleInputPassword1" value="${user.full_name}" disabled="">
                                             </div> 
@@ -336,13 +336,13 @@
                                         <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;">Thông Tin Đặt Hàng</h4><br>
                                         
                                         
-                                        <form action="checkout" method="post">
-                                            <input type="text" value="${usergg.email}" name="email">
+                                        <form action="checkoutgg" method="post">
+                                            <input type="hidden" value="${usergg.user_id}" name="id">
                                             <div class="form-group" style="font-weight: bold;">
-                                                Họ và tên<input type="text" class="form-control" id="exampleInputPassword1" value="${usergg.name}" disabled="">
+                                                Họ và tên<input type="text" class="form-control" id="exampleInputPassword1" value="${usergg.full_name}" disabled="">
                                             </div> 
                                             <div class="form-group" style="font-weight: bold;">
-                                                Số điện thoại<input type="text" class="form-control" id="exampleInputPassword1" value="" disabled="">
+                                                Số điện thoại<input type="number" class="form-control" id="exampleInputPassword1" name="phone" value="${usergg.phone}">
                                             </div> 
                                             <div style="font-weight: bold;" class="form-group">
                                                 Địa chỉ giao hàng

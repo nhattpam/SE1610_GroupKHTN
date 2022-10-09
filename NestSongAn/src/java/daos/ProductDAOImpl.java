@@ -261,6 +261,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
     
     //phan trang
+    @Override
     //1. dem so luong sp trong db
     public int getTotalProduct(){
         String sql = "SELECT COUNT (*) from product";
@@ -276,6 +277,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
     
     //pagingProduct
+    @Override
     public List<ProductDTO> pagingProduct(int index){
         List<ProductDTO> list = new ArrayList();
         ProductDTO p = null;

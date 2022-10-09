@@ -6,9 +6,14 @@
 package mainf;
 
 import daos.ProductDAOImpl;
+import daos.UserDAOImpl;
 import dtos.CategoryDTO;
 import dtos.ProductDTO;
+import dtos.UsersDTO;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.DBUtils;
 
 /**
@@ -18,11 +23,13 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) {
-        ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
-
-        List<ProductDTO> list = dao.pagingProduct(5);
-        for (ProductDTO productDTO : list) {
-            System.out.println(productDTO);
-        }
+        UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
+        
+        UsersDTO u = new UsersDTO();
+        u.setUser_id(7);
+        u.setPhone("234");
+        dao.addPhoneToGoogleAccount(u);
+        
+        System.out.println(u.getUser_id() + ", " + u.getPhone());
     }
 }

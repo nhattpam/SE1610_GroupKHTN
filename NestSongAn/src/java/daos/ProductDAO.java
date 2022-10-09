@@ -37,4 +37,10 @@ public interface ProductDAO {
     
     //khang tran: function search by character
     public List<ProductDTO> getProductBySearch(String character);
+    
+    //1. dem so luong sp trong db
+    public int getTotalProduct();
+    
+    //pagingProduct
+    public List<ProductDTO> pagingProduct(int index);
 }

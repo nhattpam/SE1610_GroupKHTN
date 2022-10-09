@@ -189,24 +189,17 @@
                             <ul>
                                 <li><a href="#"><i class="fa fa-heart"></i> </a></li>
                                     <%
-                                        if (u == null) {%>
+                                        if (u == null && us == null) {%>
                                 <li><a href="loginController"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%} else {%>
+                                    <%} else if(u != null){%>
                                 <li><a href="my-cart?uid=<%=u.getUser_id()%>"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%}
+                                    <%} else if(us != null){%>
+                                <li><a href="my-cart?uid=<%=us.getId() %>"><i class="fa fa-shopping-bag"></i> </a></li>
+    
+                                <%}
                                     %>
                             </ul>
-<!--                            <ul>
-                                <li><a href="#"><i class="fa fa-heart"></i> </a></li>
-                                    <%
-                                        if (us == null) {%>
-                                <li><a href="login.jsp"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%} else {%>
-                                <li><a href="my-cart?uid=<%=us.getId()%>"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%}
-                                    %>
-                            </ul>-->
-<!--                            <div class="header__cart__price">item: <span>410000</span></div>-->
+
                         </div>
                     </div>
                 </div>

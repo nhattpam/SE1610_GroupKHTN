@@ -39,6 +39,11 @@ public interface UserDAO {
     public boolean checkDuplicatePhone(String phone) throws SQLException;
     
     public boolean checkDuplicateUserName(String username) throws SQLException;
+    
+    //
+    public UsersDTO viewAccountByEmail(String email) throws SQLException;
 
+    //insert phone to google account
+    public void addPhoneToGoogleAccount(UsersDTO us);
 
 }
