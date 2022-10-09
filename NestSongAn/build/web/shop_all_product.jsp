@@ -48,9 +48,9 @@
     </head>
     <body>
         <!-- Page Preloder -->
-        <div id="preloder">
+<!--        <div id="preloder">
             <div class="loader"></div>
-        </div>
+        </div>-->
         <jsp:include page="header.jsp" />
         <!-- Hero Section Begin -->
         <section class="hero hero-normal">
@@ -163,7 +163,7 @@
                 %>
 
                 <div class="row featured__filter">
-                    <c:forEach items="${listAllProduct}" var="l">
+                    <c:forEach items="${listPaging}" var="l">
                         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                             <div class="featured__item">
 
@@ -191,9 +191,14 @@
                             </div>
                         </div>
                     </c:forEach>
+                    
 
                 </div>
+                <c:forEach begin="1" end="${endPage}" var="i">
+                        <a href="shop-products?index=${i}" >${i}</a>
+                    </c:forEach>
             </div>
+                
         </section>
         <!-- Featured Section End -->
         <jsp:include page="footer.jsp" />

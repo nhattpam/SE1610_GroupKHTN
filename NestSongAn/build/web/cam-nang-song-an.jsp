@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title from-blog__title">
-                            <h2>Cẩm Nang Yến Sào</h2>
+                            <h2 style="color: #6a0e13; font-family: Tahoma, Verdana, Segoe, sans-serif;">Cẩm Nang Yến Sào</h2>
                         </div>
                     </div>
                 </div>

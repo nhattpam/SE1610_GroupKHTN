@@ -51,15 +51,10 @@
                 </div>
             </div>
         </section>
+        <jsp:include page="horizontal_category.jsp" />
         <jsp:include page="feature_product.jsp" />
+        <jsp:include page="banner_2.jsp" />
         
-<!--        <section class="latest-product spad">
-            <div class="container">
-                <div class="row">
-                    
-                </div>
-            </div>
-        </section>-->
         <jsp:include page="cam-nang-song-an.jsp" />
 
 
