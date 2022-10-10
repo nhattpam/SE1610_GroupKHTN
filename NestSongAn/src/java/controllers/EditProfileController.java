@@ -43,51 +43,54 @@ public class EditProfileController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        int uid = Integer.parseInt(request.getParameter("uid"));
+        String fullname = request.getParameter("fullname");
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
         try {
-            response.setContentType("text/html;charset=UTF-8");
-            int uid = Integer.parseInt(request.getParameter("uid"));
-            String fullname = request.getParameter("fullname");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
+            HttpSession session = request.getSession();
+            HttpSession sessionValidate = request.getSession();
             Pattern fullNameCheck = Pattern.compile("^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]+$");
             boolean check = true;
             if (fullname == null || "".equals(fullname.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
+                sessionValidate.setAttribute("wrongFullName", "Họ và tên không được trống và không chứa kí tự đặc biệt");
                 check = false;
             }
             if (!fullname.matches(fullNameCheck.pattern())) {
+                sessionValidate.setAttribute("wrongFullName", "Họ và tên không được trống và không chứa kí tự đặc biệt");
                 check = false;
             }
             Pattern userNameCheck = Pattern.compile("^[A-Za-z0-9]+$");
             if (username == null || "".equals(username.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
+                sessionValidate.setAttribute("wrongUser_name", "Tên đăng nhập không được trống và không chứa kí tự đặc biệt");
                 check = false;
             }
             if (!username.matches(userNameCheck.pattern())) {
+                sessionValidate.setAttribute("wrongUser_name", "Tên đăng nhập không được trống và không chứa kí tự đặc biệt và dấu cách");
                 check = false;
             }
             Pattern phoneCheck = Pattern.compile("^[0][0-9]{9}$");
             if (!phone.matches(phoneCheck.pattern())) { // dấu ! là phủ định có nghĩa là k đúng định dạng
+                sessionValidate.setAttribute("wrongPhone", "Số điện thoại phải bắt đầu là số 0 và dài 10 kí tự");
                 check = false;
             }
-            if (password == null || "".equals(password.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
-                check = false;
-            }
+            
             if (check) {
-                String checkPassword = toHexString(getSHA(password));
+//                String checkPassword = toHexString(getSHA(password));
+                
                 UserDAOImpl user = new UserDAOImpl();
-                UsersDTO us = new UsersDTO(uid, fullname, username, checkPassword, email, phone);
+                UsersDTO us = new UsersDTO(uid, fullname, username, email, phone);
                 user.editAccount(us);
+                session.setAttribute("succMsg", "Cập nhập tài khoản thành công...");
             }
-            response.sendRedirect("MyProfile?uid="+uid); 
+            response.sendRedirect("MyProfile?uid=" + uid);
 
         } catch (SQLException ex) {
             Logger.getLogger(MyProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -128,7 +131,7 @@ public class EditProfileController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-     //hàm mã hóa sha256
+    //hàm mã hóa sha256
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
         // Static getInstance method is called with hashing SHA
         MessageDigest md = MessageDigest.getInstance("SHA-256");

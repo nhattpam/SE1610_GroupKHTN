@@ -39,7 +39,20 @@
         <script src="js/mixitup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
-
+        <style>
+            *{
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+            }
+            .header__menu ul li:hover>a {
+                color: black;
+            }
+            .header__menu ul li .header__menu__dropdown li:hover>a {
+                color: black;
+            }
+            .header__menu ul li.active a {
+	color: black;
+}
+        </style>
     </head>
     <body>
         <!-- Humberger Begin -->
@@ -85,13 +98,6 @@
                     <li><a href="./contact.html">Contact</a></li>
                 </ul>
             </nav>
-            <div id="mobile-menu-wrap"></div>
-            <div class="header__top__right__social">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-            </div>
             <div class="humberger__menu__contact">
                 <ul>
                     <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
@@ -107,24 +113,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
-                            <div class="header__top__left">
-                                <ul>
-                                    <li style="color: white;"><i class="fa fa-envelope" style="color: white;"></i> khtnholdings.work@gmail.com</li>
-                                    <li style="color: white;">Giao Hàng Tận Nơi</li>
-                                </ul>
-                            </div>
+                            
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="header__top__right">
                                 <div class="header__top__right__social" >
-                                    <a href="#"><i class="fa fa-facebook" style="color: white;"></i></a>
-                                    <a href="#"><i class="fa fa-twitter" style="color: white;"></i></a>
-                                    <a href="#"><i class="fa fa-linkedin" style="color: white;"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest-p" style="color: white;"></i></a>
                                 </div>
-                                <div class="header__top__right__language">
-                                    <img src="img/language.png" alt="">
-                                    <div style="color: white;">English</div>
+                                <div class="header__top__right__language">                                   
                                 </div>
                                 <!--login-->
                                 <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
@@ -133,8 +128,9 @@
                                         <a href="" style="color: white;"><i class="fa fa-user"></i> <%=u.getFull_name()%></a>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
-                                            <li><a href="MyProfile?uid=<%=u.getUser_id()%>" style="color: white;">My Profile</a></li>
-                                            <li><a href="#" style="color: white;">English</a></li>
+                                            <li><a href="MyProfile?uid=<%=u.getUser_id()%>" style="color: white;">Tài khoản</a></li>
+                                            <c:url var="logout" value="logoutController"/>
+                                            <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
                                     </div>
                                 </c:if>
@@ -144,14 +140,15 @@
                                         <a href="" style="color: white;"><i class="fa fa-user"></i> <%=us.getName()%></a>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
-                                            <li><a href="MyProfileGoogle?email=<%=us.getEmail()%>" style="color: white;">My Profile</a></li>
-                                            <li><a href="#" style="color: white;">English</a></li>
+                                            <li><a href="MyProfile?uid=<%=us.getId()%>" style="color: white;">Tài Khoản</a></li>
+                                            <c:url var="logout" value="logoutController"/>
+                                            <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
                                     </div>
                                 </c:if>
                                 <c:if test="${empty USER && empty USERG}">
                                     <div class="header__top__right__auth">
-                                        <a href="loginPage" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
+                                        <a href="loginController" style="color: white;"><i class="fa fa-user"></i> Đăng nhập</a>
                                     </div>
                                 </c:if>
 
@@ -171,7 +168,7 @@
                         <nav class="header__menu">
                             <ul>
                                 <li class="active"><a href="home" style="color: #6a0e13;">Trang Chủ</a></li>
-                                <li><a href="shop-products">Shop</a></li>
+                                <li><a href="shop-products">Sản Phẩm</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="header__menu__dropdown">
                                         <li><a href="./shop-details.html">Shop Details</a></li>
@@ -181,7 +178,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="./blog.html">Blog</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
+                                <!--<li><a href="./contact.html">Contact</a></li>-->
                             </ul>
                         </nav>
                     </div>
@@ -192,24 +189,17 @@
                             <ul>
                                 <li><a href="#"><i class="fa fa-heart"></i> </a></li>
                                     <%
-                                        if (u == null) {%>
-                                <li><a href="login.jsp"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%} else {%>
+                                        if (u == null && us == null) {%>
+                                <li><a href="loginController"><i class="fa fa-shopping-bag"></i> </a></li>
+                                    <%} else if(u != null){%>
                                 <li><a href="my-cart?uid=<%=u.getUser_id()%>"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%}
+                                    <%} else if(us != null){%>
+                                <li><a href="my-cart?uid=<%=us.getId() %>"><i class="fa fa-shopping-bag"></i> </a></li>
+    
+                                <%}
                                     %>
                             </ul>
-                            <ul>
-                                <li><a href="#"><i class="fa fa-heart"></i> </a></li>
-                                    <%
-                                        if (us == null) {%>
-                                <li><a href="login.jsp"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%} else {%>
-                                <li><a href="my-cart?uid=<%=us.getId()%>"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%}
-                                    %>
-                            </ul>
-                            <div class="header__cart__price">item: <span>410000</span></div>
+
                         </div>
                     </div>
                 </div>

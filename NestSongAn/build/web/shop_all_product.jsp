@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="dtos.GoogleDTO"%>
 <%@page import="dtos.UsersDTO"%>
 <%@page import="dtos.ProductDTO"%>
 <%@page import="dtos.CartDTO"%>
@@ -47,9 +48,9 @@
     </head>
     <body>
         <!-- Page Preloder -->
-        <div id="preloder">
+<!--        <div id="preloder">
             <div class="loader"></div>
-        </div>
+        </div>-->
         <jsp:include page="header.jsp" />
         <!-- Hero Section Begin -->
         <section class="hero hero-normal">
@@ -62,29 +63,22 @@
                                 <span>Danh Mục</span>
                             </div>
                             <ul>
-                                <li><a href="#">Fresh Meat</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit & Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter & Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya & Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
-                                <li><a href="#">Fresh Bananas</a></li>
+                                <c:forEach items="${cList}" var="l">
+                                    <li><a href="#">${l.name}</a></li>
+                                </c:forEach>
+                                
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="hero__search">
                             <div class="hero__search__form">
-                                <form action="#">
+                                <form action="search-result">
                                     <div class="hero__search__categories">
-                                        Danh Mục
-                                        <span class="arrow_carrot-down"></span>
+                                        Yến Song Ân
+                                        <!--<span class="arrow_carrot-down"></span>-->
                                     </div>
-                                    <input type="text" placeholder="What do yo u need?">
+                                    <input type="text" placeholder="Bạn tìm gì?" name="character">
                                     <button type="submit" class="site-btn">TÌM KIẾM</button>
                                 </form>
                             </div>
@@ -152,9 +146,10 @@
                         </div>
                     </div>
                 </div>
-
+                <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>
                 <%
                     UsersDTO u = (UsersDTO) session.getAttribute("USER");
+                    
                     //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
                     //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
                     NumberFormat nf = NumberFormat.getInstance();
@@ -168,7 +163,7 @@
                 %>
 
                 <div class="row featured__filter">
-                    <c:forEach items="${listAllProduct}" var="l">
+                    <c:forEach items="${listPaging}" var="l">
                         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                             <div class="featured__item">
 
@@ -176,14 +171,17 @@
                                     <ul class="featured__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                      <!--  
                                         <%
-                                            if (u == null){%>
-                                                <li><a href="login.jsp"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%} else {%>
+                                          //  if (u == null && us == null){%>
+                                                <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <%} //else if(u != null){%>
                                                 <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%}
+                                            <%} //else if(us != null){%>
+                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <%//}
                                         %>
-                                        
+                                        -->
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
@@ -194,9 +192,14 @@
                             </div>
                         </div>
                     </c:forEach>
+                    
 
                 </div>
+                <c:forEach begin="1" end="${endPage}" var="i">
+                        <a href="shop-products?index=${i}" >${i}</a>
+                    </c:forEach>
             </div>
+                
         </section>
         <!-- Featured Section End -->
         <jsp:include page="footer.jsp" />

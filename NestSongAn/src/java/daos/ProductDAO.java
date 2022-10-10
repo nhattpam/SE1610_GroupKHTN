@@ -5,6 +5,7 @@
  */
 package daos;
 
+import dtos.CategoryDTO;
 import dtos.ProductDTO;
 import java.sql.SQLException;
 import java.util.List;
@@ -26,6 +27,21 @@ public interface ProductDAO {
     //nhattpam: get ma sp de add to cart
     public ProductDTO getProductId(int product_id);
     
-    //nhatpam: get tat ca san pham cho viec edit product
+    //nhatpam: function View all product (staff)
      public List<ProductDTO> getAllListProduct();
+     
+     //nhatpham: function edit product
+    public boolean editProduct(ProductDTO p);
+    
+    public List<CategoryDTO> getAllCategory();
+    
+    //khang tran: function search by character
+    public List<ProductDTO> getProductBySearch(String character);
+    //hapham: funtion get new product
+    public List<ProductDTO> getNewProduct() throws SQLException;
+    //1. dem so luong sp trong db
+    public int getTotalProduct();
+    
+    //pagingProduct
+    public List<ProductDTO> pagingProduct(int index);
 }

@@ -27,59 +27,180 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <style>
+            body {
+                color: #999;
+                background: #f5f5f5;
+                font-family: 'Roboto', sans-serif;
+            }
+            .form-control, .form-control:focus, .input-group-addon {
+                border-color: #e1e1e1;
+                border-radius: 0;
+            }
+            .signup-form {
+                width: 390px;
+                margin: 0 auto;
+                padding: 30px 0;
+            }
+            .signup-form h2 {
+                color: #636363;
+                margin: 0 0 15px;
+                text-align: center;
+            }
+            .signup-form .lead {
+                font-size: 14px;
+                margin-bottom: 30px;
+                text-align: center;
+            }
+            .signup-form form {		
+                border-radius: 2px;
+                margin-bottom: 15px;
+                background: url('img/signup.jpg') no-repeat center center fixed;
+                /*opacity: 0.8;*/
+                border: 1px solid #f3f3f3;
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+                padding: 30px;
+            }
+            .signup-form .form-group {
+                margin-bottom: 20px;
+            }
+            .signup-form label {
+                font-weight: normal;
+                font-size: 13px;
+            }
+            .signup-form .form-control {
+                min-height: 38px;
+                box-shadow: none !important;
+                border-width: 0 0 1px 0;
+            }	
+            .signup-form .input-group-addon {
+                max-width: 42px;
+                text-align: center;
+                background: none;
+                border-bottom: 1px solid #e1e1e1;
+                padding-left: 5px;
+            }
+            .signup-form .btn, .signup-form .btn:active {        
+                font-size: 16px;
+                font-weight: bold;
+                background: #6a0e13 !important;
+                border-radius: 3px;
+                border: none;
+                min-width: 140px;
+            }
+            .signup-form .btn:hover, .signup-form .btn:focus {
+                background: #6a0e13 !important;
+            }
+            .signup-form a {
+                color: #19aa8d;
+                text-decoration: none;
+            }	
+            .signup-form a:hover {
+                text-decoration: underline;
+            }
+            .signup-form .fa {
+                font-size: 21px;
+                position: relative;
+                top: 8px;
+            }
+            .signup-form .fa-paper-plane {
+                font-size: 17px;
+            }
+            .signup-form .fa-check {
+                color: #fff;
+                left: 9px;
+                top: 18px;
+                font-size: 7px;
+                position: absolute;
+            }
+            body{
+                background:url('img/signup.jpg') no-repeat center center fixed;
+                -webkit-background-size:cover;
+                -moz-background-size:cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="header.jsp" />
-
-
-
-        <div class="container mb-3">
+        <div class="signup-form">	
             <form action="RegisterController" method="post">
-                <h4>Đăng Ký tài khoản</h4>
-                <c:if test="${ not empty requestScope.succMsg }">
-                    <h5 class="text-center text-success">${requestScope.succMsg}</h5>
+                <c:if test="${ not empty succMsg }">
+                    <h5 class="text-center text-success">${succMsg}</h5>
+                    <c:remove var="succMsg" scope="session"/>
                 </c:if>
 
-                    <c:if test="${ not empty requestScope.failedMsg }">
-                        <h5 class="text-center text-danger">${requestScope.failedMsg}</h5>
+                <c:if test="${ not empty failedMsg }">
+                    <h5 class="text-center text-danger">${failedMsg}</h5>
+                    <c:remove var="failedMsg" scope="session"/>
                 </c:if>
-
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Họ và tên</label>
-                    <c:if test="${ not empty requestScope.wrongFullName }">
-                        <p class="text-danger">${requestScope.wrongFullName}</p>                        
-                    </c:if>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="full_name">
+                <h2 style="font-weight: bold; color:#6a0e13;">Đăng Ký</h2>
+                <p class="lead">Những sản phẩm tuyệt vời đang đợi bạn.</p>
+                
+                    
+                <c:if test="${ not empty wrongFullName }">
+                    <p class="text-danger">${wrongFullName}</p>   
+                    <c:remove var="wrongFullName" scope="session"/>
+                </c:if>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" name="full_name" placeholder="Họ và tên" required="required">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Tên đăng nhập</label>
-                    <c:if test="${ not empty requestScope.wrongUser_name }">
-                        <p class="text-danger">${requestScope.wrongUser_name}</p>                        
-                    </c:if>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="user_name">
+                    
+                    <c:if test="${ not empty wrongUser_name }">
+                        <p class="text-danger">${wrongUser_name}</p>     
+                        <c:remove var="wrongUser_name" scope="session"/>
+                    </c:if>    
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
+                        <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập" required="required">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Số điện thoại</label>
-                    <c:if test="${ not empty requestScope.wrongPhone }">
-                        <p class="text-danger">${requestScope.wrongPhone}</p>                        
-                    </c:if>
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="phone">
+                        
+                <c:if test="${ not empty wrongPhone }">
+                        <p class="text-danger">${wrongPhone}</p>   
+                        <c:remove var="wrongPhone" scope="session"/>
+                </c:if>        
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                        <input type="number" class="form-control" name="phone" placeholder="Số điện thoại" required="required">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Địa chỉ email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" name="email">
+                
+                        
+                <c:if test="${ not empty wrongEmail }">
+                        <p class="text-danger">${wrongEmail}</p>  
+                        <c:remove var="wrongEmail" scope="session"/>
+                </c:if>        
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                        <input type="email" class="form-control" name="email" placeholder="Địa chỉ email" required="required">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                    <c:if test="${ not empty requestScope.wrongPassword }">
-                        <p class="text-danger">${requestScope.wrongPassword}</p>                      
-                    </c:if>
-                    <input type="password" class="form-control" id="exampleInputPassword1"  required="" name="password">
+                        
+                <c:if test="${ not empty wrongPassword }">
+                        <p class="text-danger">${wrongPassword}</p> 
+                        <c:remove var="wrongPassword" scope="session"/>
+                </c:if>        
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="text" class="form-control" name="password" placeholder="Mật khẩu" required="required">
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Đăng ký</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Đăng Ký</button>
+                </div>
             </form>
+            <div class="text-center">Đã có tài khoản? <a href="loginController" style="color: #6a0e13;">Đăng nhập</a>.</div>
         </div>
+
         <jsp:include page="footer.jsp" />
         <!-- Js Plugins -->
         <script src="js/jquery-3.3.1.min.js"></script>

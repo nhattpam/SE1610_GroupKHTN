@@ -6,8 +6,9 @@
 package controllers;
 
 import daos.ProductDAOImpl;
+import dtos.CategoryDTO;
+import java.util.List;
 import dtos.ProductDTO;
-import dtos.UsersDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +40,13 @@ public class ProductDetailController extends HttpServlet {
         ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
         ProductDTO p = dao.getProductId(product_id);
         request.setAttribute("detail", p);
+        
+         //hien thi category
+        ProductDAOImpl categoryDAO = new ProductDAOImpl(DBUtils.getConnection());
+        List<CategoryDTO> listCategory = categoryDAO.getAllCategory();
+        
+        request.setAttribute("CList", listCategory); //ban qua detail
+        
         request.getRequestDispatcher("product_details.jsp").forward(request, response);
     }
 

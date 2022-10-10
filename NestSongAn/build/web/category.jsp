@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,17 +38,9 @@
                     <span>Danh Mục</span>
                 </div>
                 <ul>
-                    <li><a href="#">Yến Dạng Lọ</a></li>
-                    <li><a href="#">Vegetables</a></li>
-                    <li><a href="#">Fruit & Nut Gifts</a></li>
-                    <li><a href="#">Fresh Berries</a></li>
-                    <li><a href="#">Ocean Foods</a></li>
-                    <li><a href="#">Butter & Eggs</a></li>
-                    <li><a href="#">Fastfood</a></li>
-                    <li><a href="#">Fresh Onion</a></li>
-                    <li><a href="#">Papayaya & Crisps</a></li>
-                    <li><a href="#">Oatmeal</a></li>
-                    <li><a href="#">Fresh Bananas</a></li>
+                    <c:forEach items="${cList}" var="l">
+                        <li><a href="#">${l.name}</a></li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>

@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title from-blog__title">
-                            <h2>Cẩm Nang Yến Sào</h2>
+                            <h2 style="color: #6a0e13; font-family: Tahoma, Verdana, Segoe, sans-serif;">Cẩm Nang Yến Sào</h2>
                         </div>
                     </div>
                 </div>
@@ -44,45 +44,45 @@
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="blog__item">
                             <div class="blog__item__pic">
-                                <img src="img/blog/blog-1.jpg" alt="">
+                                <img src="cnsa-images/bi-quyet-giu-duoc-duong-chat-cua-yen-sao-khi-che-bien/b1.jpg" alt="">
                             </div>
                             <div class="blog__item__text">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                                <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                                <h5><a href="bi-quyet-giu-duoc-duong-chat-cua-yen-sao-khi-che-bien">Bí quyết giữ được dưỡng chất của yến sào khi chế biến</a></h5>
+                                <p>Thành phần yến sào rất giàu dinh dưỡng tốt cho sức khỏe con người. Tuy nhiên, để có thể giữ được trọn vẹn dưỡng chất, bạn không thể bỏ qua cách chế biến yến sào “đúng chuẩn”. </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="blog__item">
                             <div class="blog__item__pic">
-                                <img src="img/blog/blog-2.jpg" alt="">
+                                <img src="cnsa-images/ban-da-biet-cach-chung-yen-khong-bi-tanh/b2.jpg" alt="">
                             </div>
                             <div class="blog__item__text">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                                <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                                <h5><a href="ban-da-biet-cach-chung-yen-khong-bi-tanh">Bạn đã biết cách chưng yến không bị tanh?</a></h5>
+                                <p>Tổ yến trước hoặc sau khi chưng đều có mùi tanh tự nhiên giống lòng trắng trứng gà, điều này khiến nhiều người e ngại khi sử dụng. Trong bài viết này, Yến sào Song Ân sẽ chia sẻ cùng bạn cách chưng yến không bị tanh cực kỳ đơn giản mà ai cũng có thể tự thực hiện tại nhà. </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="blog__item">
                             <div class="blog__item__pic">
-                                <img src="img/blog/blog-3.jpg" alt="">
+                                <img src="cnsa-images/cach-bao-quan-yen-tuoi/b3.jpeg" alt="">
                             </div>
                             <div class="blog__item__text">
                                 <ul>
                                     <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="#">Visit the clean farm in the US</a></h5>
-                                <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                                <h5><a href="cach-bao-quan-yen-tuoi">Cách Bảo Quản Yến Tươi Đúng Cách Mà Bạn Nên Biết</a></h5>
+                                <p>Bạn đang có ý định mua tổ yến tươi. Tuy nhiên bạn không biết cách bảo quản yến tươi ra sao? Bảo quản được lâu không? Hãy cùng Song Ân tham khảo bài viết dưới đây để tìm hiểu về cách bảo quản yến tươi đúng cách nhé. </p>
                             </div>
                         </div>
                     </div>

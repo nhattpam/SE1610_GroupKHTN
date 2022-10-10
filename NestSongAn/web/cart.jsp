@@ -4,6 +4,8 @@
 <%@page import="java.util.TreeMap"%>
 <%@page import="dtos.CartDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -171,10 +173,18 @@
             .cart_delete a:hover {
                 background:#FE980F
             }
+            #button{
+                background: #6a0e13;
+                color: white;
+            }
 
         </style>
     </head>
     <body>
+        <!--         Page Preloder 
+                <div id="preloder">
+                    <div class="loader"></div>
+                </div>-->
         <jsp:include page="header.jsp" />
 
         <%
@@ -192,7 +202,7 @@
             <div class="container">
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
-                        <li><a href="index.jsp">Trang Chủ</a></li>
+                        <li><a href="home">Trang Chủ</a></li>
                         <li class="active">Giỏ Hàng</li>
                     </ol>
                 </div>
@@ -223,7 +233,7 @@
                                     <p>Code: <%= ds.getKey().getCode()%></p>
                                 </td>
                                 <td class="cart_price">
-                                    <p><%= nf.format(ds.getKey().getPrice()) %> VNĐ</p>
+                                    <p><%= nf.format(ds.getKey().getPrice())%> VNĐ</p>
                                 </td>
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
@@ -233,7 +243,7 @@
                                     </div>
                                 </td>
                                 <td class="cart_total">
-                                    <p class="cart_total_price"><%= nf.format(ds.getValue() * ds.getKey().getPrice()) %> VNĐ</p>
+                                    <p class="cart_total_price"><%= nf.format(ds.getValue() * ds.getKey().getPrice())%> VNĐ</p>
                                 </td>
                                 <td class="cart_delete">
                                     <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"><i class="fa fa-times"></i></a>
@@ -244,21 +254,36 @@
                                 }
                             %>
                         </tbody>
+
                     </table>
-                    </section> <!--/#cart_items-->
+
+                </div>
+                <div  class="container-fluid mb-5" style="color: white">
+                    <c:if test="${not empty USER }">
+                        <a class="btn btn-custom btn-lg btn-block" href="checkout" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+
+                    </c:if>
+                    <c:if test="${not empty USERG }">
+                        <a class="btn btn-custom btn-lg btn-block" href="checkoutgg" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+
+                    </c:if>
                 </div>
             </div>
 
+        </section> <!--/#cart_items-->
+    </div>
+</div>
 
-            <jsp:include page="footer.jsp" />
-            <!-- Js Plugins -->
-            <script src="js/jquery-3.3.1.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.nice-select.min.js"></script>
-            <script src="js/jquery-ui.min.js"></script>
-            <script src="js/jquery.slicknav.js"></script>
-            <script src="js/mixitup.min.js"></script>
-            <script src="js/owl.carousel.min.js"></script>
-            <script src="js/main.js"></script>
-    </body>
+
+<jsp:include page="footer.jsp" />
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>

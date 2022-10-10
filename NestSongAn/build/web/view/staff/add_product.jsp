@@ -291,6 +291,8 @@
                                                 <option value="4">Yến Thô Còn Lông</option>
                                                 <option value="5">Chân Tổ Yến</option>
                                                 <option value="6">Nước Yến</option>
+                                                <option value="7">Tổ Yến Huyết</option>
+                                                <option value="8">Tổ Yến Hồng</option>
                                             </select>
                                         </div> 
 

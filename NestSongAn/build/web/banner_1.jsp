@@ -33,12 +33,12 @@
         <!--<div class="col-lg-9">-->
             <div class="hero__search">
                 <div class="hero__search__form">
-                    <form action="#">
+                    <form action="search-result">
                         <div class="hero__search__categories">
-                            Danh Mục
-                            <span class="arrow_carrot-down"></span>
+                            Yến Song Ân
+                            <!--<span class="arrow_carrot-down"></span>-->
                         </div>
-                        <input type="text" placeholder="Bạn tìm gì?">
+                        <input type="text" placeholder="Bạn tìm gì?" name="character">
                         <button type="submit" class="site-btn" style="background: #6a0e13;">TÌM KIẾM</button>
                     </form>
                 </div>

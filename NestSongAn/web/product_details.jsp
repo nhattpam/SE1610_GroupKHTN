@@ -4,9 +4,13 @@
     Author     : Admin
 --%>
 
+<%@page import="dtos.CartDTO"%>
+<%@page import="dtos.CartDTO"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="dtos.UsersDTO"%>
-<%@page import="dtos.ProductDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -16,7 +20,7 @@
         <meta name="keywords" content="Ogani, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Ogani | Template</title>
+        <title>Chi Tiết Sản Phẩm</title>
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -30,6 +34,15 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <style>
+            *{
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+            }
+            .featured__item__pic__hover li:hover a {
+                background: #6a0e13;
+                border-color: #6a0e13;
+            }
+        </style>
     </head>
 
     <body>
@@ -52,29 +65,21 @@
                                 <span>Danh Mục</span>
                             </div>
                             <ul>
-                                <li><a href="#">Fresh Meat</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit & Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter & Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya & Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
-                                <li><a href="#">Fresh Bananas</a></li>
+                                <c:forEach items="${CList}" var="l">
+                                    <li><a href="">${l.name}</a></li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="hero__search">
                             <div class="hero__search__form">
-                                <form action="#">
+                                <form action="search-result">
                                     <div class="hero__search__categories">
-                                        All Categories
-                                        <span class="arrow_carrot-down"></span>
+                                        Yến Song Ân
+                                        <!--<span class="arrow_carrot-down"></span>-->
                                     </div>
-                                    <input type="text" placeholder="Bạn tìm gì?">
+                                    <input type="text" placeholder="Bạn tìm gì?" name="character">
                                     <button type="submit" class="site-btn" style="background: #6a0e13;">TÌM KIẾM</button>
                                 </form>
                             </div>
@@ -100,11 +105,10 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="breadcrumb__text">
-                            <h2>Vegetable’s Package</h2>
+                            <h2>Sản Phẩm Chính Hãng</h2>
                             <div class="breadcrumb__option">
-                                <a href="./index.html">Home</a>
-                                <a href="./index.html">Vegetables</a>
-                                <span>Vegetable’s Package</span>
+                                <a href="home">Trang Chủ</a>
+                                <span>Chi Tiết Sản Phẩm</span>
                             </div>
                         </div>
                     </div>
@@ -112,7 +116,19 @@
             </div>
         </section>
         <!-- Breadcrumb Section End -->
+        <%
+                    UsersDTO u = (UsersDTO) session.getAttribute("USER");
+                    //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
+                    //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
+                    NumberFormat nf = NumberFormat.getInstance();
+                    nf.setMinimumIntegerDigits(0);
 
+                    CartDTO cart = (CartDTO) session.getAttribute("cart");
+                    if (cart == null) {
+                        cart = new CartDTO();
+                        session.setAttribute("cart", cart);
+                    }
+                %>
         <!-- Product Details Section Begin -->
         <section class="product-details spad">
             <div class="container">
@@ -121,7 +137,7 @@
                         <div class="product__details__pic">
                             <div class="product__details__pic__item">
                                 <img class="product__details__pic__item--large"
-                                     src="${detail.photo}" alt="">
+                                     src="products/${detail.photo}" alt="">
                             </div>
                             <div class="product__details__pic__slider owl-carousel">
                                 <img data-imgbigurl="img/product/details/product-details-2.jpg"
@@ -146,29 +162,29 @@
                                 <i class="fa fa-star-half-o"></i>
                                 <span>(18 reviews)</span>
                             </div>
-                            <div class="product__details__price">${detail.price}</div>
+                            <div class="product__details__price"><fmt:formatNumber type="number" groupingUsed="true" value="${detail.price}" /> VNĐ</div>
                             <p>${detail.short_description}</p>
-                            <div class="product__details__quantity">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            <%
+                                if (u == null) {%>
+                            <a href="loginController" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            <%} else {%>
+                            <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=<%= System.currentTimeMillis()%>" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            <%}
+                            %>
+                            
                             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                             <ul>
-                                <li><b>Availability</b> <span>In Stock</span></li>
-                                <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                                <li><b>Weight</b> <span>0.5 kg</span></li>
-                                <li><b>Share on</b>
+                                <li><b>Số lượng còn lại</b> <span>${detail.quantity}</span></li>
+                                <li><b>Vận chuyển</b> <span><samp>Miễn Phí Vận Chuyển Toàn Quốc</samp></span></li>
+                                <li><b>Trọng lượng</b> <span>${detail.weight} gam</span></li>
+<!--                                <li><b>Share on</b>
                                     <div class="share">
                                         <a href="#"><i class="fa fa-facebook"></i></a>
                                         <a href="#"><i class="fa fa-twitter"></i></a>
                                         <a href="#"><i class="fa fa-instagram"></i></a>
                                         <a href="#"><i class="fa fa-pinterest"></i></a>
                                     </div>
-                                </li>
+                                </li>-->
                             </ul>
                         </div>
                     </div>
@@ -177,32 +193,34 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                       aria-selected="true">Description</a>
+                                       aria-selected="true">Mô tả</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                       aria-selected="false">Information</a>
+                                       aria-selected="false">Thông tin bổ sung</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                       aria-selected="false">Comments <span>(1)</span></a>
+                                       aria-selected="false">Đánh giá <span>(1)</span></a>
                                 </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                     <div class="product__details__tab__desc">
-                                        <h6>Products Infomation</h6>
+                                        <h6>Giới thiệu về ${detail.name}</h6>
                                         <p>${detail.full_description}</p>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tabs-2" role="tabpanel">
                                     <div class="product__details__tab__desc">
-                                        <h6>Products Infomation</h6>
-                                        <p>${detail.full_description}</p>
+                                        <h6>Trọng lượng</h6>
+                                        <p>${detail.weight} gam</p>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tabs-3" role="tabpane3">
                                     <div class="product__details__tab__desc">
+                                        <h6>Products Infomation</h6>
+                                        <p>${detail.full_description}</p>
                                         <section style="background-color: #eee;">
                                             <div class="container py-5">
 
@@ -291,7 +309,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title related__product__title">
-                            <h2>Related Product</h2>
+                            <h2>Sản Phẩm Liên Quan</h2>
                         </div>
                     </div>
                 </div>
