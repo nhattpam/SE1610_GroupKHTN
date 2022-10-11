@@ -40,9 +40,9 @@
                                 <a href="./index.html"><img src="img/logo-song-an.jpg" style="width: 50%;" alt=""></a>
                             </div>
                             <ul >
-                                <li style="color: white;">Address: 60-49 Road Rach Gia Kien Giang</li>
-                                <li style="color: white;">Phone: +65 11.188.888</li>
-                                <li style="color: white;">Email: hello@colorlib.com</li>
+                                <li style="color: white;">Địa chỉ: 60-49 Rạch Giá Kiên Giang</li>
+                                <li style="color: white;">Sđt:  +65 11.188.888</li>
+                                <li style="color: white;">Email: khtnholdings.work.gmail</li>
                             </ul>
                         </div>
                     </div>
@@ -68,27 +68,16 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
-                        <div class="footer__widget">
-                            <h6 style="color: white;">Join Our Newsletter Now</h6>
-                            <p style="color: white;">Get E-mail updates about our latest shop and special offers.</p>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your mail" style="color: black;">
-                                <button type="submit" class="site-btn">Subscribe</button>
-                            </form>
-                            <div class="footer__widget__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                        </div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125724.66264495872!2d105.0312464060239!3d10.025464559052855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0b383f135522f%3A0xb503ed2c7808c8a!2zVHAuIFLhuqFjaCBHacOhLCBLacOqbiBHaWFuZywgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1665498206471!5m2!1svi!2s" 
+                                width="400" height="300" style="border:0;" allowfullscreen="" 
+                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="footer__copyright">
                             <div class="footer__copyright__text"><p style="color: white;"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bản quyền thuộc về KHTN <i class="fa fa-heart" aria-hidden="true"></i>
+                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bản quyền thuộc về Song Ân
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
                             <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
                         </div>
