@@ -118,7 +118,7 @@
                             <div class="card-header bg-white border-0">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h3 class="mb-0">Update new password</h3>
+                                        <h3 class="mb-0">Thay đổi mật khẩu</h3>
                                     </div>
                                 </div>
                             </div>
@@ -129,12 +129,16 @@
                                             <div class="col-md-12">
                                                 <div class="form-group focused">
                                                     <label class="form-control-label" for="input-address">Mật khẩu hiện tại</label>
-                                                    <input type="hidden" name="uid" value="${inform.user_id}" readonly="">
+                                                    <input type="hidden" name="uid" value="${inform.user_id}">
+                                                    <input type="hidden" name="uname" value="${inform.user_name}">
                                                     <input name="pass" class="form-control form-control-alternative" placeholder="Password" type="password">
                                                     <c:if test="${ not empty wrongPassword }">
                                                         <p class="text-danger" style="color: red;">${wrongPassword}</p> 
-                                                        <p class="text-danger" style="color: red;">${missPassword}</p> 
                                                         <c:remove var="wrongPassword" scope="session"/>
+                                                    </c:if> 
+                                                    <c:if test="${ not empty missPassword }">
+                                                        <p class="text-danger" style="color: red;">${missPassword}</p> 
+                                                        <c:remove var="missPassword" scope="session"/>
                                                     </c:if> 
                                                 </div>
                                             </div>
@@ -154,8 +158,12 @@
                                                     <input name="confpass" class="form-control form-control-alternative" placeholder="Password" type="password">
                                                     <c:if test="${ not empty wrongPassword }">
                                                         <p class="text-danger" style="color: red;">${wrongPassword}</p> 
-                                                        <p class="text-danger" style="color: red;">${Passworderror}</p> 
                                                         <c:remove var="wrongPassword" scope="session"/>
+                                                    </c:if> 
+                                                    <c:if test="${ not empty Passworderror }">
+                                                        <p class="text-danger" style="color: red;">${Passworderror}</p> 
+                                                        
+                                                        <c:remove var="Passworderror" scope="session"/>
                                                     </c:if> 
                                                 </div>
                                             </div>
@@ -165,6 +173,7 @@
                                     <hr class="my-4">
                                     <div class="col-12 text-center">
                                         <input type="submit" class="btn btn-sm btn-primary" value="Save">
+                                        <a href="MyProfile?uid=${inform.user_id}" class="btn btn-sm btn-primary" style="color: white;">Hủy</a>
                                     </div>
                                 </form>
                             </div>

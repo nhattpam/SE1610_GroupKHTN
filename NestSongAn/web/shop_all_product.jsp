@@ -171,17 +171,17 @@
                                     <ul class="featured__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                      <!--  
+                                      
                                         <%
-                                          //  if (u == null && us == null){%>
+                                           if (u == null && us == null){%>
                                                 <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%} //else if(u != null){%>
+                                            <%} else if(u != null){%>
                                                 <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%} //else if(us != null){%>
+                                            <%} else if(us != null){%>
                                                 <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <%//}
+                                                <%}
                                         %>
-                                        -->
+                                        
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">

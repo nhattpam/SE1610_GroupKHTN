@@ -63,19 +63,24 @@ public class EditPasswordController extends HttpServlet {
         HttpSession session = request.getSession();
         HttpSession sessionValidate = request.getSession();
         int uid = Integer.parseInt(request.getParameter("uid"));
+        String uname = request.getParameter("uname");
         boolean check = true;
         if (password == null || "".equals(password.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
+            sessionValidate.setAttribute("wrongPassword", "Mật khẩu không được trống");
             check = false;
         }
 
         if (newpassword == null || "".equals(newpassword.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
+            sessionValidate.setAttribute("wrongPassword", "Mật khẩu không được trống");
             check = false;
         }
 
         if (confpassword == null || "".equals(confpassword.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách\
+            sessionValidate.setAttribute("wrongPassword", "Mật khẩu không được trống");
             check = false;
         }
         if (!newpassword.equals(confpassword)) {
+            sessionValidate.setAttribute("Passworderror", "Mật khẩu không trùng khớp");
             check = false;
         }
         if (check) {
@@ -83,12 +88,14 @@ public class EditPasswordController extends HttpServlet {
                 String checkPassword = toHexString(getSHA(password));
                 String checkNewPassword = toHexString(getSHA(newpassword));
                 UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
-                boolean result = dao.checkPassword(checkPassword);
+                boolean result = dao.checkPassword(uname, checkPassword);
                 if (result) {
                     dao.editPassword(uid, checkNewPassword);
                     response.sendRedirect("MyProfile?uid=" + uid);
+                }else{
+                    sessionValidate.setAttribute("missPassword", "Mật khẩu không tồn tại");
+                    response.sendRedirect("EditPassword?uid=" + uid);
                 }
-                response.sendRedirect("EditPassword?uid=" + uid);
             } catch (Exception e) {
                 e.printStackTrace();
             } 

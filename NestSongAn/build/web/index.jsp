@@ -52,7 +52,7 @@
             </div>
         </section>
         <jsp:include page="horizontal_category.jsp" />
-        <jsp:include page="/feature_product" />
+        <jsp:include page="feature_product.jsp" />
         
         <jsp:include page="banner_2.jsp" />
         

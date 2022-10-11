@@ -315,7 +315,7 @@ public class ProductDAOImpl implements ProductDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "SELECT product_id, photo, name, price\n"
+                String sql = "SELECT TOP(8) product_id, photo, name, price\n"
                         + "FROM product\n"
                         + "ORDER BY product_id DESC";
                 stm = con.prepareStatement(sql);

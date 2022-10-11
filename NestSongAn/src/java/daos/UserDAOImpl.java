@@ -425,7 +425,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean checkPassword(String password) throws SQLException {
+    public boolean checkPassword(String username,String password) throws SQLException {
         boolean check = false;
         Connection con = null;
         PreparedStatement stm = null;
@@ -435,9 +435,10 @@ public class UserDAOImpl implements UserDAO {
             if (con != null) {
                 String sql = "SELECT user_id \n"
                         + "  FROM users\n"
-                        + "  WHERE password = ? ";
+                        + "  WHERE user_name = ? and password = ? ";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, password);
+                stm.setString(1, username);
+                stm.setString(2, password);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     check = true;

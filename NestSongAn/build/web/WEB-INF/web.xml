@@ -51,10 +51,6 @@
         <servlet-name>EditPasswordController</servlet-name>
         <servlet-class>controllers.EditPasswordController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ViewNewProductController</servlet-name>
-        <servlet-class>controllers.ViewNewProductController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>MyProfileController</servlet-name>
         <url-pattern>/MyProfile</url-pattern>
