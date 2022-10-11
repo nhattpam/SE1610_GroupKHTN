@@ -219,8 +219,8 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <%
+                                int totalSum=0;
                                 for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
                             %>
 
@@ -243,6 +243,7 @@
                                     </div>
                                 </td>
                                 <td class="cart_total">
+                                    <%totalSum+=ds.getValue() * ds.getKey().getPrice();%>
                                     <p class="cart_total_price"><%= nf.format(ds.getValue() * ds.getKey().getPrice())%> VNĐ</p>
                                 </td>
                                 <td class="cart_delete">
@@ -258,7 +259,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>Tiền tạm tính: </td>
-                                <td>52435435 VND</td>
+                                <td><%=nf.format(totalSum)%> VND</td>
                             </tr>
                         </tbody>
 
