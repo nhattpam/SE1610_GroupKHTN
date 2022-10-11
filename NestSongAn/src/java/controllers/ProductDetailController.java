@@ -47,6 +47,13 @@ public class ProductDetailController extends HttpServlet {
         
         request.setAttribute("CList", listCategory); //ban qua detail
         
+        
+        //lastest product
+        ProductDAOImpl daoLastest = new ProductDAOImpl(DBUtils.getConnection());
+        
+        List<ProductDTO> listLastest = daoLastest.getAllProductLastest();
+        request.setAttribute("listLastest", listLastest);
+        
         request.getRequestDispatcher("product_details.jsp").forward(request, response);
     }
 

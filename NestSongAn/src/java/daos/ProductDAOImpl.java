@@ -398,4 +398,33 @@ public class ProductDAOImpl implements ProductDAO {
         }
         return list;
     }
+    
+    
+    //display in product details
+//    @Override
+    public List<ProductDTO> getAllProductLastest() {
+
+        List<ProductDTO> list = new ArrayList<>();
+
+        try {
+            String sql = "select product_id, photo, name, price from product order by product_id desc";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            int i = 1;
+            while (rs.next() && i <= 4) {
+                ProductDTO p = new ProductDTO();
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setPhoto(rs.getString("photo"));
+                p.setName(rs.getString("name"));
+                p.setPrice(rs.getFloat("price"));
+                list.add(p);
+                i++;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+
+    }
 }

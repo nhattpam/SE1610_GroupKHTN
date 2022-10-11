@@ -45,6 +45,20 @@
         <script src="js/mixitup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <style>
+            .pagi{
+                color: #6a0e13;
+                font-weight: bold;
+                border: 1px solid #6a0e13;
+                padding: 15px 15px;
+                margin: 10px;
+            }
+            .pagi:hover{
+                color: white;
+                background: #6a0e13;
+            }
+        </style>
+        
     </head>
     <body>
         <!-- Page Preloder -->
@@ -197,8 +211,8 @@
 
                 </div>
                 <c:forEach begin="1" end="${endPage}" var="i">
-                        <a href="shop-products?index=${i}" >${i}</a>
-                    </c:forEach>
+                    <a href="shop-products?index=${i}" class="pagi">${i}</a>
+                </c:forEach>
             </div>
                 
         </section>

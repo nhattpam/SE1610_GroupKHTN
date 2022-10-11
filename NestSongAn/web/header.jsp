@@ -179,7 +179,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="header__logo">
-                            <a href="./index.jsp"><img src="img/logo-song-an.jpg" alt="" style="width: 30%;"></a>
+                            <a href="home"><img src="img/logo-song-an.jpg" alt="" style="width: 30%;"></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
