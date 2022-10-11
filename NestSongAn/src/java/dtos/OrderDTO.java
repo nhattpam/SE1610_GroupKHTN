@@ -35,7 +35,7 @@ public class OrderDTO {
     }
     
     
-
+    //order totalPrice
     public OrderDTO(String order_id, String delivery_address, String payment_method, String order_date, float total_price, int status, UsersDTO user_id) {
         this.order_id = order_id;
         this.delivery_address = delivery_address;

@@ -15,7 +15,30 @@
         <script type='text/javascript'
         src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
         <link rel="stylesheet" href="css/newPassword.css" type="text/css">
-
+        <style>
+                    body{
+                        background:url('img/login.jpg') no-repeat center center fixed;
+                        -webkit-background-size:cover;
+                        -moz-background-size:cover;
+                        -o-background-size: cover;
+                        background-size: cover;
+                    }
+                    .hello{
+                         background: url('img/login.jpg') no-repeat center center fixed;
+                    }
+                    .bg-custom{
+                        background: url('img/login.jpg') no-repeat center center fixed;
+                    }
+                    #button{
+                        background: #6a0e13;
+                        color: white;
+                        border: none;
+                    }
+                    #lo{
+                        border: #6a0e13;
+                    }
+            
+        </style>
     </head>
     <body oncontextmenu='return false' class='snippet-body bg-info'>
                 <jsp:include page="header.jsp" />
@@ -28,11 +51,11 @@
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6 mt-5">
                         <!-- White Container -->
-                        <div class="container bg-white rounded mt-2 mb-2 px-0">
+                        <div class="container bg-white rounded mt-2 mb-2 px-0 hello">
                             <!-- Main Heading -->
                             <div class="row justify-content-center align-items-center pt-3">
                                 <h1>
-                                    <strong>Reset Password</strong>
+                                    <h3 style="font-weight: bold;">Thay Mật Khẩu</h3>
                                 </h1>
                             </div>
                             <div class="pt-3 pb-3">
@@ -40,35 +63,35 @@
                                     <!-- User Name Input -->
                                     <div class="form-group row justify-content-center px-3">
                                         <div class="col-9 px-0">
-                                            <input type="password" name="password" placeholder="&#xf084; &nbsp; New Password"
-                                                   class="form-control border-info placeicon">
+                                            <input type="password" name="password" placeholder="&#xf084; &nbsp; Mật khẩu mới"
+                                                   class="form-control border-info placeicon" id="lo">
                                         </div>
                                     </div>
                                     <!-- Password Input -->
                                     <div class="form-group row justify-content-center px-3">
                                         <div class="col-9 px-0">
                                             <input type="password" name="confPassword"
-                                                   placeholder="&#xf084; &nbsp; Confirm New Password"
-                                                   class="form-control border-info placeicon">
+                                                   placeholder="&#xf084; &nbsp; Nhập lại mật khẩu"
+                                                   class="form-control border-info placeicon" id="lo">
                                         </div>
                                     </div>
                                     <!-- Log in Button -->
                                     <div class="form-group row justify-content-center">
                                         <div class="col-3 px-3 mt-3">
-                                            <input type="submit" value="Reset"
-                                                   class="btn btn-block btn-info">
+                                            <input type="submit" value="Đặt lại"
+                                                   class="btn btn-block btn-info" id="button">
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <!-- Alternative Login -->
-                            <div class="mx-0 px-0 bg-light">
+<!--                            <div class="mx-0 px-0 bg-custom">
 
-                                <!-- Horizontal Line -->
+                                 Horizontal Line 
                                 <div class="px-4 pt-5">
                                     <hr>
                                 </div>
-                                <!-- Register Now -->
+                                 Register Now 
                                 <div class="pt-2">
                                     <div class="row justify-content-center">
                                         <h5>
@@ -83,7 +106,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>

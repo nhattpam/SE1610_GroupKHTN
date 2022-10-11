@@ -220,7 +220,7 @@
                         </thead>
                         <tbody>
                             <%
-                                int totalSum=0;
+                                float totalSum=0;
                                 for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
                             %>
 
@@ -259,7 +259,7 @@
                                 <td></td>
                                 <td></td>
                                 <td style="font-weight: bold;">Tiền tạm tính: </td>
-                                <td style="color: green; font-size: x-large; font-weight: bold;"><%=nf.format(totalSum)%> VNĐ</td>
+                                <td style="color: green; font-size: large; font-weight: bold;"><%=nf.format(totalSum)%> VNĐ</td>
                             </tr>
                         </tbody>
 

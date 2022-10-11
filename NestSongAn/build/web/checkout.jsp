@@ -456,7 +456,7 @@
                                 <tbody>
 
                                     <%
-                                        int totalSum=0;
+                                        float totalSum=0;
                                         for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
                                     %>
 
@@ -489,6 +489,7 @@
 
                                     <%
                                         }
+                                        session.setAttribute("TotalPrice", totalSum);
                                     %>
                                     <tr>
                                         <td></td>

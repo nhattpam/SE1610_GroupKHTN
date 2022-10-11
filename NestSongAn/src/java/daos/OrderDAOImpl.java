@@ -24,7 +24,7 @@ public class OrderDAOImpl implements OrderDAO{
      //nhattpam: function checkout
     @Override
     public void addOrder(OrderDTO od) {
-        String sql = "INSERT INTO [order] (order_id,user_id,delivery_address,payment_method,order_date,status) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO [order] (order_id,user_id,delivery_address,payment_method,order_date,total_price,status) VALUES(?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, od.getOrder_id());
@@ -32,7 +32,8 @@ public class OrderDAOImpl implements OrderDAO{
             ps.setString(3, od.getDelivery_address());
             ps.setString(4, od.getPayment_method());
             ps.setString(5, od.getOrder_date());
-            ps.setInt(6, od.getStatus());
+            ps.setFloat(6, od.getTotal_price());
+            ps.setInt(7, od.getStatus());
             
             ps.executeUpdate();
         } catch (SQLException e) {

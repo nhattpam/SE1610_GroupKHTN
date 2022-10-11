@@ -126,8 +126,8 @@
         <!-- Humberger End -->
 
         <!-- Header Section Begin -->
-        <header class="header" id="nav-fixed">
-            <div class="header__top" style="background: #6a0e13;">
+        <header class="header">
+            <div class="header__top" style="background: #6a0e13;" id="nav-fixed">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
