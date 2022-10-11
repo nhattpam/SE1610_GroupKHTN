@@ -3,7 +3,15 @@
     Created on : Sep 17, 2022, 8:44:05 PM
     Author     : Admin
 --%>
-
+<%@page import="dtos.GoogleDTO"%>
+<%@page import="dtos.UsersDTO"%>
+<%@page import="dtos.ProductDTO"%>
+<%@page import="dtos.CartDTO"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="utils.DBUtils"%>
+<%@page import="daos.ProductDAOImpl"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -55,33 +63,33 @@
                                 }
                             </style>
                         </div>
-                        <div class="featured__controls">
+<!--                        <div class="featured__controls">
                             <ul>
                                 <li class="active" data-filter="*">All</li>
-                                <!--                                                                    <li data-filter=".oranges">Oranges</li>
+                                                                                                    <li data-filter=".oranges">Oranges</li>
                                                                                                     <li data-filter=".fresh-meat">Fresh Meat</li>
                                                                                                     <li data-filter=".vegetables">Vegetables</li>
-                                                                                                    <li data-filter=".fastfood">Fastfood</li>-->
+                                                                                                    <li data-filter=".fastfood">Fastfood</li>
                             </ul>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
+                
                 <div class="row featured__filter">
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                        <div class="featured__item">
-                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
-                                <ul class="featured__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="featured__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
+                    <c:forEach items="${listFeature}" var="l">
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                            <div class="featured__item">
+
+                                <div class="featured__item__pic set-bg" data-setbg="products/${l.photo}">
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="detail?product_id=${l.product_id}">${l.name}</a></h6>
+                                    <h5><fmt:formatNumber type="number" groupingUsed="true" value="${l.price}" /> VNĐ</h5>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

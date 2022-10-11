@@ -25,8 +25,11 @@ public class test {
     public static void main(String[] args) {
         UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
         
-        ProductDAOImpl dao1 = new ProductDAOImpl(DBUtils.getConnection());
-        int i = dao1.getTotalProductByCategory();
-        System.out.println(i);
+        UsersDTO u = new UsersDTO();
+        u.setUser_id(7);
+        u.setPhone("234");
+        dao.addPhoneToGoogleAccount(u);
+        
+        System.out.println(u.getUser_id() + ", " + u.getPhone());
     }
 }

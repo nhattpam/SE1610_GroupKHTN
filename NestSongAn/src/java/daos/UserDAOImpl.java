@@ -123,7 +123,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "Select full_name, user_name , password, email, phone\n"
+                String sql = "Select full_name, user_name , email, phone\n"
                         + "from users\n"
                         + "where user_id = ?";
                 stm = con.prepareStatement(sql);
@@ -132,10 +132,9 @@ public class UserDAOImpl implements UserDAO {
                 if (rs.next()) {
                     String fullname = rs.getString("full_name");
                     String username = rs.getString("user_name");
-                    String password = rs.getString("password");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
-                    result = new UsersDTO(userId, fullname, username, password, email, phone);
+                    result = new UsersDTO(userId, fullname, username, email, phone);
                 }
             }
         } finally {
@@ -163,17 +162,15 @@ public class UserDAOImpl implements UserDAO {
                 String sql = "UPDATE users\n"
                         + "SET full_name = ?,\n"
                         + "user_name = ?,\n"
-                        + "password = ?,\n"
                         + "email = ?,\n"
                         + "phone = ?\n"
                         + "WHERE user_id = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, us.getFull_name());
                 stm.setString(2, us.getUser_name());
-                stm.setString(3, us.getPassword());
-                stm.setString(4, us.getEmail());
-                stm.setString(5, us.getPhone());
-                stm.setInt(6, us.getUser_id());
+                stm.setString(3, us.getEmail());
+                stm.setString(4, us.getPhone());
+                stm.setInt(5, us.getUser_id());
                 stm.executeUpdate();
                 f = true;
             }
@@ -241,6 +238,7 @@ public class UserDAOImpl implements UserDAO {
         return check;
     }
 //Minh thanh
+
     @Override
     public boolean checkDuplicateEmail(String email) throws SQLException {
         boolean check = false;
@@ -254,7 +252,7 @@ public class UserDAOImpl implements UserDAO {
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
                 rs = stm.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     check = true;
                 }
             }
@@ -272,6 +270,7 @@ public class UserDAOImpl implements UserDAO {
         }
         return check;
     }
+
     @Override
     public boolean checkDuplicateUserName(String username) throws SQLException {
         boolean check = false;
@@ -285,7 +284,7 @@ public class UserDAOImpl implements UserDAO {
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
                 rs = stm.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     check = true;
                 }
             }
@@ -303,6 +302,7 @@ public class UserDAOImpl implements UserDAO {
         }
         return check;
     }
+
     @Override
     public boolean checkDuplicatePhone(String phone) throws SQLException {
         boolean check = false;
@@ -316,7 +316,7 @@ public class UserDAOImpl implements UserDAO {
                 stm = con.prepareStatement(sql);
                 stm.setString(1, phone);
                 rs = stm.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     check = true;
                 }
             }
@@ -334,7 +334,7 @@ public class UserDAOImpl implements UserDAO {
         }
         return check;
     }
-    
+     
     @Override
     public GoogleDTO viewAcc(String email) throws SQLException {
         Connection con = null;
@@ -368,7 +368,7 @@ public class UserDAOImpl implements UserDAO {
         }
         return result;
     }
-    
+
     //test lay id gooogle
     @Override
     public UsersDTO viewAccountByEmail(String email) throws SQLException {
@@ -405,12 +405,10 @@ public class UserDAOImpl implements UserDAO {
         }
         return result;
     }
-    
-    
+
     //insert phone to google account
     @Override
     public void addPhoneToGoogleAccount(UsersDTO us) {
-
 
         try {
             String sql = "UPDATE users\n"
@@ -421,9 +419,69 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(1, us.getPhone());
             ps.setInt(2, us.getUser_id());
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    @Override
+    public boolean checkPassword(String username,String password) throws SQLException {
+        boolean check = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT user_id \n"
+                        + "  FROM users\n"
+                        + "  WHERE user_name = ? and password = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, username);
+                stm.setString(2, password);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return check;
+    }
+
+    @Override
+    public void editPassword(int userId, String password) throws SQLException {
+        boolean f = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "  UPDATE users\n"
+                        + "  SET password = ?\n"
+                        + "  WHERE user_id= ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, password);
+                stm.setInt(2, userId);
+                stm.executeUpdate();
+                f = true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
     }
 }

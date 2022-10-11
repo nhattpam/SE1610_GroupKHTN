@@ -13,14 +13,6 @@
         <link rel="stylesheet" href="css/style1.css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-        <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-        <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-        <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-        <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-        <link rel="stylesheet" href="css/style.css" type="text/css">
         <style>
             body {
                 color: #999;
@@ -120,86 +112,72 @@
         <div class="main-content">
             <div class="container mt-7">
                 <!-- Table -->
-                <a href="home" class="mb-5">Trang chủ</a>
                 <div class="row">
                     <div class="col-xl-8 m-auto order-xl-1">
-                        <div class="card bg-secondary">
+                        <div class="card bg-secondary shadow">
                             <div class="card-header bg-white border-0">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h3 class="mb-0">Tài khoảng của tôi</h3>
+                                        <h3 class="mb-0">Thay đổi mật khẩu</h3>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body bg-light">
-                                <form action="EditProfile" method="POST">
-                                    <h6 class="heading-small text-muted mb-4">Thông tin người dùng</h6>
-                                    <c:if test="${ not empty succMsg }">
-                                        <h5 class="text-center text-success" style="color: green;">${succMsg}</h5>
-                                        <c:remove var="succMsg" scope="session"/>
-                                    </c:if>
-                                    <div class="pl-lg-4">
-                                        <div class="row">
-                                            <input type="hidden" name="uid" value="${inform.user_id}">
-                                            <div class="col-lg-6">
-                                                <div class="form-group focused">
-                                                    <label class="form-control-label">Tên đầy đủ</label>
-                                                    <input type="text" name="fullname" class="form-control form-control-alternative" placeholder="Full Name" value="${inform.full_name}">
-                                                    <c:if test="${ not empty wrongFullName }">
-                                                        <p class="text-danger" style="color: red;">${wrongFullName}</p>   
-                                                        <c:remove var="wrongFullName" scope="session"/>
-                                                    </c:if>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Tên người dùng</label>
-                                                    <input type="text" name="username" class="form-control form-control-alternative" placeholder="User Name" value="${inform.user_name}">
-                                                    <c:if test="${ not empty wrongUser_name }">
-                                                        <p class="text-danger" style="color: red;">${wrongUser_name}</p>     
-                                                        <c:remove var="wrongUser_name" scope="session"/>
-                                                    </c:if>  
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group focused">
-                                                    <label class="form-control-label">Số Điện Thoại</label>
-                                                    <input type="text" name="phone" class="form-control form-control-alternative" placeholder="Phone Number" value="${inform.phone}">
-                                                    <c:if test="${ not empty wrongPhone }">
-                                                        <p class="text-danger" style="color: red;">${wrongPhone}</p>   
-                                                        <c:remove var="wrongPhone" scope="session"/>
-                                                    </c:if>   
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group focused">
-                                                    <label class="form-control-label">Mật Khẩu</label><br>
-                                                    <a href="EditPassword?uid=${inform.user_id}" class="btn btn-lg btn-dark btn-block signin-btn">Thay đổi mật khẩu</a><br>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr class="my-4">
-                                    <!-- Address -->
-                                    <h6 class="heading-small text-muted mb-4">Email liên hệ</h6>
+                            <div class="card-body">
+                                <form action="EditPassword" method="POST">
                                     <div class="pl-lg-4">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group focused">
-                                                    <label class="form-control-label" for="input-address">Địa chỉ Email</label>
-                                                    <input name="email" class="form-control form-control-alternative" placeholder="Email Address" value="${inform.email}" type="email" readonly="">
+                                                    <label class="form-control-label" for="input-address">Mật khẩu hiện tại</label>
+                                                    <input type="hidden" name="uid" value="${inform.user_id}">
+                                                    <input type="hidden" name="uname" value="${inform.user_name}">
+                                                    <input name="pass" class="form-control form-control-alternative" placeholder="Password" type="password">
+                                                    <c:if test="${ not empty wrongPassword }">
+                                                        <p class="text-danger" style="color: red;">${wrongPassword}</p> 
+                                                        <c:remove var="wrongPassword" scope="session"/>
+                                                    </c:if> 
+                                                    <c:if test="${ not empty missPassword }">
+                                                        <p class="text-danger" style="color: red;">${missPassword}</p> 
+                                                        <c:remove var="missPassword" scope="session"/>
+                                                    </c:if> 
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group focused">
+                                                    <label class="form-control-label" for="input-address">Mật khẩu mới</label>
+                                                    <input name="newpass" class="form-control form-control-alternative" placeholder="Password" type="password">
+                                                    <c:if test="${ not empty wrongPassword }">
+                                                        <p class="text-danger" style="color: red;">${wrongPassword}</p> 
+                                                        <c:remove var="wrongPassword" scope="session"/>
+                                                    </c:if> 
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group focused">
+                                                    <label class="form-control-label" for="input-address">Nhập lại mật khẩu mới</label>
+                                                    <input name="confpass" class="form-control form-control-alternative" placeholder="Password" type="password">
+                                                    <c:if test="${ not empty wrongPassword }">
+                                                        <p class="text-danger" style="color: red;">${wrongPassword}</p> 
+                                                        <c:remove var="wrongPassword" scope="session"/>
+                                                    </c:if> 
+                                                    <c:if test="${ not empty Passworderror }">
+                                                        <p class="text-danger" style="color: red;">${Passworderror}</p> 
+                                                        
+                                                        <c:remove var="Passworderror" scope="session"/>
+                                                    </c:if> 
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group focused"><a href="forgotPassword" style="color: #6a0e13;">Quên mật khẩu?</a></div>
                                     </div>
                                     <hr class="my-4">
                                     <div class="col-12 text-center">
-                                        <input type="submit" class="btn btn-sm btn-dark btn-block signin-btn" value="Lưu thay đổi">
+                                        <input type="submit" class="btn btn-sm btn-primary" value="Save">
+                                        <a href="MyProfile?uid=${inform.user_id}" class="btn btn-sm btn-primary" style="color: white;">Hủy</a>
                                     </div>
                                 </form>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

@@ -27,6 +27,10 @@ public interface UserDAO {
     //hapham: function view account by google login
     public GoogleDTO viewAcc(String email) throws SQLException;
 
+    //check password
+    public boolean checkPassword(String username,String password) throws SQLException;
+    //update password
+    public void editPassword(int userId, String password) throws SQLException;
     //khangtran: function register account
     public boolean userRegister(UsersDTO us);
     

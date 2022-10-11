@@ -148,7 +148,7 @@ public class ProductDAOImpl implements ProductDAO {
         }
         return list;
     }
-    
+
     //nhatpham: function edit product
     @Override
     public boolean editProduct(ProductDTO p) {
@@ -178,7 +178,7 @@ public class ProductDAOImpl implements ProductDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return f;
+        return f;       
     }
 
     @Override
@@ -239,7 +239,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public void deleteProduct(int pid) throws SQLException {
-       Connection con = null;
+        Connection con = null;
         PreparedStatement stm = null;
         try {
             con = DBUtils.getConnection();
@@ -259,7 +259,7 @@ public class ProductDAOImpl implements ProductDAO {
             }
         }
     }
-    
+
     //phan trang
     @Override
     //1. dem so luong sp trong db
@@ -268,20 +268,17 @@ public class ProductDAOImpl implements ProductDAO {
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
         }
         return 0;
     }
-    
-    
-    
-    
+
     //pagingProduct
     @Override
-    public List<ProductDTO> pagingProduct(int index){
+    public List<ProductDTO> pagingProduct(int index) {
         List<ProductDTO> list = new ArrayList();
         ProductDTO p = null;
         String sql = "SELECT * FROM product \n"
@@ -362,5 +359,43 @@ public class ProductDAOImpl implements ProductDAO {
         } catch (Exception e) {
         }
         return 0;
+    }
+//HaPham
+
+    @Override
+    public List<ProductDTO> getNewProduct() throws SQLException {
+        List<ProductDTO> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT TOP(8) product_id, photo, name, price\n"
+                        + "FROM product\n"
+                        + "ORDER BY product_id DESC";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    ProductDTO p = new ProductDTO();
+                    p.setProduct_id(rs.getInt("product_id"));
+                    p.setPhoto(rs.getString("photo"));
+                    p.setName(rs.getString("name"));
+                    p.setPrice(rs.getFloat("price"));
+                    list.add(p);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }

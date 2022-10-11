@@ -37,7 +37,9 @@ public interface ProductDAO {
     
     //khang tran: function search by character
     public List<ProductDTO> getProductBySearch(String character);
-    
+    //hapham: funtion get new product
+    public List<ProductDTO> getNewProduct() throws SQLException;
+
     //1. dem so luong sp trong db
     public int getTotalProduct();
     
