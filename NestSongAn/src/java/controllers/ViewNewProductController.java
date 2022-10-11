@@ -8,10 +8,12 @@ package controllers;
 import daos.ProductDAOImpl;
 import dtos.ProductDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +25,8 @@ import utils.DBUtils;
  *
  * @author haph1
  */
-@WebServlet("/feature-products")
-public class ViewNewProductsController extends HttpServlet {
+@WebServlet("/feature_product")
+public class ViewNewProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +37,21 @@ public class ViewNewProductsController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
+            List<ProductDTO> list = dao.getNewProduct();
+            request.setAttribute("listFeature", list);
+//            request.getRequestDispatcher("feature_product.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/feature_product.jsp");
+            view.include(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewNewProductController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -49,14 +65,21 @@ public class ViewNewProductsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            ProductDAOImpl dao = new ProductDAOImpl(DBUtils.getConnection());
-            List<ProductDTO> listNewProduct = dao.getNewProduct();
-            request.setAttribute("listFeature", listNewProduct);
-            request.getRequestDispatcher("feature_product.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewNewProductsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
