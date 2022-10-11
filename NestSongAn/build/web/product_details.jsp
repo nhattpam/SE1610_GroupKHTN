@@ -66,7 +66,7 @@
                             </div>
                             <ul>
                                 <c:forEach items="${CList}" var="l">
-                                    <li><a href="">${l.name}</a></li>
+                                    <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
                                 </c:forEach>
                             </ul>
                         </div>
@@ -139,7 +139,7 @@
                                 <img class="product__details__pic__item--large"
                                      src="products/${detail.photo}" alt="">
                             </div>
-                            <div class="product__details__pic__slider owl-carousel">
+<!--                            <div class="product__details__pic__slider owl-carousel">
                                 <img data-imgbigurl="img/product/details/product-details-2.jpg"
                                      src="img/product/details/thumb-1.jpg" alt="">
                                 <img data-imgbigurl="img/product/details/product-details-3.jpg"
@@ -148,7 +148,7 @@
                                      src="img/product/details/thumb-3.jpg" alt="">
                                 <img data-imgbigurl="img/product/details/product-details-4.jpg"
                                      src="img/product/details/thumb-4.jpg" alt="">
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">

@@ -53,6 +53,24 @@
 	color: black;
 }
         </style>
+        <!--fixed navbar-->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+                window.addEventListener('scroll', function () {
+                    if (window.scrollY > 50) {
+                        document.getElementById('nav-fixed').classList.add('fixed-top');
+                        // add padding top to show content behind navbar
+                        navbar_height = document.querySelector('.navbar').offsetHeight;
+                        document.body.style.paddingTop = navbar_height + 'px';
+                    } else {
+                        document.getElementById('nav-fixed').classList.remove('fixed-top');
+                        // remove padding top from body
+                        document.body.style.paddingTop = '0';
+                    }
+                });
+            });
+        </script>
+        <!--fixed navbar-->
     </head>
     <body>
         <!-- Humberger Begin -->
@@ -108,7 +126,7 @@
         <!-- Humberger End -->
 
         <!-- Header Section Begin -->
-        <header class="header">
+        <header class="header" id="nav-fixed">
             <div class="header__top" style="background: #6a0e13;">
                 <div class="container">
                     <div class="row">

@@ -276,6 +276,9 @@ public class ProductDAOImpl implements ProductDAO {
         return 0;
     }
     
+    
+    
+    
     //pagingProduct
     @Override
     public List<ProductDTO> pagingProduct(int index){
@@ -307,5 +310,56 @@ public class ProductDAOImpl implements ProductDAO {
         }
         
         return list;
+    }
+    
+    //list Category paging
+//    @Override
+    public List<ProductDTO> pagingProductByCategory(int index, int categoryId){
+        List<ProductDTO> list = new ArrayList();
+        ProductDTO p = null;
+        String sql = "SELECT product_id, name, code,short_description, "
+                + "full_description, weight, price, photo, quantity, "
+                + "category_id FROM product WHERE category_id = ?\n"
+                + "Order by product_id\n"
+                + "OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+
+            ps.setInt(2, (index - 1) * 3);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                p = new ProductDTO();
+                CategoryDTO category_id = new CategoryDTO(rs.getInt("category_id"));
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setCategory_id(category_id);
+                p.setName(rs.getString("name"));
+                p.setCode(rs.getString("code"));
+                p.setShort_description(rs.getString("short_description"));
+                p.setFull_description(rs.getString("full_description"));
+                p.setWeight(rs.getInt("weight"));
+                p.setPhoto(rs.getString("photo"));
+                p.setQuantity(rs.getInt("quantity"));
+                p.setPrice(rs.getFloat("price"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+        }
+        
+        return list;
+    }
+    
+    //1. dem so luong sp trong db
+    public int getTotalProductByCategory1(){
+        String sql = "SELECT COUNT (*) from product where category_id = 1";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
     }
 }

@@ -22,7 +22,7 @@
         <meta name="keywords" content="Ogani, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Tất Cả Sản Phẩm</title>
+        <title>Yến Hũ</title>
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@
 <!--        <div id="preloder">
             <div class="loader"></div>
         </div>-->
-        <jsp:include page="header.jsp" />
+        <jsp:include page="../header.jsp" />
         <!-- Hero Section Begin -->
         <section class="hero hero-normal">
             <div class="container">
@@ -107,7 +107,7 @@
                             <h2>Sản Phẩm Của Nest Song Ân</h2>
                             <div class="breadcrumb__option">
                                 <a href="home">Trang chủ</a>
-                                <span>Shop</span>
+                                <span>Yến Hũ</span>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title">
-                            <h2>Tất Cả</h2>
+                            <h2>Yến Hũ</h2>
                             <style type="text/css">
                                 .section-title h2:after {
                                     position: absolute;
@@ -195,12 +195,12 @@
 
                 </div>
                 <c:forEach begin="1" end="${endPage}" var="i">
-                        <a href="shop-products?index=${i}" >${i}</a>
+                        <a href="yen-hu?index=${i}" >${i}</a>
                     </c:forEach>
             </div>
                 
         </section>
         <!-- Featured Section End -->
-        <jsp:include page="footer.jsp" />
+        <jsp:include page="../footer.jsp" />
     </body>
 </html>
