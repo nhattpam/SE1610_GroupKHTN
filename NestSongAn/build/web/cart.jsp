@@ -258,8 +258,8 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>Tiền tạm tính: </td>
-                                <td><%=nf.format(totalSum)%> VND</td>
+                                <td style="font-weight: bold;">Tiền tạm tính: </td>
+                                <td style="color: green; font-size: x-large; font-weight: bold;"><%=nf.format(totalSum)%> VNĐ</td>
                             </tr>
                         </tbody>
 

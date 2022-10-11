@@ -313,7 +313,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
     
     //list Category paging
-//    @Override
+    @Override
     public List<ProductDTO> pagingProductByCategory(int index, int categoryId){
         List<ProductDTO> list = new ArrayList();
         ProductDTO p = null;
@@ -350,6 +350,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
     
     //1. dem so luong sp trong db
+    @Override
     public int getTotalProductByCategory1(){
         String sql = "SELECT COUNT (*) from product where category_id = 1";
         try {
