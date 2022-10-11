@@ -253,6 +253,13 @@
                             <%
                                 }
                             %>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Tiền tạm tính: </td>
+                                <td>52435435 VND</td>
+                            </tr>
                         </tbody>
 
                     </table>
