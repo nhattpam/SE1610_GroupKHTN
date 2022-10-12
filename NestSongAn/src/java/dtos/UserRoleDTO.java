@@ -21,6 +21,12 @@ public class UserRoleDTO implements Serializable{
     public UserRoleDTO(int role_id) {
         this.role_id = role_id;
     }
+
+    public UserRoleDTO(String role) {
+        this.role = role;
+    }
+    
+    
     
 
     public UserRoleDTO(int role_id, String role) {

@@ -23,11 +23,15 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) {
-        ProductDAOImpl daoLastest = new ProductDAOImpl(DBUtils.getConnection());
+        UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
         
-        List<ProductDTO> listLastest = daoLastest.getAllProductLastest();
-        for (ProductDTO productDTO : listLastest) {
-            System.out.println(productDTO.getName());
+        
+        List<UsersDTO> list = dao.getAllListUser();
+        
+        
+        for (UsersDTO u : list) {
+            System.out.println(u.getUser_id() + u.getFull_name() + "," + u.getEmail() + ", " + u.getCreate_date() + ", " + u.getEdit_date() + 
+                    ",status:  " + u.getStatus() + ", roleid:  " + u.getRole_id().getRole_id());
         }
     }
 }
