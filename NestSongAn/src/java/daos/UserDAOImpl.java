@@ -12,9 +12,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 import javax.naming.NamingException;
 import utils.DBUtils;
@@ -334,7 +335,7 @@ public class UserDAOImpl implements UserDAO {
         }
         return check;
     }
-     
+
     @Override
     public GoogleDTO viewAcc(String email) throws SQLException {
         Connection con = null;
@@ -424,8 +425,9 @@ public class UserDAOImpl implements UserDAO {
             e.printStackTrace();
         }
     }
+
     @Override
-    public boolean checkPassword(String username,String password) throws SQLException {
+    public boolean checkPassword(String username, String password) throws SQLException {
         boolean check = false;
         Connection con = null;
         PreparedStatement stm = null;
@@ -483,5 +485,58 @@ public class UserDAOImpl implements UserDAO {
                 con.close();
             }
         }
+    }
+
+    //Minh Thanh
+    @Override
+
+    public List<UsersDTO> getUserList() {
+
+        List<UsersDTO> list = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            String sql = "select user_id, full_name, email, phone from users";
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new UsersDTO(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4)));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<UsersDTO> getStaffList() {
+        UsersDTO us = new UsersDTO();
+        List<UsersDTO> list = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            String sql = "SELECT user_id, full_name, user_name, email, phone, r.role_id\n"
+                    + " FROM users u, user_role r \n"
+                    + " WHERE u.role_id = 2\n"
+                    + " and u.role_id = r.role_id ";
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                
+            stm.setInt(1, us.getUser_id());
+            stm.setString(2, us.getFull_name());
+            stm.setString(3, us.getUser_name());
+            stm.setString(4, us.getEmail());
+            stm.setString(5, us.getPhone());
+            stm.setInt(6, us.getRole_id().getRole_id());
+            list.add(us);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
