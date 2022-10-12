@@ -57,5 +57,9 @@ public interface UserDAO {
     public List<UsersDTO> getUserList();
     
     public List<UsersDTO> getStaffList();
+    
+    //khang tran: function view list user in admin
+     public List<UsersDTO> getAllListUser();
+    
 
 }

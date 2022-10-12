@@ -5,7 +5,9 @@
  */
 package daos;
 
+import dtos.CategoryDTO;
 import dtos.GoogleDTO;
+import dtos.ProductDTO;
 import dtos.UserRoleDTO;
 import dtos.UsersDTO;
 import java.sql.Connection;
@@ -532,6 +534,38 @@ public class UserDAOImpl implements UserDAO {
             stm.setString(5, us.getPhone());
             stm.setInt(6, us.getRole_id().getRole_id());
             list.add(us);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    
+    //khang tran: function view list user in admin
+    @Override
+    public List<UsersDTO> getAllListUser() {
+        List<UsersDTO> list = new ArrayList<>();
+
+        try {
+            String sql = "SELECT u.user_id, u.full_name, u.email, u.create_date, u.edited_date,u.status, ur.role\n"
+                    + " FROM USERS u INNER JOIN user_role ur\n"
+                    + " ON u.role_id = ur.role_id\n"
+                    + " ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                UsersDTO u = new UsersDTO();
+                UserRoleDTO role = new UserRoleDTO(rs.getString("role"));
+                u.setUser_id(rs.getInt("user_id"));
+                u.setFull_name(rs.getString("full_name"));
+                u.setEmail(rs.getString("email"));
+                u.setCreate_date(rs.getString("create_date"));
+                u.setEdit_date(rs.getString("edited_date"));
+                u.setStatus(rs.getInt("status"));
+                u.setRole_id(role);
+                list.add(u);
             }
 
         } catch (Exception e) {
