@@ -573,4 +573,23 @@ public class UserDAOImpl implements UserDAO {
         }
         return list;
     }
+
+    //nhattpham: get phone by email gg
+    @Override
+    public UsersDTO getPhone(String email) {
+        UsersDTO u = new UsersDTO();
+
+        try {
+            String sql = "select phone from users where email like '" + email + "'";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                u.setPhone(rs.getString("phone"));
+            }
+        } catch (SQLException ex) {
+        }
+        return u;
+    }
 }

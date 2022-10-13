@@ -7,6 +7,8 @@ package controllers;
 
 import daos.OrderDAOImpl;
 import daos.OrderDetailsDAOImpl;
+import daos.UserDAOImpl;
+import dtos.GoogleDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import dtos.UsersDTO;
@@ -24,33 +26,32 @@ import utils.DBUtils;
  *
  * @author Admin
  */
-@WebServlet("/order-details")
-public class ViewHistoryOrderDetailController extends HttpServlet{
+@WebServlet("/order-details-gg")
+public class ViewHistoryOrderDetailGGController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-         String order_id = req.getParameter("order_id");
+        //get google
+         HttpSession s1 = req.getSession();
          
-//         System.out.println(order_id);
+         UsersDTO u = (UsersDTO) s1.getAttribute("usergg");
          
+//         System.out.println(u.getFull_name());
+         
+
+
+        
+        //get order details
+        String order_id = req.getParameter("order_id");
+        System.out.println(order_id);
+        
          OrderDetailsDAOImpl dao = new OrderDetailsDAOImpl(DBUtils.getConnection());
            
         
         List<OrderDetailsDTO> list = dao.getOrderDetails(order_id);
         
         req.setAttribute("listOrderDetail", list);
-        
-        HttpSession session = req.getSession();
-        UsersDTO u = (UsersDTO) session.getAttribute("USER");
-        
-        
-//        System.out.println(u);
-        
-        
-        //get order_id
-        req.setAttribute("order_id", order_id);
-        
         
         //get address
         OrderDAOImpl dao3 = new OrderDAOImpl(DBUtils.getConnection());
@@ -63,13 +64,7 @@ public class ViewHistoryOrderDetailController extends HttpServlet{
         
         req.setAttribute("address", address);
         
-        //get user and gg
-        HttpSession session2 = req.getSession();
-        UsersDTO u1 = (UsersDTO) session2.getAttribute("USER");
-        req.setAttribute("user", u1);
-        
-        
         req.getRequestDispatcher("view/customer/order_details.jsp").forward(req, resp);
     }
-    
+
 }

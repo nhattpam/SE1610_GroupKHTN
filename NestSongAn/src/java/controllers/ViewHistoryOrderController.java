@@ -7,6 +7,7 @@ package controllers;
 
 import daos.OrderDAOImpl;
 import dtos.OrderDTO;
+import dtos.UsersDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -36,6 +37,11 @@ public class ViewHistoryOrderController extends HttpServlet {
         List<OrderDTO> list = dao.getAllListOrder(user_id);
         req.setAttribute("listOrder", list);
 
+        
+        //get user and gg
+        HttpSession session = req.getSession();
+        UsersDTO u = (UsersDTO) session.getAttribute("USER");
+        req.setAttribute("user", u);
         
         req.getRequestDispatcher("view/customer/my_order.jsp").forward(req, resp);
     }
