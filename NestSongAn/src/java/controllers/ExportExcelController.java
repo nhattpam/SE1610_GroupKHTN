@@ -48,7 +48,7 @@ public class ExportExcelController extends HttpServlet {
         HSSFWorkbook wb = new HSSFWorkbook();
         UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
         try {
-            List<UsersDTO> list = dao.getStaffList();
+            List<UsersDTO> list = dao.getUserList();
             HSSFSheet sheet = wb.createSheet("new sheet");
             HSSFRow rowhead = sheet.createRow((short) 0);
             rowhead.createCell((short) 0).setCellValue("User ID");

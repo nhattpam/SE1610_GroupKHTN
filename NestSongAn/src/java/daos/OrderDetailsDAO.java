@@ -6,6 +6,7 @@
 package daos;
 
 import dtos.OrderDetailsDTO;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,7 @@ import dtos.OrderDetailsDTO;
 public interface OrderDetailsDAO {
     //nhattpam: function checkout
     public void addOrderDetails(OrderDetailsDTO ods);
+    
+    //nhatpam: function view detail order
+    public List<OrderDetailsDTO> getOrderDetails(String order_id);
 }
