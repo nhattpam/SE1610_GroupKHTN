@@ -39,9 +39,16 @@ public interface ProductDAO {
     public List<ProductDTO> getProductBySearch(String character);
     //hapham: funtion get new product
     public List<ProductDTO> getNewProduct() throws SQLException;
+
     //1. dem so luong sp trong db
     public int getTotalProduct();
     
     //pagingProduct
     public List<ProductDTO> pagingProduct(int index);
+    
+    //list paging by category
+    public List<ProductDTO> pagingProductByCategory(int index, int categoryId);
+    
+    //1. dem so luong sp trong db
+    public int getTotalProductByCategory1();
 }

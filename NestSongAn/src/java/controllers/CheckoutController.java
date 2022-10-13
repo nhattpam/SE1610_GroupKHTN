@@ -72,6 +72,10 @@ public class CheckoutController extends HttpServlet {
 //        System.out.println("User_id: " + getUser_id + ", " + "branch: " + branch_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
         System.out.println("User_id: " + getUser_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
 
+        HttpSession sessin = request.getSession();
+        float totalPrice = (float) sessin.getAttribute("TotalPrice");
+        System.out.println(totalPrice);
+        
         HttpSession session = request.getSession();
         CartDTO cart = (CartDTO) session.getAttribute("cart");
         
@@ -84,7 +88,7 @@ public class CheckoutController extends HttpServlet {
         try {
             Date date = new Date();
             String order_id = "" + date.getTime();
-            OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date, 1, user_id);
+            OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date,totalPrice, 1, user_id);
             
             //status = 1: order pending
             

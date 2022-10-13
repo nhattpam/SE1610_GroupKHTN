@@ -53,6 +53,24 @@
 	color: black;
 }
         </style>
+        <!--fixed navbar-->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+                window.addEventListener('scroll', function () {
+                    if (window.scrollY > 50) {
+                        document.getElementById('nav-fixed').classList.add('fixed-top');
+                        // add padding top to show content behind navbar
+                        navbar_height = document.querySelector('.navbar').offsetHeight;
+                        document.body.style.paddingTop = navbar_height + 'px';
+                    } else {
+                        document.getElementById('nav-fixed').classList.remove('fixed-top');
+                        // remove padding top from body
+                        document.body.style.paddingTop = '0';
+                    }
+                });
+            });
+        </script>
+        <!--fixed navbar-->
     </head>
     <body>
         <!-- Humberger Begin -->
@@ -109,7 +127,7 @@
 
         <!-- Header Section Begin -->
         <header class="header">
-            <div class="header__top" style="background: #6a0e13;">
+            <div class="header__top" style="background: #6a0e13;" id="nav-fixed">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
@@ -140,7 +158,7 @@
                                         <a href="" style="color: white;"><i class="fa fa-user"></i> <%=us.getName()%></a>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
-                                            <li><a href="MyProfile?uid=<%=us.getId()%>" style="color: white;">Tài Khoản</a></li>
+                                            <li><a href="MyProfileGoogle?ugmail=<%=us.getEmail()%>" style="color: white;">Tài Khoản</a></li>
                                             <c:url var="logout" value="logoutController"/>
                                             <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
@@ -161,7 +179,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="header__logo">
-                            <a href="./index.jsp"><img src="img/logo-song-an.jpg" alt="" style="width: 30%;"></a>
+                            <a href="home"><img src="img/logo-song-an.jpg" alt="" style="width: 30%;"></a>
                         </div>
                     </div>
                     <div class="col-lg-6">

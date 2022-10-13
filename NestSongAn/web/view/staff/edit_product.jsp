@@ -202,6 +202,14 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="list-orders" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Danh Sách Đặt Hàng
+                                    </p>
+                                </a>
+                            </li>
 
 
                         </ul>

@@ -30,6 +30,7 @@ public class UsersDTO implements Serializable{
         this.user_id = user_id;
     }
 
+
     public UsersDTO(int user_id, String full_name, String user_name, String email, String phone) {
         this.user_id = user_id;
         this.full_name = full_name;
@@ -37,8 +38,6 @@ public class UsersDTO implements Serializable{
         this.email = email;
         this.phone = phone;
     }
-
-    
     public UsersDTO(int user_id, String full_name, String user_name, String password, String email, String phone) {
         this.user_id = user_id;
         this.full_name = full_name;

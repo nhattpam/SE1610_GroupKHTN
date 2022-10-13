@@ -62,8 +62,8 @@ public class CartController extends HttpServlet {
                         cart.addToCart(p, 1);
                         listBuy.add(idBuy);
                     }
-                    url = "/cart.jsp";
-//                    url = "/shop-products";
+//                    url = "/cart.jsp";
+                    url = "/shop-products";
                     break;
                 case "plus":
                     if (listBuy == null) {

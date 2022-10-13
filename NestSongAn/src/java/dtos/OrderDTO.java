@@ -25,6 +25,18 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
+    public OrderDTO(String order_id, String order_date, int status, UsersDTO user_id) {
+        this.order_id = order_id;
+        this.order_date = order_date;
+        this.status = status;
+        this.user_id = user_id;
+    }
+
+    
+
+    
+    
+
     public OrderDTO(String order_id, String delivery_address, String payment_method, String order_date, int status, UsersDTO user_id) {
         this.order_id = order_id;
         this.delivery_address = delivery_address;
@@ -35,7 +47,7 @@ public class OrderDTO {
     }
     
     
-
+    //order totalPrice
     public OrderDTO(String order_id, String delivery_address, String payment_method, String order_date, float total_price, int status, UsersDTO user_id) {
         this.order_id = order_id;
         this.delivery_address = delivery_address;

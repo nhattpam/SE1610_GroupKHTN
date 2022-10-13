@@ -6,6 +6,9 @@
 package daos;
 
 import dtos.OrderDTO;
+import dtos.UsersDTO;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -15,4 +18,6 @@ public interface OrderDAO {
     
    //nhattpam: function checkout
     public void addOrder(OrderDTO od);
+    //hapham: function veiw user of order
+    public List<OrderDTO> viewUserOrder() throws SQLException;
 }

@@ -63,12 +63,12 @@ public class LoginGoogleController extends HttpServlet {
                         response.sendRedirect("home");
                     } else {
                         session.setAttribute("failedMsg", "Đăng ký tài khoản hong thành công...");
-                        response.sendRedirect("register.jsp");
+                        response.sendRedirect("RegisterAccountController");
                     }
                 }
 
             }
-            dis.forward(request, response);
+//            dis.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }

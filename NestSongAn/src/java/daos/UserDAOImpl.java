@@ -425,7 +425,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean checkPassword(String username,String password) throws SQLException {
+    public boolean checkPassword(String username, String password) throws SQLException {
         boolean check = false;
         Connection con = null;
         PreparedStatement stm = null;
@@ -484,4 +484,5 @@ public class UserDAOImpl implements UserDAO {
             }
         }
     }
+
 }

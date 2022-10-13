@@ -23,13 +23,11 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) {
-        UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
+        ProductDAOImpl daoLastest = new ProductDAOImpl(DBUtils.getConnection());
         
-        UsersDTO u = new UsersDTO();
-        u.setUser_id(7);
-        u.setPhone("234");
-        dao.addPhoneToGoogleAccount(u);
-        
-        System.out.println(u.getUser_id() + ", " + u.getPhone());
+        List<ProductDTO> listLastest = daoLastest.getAllProductLastest();
+        for (ProductDTO productDTO : listLastest) {
+            System.out.println(productDTO.getName());
+        }
     }
 }

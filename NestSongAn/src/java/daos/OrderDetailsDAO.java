@@ -6,6 +6,8 @@
 package daos;
 
 import dtos.OrderDetailsDTO;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -14,4 +16,6 @@ import dtos.OrderDetailsDTO;
 public interface OrderDetailsDAO {
     //nhattpam: function checkout
     public void addOrderDetails(OrderDetailsDTO ods);
+    //hapham: function view order detail
+    public List<OrderDetailsDTO> viewOrderDetails(String order_id) throws SQLException;
 }

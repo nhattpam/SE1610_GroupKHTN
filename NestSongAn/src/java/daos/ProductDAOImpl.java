@@ -116,6 +116,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     //nhatpam: function View all product (staff)
+
     @Override
     public List<ProductDTO> getAllListProduct() {
         List<ProductDTO> list = new ArrayList<>();
@@ -168,20 +169,21 @@ public class ProductDAOImpl implements ProductDAO {
             ps.setInt(10, p.getProduct_id());
 
             int i = ps.executeUpdate();
-
-            if (i == 1) {
+            
+            if(i == 1){
                 f = true;
             }
+            
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return f;
+        return f;       
     }
 
     @Override
     public List<CategoryDTO> getAllCategory() {
-        List<CategoryDTO> list = new ArrayList<>();
+         List<CategoryDTO> list = new ArrayList<>();
 
         try {
             String sql = "SELECT category_id,name from category";
@@ -200,6 +202,8 @@ public class ProductDAOImpl implements ProductDAO {
         return list;
     }
 
+    
+    
     //khang tran: function search by character
     @Override
     public List<ProductDTO> getProductBySearch(String character) {
@@ -209,9 +213,9 @@ public class ProductDAOImpl implements ProductDAO {
             String sql = "SELECT product_id, name, code, short_description, full_description, weight, price, photo, category_id, quantity FROM product WHERE name like ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + character + "%");
-
+            
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+            while(rs.next()){
                 p = new ProductDTO();
                 CategoryDTO category_id = new CategoryDTO(rs.getInt("category_id"));
                 p.setProduct_id(rs.getInt("product_id"));
@@ -231,7 +235,7 @@ public class ProductDAOImpl implements ProductDAO {
         }
         return list;
     }
-//HaPham
+    
 
     @Override
     public void deleteProduct(int pid) throws SQLException {
@@ -259,7 +263,7 @@ public class ProductDAOImpl implements ProductDAO {
     //phan trang
     @Override
     //1. dem so luong sp trong db
-    public int getTotalProduct() {
+    public int getTotalProduct(){
         String sql = "SELECT COUNT (*) from product";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -282,7 +286,44 @@ public class ProductDAOImpl implements ProductDAO {
                 + "OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, (index - 1) * 3);
+            ps.setInt(1, (index-1) * 3);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                p = new ProductDTO();
+                CategoryDTO category_id = new CategoryDTO(rs.getInt("category_id"));
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setCategory_id(category_id);
+                p.setName(rs.getString("name"));
+                p.setCode(rs.getString("code"));
+                p.setShort_description(rs.getString("short_description"));
+                p.setFull_description(rs.getString("full_description"));
+                p.setWeight(rs.getInt("weight"));
+                p.setPhoto(rs.getString("photo"));
+                p.setQuantity(rs.getInt("quantity"));
+                p.setPrice(rs.getFloat("price"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+        }
+        
+        return list;
+    }
+    
+    //list Category paging
+    @Override
+    public List<ProductDTO> pagingProductByCategory(int index, int categoryId){
+        List<ProductDTO> list = new ArrayList();
+        ProductDTO p = null;
+        String sql = "SELECT product_id, name, code,short_description, "
+                + "full_description, weight, price, photo, quantity, "
+                + "category_id FROM product WHERE category_id = ?\n"
+                + "Order by product_id\n"
+                + "OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+
+            ps.setInt(2, (index - 1) * 3);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 p = new ProductDTO();
@@ -301,8 +342,23 @@ public class ProductDAOImpl implements ProductDAO {
             }
         } catch (Exception e) {
         }
-
+        
         return list;
+    }
+    
+    //1. dem so luong sp trong db
+    @Override
+    public int getTotalProductByCategory1(){
+        String sql = "SELECT COUNT (*) from product where category_id = 1";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
     }
 //HaPham
 
@@ -341,5 +397,34 @@ public class ProductDAOImpl implements ProductDAO {
             }
         }
         return list;
+    }
+    
+    
+    //display in product details
+//    @Override
+    public List<ProductDTO> getAllProductLastest() {
+
+        List<ProductDTO> list = new ArrayList<>();
+
+        try {
+            String sql = "select product_id, photo, name, price from product order by product_id desc";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            int i = 1;
+            while (rs.next() && i <= 4) {
+                ProductDTO p = new ProductDTO();
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setPhoto(rs.getString("photo"));
+                p.setName(rs.getString("name"));
+                p.setPrice(rs.getFloat("price"));
+                list.add(p);
+                i++;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+
     }
 }

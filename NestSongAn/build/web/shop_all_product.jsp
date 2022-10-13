@@ -45,6 +45,20 @@
         <script src="js/mixitup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <style>
+            .pagi{
+                color: #6a0e13;
+                font-weight: bold;
+                border: 1px solid #6a0e13;
+                padding: 15px 15px;
+                margin: 10px;
+            }
+            .pagi:hover{
+                color: white;
+                background: #6a0e13;
+            }
+        </style>
+        
     </head>
     <body>
         <!-- Page Preloder -->
@@ -64,7 +78,7 @@
                             </div>
                             <ul>
                                 <c:forEach items="${cList}" var="l">
-                                    <li><a href="#">${l.name}</a></li>
+                                    <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
                                 </c:forEach>
                                 
                             </ul>
@@ -173,7 +187,8 @@
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                       
                                         <%
-                                           if (u == null && us == null){%>
+                                            if (u == null && us == null){%>
+
                                                 <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
                                             <%} else if(u != null){%>
                                                 <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
@@ -196,8 +211,8 @@
 
                 </div>
                 <c:forEach begin="1" end="${endPage}" var="i">
-                        <a href="shop-products?index=${i}" >${i}</a>
-                    </c:forEach>
+                    <a href="shop-products?index=${i}" class="pagi">${i}</a>
+                </c:forEach>
             </div>
                 
         </section>
