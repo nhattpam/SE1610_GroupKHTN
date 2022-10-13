@@ -1,10 +1,16 @@
+<%-- 
+    Document   : create_new_staff
+    Created on : Oct 13, 2022, 10:24:42 PM
+    Author     : HUNG
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Quản Trị Viên</title>
+        <title>Tạo nhân viên mới</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -204,93 +210,99 @@
                 </div>
                 <!-- /.sidebar -->
             </aside>
-
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <!--<h1>Widgets</h1>-->
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="admin-dashboard">Thống Kê</a></li>
-                                    <!--<li class="breadcrumb-item active">Quản Lý Người Dùng</li>-->
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                </section>
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <!--<h5 class="mb-2">Quản Lý Người Dùng</h5>-->
-                        <div class="row">
-
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
-                                    <div class="info-box-content">
-                                        <a href="manage-user">
-                                            <span class="info-box-text">Quản Lý Người Dùng</span>
-                                            <!--<span class="info-box-number">1,410</span>-->
-                                        </a>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Bookmarks</span>
-                                        <span class="info-box-number">410</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Uploads</span>
-                                        <span class="info-box-number">13,648</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Likes</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                </section>
-            </div>
         </div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row crd-ho">
+                    <div class="col-md-4 offset-md-4 mt-3 ">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 style="font-weight: bold; color:#6a0e13;" class="text-center">Tạo tài khoảng</h2>
 
+                                <form action="CreateStaffAccount" method="post">
+                                    <c:if test="${ not empty succMsg }">
+                                        <h5 class="text-center text-success">${succMsg}</h5>
+                                        <c:remove var="succMsg" scope="session"/>
+                                    </c:if>
+
+                                    <c:if test="${ not empty failedMsg }">
+                                        <h5 class="text-center text-danger">${failedMsg}</h5>
+                                        <c:remove var="failedMsg" scope="session"/>
+                                    </c:if>
+                                    <c:if test="${ not empty wrongFullName }">
+                                        <p class="text-danger">${wrongFullName}</p>   
+                                        <c:remove var="wrongFullName" scope="session"/>
+                                    </c:if>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <input type="text" class="form-control" name="full_name" placeholder="Họ và tên" required="required" value="${full_name}">
+                                        </div>
+                                    </div>
+
+                                    <c:if test="${ not empty wrongUser_name }">
+                                        <p class="text-danger">${wrongUser_name}</p>     
+                                        <c:remove var="wrongUser_name" scope="session"/>
+                                    </c:if>    
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
+                                            <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập" required="required" value="${user_name}">
+                                        </div>
+                                    </div>
+
+                                    <c:if test="${ not empty wrongPhone }">
+                                        <p class="text-danger">${wrongPhone}</p>   
+                                        <c:remove var="wrongPhone" scope="session"/>
+                                    </c:if>        
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                            <input type="number" class="form-control" name="phone" placeholder="Số điện thoại" required="required" value="${phone}">
+                                        </div>
+                                    </div>
+
+
+                                    <c:if test="${ not empty wrongEmail }">
+                                        <p class="text-danger">${wrongEmail}</p>  
+                                        <c:remove var="wrongEmail" scope="session"/>
+                                    </c:if>        
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                                            <input type="email" class="form-control" name="email" placeholder="Địa chỉ email" required="required" value="${email}">
+                                        </div>
+                                    </div>
+
+                                    <c:if test="${ not empty wrongPassword }">
+                                        <p class="text-danger">${wrongPassword}</p> 
+                                        <c:remove var="wrongPassword" scope="session"/>
+                                    </c:if>        
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                            <input type="text" class="form-control" name="password" placeholder="Mật khẩu" required="required">
+                                        </div>
+                                    </div>
+                                        <div class="form-group">
+                                            <label for="inputState">Chức vụ</label>
+                                            <select id="inputState" name="role_id" class="form-control" required="required">
+                                                <option selected>--chọn--</option>
+                                                <option value="2">Nhân viên</option>
+                                                <option value="4">Supplier</option>
+                                                <option value="5">Shipper</option>
+                                            </select>
+                                        </div> 
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block btn-lg">Đăng Ký</button>
+                                    </div>
+                                </form>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
