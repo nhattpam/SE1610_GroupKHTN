@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Map"%>
 <%@page import="dtos.ProductDTO"%>
@@ -222,6 +223,7 @@
                             <%
                                 float totalSum=0;
                                 for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
+                                    
                             %>
 
                             <tr>
@@ -250,10 +252,10 @@
                                     <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
-
                             <%
                                 }
                             %>
+
                             <tr>
                                 <td></td>
                                 <td></td>
@@ -268,11 +270,25 @@
                 </div>
                 <div  class="container-fluid mb-5" style="color: white">
                     <c:if test="${not empty USER }">
-                        <a class="btn btn-custom btn-lg btn-block" href="checkout" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+                        <%
+                        if (list.entrySet().isEmpty()) {
+                                System.out.print("empty");
+                            } else {%>
+                                <a class="btn btn-custom btn-lg btn-block" href="checkout" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+                            <%}
+                        %>
+                        
 
                     </c:if>
                     <c:if test="${not empty USERG }">
-                        <a class="btn btn-custom btn-lg btn-block" href="checkoutgg" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+                        <%
+                        if (list.entrySet().isEmpty()) {
+                                System.out.print("empty");
+                            } else {%>
+                                 <a class="btn btn-custom btn-lg btn-block" href="checkoutgg" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+                            <%}
+                        %>
+                       
 
                     </c:if>
                 </div>
