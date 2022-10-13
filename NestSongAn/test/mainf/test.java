@@ -27,11 +27,11 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) {
-        OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
+        UserDAOImpl dao6 = new UserDAOImpl(DBUtils.getConnection());
         
-        OrderDTO o = dao.getOrderAddress("1665478139121");
+        UsersDTO d = dao6.getPhone("khtnholdings.work@gmail.com");
         
-        System.out.println(o.getDelivery_address());
+        System.out.println(d.getPhone());
         
     }
 }

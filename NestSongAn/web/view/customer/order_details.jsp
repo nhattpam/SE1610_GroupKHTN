@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="dtos.GoogleDTO"%>
 <%@page import="dtos.UsersDTO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -42,41 +43,78 @@
     </head>
     <body>
         <jsp:include page="../../header.jsp" />
-        
-        <% UsersDTO u = (UsersDTO) session.getAttribute("USER"); %>
-        
-        <div class="container">
-            <h4 style="color: #6a0e13">Chi tiết đơn hàng #${order_id}</h4>
-            <p><span style="font-weight: bold">Cửa hàng: Song Ân</span></p>
-            <p><span style="font-weight: bold">Tên khách hàng:  <%= u.getFull_name() %></span></p>
-            <p><span style="font-weight: bold">Số điện thoại: <%= u.getPhone() %></span></p>
-            <p><span style="font-weight: bold">Địa chỉ: ${address}</span></p>
-            <table class="table table-striped">
-                <thead>
-                
-                <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">Sản phẩm</th>
-                    <th scope="col">ĐVT</th>
-                    <th scope="col">Số lượng</th>
-                    <th scope="col">Đơn giá</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${listOrderDetail}" var="l">
+        <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
+        <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG"); %>
+        <c:if test="${not empty user }">
+
+            <div class="container">
+                <h4 style="color: #6a0e13">Chi tiết đơn hàng #${order_id}</h4>
+                <p><span style="font-weight: bold">Cửa hàng: </span>Song Ân</p>
+                <p><span style="font-weight: bold">Tên khách hàng:  </span><%= u.getFull_name()%></p>
+                <p><span style="font-weight: bold">Số điện thoại: </span><%= u.getPhone()%></p>
+                <p><span style="font-weight: bold">Địa chỉ: </span>${address}</p>
+                <table class="table table-striped">
+                    <thead>
 
                         <tr>
-                            <td>${l.order_details_id}</td>
-                            <td>${l.product_id.product_id}</td>
-                            <td>1</td>
-                            <td>${l.quantity}</td>
-                           <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
+                            <th scope="col">STT</th>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col">ĐVT</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Đơn giá</th>
                         </tr>
-                    </c:forEach>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${listOrderDetail}" var="l">
 
-                </tbody>
-            </table>
-        </div>
+                            <tr>
+                                <td>${l.order_details_id}</td>
+                                <td>${l.product_id.product_id}</td>
+                                <td>1</td>
+                                <td>${l.quantity}</td>
+                                <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
+                            </tr>
+                        </c:forEach>
+
+                    </tbody>
+                </table>
+            </div>
+        </c:if>
+        <c:if test="${not empty usergg }">
+            <div class="container">
+                <h4 style="color: #6a0e13">Chi tiết đơn hàng #${order_id}</h4>
+                <p><span style="font-weight: bold">Cửa hàng: </span>Song Ân</p>
+                <p><span style="font-weight: bold">Tên khách hàng:  </span><%= us.getName()%></p>
+                <p><span style="font-weight: bold">Email: </span><%= us.getEmail() %></p>
+                <p><span style="font-weight: bold">Địa chỉ: </span>${address}</p>
+                <table class="table table-striped">
+                    <thead>
+
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col">ĐVT</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Đơn giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <c:forEach items="${listOrderDetail}" var="l">
+
+                            <tr>
+                                <td>${l.order_details_id}</td>
+                                <td>${l.product_id.product_id}</td>
+                                <td>1</td>
+                                <td>${l.quantity}</td>
+                                <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
+                            </tr>
+                        </c:forEach>
+
+                    </tbody>
+                </table>
+            </div>
+        </c:if>
+
         <jsp:include page="../../footer.jsp" />
 
     </body>
