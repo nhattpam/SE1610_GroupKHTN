@@ -146,7 +146,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" name="full_name" placeholder="Họ và tên" required="required">
+                        <input type="text" class="form-control" name="full_name" placeholder="Họ và tên" required="required" value="${full_name}">
                     </div>
                 </div>
                     
@@ -157,7 +157,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
-                        <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập" required="required">
+                        <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập" required="required" value="${user_name}">
                     </div>
                 </div>
                         
@@ -168,7 +168,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                        <input type="number" class="form-control" name="phone" placeholder="Số điện thoại" required="required">
+                        <input type="number" class="form-control" name="phone" placeholder="Số điện thoại" required="required" value="${phone}">
                     </div>
                 </div>
                 
@@ -180,7 +180,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
-                        <input type="email" class="form-control" name="email" placeholder="Địa chỉ email" required="required">
+                        <input type="email" class="form-control" name="email" placeholder="Địa chỉ email" required="required" value="${email}">
                     </div>
                 </div>
                         

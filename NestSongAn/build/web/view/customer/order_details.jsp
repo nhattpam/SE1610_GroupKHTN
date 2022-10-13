@@ -69,7 +69,7 @@
 
                             <tr>
                                 <td>${l.order_details_id}</td>
-                                <td>${l.product_id.product_id}</td>
+                                <td>${l.product_id.name}</td>
                                 <td>1</td>
                                 <td>${l.quantity}</td>
                                 <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
@@ -103,7 +103,7 @@
 
                             <tr>
                                 <td>${l.order_details_id}</td>
-                                <td>${l.product_id.product_id}</td>
+                                <td>${l.product_id.name}</td>
                                 <td>1</td>
                                 <td>${l.quantity}</td>
                                 <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
