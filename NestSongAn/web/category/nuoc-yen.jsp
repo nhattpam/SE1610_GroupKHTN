@@ -146,15 +146,22 @@
                                     content: "";
                                     margin: 0 auto;
                                 }
+                                .featured__controls a{
+                                    color: black;
+                                }
                             </style>
                         </div>
                         <div class="featured__controls">
                             <ul>
                                 <li class="active" data-filter="*">All</li>
-                                <li data-filter=".oranges">Oranges</li>
-                                <li data-filter=".fresh-meat">Fresh Meat</li>
-                                <li data-filter=".vegetables">Vegetables</li>
-                                <li data-filter=".fastfood">Fastfood</li>
+                                    <c:forEach items="${cList}" var="l">
+                                    <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
+                                    </c:forEach>
+                            </ul>
+                            </br>
+                            <ul>
+                                <li><a href="">Giá tăng dần</a></li>
+                                <li><a href="">Giá giảm dần</a></li>
                             </ul>
                         </div>
                     </div>

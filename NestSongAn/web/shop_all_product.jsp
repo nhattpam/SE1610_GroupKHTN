@@ -58,13 +58,13 @@
                 background: #6a0e13;
             }
         </style>
-        
+
     </head>
     <body>
         <!-- Page Preloder -->
-<!--        <div id="preloder">
-            <div class="loader"></div>
-        </div>-->
+        <!--        <div id="preloder">
+                    <div class="loader"></div>
+                </div>-->
         <jsp:include page="header.jsp" />
         <!-- Hero Section Begin -->
         <section class="hero hero-normal">
@@ -79,8 +79,8 @@
                             <ul>
                                 <c:forEach items="${cList}" var="l">
                                     <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
-                                </c:forEach>
-                                
+                                    </c:forEach>
+
                             </ul>
                         </div>
                     </div>
@@ -147,15 +147,22 @@
                                     content: "";
                                     margin: 0 auto;
                                 }
+                                .featured__controls a{
+                                    color: black;
+                                }
                             </style>
                         </div>
                         <div class="featured__controls">
                             <ul>
                                 <li class="active" data-filter="*">All</li>
-                                <li data-filter=".oranges">Oranges</li>
-                                <li data-filter=".fresh-meat">Fresh Meat</li>
-                                <li data-filter=".vegetables">Vegetables</li>
-                                <li data-filter=".fastfood">Fastfood</li>
+                                    <c:forEach items="${cList}" var="l">
+                                    <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
+                                    </c:forEach>
+                            </ul>
+                            </br>
+                            <ul>
+                                <li><a href="">Giá tăng dần</a></li>
+                                <li><a href="">Giá giảm dần</a></li>
                             </ul>
                         </div>
                     </div>
@@ -163,7 +170,7 @@
                 <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>
                 <%
                     UsersDTO u = (UsersDTO) session.getAttribute("USER");
-                    
+
                     //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
                     //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
                     NumberFormat nf = NumberFormat.getInstance();
@@ -185,18 +192,18 @@
                                     <ul class="featured__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                      
-                                        <%
-                                            if (u == null && us == null){%>
 
-                                                <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%} else if(u != null){%>
-                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%} else if(us != null){%>
-                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <%
+                                            if (u == null && us == null) {%>
+
+                                        <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <%} else if (u != null) {%>
+                                        <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <%} else if (us != null) {%>
+                                        <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                                 <%}
-                                        %>
-                                        
+                                                %>
+
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
@@ -207,14 +214,14 @@
                             </div>
                         </div>
                     </c:forEach>
-                    
+
 
                 </div>
                 <c:forEach begin="1" end="${endPage}" var="i">
                     <a href="shop-products?index=${i}" class="pagi">${i}</a>
                 </c:forEach>
             </div>
-                
+
         </section>
         <!-- Featured Section End -->
         <jsp:include page="footer.jsp" />
