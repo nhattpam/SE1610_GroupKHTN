@@ -5,9 +5,13 @@
  */
 package mainf;
 
+import daos.OrderDAOImpl;
+import daos.OrderDetailsDAOImpl;
 import daos.ProductDAOImpl;
 import daos.UserDAOImpl;
 import dtos.CategoryDTO;
+import dtos.OrderDTO;
+import dtos.OrderDetailsDTO;
 import dtos.ProductDTO;
 import dtos.UsersDTO;
 import java.sql.SQLException;
@@ -23,15 +27,11 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) {
-        UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
+        OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
         
+        OrderDTO o = dao.getOrderAddress("1665478139121");
         
-        List<UsersDTO> list = dao.getAllListUser();
+        System.out.println(o.getDelivery_address());
         
-        
-        for (UsersDTO u : list) {
-            System.out.println(u.getUser_id() + u.getFull_name() + "," + u.getEmail() + ", " + u.getCreate_date() + ", " + u.getEdit_date() + 
-                    ",status:  " + u.getStatus() + ", roleid:  " + u.getRole_id().getRole_id());
-        }
     }
 }
