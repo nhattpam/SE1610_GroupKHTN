@@ -50,9 +50,8 @@ public class CheckoutController extends HttpServlet {
 //        GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");
 
         request.setAttribute("user", u);
-        
-//        request.setAttribute("usergg", us);
 
+//        request.setAttribute("usergg", us);
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
 
@@ -63,49 +62,63 @@ public class CheckoutController extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
 
-        int getUser_id = (request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0);
-        UsersDTO user_id = new UsersDTO(getUser_id);
+        try {
+            int getUser_id = (request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0);
+            UsersDTO user_id = new UsersDTO(getUser_id);
 
 //        int branch_id = Integer.parseInt(request.getParameter("branch_id"));
-        String delivery_address = request.getParameter("delivery_address") + ", " + request.getParameter("province");
-        String payment_method = request.getParameter("payment_method");
+            String address = request.getParameter("delivery_address");
+//        System.out.println(address);
+            String delivery_address = address + ", " + request.getParameter("province");
+            String payment_method = request.getParameter("payment_method");
 //        System.out.println("User_id: " + getUser_id + ", " + "branch: " + branch_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
-        System.out.println("User_id: " + getUser_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
+            System.out.println("User_id: " + getUser_id + ", " + "Address: " + delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
 
-        HttpSession sessin = request.getSession();
-        float totalPrice = (float) sessin.getAttribute("TotalPrice");
-        System.out.println(totalPrice);
-        
-        HttpSession session = request.getSession();
-        CartDTO cart = (CartDTO) session.getAttribute("cart");
-        
-        System.out.println(cart.getList() + "\n");
+            HttpSession sessin = request.getSession();
+            float totalPrice = (float) sessin.getAttribute("TotalPrice");
+            System.out.println(totalPrice);
 
-        Date now = new Date();
-        SimpleDateFormat x = new SimpleDateFormat();
-        String order_date = x.format(now);
+            HttpSession session = request.getSession();
+            CartDTO cart = (CartDTO) session.getAttribute("cart");
 
-        try {
-            Date date = new Date();
-            String order_id = "" + date.getTime();
-            OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date,totalPrice, 1, user_id);
-            
-            //status = 1: order pending
-            
-            od.setOrder_id(order_id);
-            orderDAO.addOrder(od);
-            
-            TreeMap<ProductDTO, Integer> list = cart.getList();
-            for(Map.Entry<ProductDTO, Integer> ds : list.entrySet()){
-                ProductDTO p = new ProductDTO();
-                p.setProduct_id(ds.getKey().getProduct_id());
-                orderDetailsDAO.addOrderDetails(new OrderDetailsDTO(od, p,  ds.getKey().getPrice(), ds.getValue()));
+            System.out.println(cart.getList() + "\n");
+
+            Date now = new Date();
+            SimpleDateFormat x = new SimpleDateFormat();
+            String order_date = x.format(now);
+
+            HttpSession sessionValidate = request.getSession();
+            boolean check = true;
+            if (address == null || "".equals(address.trim())) {
+                sessionValidate.setAttribute("wrongAddress", "Địa chỉ không được rỗng");
+                check = false;
             }
-            session.removeAttribute("cart");
-            response.sendRedirect("success-order");
-            
+            if (check) {
+                try {
+                    Date date = new Date();
+                    String order_id = "" + date.getTime();
+                    OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date, totalPrice, 1, user_id);
+
+                    //status = 1: order pending
+                    od.setOrder_id(order_id);
+                    orderDAO.addOrder(od);
+
+                    TreeMap<ProductDTO, Integer> list = cart.getList();
+                    for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
+                        ProductDTO p = new ProductDTO();
+                        p.setProduct_id(ds.getKey().getProduct_id());
+                        orderDetailsDAO.addOrderDetails(new OrderDetailsDTO(od, p, ds.getKey().getPrice(), ds.getValue()));
+                    }
+                    session.removeAttribute("cart");
+                    response.sendRedirect("success-order");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+        } finally{
+            response.sendRedirect("checkout");
         }
 
     }

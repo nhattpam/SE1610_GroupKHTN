@@ -235,6 +235,10 @@
                                             <div class="form-group" style="font-weight: bold;">
                                                 Số điện thoại<input type="text" class="form-control" id="exampleInputPassword1" value="${user.phone}" disabled="">
                                             </div> 
+                                            <c:if test="${ not empty wrongAddress }">
+                                                <p class="text-danger">${wrongAddress}</p>
+                                                <c:remove var="wrongAddress" scope="session"/>
+                                            </c:if>
                                             <div style="font-weight: bold;" class="form-group">
                                                 Địa chỉ giao hàng
                                             </div>
@@ -313,7 +317,7 @@
                                             <br>
 
                                             <div class="form-group">
-                                                <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết">
+                                                <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết" value="${address}">
                                             </div> 
                                             <div class="form-group">
                                                 <select name="payment_method" required=""> 
@@ -344,6 +348,10 @@
                                             <div class="form-group" style="font-weight: bold;">
                                                 Số điện thoại<input type="number" class="form-control" id="exampleInputPassword1" name="phone" value="${usergg.phone}">
                                             </div> 
+                                            <c:if test="${ not empty wrongAddress }">
+                                                <p class="text-danger">${wrongAddress}</p>
+                                                <c:remove var="wrongAddress" scope="session"/>
+                                            </c:if>
                                             <div style="font-weight: bold;" class="form-group">
                                                 Địa chỉ giao hàng
                                             </div>

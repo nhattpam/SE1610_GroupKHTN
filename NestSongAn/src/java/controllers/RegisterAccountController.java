@@ -51,6 +51,12 @@ public class RegisterAccountController extends HttpServlet {
             String email = req.getParameter("email");
             String password = req.getParameter("password");
             UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
+            
+            HttpSession keepInput = req.getSession();
+            keepInput.setAttribute("full_name", full_name);
+            keepInput.setAttribute("user_name", user_name);
+            keepInput.setAttribute("phone", phone);
+            keepInput.setAttribute("email", email);
 
             int status = 1; //1: tai khoan active: dang hoat dong
 
@@ -140,6 +146,13 @@ public class RegisterAccountController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+        HttpSession keepInput = req.getSession();
+        String full_name = (String) keepInput.getAttribute("full_name");
+        String user_name = (String) keepInput.getAttribute("user_name");
+        String phone = (String) keepInput.getAttribute("phone");
+        String email = (String) keepInput.getAttribute("email");
+        
         req.getRequestDispatcher("register.jsp").forward(req, resp);
     }
 

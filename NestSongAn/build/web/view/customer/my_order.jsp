@@ -64,6 +64,7 @@
                         <th scope="col">Mã đơn hàng</th>
                         <th scope="col">Ngày đặt</th>
                         <th scope="col">Đơn giá</th>
+                        <th scope="col">Trạng thái</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -74,6 +75,19 @@
                                 <td>${l.order_id}</td>
                                 <td>${l.order_date}</td>
                                 <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
+                                <c:set var = "status" scope = "session" value = "${l.status}"/>
+                                <c:if test = "${status == 1}">
+                                    <td>Đang chờ lấy hàng</td>
+                                </c:if>
+                                <c:if test = "${status == 2}">
+                                    <td>Đang giao hàng</td>
+                                </c:if>
+                                <c:if test = "${status == 3}">
+                                    <td>Giao hàng thành công</td>
+                                </c:if>
+                                <c:if test = "${status == 4}">
+                                    <td>Đơn hàng bị huỷ</td>
+                                </c:if>
                                 <td><a href="order-details?order_id=${l.order_id}" style="color: #6a0e13">Chi tiết</a></td>
                             </tr>
                         </c:forEach>
@@ -103,6 +117,7 @@
                         <th scope="col">Mã đơn hàng</th>
                         <th scope="col">Ngày đặt</th>
                         <th scope="col">Đơn giá</th>
+                        <th scope="col">Trạng thái</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -112,6 +127,19 @@
                                 <td>${l.order_id}</td>
                                 <td>${l.order_date}</td>
                                 <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
+                                <c:set var = "status" scope = "session" value = "${l.status}"/>
+                                <c:if test = "${status == 1}">
+                                    <td>Đang chờ lấy hàng</td>
+                                </c:if>
+                                <c:if test = "${status == 2}">
+                                    <td>Đang giao hàng</td>
+                                </c:if>
+                                <c:if test = "${status == 3}">
+                                    <td>Giao hàng thành công</td>
+                                </c:if>
+                                <c:if test = "${status == 4}">
+                                    <td>Đơn hàng bị huỷ</td>
+                                </c:if>
                                 <td><a href="order-details?order_id=${l.order_id}" style="color: #6a0e13">Chi tiết</a></td>
                             </tr>
                         </c:forEach>

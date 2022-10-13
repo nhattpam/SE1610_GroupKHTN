@@ -27,11 +27,13 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) {
-        UserDAOImpl dao6 = new UserDAOImpl(DBUtils.getConnection());
-        
-        UsersDTO d = dao6.getPhone("khtnholdings.work@gmail.com");
-        
-        System.out.println(d.getPhone());
+       OrderDetailsDAOImpl dao = new OrderDetailsDAOImpl(DBUtils.getConnection());
+       
+       List<OrderDetailsDTO> list = dao.getOrderDetails1("1665478139121");
+       
+        for (OrderDetailsDTO o : list) {
+            System.out.println(o.getProduct_id().getName());
+        }
         
     }
 }
