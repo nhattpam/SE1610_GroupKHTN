@@ -217,7 +217,7 @@
                     <div class="col-md-4 offset-md-4 mt-3 ">
                         <div class="card">
                             <div class="card-body">
-                                <h2 style="font-weight: bold; color:#6a0e13;" class="text-center">Tạo tài khoảng</h2>
+                                <h2 style="font-weight: bold; color:#6a0e13;" class="text-center">Tạo tài khoản</h2>
 
                                 <form action="CreateStaffAccount" method="post">
                                     <c:if test="${ not empty succMsg }">

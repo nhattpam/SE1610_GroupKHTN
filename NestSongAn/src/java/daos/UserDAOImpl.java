@@ -549,7 +549,7 @@ public class UserDAOImpl implements UserDAO {
         List<UsersDTO> list = new ArrayList<>();
 
         try {
-            String sql = "SELECT u.user_id, u.full_name, u.email, u.create_date, u.edited_date,u.status, ur.role\n"
+            String sql = "SELECT u.user_id, u.full_name, u.user_name,u.phone, u.email, u.create_date, u.edited_date,u.status, ur.role\n"
                     + " FROM USERS u INNER JOIN user_role ur\n"
                     + " ON u.role_id = ur.role_id\n"
                     + " ";
@@ -560,6 +560,8 @@ public class UserDAOImpl implements UserDAO {
                 UserRoleDTO role = new UserRoleDTO(rs.getString("role"));
                 u.setUser_id(rs.getInt("user_id"));
                 u.setFull_name(rs.getString("full_name"));
+                u.setUser_name(rs.getString("user_name"));
+                u.setPhone(rs.getString("phone"));
                 u.setEmail(rs.getString("email"));
                 u.setCreate_date(rs.getString("create_date"));
                 u.setEdit_date(rs.getString("edited_date"));
@@ -589,6 +591,44 @@ public class UserDAOImpl implements UserDAO {
                 u.setPhone(rs.getString("phone"));
             }
         } catch (SQLException ex) {
+        }
+        return u;
+    }
+    
+    public UsersDTO viewAccountStaff(int userId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        UsersDTO u = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "Select user_id, full_name, user_name , email, phone, password\n"
+                        + "from users\n"
+                        + "where user_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, userId);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                     u = new UsersDTO();
+                     u.setFull_name(rs.getString("full_name"));
+                     u.setUser_name(rs.getString("user_name"));
+                     u.setEmail(rs.getString("email"));
+                     u.setPhone(rs.getString("phone"));
+                     u.setUser_id(rs.getInt("user_id"));
+                     u.setPassword(rs.getString("password"));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
         return u;
     }
