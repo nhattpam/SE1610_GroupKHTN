@@ -1,10 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page isELIgnored="false" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Nhân Viên</title>
+        <title>Thêm Khách Hàng (Offline)</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -16,7 +19,7 @@
         <!-- iCheck -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
         <!-- JQVMap -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/jqvmap/jqvmap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}//plugins/jqvmap/jqvmap.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
         <!-- overlayScrollbars -->
@@ -27,6 +30,57 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/summernote/summernote-bs4.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <style>
+            
+
+            .signup-form .lead {
+                font-size: 14px;
+                margin-bottom: 30px;
+                text-align: center;
+            }
+
+            .signup-form .form-group {
+                margin-bottom: 20px;
+            }
+            .signup-form label {
+                font-weight: normal;
+                font-size: 13px;
+            }
+            .signup-form .form-control {
+                min-height: 38px;
+                box-shadow: none !important;
+                border-width: 0 0 1px 0;
+            }	
+            
+            .signup-form .btn, .signup-form .btn:active {        
+                font-size: 16px;
+                font-weight: bold;
+                /*background: #6a0e13 !important;*/
+                border-radius: 3px;
+                border: none;
+                min-width: 140px;
+            }
+            .signup-form .btn:hover, .signup-form .btn:focus {
+                /*background: #6a0e13 !important;*/
+            }
+            .signup-form a {
+                color: #19aa8d;
+                text-decoration: none;
+            }	
+            .signup-form a:hover {
+                text-decoration: underline;
+            }
+            .signup-form .fa {
+                font-size: 21px;
+                position: relative;
+                top: 8px;
+            }
+            .signup-form .fa-paper-plane {
+                font-size: 17px;
+            }
+           
+            
+        </style>
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
@@ -209,87 +263,101 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <!--<h1>Widgets</h1>-->
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="staff-dashboard">Thống Kê</a></li>
-                                    <!--<li class="breadcrumb-item active">Quản Lý Người Dùng</li>-->
-                                </ol>
+                <div class="container">
+                    <div class="row crd-ho">
+                        <div class="col-md-4 offset-md-4 mt-3 ">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="text-center">Thêm Khách Hàng (Offline)</h4>
+
+                                    <c:if test="${ not empty succMsg }">
+                                        <h5 class="text-center text-success">${succMsg}</h5>
+                                        <c:remove var="succMsg" scope="session"/>
+                                    </c:if>
+
+                                    <c:if test="${ not empty failedMsg }">
+                                        <h5 class="text-center text-danger">${failedMsg}</h5>
+                                        <c:remove var="failedMsg" scope="session"/>
+                                    </c:if>
+                                    <div class="signup-form">
+                                        <form action="offline-account" method="post">
+                                            <c:if test="${ not empty succMsg }">
+                                                <h5 class="text-center text-success">${succMsg}</h5>
+                                                <c:remove var="succMsg" scope="session"/>
+                                            </c:if>
+
+                                            <c:if test="${ not empty failedMsg }">
+                                                <h5 class="text-center text-danger">${failedMsg}</h5>
+                                                <c:remove var="failedMsg" scope="session"/>
+                                            </c:if>
+
+                                            <c:if test="${ not empty wrongFullName }">
+                                                <p class="text-danger">${wrongFullName}</p>   
+                                                <c:remove var="wrongFullName" scope="session"/>
+                                            </c:if>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                    <input type="text" class="form-control" name="full_name" placeholder="Họ và tên" required="required" value="${full_name}">
+                                                </div>
+                                            </div>
+
+                                            <c:if test="${ not empty wrongUser_name }">
+                                                <p class="text-danger">${wrongUser_name}</p>     
+                                                <c:remove var="wrongUser_name" scope="session"/>
+                                            </c:if>    
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
+                                                    <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập" required="required" value="${user_name}">
+                                                </div>
+                                            </div>
+
+                                            <c:if test="${ not empty wrongPhone }">
+                                                <p class="text-danger">${wrongPhone}</p>   
+                                                <c:remove var="wrongPhone" scope="session"/>
+                                            </c:if>        
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                    <input type="number" class="form-control" name="phone" placeholder="Số điện thoại" required="required" value="${phone}">
+                                                </div>
+                                            </div>
+
+
+                                            <c:if test="${ not empty wrongEmail }">
+                                                <p class="text-danger">${wrongEmail}</p>  
+                                                <c:remove var="wrongEmail" scope="session"/>
+                                            </c:if>        
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                                                    <input type="email" class="form-control" name="email" placeholder="Địa chỉ email" required="required" value="${email}">
+                                                </div>
+                                            </div>
+
+                                            <c:if test="${ not empty wrongPassword }">
+                                                <p class="text-danger">${wrongPassword}</p> 
+                                                <c:remove var="wrongPassword" scope="session"/>
+                                            </c:if>        
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                    <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required="required">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-dark btn-block btn-lg">Thêm</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                </div> 
                             </div>
                         </div>
-                    </div><!-- /.container-fluid -->
-                </section>
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <!--<h5 class="mb-2">Quản Lý Người Dùng</h5>-->
-                        <div class="row">
-
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
-                                    <div class="info-box-content">
-                                        <a href="offline-account">
-                                            <span class="info-box-text">Thêm Khách Hàng Mới (Offline)</span>
-                                            <!--<span class="info-box-number">1,410</span>-->
-                                        </a>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Bookmarks</span>
-                                        <span class="info-box-number">410</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Uploads</span>
-                                        <span class="info-box-number">13,648</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Likes</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
                     </div>
-                </section>
+                </div>
             </div>
 
             <!-- /.content-wrapper -->
