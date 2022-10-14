@@ -274,6 +274,9 @@
                 <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
                 All rights reserved.
                 <div class="float-right d-none d-sm-inline-block">
+                    <form action="ExcelController">
+                       <input type="submit" name="action" value="Export All User to Excel">
+                    </form>
                     <b>Version</b> 3.0.4
                 </div>
             </footer>
