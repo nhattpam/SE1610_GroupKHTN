@@ -5,12 +5,12 @@
  */
 package controllers;
 
+import daos.ProductDAOImpl;
 import daos.UserDAOImpl;
+import dtos.ProductDTO;
 import dtos.UsersDTO;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormat;
 import utils.DBUtils;
 
 /**
@@ -40,34 +42,63 @@ public class ExportExcelController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("appication/vnd.ms-excel");
-        response.setHeader("Content-Disposition", "attachment;filename=UserList.xls");
-
-        String filePath = "d:/UserList.xls";
-        File myFile = new File(filePath);
         HSSFWorkbook wb = new HSSFWorkbook();
         UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
+        ProductDAOImpl daop = new ProductDAOImpl(DBUtils.getConnection());
+
+        HSSFSheet sheet = wb.createSheet("Sheet");
+        HSSFRow rowhead = sheet.createRow((short) 0);
+
+        int i = 1;
         try {
-            List<UsersDTO> list = dao.getUserList();
-            HSSFSheet sheet = wb.createSheet("new sheet");
-            HSSFRow rowhead = sheet.createRow((short) 0);
-            rowhead.createCell((short) 0).setCellValue("User ID");
-            rowhead.createCell((short) 1).setCellValue("Full Name");
-            rowhead.createCell((short) 3).setCellValue("E-mail");
-            rowhead.createCell((short) 7).setCellValue("Phone");
-            int i = 1;
-            for (UsersDTO rs : list) {
-                HSSFRow row = sheet.createRow((short) i);
-                row.createCell((short) 0).setCellValue(Integer.toString(rs.getUser_id()));
-                row.createCell((short) 1).setCellValue(rs.getFull_name());
-                row.createCell((short) 3).setCellValue(rs.getEmail());
-                row.createCell((short) 7).setCellValue(rs.getPhone());
-                i++;
+            String action = request.getParameter("action");
+            if ("Export All User to Excel".equals(action)) {
+                List<UsersDTO> list = dao.getAllListUser();
+                rowhead.createCell((short) 0).setCellValue("User ID");
+                rowhead.createCell((short) 1).setCellValue("Full Name");
+                rowhead.createCell((short) 3).setCellValue("E-mail");
+                rowhead.createCell((short) 7).setCellValue("Phone");
+
+                for (UsersDTO rs : list) {
+                    HSSFRow row = sheet.createRow((short) i);
+                    row.createCell((short) 0).setCellValue(Integer.toString(rs.getUser_id()));
+                    row.createCell((short) 1).setCellValue(rs.getFull_name());
+                    row.createCell((short) 3).setCellValue(rs.getEmail());
+                    row.createCell((short) 7).setCellValue(rs.getPhone());
+                    i++;
+                }
+                FileOutputStream fileOut = new FileOutputStream("d:/UserList.xls");
+                wb.write(fileOut);
+                fileOut.close();
+                response.sendRedirect("manage-user");
+            } else if ("Export Product to Excel".equals(action)) {
+                List<ProductDTO> listProduct = daop.getAllListProduct();
+                rowhead.createCell((short) 0).setCellValue("Product ID");
+                rowhead.createCell((short) 1).setCellValue("Product Name");
+                rowhead.createCell((short) 4).setCellValue("Code");
+                rowhead.createCell((short) 5).setCellValue("Weight");
+                rowhead.createCell((short) 6).setCellValue("Price");
+                rowhead.createCell((short) 7).setCellValue("Create Date");
+                rowhead.createCell((short) 9).setCellValue("Edit Date");
+                for (ProductDTO rs : listProduct) {
+                    HSSFRow row = sheet.createRow((short) i);
+                    row.createCell((short) 0).setCellValue(Integer.toString(rs.getProduct_id()));
+                    row.createCell((short) 1).setCellValue(rs.getName());
+                    row.createCell((short) 4).setCellValue(rs.getCode());
+                    row.createCell((short) 5).setCellValue(Integer.toString(rs.getWeight()));
+                    row.createCell((short) 6).setCellValue(Float.toString(rs.getPrice()));
+                    row.createCell((short) 7).setCellValue((rs.getCreate_date()));
+                    row.createCell((short) 9).setCellValue((rs.getEdit_date()));
+                    i++;
+                }
+
+                FileOutputStream fileOut = new FileOutputStream("d:/ProductList.xls");
+                wb.write(fileOut);
+                fileOut.close();
+                response.sendRedirect("list-products");
+            } else {
+                response.sendRedirect("error.jsp");
             }
-            FileOutputStream fileOut = new FileOutputStream(myFile);
-            wb.write(fileOut);
-            fileOut.close();
-            return;
         } catch (Exception e) {
             System.out.println(e);
         }

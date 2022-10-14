@@ -5,9 +5,7 @@
  */
 package daos;
 
-import dtos.CategoryDTO;
 import dtos.GoogleDTO;
-import dtos.ProductDTO;
 import dtos.UserRoleDTO;
 import dtos.UsersDTO;
 import java.sql.Connection;
@@ -16,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.naming.NamingException;
 import utils.DBUtils;
@@ -515,25 +511,27 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<UsersDTO> getStaffList() {
-        UsersDTO us = new UsersDTO();
         List<UsersDTO> list = new ArrayList<>();
+
         try {
-            con = DBUtils.getConnection();
-            String sql = "SELECT user_id, full_name, user_name, email, phone, r.role_id\n"
-                    + " FROM users u, user_role r \n"
-                    + " WHERE u.role_id = 2\n"
+            String sql = "Select user_id, full_name, email, phone, create_date, edited_date, status, r.role \n"
+                    + " From users u, user_role r \n"
+                    + " Where u.role_id = 2\n"
                     + " and u.role_id = r.role_id ";
-            stm = con.prepareStatement(sql);
-            rs = stm.executeQuery();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                
-            stm.setInt(1, us.getUser_id());
-            stm.setString(2, us.getFull_name());
-            stm.setString(3, us.getUser_name());
-            stm.setString(4, us.getEmail());
-            stm.setString(5, us.getPhone());
-            stm.setInt(6, us.getRole_id().getRole_id());
-            list.add(us);
+                UsersDTO u = new UsersDTO();
+                UserRoleDTO role = new UserRoleDTO(rs.getString("role"));
+                u.setUser_id(rs.getInt("user_id"));
+                u.setFull_name(rs.getString("full_name"));
+                u.setEmail(rs.getString("email"));
+                u.setPhone(rs.getString("phone"));
+                u.setCreate_date(rs.getString("create_date"));
+                u.setEdit_date(rs.getString("edited_date"));
+                u.setStatus(rs.getInt("status"));
+                u.setRole_id(role);
+                list.add(u);
             }
 
         } catch (Exception e) {
@@ -542,7 +540,6 @@ public class UserDAOImpl implements UserDAO {
         return list;
     }
 
-    
     //khang tran: function view list user in admin
     @Override
     public List<UsersDTO> getAllListUser() {

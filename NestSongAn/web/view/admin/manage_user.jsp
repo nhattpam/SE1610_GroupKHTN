@@ -223,35 +223,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${listFullUser}" var="l">
-                                <tr>
-                                    <td>
-                                        ${l.user_id}
-                                    </td>
-                                    <td>
-                                        ${l.full_name}
-                                    </td>
-                                    <td>
-                                         ${l.email}
-                                    </td>
-                                    <td>
-                                         ${l.create_date}
-                                    </td>
-                                    <td>
-                                        ${l.edit_date}
-                                    </td>
-                                    <td>
-                                        ${l.status}
-                                    </td>
-                                    <td>
-                                        ${l.role_id.role}
-                                    </td>
-                                    <td>
-                                        <a href="" class="btn btn-sm btn-primary"> action</a>
-                                        <a href="" class="btn btn-sm btn-danger"> action</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                                <c:forEach items="${listFullUser}" var="l">
+                                    <tr>
+                                        <td>
+                                            ${l.user_id}
+                                        </td>
+                                        <td>
+                                            ${l.full_name}
+                                        </td>
+                                        <td>
+                                            ${l.email}
+                                        </td>
+                                        <td>
+                                            ${l.create_date}
+                                        </td>
+                                        <td>
+                                            ${l.edit_date}
+                                        </td>
+                                        <td>
+                                            ${l.status}
+                                        </td>
+                                        <td>
+                                            ${l.role_id.role}
+                                        </td>
+                                        <td>
+                                            <a href="" class="btn btn-sm btn-primary"> action</a>
+                                            <a href="" class="btn btn-sm btn-danger"> action</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -263,6 +263,9 @@
                 <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
                 All rights reserved.
                 <div class="float-right d-none d-sm-inline-block">
+                    <form action="ExcelController">
+                       <input type="submit" name="action" value="Export All User to Excel">
+                    </form>
                     <b>Version</b> 3.0.4
                 </div>
             </footer>

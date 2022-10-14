@@ -235,10 +235,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 <c:if test="${ not empty failedMsg }">
-                                     <h5 class="text-center text-danger">${failedMsg}</h5>
-                                     <c:remove var="failedMsg" scope="session"/>
-                                </c:if>
+                                <c:if test="${ not empty failedMsg }">
+                                <h5 class="text-center text-danger">${failedMsg}</h5>
+                                <c:remove var="failedMsg" scope="session"/>
+                            </c:if>
 
                             <c:forEach items="${listProduct}" var="l">
                                 <%--<c:set var="price" value="123.2" />--%>  
@@ -274,6 +274,10 @@
                 <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
                 All rights reserved.
                 <div class="float-right d-none d-sm-inline-block">
+
+                    <form action="ExcelController">
+                        <input type="submit" name="action" value="Export Product to Excel">
+                    </form>
                     <b>Version</b> 3.0.4
                 </div>
             </footer>
