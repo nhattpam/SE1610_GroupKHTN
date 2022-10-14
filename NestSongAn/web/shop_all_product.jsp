@@ -58,7 +58,6 @@
                 background: #6a0e13;
             }
         </style>
-
     </head>
     <body>
         <!-- Page Preloder -->

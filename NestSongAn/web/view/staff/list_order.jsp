@@ -15,6 +15,7 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/fontawesome-free/css/all.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -229,53 +230,40 @@
                             <thead class="bg-dark text-white">
                                 <tr>
                                     <th scope="col">Id</th>
-                                    <th scope="col">Ảnh</th>
-                                    <th scope="col">Tên sản phẩm</th>
-                                    <!--<th scope="col">Code</th>-->
-                                    <!--                                    <th scope="col">M.Tả Ngắn</th>
-                                                                        <th scope="col">M.Tả dài</th>-->
-                                    <th scope="col">Trọng lượng</th>
-                                    <th scope="col">Giá</th>
-                                    <th scope="col">Ngày tạo</th>
-                                    <th scope="col">Ngày sửa</th>
-                                    <th scope="col">Danh mục</th>
+                                    <th scope="col">Họ và tên</th>
+                                    <th scope="col">Tên người dùng</th>
+                                    <th scope="col">Địa chỉ Email</th>
+                                    <th scope="col">Số điện thoại</th>
+                                    <th scope="col">Ngày đặt hàng</th>
+                                    <th scope="col">Thông tin chi tiết</th>
                                     <th scope="col">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                 <c:if test="${ not empty failedMsg }">
-                                     <h5 class="text-center text-danger">${failedMsg}</h5>
-                                     <c:remove var="failedMsg" scope="session"/>
-                                </c:if>
-
-                            <c:forEach items="${listProduct}" var="l">
-                                <%--<c:set var="price" value="123.2" />--%>  
-                                <tr>
-                                    <!--<th scope="row">1</th>-->
-                                    <td>${l.product_id}</td>
-                                    <td><img src="products/${l.photo}" style="width: 50px; height: 50px;"></td>
-                                    <td>${l.name}</td>
-                                    <!--<td>${l.code}</td>-->
-<!--                                        <td>${l.short_description}</td>
-                                    <td>${l.full_description}</td>-->
-                                    <td>${l.weight}</td>
-                                    <td> 
-                                        <fmt:formatNumber type="number" groupingUsed="true" value="${l.price}" /> VNĐ
-                                    </td>
-                                    <td>${l.create_date}</td>
-                                    <td>${l.edit_date}</td>
-                                    <td>${l.category_id.category_id}</td>
-                                    <td>
-                                        <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary"> Sửa</a>
-                                        <a href="delete?pid=${l.product_id}" class="btn btn-sm btn-danger"> Xoá</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                                <c:forEach items="${listOrder}" var="o">
+                                    <%--<c:set var="price" value="123.2" />--%>  
+                                    <tr>
+                                        <!--<th scope="row">1</th>-->
+                                        <td>${o.order_id}</td>
+                                        <td>${o.user_id.full_name}</td>
+                                        <td>${o.user_id.user_name}</td>
+                                        <td>${o.user_id.email}</td>
+                                        <td>${o.user_id.phone}</td>
+                                        <td>${o.order_date}</td>
+                                        <td><a href="view-orderdetails?order_id=${o.order_id}" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i></a></td>
+                                        <td>
+                                            <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary">Đồng ý</a><br>
+                                            <a href="delete?pid=${l.product_id}" class="btn btn-sm btn-danger">Từ chối</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+
+
 
             <!-- /.content-wrapper -->
             <footer class="main-footer">

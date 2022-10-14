@@ -147,6 +147,7 @@
                                     margin: 0 auto;
                                 }.featured__controls a{
                                     color: black;
+
                                 }
                             </style>
                         </div>
@@ -161,6 +162,7 @@
                             <ul>
                                 <li><a href="">Giá tăng dần</a></li>
                                 <li><a href="">Giá giảm dần</a></li>
+
                             </ul>
                         </div>
                     </div>

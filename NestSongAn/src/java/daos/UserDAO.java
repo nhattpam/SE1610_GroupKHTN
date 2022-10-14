@@ -25,7 +25,7 @@ public interface UserDAO {
     //hapham: function view account
 
     public UsersDTO viewAccount(int userId) throws SQLException;
-
+    
     //hapham: function view account by google login
     public GoogleDTO viewAcc(String email) throws SQLException;
 

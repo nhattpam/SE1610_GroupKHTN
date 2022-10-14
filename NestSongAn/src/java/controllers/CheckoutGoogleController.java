@@ -137,6 +137,7 @@ public class CheckoutGoogleController extends HttpServlet {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
         } catch (Exception e) {
         } finally{

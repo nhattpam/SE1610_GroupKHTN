@@ -78,6 +78,7 @@ public class CheckoutController extends HttpServlet {
             float totalPrice = (float) sessin.getAttribute("TotalPrice");
             System.out.println(totalPrice);
 
+
             HttpSession session = request.getSession();
             CartDTO cart = (CartDTO) session.getAttribute("cart");
 
@@ -115,6 +116,7 @@ public class CheckoutController extends HttpServlet {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
         } catch (Exception e) {
         } finally{

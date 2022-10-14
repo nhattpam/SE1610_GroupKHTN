@@ -6,6 +6,7 @@
 package daos;
 
 import dtos.OrderDetailsDTO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -18,4 +19,6 @@ public interface OrderDetailsDAO {
     
     //nhatpam: function view detail order
     public List<OrderDetailsDTO> getOrderDetails(String order_id);
+    //hapham: function view order detail
+    public List<OrderDetailsDTO> viewOrderDetails(String order_id) throws SQLException;
 }

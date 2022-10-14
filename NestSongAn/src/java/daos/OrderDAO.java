@@ -6,6 +6,8 @@
 package daos;
 
 import dtos.OrderDTO;
+import dtos.UsersDTO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -22,4 +24,6 @@ public interface OrderDAO {
     
     //get address
     public OrderDTO getOrderAddress(String order_id);
+    //hapham: function veiw user of order
+    public List<OrderDTO> viewUserOrder() throws SQLException;
 }
