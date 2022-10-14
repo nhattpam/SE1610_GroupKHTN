@@ -197,6 +197,14 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="CreateStaffAccount" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Tạo nhân viên mới
+                                    </p>
+                                </a>
+                            </li>
 
                         </ul>
                     </nav>
@@ -247,7 +255,10 @@
                                         ${l.role_id.role}
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-primary"> action</a>
+                                        <c:if test = "${l.role_id.role == 'staff'}">
+                                            <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
+                                        </c:if>
+                                        
                                         <a href="" class="btn btn-sm btn-danger"> action</a>
                                     </td>
                                 </tr>

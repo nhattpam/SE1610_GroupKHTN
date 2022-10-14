@@ -1,17 +1,16 @@
-<%@page import="java.text.NumberFormat"%>
-<%@page import="java.util.List"%>
-<%@page import="dtos.ProductDTO"%>
+<%-- 
+    Document   : create_new_staff
+    Created on : Oct 13, 2022, 10:24:42 PM
+    Author     : HUNG
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page isELIgnored="false" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Danh Sách Người Dùng</title>
+        <title>Tạo nhân viên mới</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -23,7 +22,7 @@
         <!-- iCheck -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
         <!-- JQVMap -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}//plugins/jqvmap/jqvmap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/jqvmap/jqvmap.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/adminlte.min.css">
         <!-- overlayScrollbars -->
@@ -46,10 +45,10 @@
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="index3.html" class="nav-link">Home</a>
+                        <a href="admin-dashboard" class="nav-link">Thống Kê</a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link">Contact</a>
+                        <!--<a href="#" class="nav-link">Contact</a>-->
                     </li>
                 </ul>
 
@@ -205,120 +204,121 @@
                                     </p>
                                 </a>
                             </li>
-
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
                 </div>
                 <!-- /.sidebar -->
             </aside>
+        </div>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row crd-ho">
+                    <div class="col-md-4 offset-md-4 mt-3 ">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 style="font-weight: bold; color:#6a0e13;" class="text-center">Sửa Nhân Viên</h2>
 
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <div class="container-fluid">
-                    <div class="row crd-ho">
-                        <table class="table table-striped">
-                            <thead class="bg-dark text-white">
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Tên</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Ngày tạo</th>
-                                    <th scope="col">Ngày sửa</th>
-                                    <th scope="col">Trạng thái</th>
-                                    <th scope="col">Loại tài khoản</th>
-                                    <th scope="col">Hành động</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${listFullUser}" var="l">
-                                <tr>
-                                    <td>
-                                        ${l.user_id}
-                                    </td>
-                                    <td>
-                                        ${l.full_name}
-                                    </td>
-                                    <td>
-                                         ${l.email}
-                                    </td>
-                                    <td>
-                                         ${l.create_date}
-                                    </td>
-                                    <td>
-                                        ${l.edit_date}
-                                    </td>
-                                    <td>
-                                        ${l.status}
-                                    </td>
-                                    <td>
-                                        ${l.role_id.role}
-                                    </td>
-                                    <td>
-                                        <c:if test = "${l.role_id.role == 'staff'}">
-                                            <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
-                                        </c:if>
-                                        
-                                        <a href="" class="btn btn-sm btn-danger"> action</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                                <form action="edit-staff" method="post">
+                                     <input type="hidden" name="user_id" value="${user_id}"/>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <input type="text" class="form-control" name="full_name" placeholder="Họ và tên" required="required" value="${full_name}">
+                                        </div>
+                                    </div>
+
+                                       
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
+                                            <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập" required="required" value="${user_name}">
+                                        </div>
+                                    </div>
+
+                             
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                            <input type="number" class="form-control" name="phone" placeholder="Số điện thoại" required="required" value="${phone}">
+                                        </div>
+                                    </div>
+
+
+                        
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                                            <input type="email" class="form-control" name="email" placeholder="Địa chỉ email" required="required" value="${email}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                            <input type="text" class="form-control" name="password" placeholder="Mật khẩu" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-dark btn-block btn-lg">Lưu Thay Đổi</button>
+                                    </div>
+                                </form>
+                            </div> 
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>                
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 3.0.4
+            </div>
+        </footer>
 
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
-                All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
-                    <b>Version</b> 3.0.4
-                </div>
-            </footer>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
-        </div>
-        <!-- ./wrapper -->
-
-        <!-- jQuery -->
-        <script src="${pageContext.request.contextPath}/plugins/jquery/jquery.min.js"></script>
-        <!-- jQuery UI 1.11.4 -->
-        <script src="${pageContext.request.contextPath}/plugins/jquery-ui/jquery-ui.min.js"></script>
-        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <script>
-            $.widget.bridge('uibutton', $.ui.button);
-        </script>
-        <!-- Bootstrap 4 -->
-        <script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- ChartJS -->
-        <script src="${pageContext.request.contextPath}/plugins/chart.js/Chart.min.js"></script>
-        <!-- Sparkline -->
-        <script src="${pageContext.request.contextPath}/plugins/sparklines/sparkline.js"></script>
-        <!-- JQVMap -->
-        <script src="${pageContext.request.contextPath}/plugins/jqvmap/jquery.vmap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="${pageContext.request.contextPath}/plugins/jquery-knob/jquery.knob.min.js"></script>
-        <!-- daterangepicker -->
-        <script src="${pageContext.request.contextPath}/plugins/moment/moment.min.js"></script>
-        <script src="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.js"></script>
-        <!-- Tempusdominus Bootstrap 4 -->
-        <script src="${pageContext.request.contextPath}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-        <!-- Summernote -->
-        <script src="${pageContext.request.contextPath}/plugins/summernote/summernote-bs4.min.js"></script>
-        <!-- overlayScrollbars -->
-        <script src="${pageContext.request.contextPath}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="${pageContext.request.contextPath}/dist/js/adminlte.js"></script>
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="${pageContext.request.contextPath}/dist/js/pages/dashboard.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
-    </body>
+    <!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="${pageContext.request.contextPath}/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="${pageContext.request.contextPath}/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="${pageContext.request.contextPath}/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="${pageContext.request.contextPath}/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="${pageContext.request.contextPath}/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="${pageContext.request.contextPath}/plugins/moment/moment.min.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="${pageContext.request.contextPath}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="${pageContext.request.contextPath}/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="${pageContext.request.contextPath}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="${pageContext.request.contextPath}/dist/js/adminlte.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="${pageContext.request.contextPath}/dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
+</body>
 </html>

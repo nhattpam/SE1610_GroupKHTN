@@ -26,14 +26,12 @@ import utils.DBUtils;
  */
 public class test {
 
-    public static void main(String[] args) {
-       OrderDetailsDAOImpl dao = new OrderDetailsDAOImpl(DBUtils.getConnection());
+    public static void main(String[] args) throws SQLException {
+       UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
        
-       List<OrderDetailsDTO> list = dao.getOrderDetails1("1665478139121");
+       UsersDTO u = dao.viewAccountStaff(4);
        
-        for (OrderDetailsDTO o : list) {
-            System.out.println(o.getProduct_id().getName());
-        }
+        System.out.println(u.getEmail() + ", id: " + u.getUser_id() + ", " + u.getPassword());
         
     }
 }
