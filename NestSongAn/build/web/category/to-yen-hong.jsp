@@ -149,7 +149,6 @@
                                 .featured__controls a{
                                     color: black;
                                 }
-
                             </style>
                         </div>
                         <div class="featured__controls">
@@ -163,7 +162,6 @@
                             <ul>
                                 <li><a href="">Giá tăng dần</a></li>
                                 <li><a href="">Giá giảm dần</a></li>
-
                             </ul>
                         </div>
                     </div>

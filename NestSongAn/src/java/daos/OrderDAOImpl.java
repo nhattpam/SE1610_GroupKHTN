@@ -93,6 +93,7 @@ public class OrderDAOImpl implements OrderDAO{
         } catch (SQLException ex) {
         }
         return o;
+    }
     public List<OrderDTO> viewUserOrder() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -128,17 +129,4 @@ public class OrderDAOImpl implements OrderDAO{
         }
         return result;
     }
-    public static void main(String[] args){
-        try {
-            OrderDAOImpl od = new OrderDAOImpl(DBUtils.getConnection());
-            List<OrderDTO> o = od.viewUserOrder();
-            for (OrderDTO orderDTO : o) {
-                System.out.println(orderDTO.getUser_id().getUser_name()+", "+orderDTO.getUser_id().getFull_name()+", "+
-                        orderDTO.getUser_id().getPhone()+", "+orderDTO.getUser_id().getEmail()+", "+ orderDTO.getOrder_date());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
 }

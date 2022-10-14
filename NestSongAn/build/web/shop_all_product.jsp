@@ -58,7 +58,6 @@
                 background: #6a0e13;
             }
         </style>
-
     </head>
     <body>
         <!-- Page Preloder -->
@@ -80,7 +79,6 @@
                                 <c:forEach items="${cList}" var="l">
                                     <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
                                     </c:forEach>
-
 
                             </ul>
                         </div>
@@ -202,7 +200,6 @@
                                         <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                                 <%} else if (us != null) {%>
                                         <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
-
                                                 <%}
                                                 %>
 
