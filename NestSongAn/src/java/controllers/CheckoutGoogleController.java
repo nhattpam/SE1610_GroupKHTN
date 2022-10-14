@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -112,6 +113,12 @@ public class CheckoutGoogleController extends HttpServlet {
             boolean check = true;
             if (address == null || "".equals(address.trim())) {
                 sessionValidate.setAttribute("wrongAddress", "Địa chỉ không được rỗng");
+                check = false;
+            }
+             //check sdt
+            Pattern phoneCheck = Pattern.compile("^[0][0-9]{9}$");
+            if (!phone.matches(phoneCheck.pattern())) { // dấu ! là phủ định có nghĩa là k đúng định dạng
+                sessionValidate.setAttribute("wrongPhone", "Số điện thoại phải bắt đầu là số 0 và dài 10 kí tự");
                 check = false;
             }
 

@@ -192,9 +192,9 @@
 
     <body>
         <!-- Page Preloder -->
-        <div id="preloder">
+<!--        <div id="preloder">
             <div class="loader"></div>
-        </div>
+        </div>-->
         <jsp:include page="header.jsp" />
         <%
             CartDTO cart = (CartDTO) session.getAttribute("cart");
@@ -345,6 +345,10 @@
                                             <div class="form-group" style="font-weight: bold;">
                                                 Họ và tên<input type="text" class="form-control" id="exampleInputPassword1" value="${usergg.full_name}" disabled="">
                                             </div> 
+                                            <c:if test="${ not empty wrongPhone }">
+                                                <p class="text-danger">${wrongPhone}</p>
+                                                <c:remove var="wrongPhone" scope="session"/>
+                                            </c:if>
                                             <div class="form-group" style="font-weight: bold;">
                                                 Số điện thoại<input type="number" class="form-control" id="exampleInputPassword1" name="phone" value="${usergg.phone}">
                                             </div> 

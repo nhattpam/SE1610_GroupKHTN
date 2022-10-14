@@ -146,12 +146,12 @@ public class RegisterAccountController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        HttpSession keepInput = req.getSession();
-        String full_name = (String) keepInput.getAttribute("full_name");
-        String user_name = (String) keepInput.getAttribute("user_name");
-        String phone = (String) keepInput.getAttribute("phone");
-        String email = (String) keepInput.getAttribute("email");
+//        
+//        HttpSession keepInput = req.getSession();
+//        String full_name = (String) keepInput.getAttribute("full_name");
+//        String user_name = (String) keepInput.getAttribute("user_name");
+//        String phone = (String) keepInput.getAttribute("phone");
+//        String email = (String) keepInput.getAttribute("email");
         
         req.getRequestDispatcher("register.jsp").forward(req, resp);
     }

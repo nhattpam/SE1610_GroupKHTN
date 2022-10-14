@@ -149,7 +149,6 @@
                                 .featured__controls a{
                                     color: black;
                                 }
-
                             </style>
                         </div>
                         <div class="featured__controls">

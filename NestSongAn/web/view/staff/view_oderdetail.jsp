@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page isELIgnored="false" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -222,40 +222,39 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <div class="container">
-                    <div class="row crd-ho">
-                        <div class="col-md-4 offset-md-4 mt-3 ">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="text-center">Thông tin chi tiết sản shẩm được đặt</h4>
-                                    <c:forEach items="${listDetails}" var="d">
-                                        <input name="order_id" type="text" value="${d.order_id.order_id}" readonly="">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Tên Sản Phẩm</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${d.product_id.name}" readonly="">
-                                        </div> 
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Số Lượng Sản Phẩm Được Đặt Hàng</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${d.quantity}" readonly="">
-                                        </div> 
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Địa Chỉ Giao Hàng</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${d.order_id.delivery_address}" readonly="">
-                                        </div> 
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Phương Thức Thanh Toán</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${d.order_id.payment_method}" readonly="">
-                                        </div> 
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Tổng Giá Tiền Của Sản Phẩm</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${d.order_id.total_price}" readonly=""> 
-                                        </div> 
-                                    </c:forEach>
-                                    <a href="list-orders" class="btn btn-primary">Close</a>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
+                    <h4 style="color: #6a0e13">Chi tiết đơn hàng</h4>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Mã Hóa Đơn</th>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Địa Chỉ Giao Hàng</th>
+                                <th scope="col">Phương Thức Thanh Toán</th>
+                                <th scope="col">Đơn giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${listDetails}" var="d">
+
+                                <tr>
+                                    <td>${d.order_id.order_id}</td>
+                                    <td>${d.product_id.name}</td>
+                                    <td>${d.quantity}</td
+                                    <td>${d.order_id.delivery_address}</td
+                                    <td>${d.order_id.payment_method}</td
+                                    <td><fmt:formatNumber type="number" groupingUsed="true" value="${d.total_price}" /> VNĐ</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <a href="list-orders" class="btn btn-primary">Close</a>
                 </div>
+
+
+
+
             </div>
 
             <!-- /.content-wrapper -->
