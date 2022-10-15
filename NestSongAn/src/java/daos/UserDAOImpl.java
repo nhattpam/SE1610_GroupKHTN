@@ -47,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 //2. sql statement
-                String sql = "Select user_id, full_name, user_name, email, phone, r.role_id, role "
+                String sql = "Select user_id, full_name, user_name, email, phone, r.role_id, role, status "
                         + "From users u, user_role r "
                         + "Where user_name = ? "
                         + "And password = ? "
@@ -66,7 +66,8 @@ public class UserDAOImpl implements UserDAO {
                     String phone = rs.getString("phone");
                     int roleId = rs.getInt("role_id");
                     String role = rs.getString("role");
-                    result = new UsersDTO(userId, fullname, username, email, phone, new UserRoleDTO(roleId, role));
+                    int status=rs.getInt("status");
+                    result = new UsersDTO(userId, fullname, username, email, phone, new UserRoleDTO(roleId, role),status);
                 }
 
             }

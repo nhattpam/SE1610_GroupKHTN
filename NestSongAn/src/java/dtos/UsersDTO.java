@@ -79,13 +79,14 @@ public class UsersDTO implements Serializable{
     
     
     
-    public UsersDTO(int user_id ,String full_name, String user_name, String email, String phone, UserRoleDTO role_id) {
+    public UsersDTO(int user_id ,String full_name, String user_name, String email, String phone, UserRoleDTO role_id, int status) {
         this.user_id = user_id;
         this.full_name = full_name;
         this.user_name = user_name;
         this.email = email;
         this.phone = phone;
         this.role_id = role_id;
+        this.status = status;
     }
     public UsersDTO(String user_name, String full_name, String email, String phone, String password){
         this.user_name = user_name;

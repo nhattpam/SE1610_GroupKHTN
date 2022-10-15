@@ -73,6 +73,7 @@ public class LoginServlet extends HttpServlet {
             if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer                                                                  
                 if (result.getStatus()==1) {
                     url = siteMaps.getProperty(HOME_PAGE);   // to home page
+                    response.sendRedirect(url);
                 }else{
                     request.setAttribute("inactive", "Xin hãy xác thực email để kích hoạt tài khoản");
                     session.removeAttribute("USER");
