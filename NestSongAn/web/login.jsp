@@ -171,6 +171,9 @@
                 <c:if test="${ not empty LoginError }">
                     <h5 class="text-center text-danger">${LoginError}</h5>
                 </c:if>
+                    <c:if test="${ not empty inactive }">
+                    <h5 class="text-center text-danger">${inactive}</h5>
+                </c:if>
                 <h2 style="font-weight: bold; color:#6a0e13;">Đăng nhập</h2>
                 <p class="hint-text">Đăng nhập với tài khoản google</p>
                 <div class="social-btn text-center">

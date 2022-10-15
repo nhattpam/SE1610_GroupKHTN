@@ -65,14 +65,18 @@ public class LoginServlet extends HttpServlet {
             UserDAO dao = new UserDAOImpl();
             UsersDTO result = dao.checkLogin(username, hashedPassword);                
             //2.process 
+            HttpSession session = request.getSession();//true
+            session.setAttribute("USER", result);
             if(result==null){
                 request.setAttribute("LoginError", errorMessage);
             }
             if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer                                                                  
                 if (result.getStatus()==1) {
                     url = siteMaps.getProperty(HOME_PAGE);   // to home page
+                }else{
+                    request.setAttribute("inactive", "Xin hãy xác thực email để kích hoạt tài khoản");
+                    session.removeAttribute("USER");
                 }
-            response.sendRedirect(url);
             }
             if (result != null && result.getRole_id().getRole().equals("staff")) {          // Role name = staff 
                 url = siteMaps.getProperty(STAFF_PAGE);                                                       // to staff page
@@ -85,9 +89,7 @@ public class LoginServlet extends HttpServlet {
             }
             if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role name = shipper 
                 url = siteMaps.getProperty(SHIPPER_PAGE);                                                     // to shipper page
-            }
-            HttpSession session = request.getSession();//true
-            session.setAttribute("USER", result);
+            }          
         } catch (NamingException ex) {            
             log("LoginServlet_Naming" + ex.getMessage());
         } catch (SQLException ex) {
