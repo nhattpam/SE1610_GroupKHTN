@@ -41,29 +41,21 @@
                             </div>
                             <ul >
                                 <li style="color: white;">Địa chỉ: 60-49 Rạch Giá Kiên Giang</li>
-                                <li style="color: white;">Sđt:  +65 11.188.888</li>
+                                <li style="color: white;">Sđt:  +84 1235548 48</li>
                                 <li style="color: white;">Email: khtnholdings.work.gmail</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                         <div class="footer__widget">
-                            <h6 style="color: white;">Useful Links</h6>
+                            <h6 style="color: white;">Thông tin thêm</h6>
                             <ul>
-                                <li><a href="#" style="color: white;">About Us</a></li>
-                                <li><a href="#" style="color: white;">About Our Shop</a></li>
-                                <li><a href="#" style="color: white;">Secure Shopping</a></li>
-                                <li><a href="#" style="color: white;">Delivery infomation</a></li>
-                                <li><a href="#" style="color: white;">Privacy Policy</a></li>
-                                <li><a href="#" style="color: white;">Our Sitemap</a></li>
+                                <li><a href="ve-song-an" style="color: white;">Về song ân</a></li>
+                                <li><a href="huong-dan-mua-hang" style="color: white;">Hướng dẫn mua hàng</a></li>
+                                <li><a href="huong-dan-mua-hang" style="color: white;">Thanh toán</a></li>
                             </ul>
                             <ul>
-                                <li><a href="#" style="color: white;">Who We Are</a></li>
-                                <li><a href="#" style="color: white;">Our Services</a></li>
-                                <li><a href="#" style="color: white;">Projects</a></li>
-                                <li><a href="#" style="color: white;">Contact</a></li>
-                                <li><a href="#" style="color: white;">Innovation</a></li>
-                                <li><a href="#" style="color: white;">Testimonials</a></li>
+                                <!--<li><a href="#" style="color: white;">Testimonials</a></li>-->
                             </ul>
                         </div>
                     </div>

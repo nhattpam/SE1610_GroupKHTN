@@ -50,8 +50,14 @@
                 color: black;
             }
             .header__menu ul li.active a {
-	color: black;
-}
+                color: black;
+            }
+            .header__menu ul li {
+                list-style: none;
+                display: inline-block;
+                margin-right: 20px;
+                position: relative;
+            }
         </style>
         <!--fixed navbar-->
         <script type="text/javascript">
@@ -131,7 +137,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
-                            
+
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="header__top__right">
@@ -148,7 +154,7 @@
                                         <ul>
                                             <li><a href="MyProfile?uid=<%=u.getUser_id()%>" style="color: white;">Tài khoản</a></li>
                                             <li><a href="my-order?uid=<%=u.getUser_id()%>" style="color: white;">Lịch sử mua</a></li>
-                                            <c:url var="logout" value="logoutController"/>
+                                                <c:url var="logout" value="logoutController"/>
                                             <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
                                     </div>
@@ -161,7 +167,7 @@
                                         <ul>
                                             <li><a href="MyProfile?uid=<%=us.getId()%>" style="color: white;">Tài Khoản</a></li>
                                             <li><a href="my-order-gg?uid=<%=us.getId()%>" style="color: white;">Lịch sử mua</a></li>
-                                            <c:url var="logout" value="logoutController"/>
+                                                <c:url var="logout" value="logoutController"/>
                                             <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
                                     </div>
@@ -189,15 +195,15 @@
                             <ul>
                                 <li class="active"><a href="home" style="color: #6a0e13;">Trang Chủ</a></li>
                                 <li><a href="shop-products">Sản Phẩm</a></li>
-                                <li><a href="#">Pages</a>
+                                <li><a href="#">Về Song Ân</a>
                                     <ul class="header__menu__dropdown">
-                                        <li><a href="./shop-details.html">Shop Details</a></li>
-                                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                        <li><a href="./checkout.html">Check Out</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
+                                        <li><a href="ve-song-an">Giới thiệu</a></li>
+                                        <li><a href="huong-dan-mua-hang">Hướng dẫn mua hàng</a></li>
+<!--                                        <li><a href="./checkout.html">Check Out</a></li>
+                                        <li><a href="./blog-details.html">Blog Details</a></li>-->
                                     </ul>
                                 </li>
-                                <li><a href="./blog.html">Blog</a></li>
+                                
                                 <!--<li><a href="./contact.html">Contact</a></li>-->
                             </ul>
                         </nav>
@@ -211,13 +217,13 @@
                                     <%
                                         if (u == null && us == null) {%>
                                 <li><a href="loginController"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%} else if(u != null){%>
+                                    <%} else if (u != null) {%>
                                 <li><a href="my-cart?uid=<%=u.getUser_id()%>"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%} else if(us != null){%>
-                                <li><a href="my-cart?uid=<%=us.getId() %>"><i class="fa fa-shopping-bag"></i> </a></li>
-    
+                                    <%} else if (us != null) {%>
+                                <li><a href="my-cart?uid=<%=us.getId()%>"><i class="fa fa-shopping-bag"></i> </a></li>
+
                                 <%}
-                                    %>
+                                %>
                             </ul>
 
                         </div>
