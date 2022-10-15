@@ -68,9 +68,10 @@ public class LoginServlet extends HttpServlet {
             if(result==null){
                 request.setAttribute("LoginError", errorMessage);
             }
-            if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer 
-                url = siteMaps.getProperty(HOME_PAGE);                                                   // to home page
-//                    response.sendRedirect("home");
+            if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer                                                                  
+                if (result.getStatus()==1) {
+                    url = siteMaps.getProperty(HOME_PAGE);   // to home page
+                }
             response.sendRedirect(url);
             }
             if (result != null && result.getRole_id().getRole().equals("staff")) {          // Role name = staff 
