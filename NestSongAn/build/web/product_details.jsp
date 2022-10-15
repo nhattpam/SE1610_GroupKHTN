@@ -74,7 +74,7 @@
                             <ul>
                                 <c:forEach items="${CList}" var="l">
                                     <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
-                                </c:forEach>
+                                    </c:forEach>
                             </ul>
                         </div>
                     </div>
@@ -125,18 +125,18 @@
         <!-- Breadcrumb Section End -->
         <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>
         <%
-                    UsersDTO u = (UsersDTO) session.getAttribute("USER");
-                    //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
-                    //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
-                    NumberFormat nf = NumberFormat.getInstance();
-                    nf.setMinimumIntegerDigits(0);
+            UsersDTO u = (UsersDTO) session.getAttribute("USER");
+            //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
+            //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
+            NumberFormat nf = NumberFormat.getInstance();
+            nf.setMinimumIntegerDigits(0);
 
-                    CartDTO cart = (CartDTO) session.getAttribute("cart");
-                    if (cart == null) {
-                        cart = new CartDTO();
-                        session.setAttribute("cart", cart);
-                    }
-                %>
+            CartDTO cart = (CartDTO) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new CartDTO();
+                session.setAttribute("cart", cart);
+            }
+        %>
         <!-- Product Details Section Begin -->
         <section class="product-details spad">
             <div class="container">
@@ -147,16 +147,16 @@
                                 <img class="product__details__pic__item--large"
                                      src="products/${detail.photo}" alt="">
                             </div>
-<!--                            <div class="product__details__pic__slider owl-carousel">
-                                <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                                     src="img/product/details/thumb-1.jpg" alt="">
-                                <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                                     src="img/product/details/thumb-2.jpg" alt="">
-                                <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                                     src="img/product/details/thumb-3.jpg" alt="">
-                                <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                                     src="img/product/details/thumb-4.jpg" alt="">
-                            </div>-->
+                            <!--                            <div class="product__details__pic__slider owl-carousel">
+                                                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
+                                                                 src="img/product/details/thumb-1.jpg" alt="">
+                                                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
+                                                                 src="img/product/details/thumb-2.jpg" alt="">
+                                                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
+                                                                 src="img/product/details/thumb-3.jpg" alt="">
+                                                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
+                                                                 src="img/product/details/thumb-4.jpg" alt="">
+                                                        </div>-->
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -179,20 +179,20 @@
                             <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=<%= System.currentTimeMillis()%>" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
                             <%}
                             %>
-                            
+
                             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                             <ul>
                                 <li><b>Số lượng còn lại</b> <span>${detail.quantity}</span></li>
                                 <li><b>Vận chuyển</b> <span><samp>Miễn Phí Vận Chuyển Toàn Quốc</samp></span></li>
                                 <li><b>Trọng lượng</b> <span>${detail.weight} gam</span></li>
-<!--                                <li><b>Share on</b>
-                                    <div class="share">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-instagram"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    </div>
-                                </li>-->
+                                <!--                                <li><b>Share on</b>
+                                                                    <div class="share">
+                                                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                                                        <a href="#"><i class="fa fa-instagram"></i></a>
+                                                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                                                    </div>
+                                                                </li>-->
                             </ul>
                         </div>
                     </div>
@@ -328,16 +328,16 @@
                                 <div class="product__item__pic set-bg" data-setbg="products/${l.photo}">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <%
-                                            if (u == null && us == null){%>
+                                                <%
+                                            if (u == null && us == null) {%>
 
-                                                <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%} else if(u != null){%>
-                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <%} else if(us != null){%>
-                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <%} else if (u != null) {%>
+                                        <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <%} else if (us != null) {%>
+                                        <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                                 <%}
-                                        %>
+                                                %>
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
@@ -347,8 +347,8 @@
                             </div>
                         </div>
                     </c:forEach>
-                    
-                    
+
+
                 </div>
             </div>
         </section>
@@ -364,30 +364,22 @@
                                 <a href="./index.html"><img src="img/logo-song-an.jpg" style="width: 50%;" alt=""></a>
                             </div>
                             <ul >
-                                <li style="color: white;">Address: 60-49 Road Rach Gia Kien Giang</li>
-                                <li style="color: white;">Phone: +65 11.188.888</li>
-                                <li style="color: white;">Email: hello@colorlib.com</li>
+                                <li style="color: white;">Địa chỉ: 60-49 Rạch Giá Kiên Giang</li>
+                                <li style="color: white;">Sđt:  +84 1235548 48</li>
+                                <li style="color: white;">Email: khtnholdings.work.gmail</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                         <div class="footer__widget">
-                            <h6 style="color: white;">Useful Links</h6>
+                            <h6 style="color: white;">Thông tin thêm</h6>
                             <ul>
-                                <li><a href="#" style="color: white;">About Us</a></li>
-                                <li><a href="#" style="color: white;">About Our Shop</a></li>
-                                <li><a href="#" style="color: white;">Secure Shopping</a></li>
-                                <li><a href="#" style="color: white;">Delivery infomation</a></li>
-                                <li><a href="#" style="color: white;">Privacy Policy</a></li>
-                                <li><a href="#" style="color: white;">Our Sitemap</a></li>
+                                <li><a href="ve-song-an" style="color: white;">Về song ân</a></li>
+                                <li><a href="huong-dan-mua-hang" style="color: white;">Hướng dẫn mua hàng</a></li>
+                                <li><a href="huong-dan-mua-hang" style="color: white;">Thanh toán</a></li>
                             </ul>
                             <ul>
-                                <li><a href="#" style="color: white;">Who We Are</a></li>
-                                <li><a href="#" style="color: white;">Our Services</a></li>
-                                <li><a href="#" style="color: white;">Projects</a></li>
-                                <li><a href="#" style="color: white;">Contact</a></li>
-                                <li><a href="#" style="color: white;">Innovation</a></li>
-                                <li><a href="#" style="color: white;">Testimonials</a></li>
+                                <!--<li><a href="#" style="color: white;">Testimonials</a></li>-->
                             </ul>
                         </div>
                     </div>
