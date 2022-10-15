@@ -20,6 +20,13 @@ import java.util.regex.Pattern;
 import java.util.Properties;
 import javax.servlet.RequestDispatcher;
 import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +44,8 @@ import utils.DBUtils;
 @WebServlet("/RegisterAccountController")
 public class RegisterAccountController extends HttpServlet {
 
-    private static final String REGISTER_PAGE = "registerPage";
+    private final static String MyEmail = "system.khtnholdings@gmail.com";
+    private final static String MyEmailPass = "ucdvvemszkiufhqi";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -51,14 +59,14 @@ public class RegisterAccountController extends HttpServlet {
             String email = req.getParameter("email");
             String password = req.getParameter("password");
             UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
-            
+
             HttpSession keepInput = req.getSession();
             keepInput.setAttribute("full_name", full_name);
             keepInput.setAttribute("user_name", user_name);
             keepInput.setAttribute("phone", phone);
             keepInput.setAttribute("email", email);
 
-            int status = 1; //1: tai khoan active: dang hoat dong
+            int status = 0; //0: tai khoan in-active: khong hoat dong
 
             Date now = new Date();
             SimpleDateFormat x = new SimpleDateFormat();
@@ -125,13 +133,45 @@ public class RegisterAccountController extends HttpServlet {
                 String checkPassword = toHexString(getSHA(password));
                 UsersDTO us = new UsersDTO(full_name, user_name, checkPassword, email, phone, status, create_date, edited_date, role_id);
 
+                int otpvalue = 0;
+                Random rand = new Random();
+                otpvalue = rand.nextInt(1255650);
+
+                String to = email;// change accordingly
+                // Get the session object
+                Properties props = new Properties();
+                props.put("mail.smtp.host", "smtp.gmail.com");
+                props.put("mail.smtp.socketFactory.port", "465");
+                props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.port", "465");
+                Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(MyEmail, MyEmailPass);// Put your email
+                        // id and
+                        // password here
+                    }
+                });
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(email));// change accordingly
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+                message.setSubject("Verify Email");
+                message.setText("Your OTP is: " + otpvalue);
+                // send message
+
+                String htmlContent = "Your Link is: <a href=\""
+                        + "http://localhost:8080/NestSongAn/VerifyOTP\""
+                        + ">Xác nhận tài khoản</a>";
+                // send message
+                message.setContent(htmlContent, "text/html; charset=utf-8");
+                Transport.send(message);
+                resp.sendRedirect("LoginServlet");
                 boolean result = dao.userRegister(us);
-                HttpSession session = req.getSession();
                 if (result == true) {
-                    session.setAttribute("succMsg", "Đăng ký tài khoản thành công...");
-                    resp.sendRedirect("RegisterAccountController");
+                    keepInput.setAttribute("succMsg", "Vui lòng đăng nhập email để kích hoạt tài khoản.");
+                    // sending otp
+
                 } else {
-                    session.setAttribute("failedMsg", "Có lỗi trên hệ thống...");
                     resp.sendRedirect("RegisterAccountController");
                 }
             }
@@ -152,7 +192,7 @@ public class RegisterAccountController extends HttpServlet {
 //        String user_name = (String) keepInput.getAttribute("user_name");
 //        String phone = (String) keepInput.getAttribute("phone");
 //        String email = (String) keepInput.getAttribute("email");
-        
+
         req.getRequestDispatcher("register.jsp").forward(req, resp);
     }
 

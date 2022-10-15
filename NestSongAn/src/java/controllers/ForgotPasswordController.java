@@ -61,8 +61,7 @@ public class ForgotPasswordController extends HttpServlet {
                 message.setFrom(new InternetAddress(email));// change accordingly
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
                 message.setSubject("Hello");
-                message.setText("Your OTP is: " + otpvalue);
-                // send message
+                message.setText("Your OTP is: " + otpvalue);  
                 Transport.send(message);
                 System.out.println("Message sent successfully");
             } catch (MessagingException e) {
