@@ -164,6 +164,10 @@
         <jsp:include page="header.jsp"/>   
         <div class="signin-form">
             <form action="loginController" method="post">
+                <c:if test="${ not empty succMsg }">
+                    <h5 class="text-center text-success">${succMsg}</h5>
+                    <c:remove var="succMsg" scope="session"/>
+                </c:if>
                 <c:if test="${ not empty LoginError }">
                     <h5 class="text-center text-danger">${LoginError}</h5>
                 </c:if>
@@ -173,7 +177,7 @@
                     <!--<a href="#" class="btn btn-primary btn-lg" title="Facebook"><i class="fa fa-facebook"></i></a>-->
                     <!--<a href="#" class="btn btn-info btn-lg" title="Twitter"><i class="fa fa-twitter"></i></a>-->
                     <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/NestSongAn/login-google&response_type=code
-                   &client_id=34728737226-pshthan6um4e9qkcndvrrmvhr1b9mqqp.apps.googleusercontent.com&approval_prompt=force" class="btn btn-danger btn-lg" title="Google"><i class="fa fa-google"></i></a>
+                       &client_id=34728737226-pshthan6um4e9qkcndvrrmvhr1b9mqqp.apps.googleusercontent.com&approval_prompt=force" class="btn btn-danger btn-lg" title="Google"><i class="fa fa-google"></i></a>
                 </div>
                 <!--<div class="or-seperator"><b></b></div>-->
                 <div class="form-group">

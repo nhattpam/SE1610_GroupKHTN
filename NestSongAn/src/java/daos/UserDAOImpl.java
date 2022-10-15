@@ -333,6 +333,37 @@ public class UserDAOImpl implements UserDAO {
         }
         return check;
     }
+//    @Override
+    public boolean updateStatus(int status, String email) throws SQLException {
+        boolean check = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE users SET status = 1 WHERE email = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, email);
+                rs = stm.executeQuery();  
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (rs != null) {
+            rs.close();
+        }
+        if (stm != null) {
+            stm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+        return check;
+    }
 
     @Override
     public GoogleDTO viewAcc(String email) throws SQLException {
