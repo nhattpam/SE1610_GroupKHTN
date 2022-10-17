@@ -6,6 +6,7 @@
 package controllers;
 
 import daos.ProductDAOImpl;
+import dtos.CartDTO;
 import dtos.CategoryDTO;
 import java.util.List;
 import dtos.ProductDTO;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.DBUtils;
 
 /**
@@ -53,6 +55,15 @@ public class ProductDetailController extends HttpServlet {
         
         List<ProductDTO> listLastest = daoLastest.getAllProductLastest();
         request.setAttribute("listLastest", listLastest);
+        
+        //check cart
+        HttpSession sCart = request.getSession();
+        CartDTO cart = (CartDTO) sCart.getAttribute("cart");
+        if (cart == null) {
+            cart = new CartDTO();
+            sCart.setAttribute("cart", cart);
+        }
+        System.out.println(cart);
         
         request.getRequestDispatcher("product_details.jsp").forward(request, response);
     }

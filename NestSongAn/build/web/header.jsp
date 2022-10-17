@@ -146,27 +146,27 @@
                                 <div class="header__top__right__language">                                   
                                 </div>
                                 <!--login-->
-                                <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
+
                                 <c:if test="${not empty USER}">
                                     <div class="header__top__right__language">
-                                        <a href="" style="color: white;"><i class="fa fa-user"></i> <%=u.getFull_name()%></a>
+                                        <a href="" style="color: white;"><i class="fa fa-user"></i> ${USER.full_name}</a>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
-                                            <li><a href="MyProfile?uid=<%=u.getUser_id()%>" style="color: white;">Tài khoản</a></li>
-                                            <li><a href="my-order?uid=<%=u.getUser_id()%>" style="color: white;">Lịch sử mua</a></li>
+                                            <li><a href="MyProfile?uid=${USER.user_id}" style="color: white;">Tài khoản</a></li>
+                                            <li><a href="my-order?uid=${USER.user_id}" style="color: white;">Lịch sử mua</a></li>
                                                 <c:url var="logout" value="logoutController"/>
                                             <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
                                     </div>
                                 </c:if>
-                                <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>
+                                <!--<% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>-->
                                 <c:if test="${not empty USERG}">
                                     <div class="header__top__right__language">
-                                        <a href="" style="color: white;"><i class="fa fa-user"></i> <%=us.getName()%></a>
+                                        <a href="" style="color: white;"><i class="fa fa-user"></i> ${USERG.name}</a>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
-                                            <li><a href="MyProfile?uid=<%=us.getId()%>" style="color: white;">Tài Khoản</a></li>
-                                            <li><a href="my-order-gg?uid=<%=us.getId()%>" style="color: white;">Lịch sử mua</a></li>
+                                            <li><a href="MyProfile?uid=${USERG.id}" style="color: white;">Tài Khoản</a></li>
+                                            <li><a href="my-order-gg?uid=${USERG.id}" style="color: white;">Lịch sử mua</a></li>
                                                 <c:url var="logout" value="logoutController"/>
                                             <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
@@ -214,16 +214,16 @@
                         <div class="header__cart">
                             <ul>
                                 <li><a href="#"><i class="fa fa-heart"></i> </a></li>
-                                    <%
-                                        if (u == null && us == null) {%>
+                                    <c:if test="${empty USER && empty USERG}">
                                 <li><a href="loginController"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%} else if (u != null) {%>
-                                <li><a href="my-cart?uid=<%=u.getUser_id()%>"><i class="fa fa-shopping-bag"></i> </a></li>
-                                    <%} else if (us != null) {%>
-                                <li><a href="my-cart?uid=<%=us.getId()%>"><i class="fa fa-shopping-bag"></i> </a></li>
-
-                                <%}
-                                %>
+                                     </c:if>
+                                <c:if test="${ not empty USER }">
+                                    <li><a href="my-cart?uid=${USER.user_id}"><i class="fa fa-shopping-bag"></i> </a></li>
+                                </c:if>
+                                <c:if test="${ not empty USERG }">
+                                    <li><a href="my-cart?uid=${USERG.id}"><i class="fa fa-shopping-bag"></i> </a></li>
+                                </c:if>
+                                    
                             </ul>
 
                         </div>
