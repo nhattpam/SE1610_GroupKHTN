@@ -123,20 +123,6 @@
             </div>
         </section>
         <!-- Breadcrumb Section End -->
-        <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>
-        <%
-            UsersDTO u = (UsersDTO) session.getAttribute("USER");
-            //ProductDAOImpl productDAO = new ProductDAOImpl(DBUtils.getConnection());
-            //ProductDTO p = productDAO.getProductId(request.getParameter("product_id"));
-            NumberFormat nf = NumberFormat.getInstance();
-            nf.setMinimumIntegerDigits(0);
-
-            CartDTO cart = (CartDTO) session.getAttribute("cart");
-            if (cart == null) {
-                cart = new CartDTO();
-                session.setAttribute("cart", cart);
-            }
-        %>
         <!-- Product Details Section Begin -->
         <section class="product-details spad">
             <div class="container">
@@ -172,13 +158,15 @@
                             </div>
                             <div class="product__details__price"><fmt:formatNumber type="number" groupingUsed="true" value="${detail.price}" /> VNĐ</div>
                             <p>${detail.short_description}</p>
-                            <%
-                                if (u == null) {%>
-                            <a href="loginController" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
-                            <%} else {%>
-                            <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=<%= System.currentTimeMillis()%>" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
-                            <%}
-                            %>
+                            <c:if test="${empty USER && empty USERG}">
+                                <a href="loginController" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            </c:if>
+                            <c:if test="${ not empty USER }">
+                                <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            </c:if>
+                            <c:if test="${ not empty USERG }">
+                                <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                            </c:if>
 
                             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                             <ul>
@@ -328,16 +316,15 @@
                                 <div class="product__item__pic set-bg" data-setbg="products/${l.photo}">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <%
-                                            if (u == null && us == null) {%>
-
-                                        <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <%} else if (u != null) {%>
-                                        <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <%} else if (us != null) {%>
-                                        <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=<%= System.currentTimeMillis()%>"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <%}
-                                                %>
+                                        <c:if test="${empty USER && empty USERG}">
+                                            <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </c:if>
+                                        <c:if test="${ not empty USER }">
+                                             <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>   
+                                        </c:if>    
+                                        <c:if test="${ not empty USERG }">
+                                             <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>    
+                                        </c:if>
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">

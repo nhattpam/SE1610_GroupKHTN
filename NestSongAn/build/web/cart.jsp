@@ -187,6 +187,8 @@
                     <div class="loader"></div>
                 </div>-->
         <jsp:include page="header.jsp" />
+        <%--<c:out value="${sessionScope.cart.getList()}" />--%>
+        
 
         <%
             CartDTO cart = (CartDTO) session.getAttribute("cart");

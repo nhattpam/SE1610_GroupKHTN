@@ -52,6 +52,24 @@ public class CheckoutController extends HttpServlet {
         request.setAttribute("user", u);
 
 //        request.setAttribute("usergg", us);
+        CartDTO cart = (CartDTO) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new CartDTO();
+            session.setAttribute("cart", cart);
+        }
+        TreeMap<ProductDTO, Integer> list = cart.getList();
+        request.setAttribute("list", list);
+        
+        float totalSum=0;
+        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
+            ProductDTO key = ds.getKey();
+            Integer value = ds.getValue();
+//            request.setAttribute("key", key);
+//            request.setAttribute("value", value);
+//            request.setAttribute("ds", ds);
+            System.out.println(ds.getKey().getCategory_id());
+        }
+        
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
 

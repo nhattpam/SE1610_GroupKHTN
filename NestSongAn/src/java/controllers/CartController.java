@@ -11,6 +11,8 @@ import dtos.ProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +35,23 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
+        HttpSession session = request.getSession();
+        CartDTO cart = (CartDTO) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new CartDTO();
+            session.setAttribute("cart", cart);
+        }
+        TreeMap<ProductDTO, Integer> list = cart.getList();
+//        request.setAttribute("list", list.entrySet());
+        float totalSum = 0;
+        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()){
+            ProductDTO key = ds.getKey();
+            Integer value = ds.getValue();
+            System.out.println(ds.getKey().getName());
+            request.setAttribute("ds", ds);
+            System.out.println(ds.getKey().getName());
+        }
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
     @Override
