@@ -60,15 +60,8 @@ public class CheckoutController extends HttpServlet {
         TreeMap<ProductDTO, Integer> list = cart.getList();
         request.setAttribute("list", list);
         
-        float totalSum=0;
-        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
-            ProductDTO key = ds.getKey();
-            Integer value = ds.getValue();
-//            request.setAttribute("key", key);
-//            request.setAttribute("value", value);
-//            request.setAttribute("ds", ds);
-            System.out.println(ds.getKey().getCategory_id());
-        }
+        float totalSum= 0f;
+        
         
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
@@ -93,8 +86,16 @@ public class CheckoutController extends HttpServlet {
             System.out.println("User_id: " + getUser_id + ", " + "Address: " + delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
 
             HttpSession sessin = request.getSession();
-            float totalPrice = (float) sessin.getAttribute("TotalPrice");
-            System.out.println(totalPrice);
+//            float totalPrice = (float) sessin.getAttribute("TotalPriceAll");
+//            System.out.println(totalPrice);
+            System.out.println(sessin.getAttribute("TotalPriceAll"));
+            
+            double tt = (double) sessin.getAttribute("TotalPriceAll");
+            System.out.println("this is tt: " + tt);
+            
+            float total = (float) tt;
+            System.out.println("this is t1: " + total);
+            
 
 
             HttpSession session = request.getSession();
@@ -116,7 +117,8 @@ public class CheckoutController extends HttpServlet {
                 try {
                     Date date = new Date();
                     String order_id = "" + date.getTime();
-                    OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date, totalPrice, 1, user_id);
+                    OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date, total, 1, user_id);
+                    
 
                     //status = 1: order pending
                     od.setOrder_id(order_id);

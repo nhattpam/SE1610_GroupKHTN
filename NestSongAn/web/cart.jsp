@@ -6,6 +6,7 @@
 <%@page import="dtos.CartDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -182,25 +183,10 @@
         </style>
     </head>
     <body>
-        <!--         Page Preloder 
-                <div id="preloder">
-                    <div class="loader"></div>
-                </div>-->
+
         <jsp:include page="header.jsp" />
-        <%--<c:out value="${sessionScope.cart.getList()}" />--%>
+
         
-
-        <%
-            CartDTO cart = (CartDTO) session.getAttribute("cart");
-            if (cart == null) {
-                cart = new CartDTO();
-                session.setAttribute("cart", cart);
-            }
-            TreeMap<ProductDTO, Integer> list = cart.getList();
-            NumberFormat nf = NumberFormat.getInstance();
-            nf.setMinimumIntegerDigits(0);
-        %>
-
         <section id="cart_items">
             <div class="container">
                 <div class="breadcrumbs">
@@ -222,48 +208,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%
-                                float totalSum=0;
-                                for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
-                                    
-                            %>
+                            <c:set var="TotalPriceAll" scope="session" value="0" />
+                            <c:forEach items="${requestScope.list}" var="map">
+                                
+                                <tr>
+                                    <td class="cart_product">
+                                        <a href=""><img src="products/${map.key.photo}" alt="" style="width: 50px; height: 60px;"></a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <h4><a href="">${map.key.name}</a></h4>
+                                        <p>Code: ${map.key.code}</p>
+                                    </td>
+                                    <td class="cart_price">
+                                        <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price}" /> VNĐ</p>
+                                    </td>
+                                    <td class="cart_quantity">
+                                        <div class="cart_quantity_button">
+                                            <a class="cart_quantity_up" href="add-cart?command=plus&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"> + </a>
+                                            <input class="cart_quantity_input" type="text" value="${map.value}" autocomplete="off" size="2" disabled="">
+                                            <a class="cart_quantity_down" href="add-cart?command=sub&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"> - </a>
+                                        </div>
+                                    </td>
+                                    <td class="cart_total">
+                                        <c:set var="TotalPriceAll" scope="session" value="${TotalPriceAll+(map.value * map.key.price)}" />
+                                        <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price * map.value}" /> VNĐ</p>
+                                    </td>
+                                    <td class="cart_delete">
+                                        <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
 
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="products/<%= ds.getKey().getPhoto()%>" alt="" style="width: 50px; height: 60px;"></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href=""><%= ds.getKey().getName()%></a></h4>
-                                    <p>Code: <%= ds.getKey().getCode()%></p>
-                                </td>
-                                <td class="cart_price">
-                                    <p><%= nf.format(ds.getKey().getPrice())%> VNĐ</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href="add-cart?command=plus&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"> + </a>
-                                        <input class="cart_quantity_input" type="text" value="<%= ds.getValue()%>" autocomplete="off" size="2" disabled="">
-                                        <a class="cart_quantity_down" href="add-cart?command=sub&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <%totalSum+=ds.getValue() * ds.getKey().getPrice();%>
-                                    <p class="cart_total_price"><%= nf.format(ds.getValue() * ds.getKey().getPrice())%> VNĐ</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <%
-                                }
-                            %>
 
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td style="font-weight: bold;">Tiền tạm tính: </td>
-                                <td style="color: green; font-size: large; font-weight: bold;"><%=nf.format(totalSum)%> VNĐ</td>
+                                <td style="color: green; font-size: large; font-weight: bold;"><fmt:formatNumber type="number" groupingUsed="true" value="${TotalPriceAll}" /> VNĐ</td>
                             </tr>
                         </tbody>
 
@@ -271,27 +253,21 @@
 
                 </div>
                 <div  class="container-fluid mb-5" style="color: white">
-                    <c:if test="${not empty USER }">
-                        <%
-                        if (list.entrySet().isEmpty()) {
-                                System.out.print("empty");
-                            } else {%>
-                                <a class="btn btn-custom btn-lg btn-block" href="checkout" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
-                            <%}
-                        %>
-                        
-
+                    <c:if test="${ not empty USER }">
+                        <c:if test="${ empty requestScope.list }">
+                            Giỏ hàng trống
+                        </c:if>
+                        <c:if test="${ not empty requestScope.list }">
+                             <a class="btn btn-custom btn-lg btn-block" href="checkout" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+                        </c:if>
                     </c:if>
-                    <c:if test="${not empty USERG }">
-                        <%
-                        if (list.entrySet().isEmpty()) {
-                                System.out.print("empty");
-                            } else {%>
-                                 <a class="btn btn-custom btn-lg btn-block" href="checkoutgg" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
-                            <%}
-                        %>
-                       
-
+                    <c:if test="${ not empty USERG }">
+                        <c:if test="${ empty requestScope.list }">
+                            Giỏ hàng trống
+                        </c:if>
+                        <c:if test="${ not empty requestScope.list }">
+                             <a class="btn btn-custom btn-lg btn-block" href="checkoutgg" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+                        </c:if>
                     </c:if>
                 </div>
             </div>

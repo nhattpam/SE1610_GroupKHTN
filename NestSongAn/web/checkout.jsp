@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.Map"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.TreeMap"%>
@@ -196,16 +197,7 @@
             <div class="loader"></div>
         </div>-->
         <jsp:include page="header.jsp" />
-        <%
-            CartDTO cart = (CartDTO) session.getAttribute("cart");
-            if (cart == null) {
-                cart = new CartDTO();
-                session.setAttribute("cart", cart);
-            }
-            TreeMap<ProductDTO, Integer> list = cart.getList();
-            NumberFormat nf = NumberFormat.getInstance();
-            nf.setMinimumIntegerDigits(0);
-        %>
+
 
         <section id="cart_items">
             <div class="container">
@@ -453,7 +445,7 @@
                                 
                             </div>
                         </div>
-                        <div class="table-responsive cart_info mt-5">
+                        <div class="table-responsive cart_info">
                             <table class="table table-condensed">
                                 <thead>
                                     <tr class="cart_menu">
@@ -466,50 +458,44 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <c:set var="TotalPriceAll" scope="session" value="0" />
+                                    <c:forEach items="${requestScope.list}" var="map">
+                                        <tr>
+                                            <td class="cart_product">
+                                                <a href=""><img src="products/${map.key.photo}" alt="" style="width: 50px; height: 60px;"></a>
+                                            </td>
+                                            <td class="cart_description">
+                                                <h4><a href="">${map.key.name}</a></h4>
+                                                <p>Code: ${map.key.code}</p>
+                                            </td>
+                                            <td class="cart_price">
+                                                <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price}" /> VNĐ</p>
+                                            </td>
+                                            <td class="cart_quantity">
+                                                <div class="cart_quantity_button">
+                                                    <a class="cart_quantity_up" href="add-cart?command=plus&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"> + </a>
+                                                    <input class="cart_quantity_input" type="text" value="${map.value}" autocomplete="off" size="2" disabled="">
+                                                    <a class="cart_quantity_down" href="add-cart?command=sub&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"> - </a>
+                                                </div>
+                                            </td>
+                                            <td class="cart_total">
+                                                <c:set var="TotalPriceAll" scope="session" value="${TotalPriceAll+(map.value * map.key.price)}" />
+                                                <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price * map.value}" /> VNĐ</p>
+                                            </td>
+                                            <td class="cart_delete">
+                                                <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
 
-                                    <%
-                                        float totalSum=0;
-                                        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
-                                    %>
 
-                                    <tr>
-                                        <td class="cart_product">
-                                            <a href=""><img src="products/<%= ds.getKey().getPhoto()%>" alt="" style="width: 50px; height: 60px;"></a>
-                                        </td>
-                                        <td class="cart_description">
-                                            <h4><a href=""><%= ds.getKey().getName()%></a></h4>
-                                            <p>Code: <%= ds.getKey().getCode()%></p>
-                                        </td>
-                                        <td class="cart_price">
-                                            <p><%= nf.format(ds.getKey().getPrice())%> VNĐ</p>
-                                        </td>
-                                        <td class="cart_quantity">
-                                            <div class="cart_quantity_button">
-                                                <a class="cart_quantity_up" href="add-cart?command=plus&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"> + </a>
-                                                <input class="cart_quantity_input" type="text" value="<%= ds.getValue()%>" autocomplete="off" size="2" disabled="">
-                                                <a class="cart_quantity_down" href="add-cart?command=sub&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"> - </a>
-                                            </div>
-                                        </td>
-                                        <td class="cart_total">
-                                            <%totalSum+=ds.getValue() * ds.getKey().getPrice();%>
-                                            <p class="cart_total_price"><%= nf.format(ds.getValue() * ds.getKey().getPrice())%> VNĐ</p>
-                                        </td>
-                                        <td class="cart_delete">
-                                            <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=<%= ds.getKey().getProduct_id()%>&cartID=<%=System.currentTimeMillis()%>"><i class="fa fa-times"></i></a>
-                                        </td>
-                                    </tr>
-
-                                    <%
-                                        }
-                                        session.setAttribute("TotalPrice", totalSum);
-                                    %>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td style="font-weight: bold;">Tiền tạm tính: </td>
-                                        <td style="color: green; font-size: large; font-weight: bold"><%=nf.format(totalSum)%> VNĐ</td>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-weight: bold;">Tiền tạm tính: </td>
+                                    <td style="color: green; font-size: large; font-weight: bold;"><fmt:formatNumber type="number" groupingUsed="true" value="${TotalPriceAll}" /> VNĐ</td>
+                                </tr>
                                 </tbody>
 
                             </table>
