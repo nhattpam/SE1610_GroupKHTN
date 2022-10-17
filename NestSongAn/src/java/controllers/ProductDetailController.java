@@ -5,9 +5,11 @@
  */
 package controllers;
 
+import daos.FeedbackDAOImpl;
 import daos.ProductDAOImpl;
 import dtos.CartDTO;
 import dtos.CategoryDTO;
+import dtos.FeedbackDTO;
 import java.util.List;
 import dtos.ProductDTO;
 import java.io.IOException;
@@ -49,7 +51,26 @@ public class ProductDetailController extends HttpServlet {
         
         request.setAttribute("CList", listCategory); //ban qua detail
         
+        //view all feedback
+        FeedbackDAOImpl fedao = new FeedbackDAOImpl(DBUtils.getConnection());
+        List<FeedbackDTO> felist = fedao.viewAllfeedback();
+        request.setAttribute("listFeedback", felist);
         
+        //phan trang
+        int count = fedao.getTotalFeedback();
+        int endpage = count/2;
+        if(count%2 !=0){
+            endpage++;
+        }
+        request.setAttribute("enpage", endpage);
+        //get index
+        String indexPage = request.getParameter("index");
+        if(indexPage == null){
+           indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
+        List<FeedbackDTO> felist1 = fedao.pagingFeedback(index);
+        request.setAttribute("listPage", felist1);
         //lastest product
         ProductDAOImpl daoLastest = new ProductDAOImpl(DBUtils.getConnection());
         

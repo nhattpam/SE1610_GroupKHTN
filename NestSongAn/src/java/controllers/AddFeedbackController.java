@@ -66,19 +66,17 @@ public class AddFeedbackController extends HttpServlet {
             if (feedback == null) {
                 check = false;
             }
-            if (uid == 0) {
-                check = false;
+            if (uid != 0) {
+                response.sendRedirect("loginController");
             }
             if (pid == 0) {
                 check = false;
             }
             if (check) {
                 FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
-                boolean f =fed.addFeedback(feedback, uid, createdDate, pid);
-                if(f){
-                    response.sendRedirect("detail?product_id="+pid);
-                }
+                fed.addFeedback(feedback, uid, createdDate, pid);
             }
+            response.sendRedirect("detail?product_id="+pid);
 
         } catch (Exception e) {
             e.printStackTrace();
