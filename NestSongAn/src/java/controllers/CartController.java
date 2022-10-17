@@ -35,23 +35,6 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
-        HttpSession session = request.getSession();
-        CartDTO cart = (CartDTO) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new CartDTO();
-            session.setAttribute("cart", cart);
-        }
-        TreeMap<ProductDTO, Integer> list = cart.getList();
-//        request.setAttribute("list", list.entrySet());
-        float totalSum = 0;
-        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()){
-            ProductDTO key = ds.getKey();
-            Integer value = ds.getValue();
-            System.out.println(ds.getKey().getName());
-            request.setAttribute("ds", ds);
-            System.out.println(ds.getKey().getName());
-        }
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
     @Override
@@ -93,7 +76,8 @@ public class CartController extends HttpServlet {
                         cart.addToCart(p, 1);
                         listBuy.add(idBuy);
                     }
-                    url = "/cart.jsp";
+//                    url = "/cart.jsp";
+                    url = "/my-cart";
                     break;
                 case "sub":
                     if (listBuy == null) {
@@ -104,11 +88,13 @@ public class CartController extends HttpServlet {
                         cart.subToCart(p, 1);
                         listBuy.add(idBuy);
                     }
-                    url = "/cart.jsp";
+//                    url = "/cart.jsp";
+                     url = "/my-cart";
                     break;
                 case "remove":
                     cart.removeToCart(p);
-                    url = "/cart.jsp";
+//                    url = "/cart.jsp";
+                     url = "/my-cart";
                     break;
                 default:
                     break;

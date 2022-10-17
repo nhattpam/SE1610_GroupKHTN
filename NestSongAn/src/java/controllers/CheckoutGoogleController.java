@@ -64,6 +64,16 @@ public class CheckoutGoogleController extends HttpServlet {
             HttpSession s1 = request.getSession();
 
             s1.setAttribute("usergg", u);
+            //check cart
+            CartDTO cart = (CartDTO) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new CartDTO();
+                session.setAttribute("cart", cart);
+            }
+            TreeMap<ProductDTO, Integer> list = cart.getList();
+            request.setAttribute("list", list);
+
+            float totalSum = 0;
             request.getRequestDispatcher("checkout.jsp").forward(request, response);
         } catch (Exception e) {
         }
@@ -96,6 +106,18 @@ public class CheckoutGoogleController extends HttpServlet {
 //        System.out.println("User_id: " + getUser_id + ", " + "branch: " + branch_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
             System.out.println("User_id: " + getUser_id + ", " + "Address: " + delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
 
+            HttpSession sessin = request.getSession();
+//            float totalPrice = (float) sessin.getAttribute("TotalPriceAll");
+//            System.out.println(totalPrice);
+            System.out.println(sessin.getAttribute("TotalPriceAll"));
+            
+            double tt = (double) sessin.getAttribute("TotalPriceAll");
+            System.out.println("this is tt: " + tt);
+            
+            float total = (float) tt;
+            System.out.println("this is t1: " + total);
+            
+            
             HttpSession session = request.getSession();
             CartDTO cart = (CartDTO) session.getAttribute("cart");
 
@@ -105,9 +127,9 @@ public class CheckoutGoogleController extends HttpServlet {
             SimpleDateFormat x = new SimpleDateFormat();
             String order_date = x.format(now);
 
-            HttpSession sessin = request.getSession();
-            float totalPrice = (float) sessin.getAttribute("TotalPrice");
-            System.out.println(totalPrice);
+//            HttpSession sessin = request.getSession();
+//            float totalPrice = (float) sessin.getAttribute("TotalPrice");
+//            System.out.println(totalPrice);
 
             HttpSession sessionValidate = request.getSession();
             boolean check = true;
@@ -126,7 +148,7 @@ public class CheckoutGoogleController extends HttpServlet {
                 try {
                     Date date = new Date();
                     String order_id = "" + date.getTime();
-                    OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date, totalPrice, 1, user_id);
+                    OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date, total, 1, user_id);
 
                     //status = 1: order pending
                     od.setOrder_id(order_id);
