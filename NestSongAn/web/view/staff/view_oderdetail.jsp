@@ -223,15 +223,14 @@
             <div class="content-wrapper">
                 <div class="container">
                     <h4 style="color: #6a0e13">Chi tiết đơn hàng</h4>
-
+                    <p><span style="font-weight: bold">Mã Hóa Đơn: </span>${order_id}</p>
+                    <p><span style="font-weight: bold">Địa Chỉ Giao Hàng: </span>${delivery_address}</p>
+                    <p><span style="font-weight: bold">Phương Thức Thanh Toán: </span>${payment_method}</p>
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Mã Hóa Đơn</th>
                                 <th scope="col">Sản phẩm</th>
                                 <th scope="col">Số lượng</th>
-                                <th scope="col">Địa Chỉ Giao Hàng</th>
-                                <th scope="col">Phương Thức Thanh Toán</th>
                                 <th scope="col">Đơn giá</th>
                             </tr>
                         </thead>
@@ -239,11 +238,8 @@
                             <c:forEach items="${listDetails}" var="d">
 
                                 <tr>
-                                    <td>${d.order_id.order_id}</td>
                                     <td>${d.product_id.name}</td>
-                                    <td>${d.quantity}</td
-                                    <td>${d.order_id.delivery_address}</td
-                                    <td>${d.order_id.payment_method}</td
+                                    <td>${d.quantity}</td>
                                     <td><fmt:formatNumber type="number" groupingUsed="true" value="${d.total_price}" /> VNĐ</td>
                                 </tr>
                             </c:forEach>

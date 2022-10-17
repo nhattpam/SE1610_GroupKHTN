@@ -5,11 +5,13 @@
  */
 package mainf;
 
+import daos.FeedbackDAOImpl;
 import daos.OrderDAOImpl;
 import daos.OrderDetailsDAOImpl;
 import daos.ProductDAOImpl;
 import daos.UserDAOImpl;
 import dtos.CategoryDTO;
+import dtos.FeedbackDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import dtos.ProductDTO;
@@ -28,10 +30,25 @@ public class test {
 
     public static void main(String[] args) throws SQLException {
        UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
-       
+        FeedbackDAOImpl fedao = new FeedbackDAOImpl();
+        List<FeedbackDTO> list = fedao.viewAllfeedback();
+        List<FeedbackDTO> list1 = fedao.pagingFeedback(2);
+        int i = fedao.getTotalFeedback();
        UsersDTO u = dao.viewAccountStaff(4);
-       
-        System.out.println(u.getEmail() + ", id: " + u.getUser_id() + ", " + u.getPassword());
-        
+       String order_id = "1665556079080";
+//       
+//        System.out.println(u.getEmail() + ", id: " + u.getUser_id() + ", " + u.getPassword());
+        OrderDAOImpl oda = new OrderDAOImpl(DBUtils.getConnection());
+        OrderDTO o = oda.getOderdetail(order_id);
+//        System.out.println(o.getDelivery_address()+", "+o.getPayment_method());
+        for (FeedbackDTO feedbackDTO : list) {
+            System.out.println(feedbackDTO.getFeedback_id()+", "+feedbackDTO.getUser_id().getUser_name()+", "+feedbackDTO.getFeedback()+", "+feedbackDTO.getCreate_date()+
+                    ", "+feedbackDTO.getProduct_id().getProduct_id()+", "+feedbackDTO.getUser_id().getUser_id());
+        }
+        for (FeedbackDTO feedbackDTO : list1) {
+            System.out.println(feedbackDTO.getFeedback_id()+", "+feedbackDTO.getUser_id().getUser_name()+", "+feedbackDTO.getFeedback()+", "+feedbackDTO.getCreate_date()+
+                    ", "+feedbackDTO.getProduct_id().getProduct_id()+", "+feedbackDTO.getUser_id().getUser_id());
+        }
+        System.out.println(i);
     }
 }

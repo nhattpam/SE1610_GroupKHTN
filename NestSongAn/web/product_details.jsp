@@ -215,71 +215,45 @@
                                 </div>
                                 <div class="tab-pane" id="tabs-3" role="tabpane3">
                                     <div class="product__details__tab__desc">
-                                        <h6>Products Infomation</h6>
-                                        <p>${detail.full_description}</p>
                                         <section style="background-color: #eee;">
                                             <div class="container py-5">
 
                                                 <div class="row">
 
                                                     <div class="col-md-6 col-lg-7 col-xl-8">
-
-                                                        <ul class="list-unstyled">
-                                                            <li class="d-flex justify-content-between mb-4">
-                                                                <div class="card">
-                                                                    <div class="card-header d-flex justify-content-between p-3">
-                                                                        <p class="fw-bold mb-0">Brad Pitt</p>
-                                                                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> 12 mins ago</p>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <p class="mb-0">
-                                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                                            labore et dolore magna aliqua.
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="d-flex justify-content-between mb-4">
-                                                                <div class="card w-100">
-                                                                    <div class="card-header d-flex justify-content-between p-3">
-                                                                        <p class="fw-bold mb-0">Lara Croft</p>
-                                                                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> 13 mins ago</p>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <p class="mb-0">
-                                                                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                                                            laudantium.
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
+                                                        <c:forEach items="${listFeedback}" var="f">
                                                             <li class="d-flex justify-content-between mb-4" width="60">
-                                                                <i class="fa fa-user" width="60"></i>
+                                                                <c:if test="${empty l.user_id.user_id}"></c:if>
+                                                                <c:if test="${not empty l.user_id.user_id}">
+                                                                    <c:if test="${USER.user_id = l.user_id.user_id}"><i class="fa fa-user" width="60"></i></c:if>
+                                                                </c:if>
+                                                                
                                                                 <div class="card">
                                                                     <div class="card-header d-flex justify-content-between p-3">
-                                                                        <p class="fw-bold mb-0">Brad Pitt</p>
-                                                                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> 10 mins ago</p>
+                                                                        <p class="fw-bold mb-0">${f.user_id.user_name}</p>
+                                                                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> ${f.create_date}</p>
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <p class="mb-0">
-                                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                                            labore et dolore magna aliqua.
+                                                                            ${f.feedback}
                                                                         </p>
                                                                     </div>
                                                                 </div>
                                                             </li>
-                                                            <!--input-->
-                                                            <form action="AddFeedback" method="POST">
-                                                                <li class="bg-white mb-3">
-                                                                    <div class="form-outline">
-                                                                        <input type="hidden" name="uid" value="${USER.user_id}">
-                                                                        <input type="hidden" name="pid" value="${detail.product_id}">
-                                                                        <textarea type="textarea" class="form-control" id="textAreaExample2" rows="4" name="feedback"></textarea>
-                                                                        <label class="form-label" for="textAreaExample2">Message</label>
-                                                                    </div>
-                                                                </li>
-                                                                <button type="input" class="btn btn-info btn-rounded float-end">Send</button>
-                                                            </form>
+                                                        </c:forEach>
+
+                                                        <!--input-->
+                                                        <form action="AddFeedback" method="POST">
+                                                            <li class="bg-white mb-3">
+                                                                <div class="form-outline">
+                                                                    <input type="hidden" name="uid" value="${USER.user_id}">
+                                                                    <input type="hidden" name="pid" value="${detail.product_id}">
+                                                                    <textarea type="textarea" class="form-control" id="textAreaExample2" rows="4" name="feedback"></textarea>
+                                                                    <label class="form-label" for="textAreaExample2">Message</label>
+                                                                </div>
+                                                            </li>
+                                                            <button type="input" class="btn btn-info btn-rounded float-end">Send</button>
+                                                        </form>
 
                                                         </ul>
 
@@ -316,15 +290,15 @@
                                 <div class="product__item__pic set-bg" data-setbg="products/${l.photo}">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <c:if test="${empty USER && empty USERG}">
+                                                <c:if test="${empty USER && empty USERG}">
                                             <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </c:if>
-                                        <c:if test="${ not empty USER }">
-                                             <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>   
-                                        </c:if>    
-                                        <c:if test="${ not empty USERG }">
-                                             <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>    
-                                        </c:if>
+                                                </c:if>
+                                                <c:if test="${ not empty USER }">
+                                            <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>   
+                                                </c:if>    
+                                                <c:if test="${ not empty USERG }">
+                                            <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>    
+                                                </c:if>
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">

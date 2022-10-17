@@ -129,4 +129,24 @@ public class OrderDAOImpl implements OrderDAO{
         }
         return result;
     }
+
+    @Override
+    public OrderDTO getOderdetail(String order_id) {
+        OrderDTO o = new OrderDTO();
+
+        try {
+            String sql = "SELECT delivery_address, payment_method from [order] where order_id LIKE ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, order_id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                o.setDelivery_address(rs.getString("delivery_address"));
+                o.setPayment_method(rs.getString("payment_method"));
+            }
+        } catch (SQLException ex) {
+        }
+        return o;
+    }
 }
