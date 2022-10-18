@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import daos.QuantityProductDAOImpl;
 import dtos.CartDTO;
 import dtos.ProductDTO;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.DBUtils;
 
 /**
  *
@@ -39,6 +41,12 @@ public class ViewCartPageController extends HttpServlet {
  
         float totalSum = 0;
         req.setAttribute("totalSum", totalSum);
+        
+        QuantityProductDAOImpl daoQ = new QuantityProductDAOImpl(DBUtils.getConnection());
+//        int branch_id =Integer.parseInt(req.getParameter("bid"));
+        int branch_id1 = (int) session.getAttribute("branch_id");
+//        System.out.println("request: " + branch_id);
+        System.out.println("session: " + branch_id1);
         
         req.getRequestDispatcher("cart.jsp").forward(req, resp);
     }

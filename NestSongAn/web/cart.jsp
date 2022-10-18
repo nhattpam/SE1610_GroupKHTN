@@ -186,7 +186,7 @@
 
         <jsp:include page="header.jsp" />
 
-        
+
         <section id="cart_items">
             <div class="container">
                 <div class="breadcrumbs">
@@ -209,8 +209,8 @@
                         </thead>
                         <tbody>
                             <c:set var="TotalPriceAll" scope="session" value="0" />
+                            <c:set var="quantityWrong" scope="request" value="Vượt quá số lượng trong kho" />
                             <c:forEach items="${requestScope.list}" var="map">
-                                
                                 <tr>
                                     <td class="cart_product">
                                         <a href=""><img src="products/${map.key.photo}" alt="" style="width: 50px; height: 60px;"></a>
@@ -222,11 +222,18 @@
                                     <td class="cart_price">
                                         <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price}" /> VNĐ</p>
                                     </td>
+
                                     <td class="cart_quantity">
+                                        <c:if test="${map.value > sessionScope.q}" >
+                                             <%--<c:set var="quantityWrong" scope="request" value="Vượt quá số lượng trong kho" />--%>
+                                             <c:out value="${quantityWrong}" />
+                                             <c:remove var="quantityWrong" scope="request"/>
+                                        </c:if>
                                         <div class="cart_quantity_button">
-                                            <a class="cart_quantity_up" href="add-cart?command=plus&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"> + </a>
+                                            <a class="cart_quantity_up" href="add-cart?command=plus&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"> + </a>
                                             <input class="cart_quantity_input" type="text" value="${map.value}" autocomplete="off" size="2" disabled="">
-                                            <a class="cart_quantity_down" href="add-cart?command=sub&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"> - </a>
+                                            <a class="cart_quantity_down" href="add-cart?command=sub&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"> - </a>
+
                                         </div>
                                     </td>
                                     <td class="cart_total">
@@ -234,7 +241,7 @@
                                         <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price * map.value}" /> VNĐ</p>
                                     </td>
                                     <td class="cart_delete">
-                                        <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-times"></i></a>
+                                        <a class="cart_quantity_delete" href="add-cart?command=remove&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -257,16 +264,16 @@
                         <c:if test="${ empty requestScope.list }">
                             Giỏ hàng trống
                         </c:if>
-                        <c:if test="${ not empty requestScope.list }">
-                             <a class="btn btn-custom btn-lg btn-block" href="checkout" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+                        <c:if test="${ not empty requestScope.list  && not empty requestScope.quantityWrong }">
+                            <a class="btn btn-custom btn-lg btn-block" href="checkout?bid=${sessionScope.branch_id}" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
                         </c:if>
                     </c:if>
                     <c:if test="${ not empty USERG }">
                         <c:if test="${ empty requestScope.list }">
                             Giỏ hàng trống
                         </c:if>
-                        <c:if test="${ not empty requestScope.list }">
-                             <a class="btn btn-custom btn-lg btn-block" href="checkoutgg" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
+                        <c:if test="${ not empty requestScope.list && not empty requestScope.quantityWrong }">
+                            <a class="btn btn-custom btn-lg btn-block" href="checkoutgg?bid=${sessionScope.branch_id}" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
                         </c:if>
                     </c:if>
                 </div>
@@ -278,6 +285,11 @@
 
 
 <jsp:include page="footer.jsp" />
+<script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus');
+    });
+</script>
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

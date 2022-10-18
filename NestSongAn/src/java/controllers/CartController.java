@@ -6,8 +6,10 @@
 package controllers;
 
 import daos.ProductDAOImpl;
+import daos.QuantityProductDAOImpl;
 import dtos.CartDTO;
 import dtos.ProductDTO;
+import dtos.QuantityProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -35,6 +37,22 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
+        
+        HttpSession session = request.getSession();
+        int branch_id1 = (int) session.getAttribute("branch_id");
+//        System.out.println("request: " + branch_id);
+        System.out.println("session cart: " + branch_id1);
+        int product_id = Integer.parseInt(request.getParameter("product_id"));
+        System.out.println(product_id);
+        
+        QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
+        QuantityProductDTO q = daoCheck.getBranch(product_id, branch_id1);
+//        System.out.println("so luong: " + q.getQuantity());
+//        int quantityInput = (int) session.getAttribute("quantityInput");
+//        System.out.println(quantityInput);
+        session.setAttribute("q", q.getQuantity());
+        System.out.println("qu: " + q.getQuantity());
+
     }
 
     @Override

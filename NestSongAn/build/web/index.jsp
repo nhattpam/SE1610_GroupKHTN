@@ -31,6 +31,21 @@
     </head>
 
     <body>
+        <div class="modal hide fade" id="myModal">
+            <div class="modal-header text-center" style="color:white">
+                
+            </div>
+            <div class="modal-body text-center ">
+                <h3 class="text-center" style="color:white">BẠN GẦN NESTSONGAN</h3>
+                <p class="text-center" style="color:white">Hãy chọn tỉnh thành của bạn</p>
+                <a href="trang-chu?bid=1" class="btn btn-danger ml-10">Miền Bắc</a>
+                <a href="trang-chu?bid=2" class="btn btn-primary ml-10">Miền Trung</a>
+                <a href="trang-chu?bid=3" class="btn btn-warning ml-10">Miền Nam</a>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
         <!-- Page Preloder -->
         <div id="preloder">
             <div class="loader"></div>
@@ -60,6 +75,11 @@
 
 
         <jsp:include page="footer.jsp" />
+        <script type="text/javascript">
+    $(window).on('load', function() {
+        $('#myModal').modal('show');
+    });
+        </script>
         <!-- Js Plugins -->
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

@@ -193,8 +193,8 @@
                     <div class="col-lg-6">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="home" style="color: #6a0e13;">Trang Chủ</a></li>
-                                <li><a href="shop-products">Sản Phẩm</a></li>
+                                <li class="active"><a href="trang-chu?bid=${sessionScope.branch_id}" style="color: #6a0e13;">Trang Chủ</a></li>
+                                <li><a href="shop-products?bid=${sessionScope.branch_id}">Sản Phẩm</a></li>
                                 <li><a href="#">Về Song Ân</a>
                                     <ul class="header__menu__dropdown">
                                         <li><a href="ve-song-an">Giới thiệu</a></li>
@@ -218,10 +218,10 @@
                                 <li><a href="loginController"><i class="fa fa-shopping-bag"></i> </a></li>
                                      </c:if>
                                 <c:if test="${ not empty USER }">
-                                    <li><a href="my-cart?uid=${USER.user_id}"><i class="fa fa-shopping-bag"></i> </a></li>
+                                    <li><a href="my-cart?uid=${USER.user_id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i> </a></li>
                                 </c:if>
                                 <c:if test="${ not empty USERG }">
-                                    <li><a href="my-cart?uid=${USERG.id}"><i class="fa fa-shopping-bag"></i> </a></li>
+                                    <li><a href="my-cart?uid=${USERG.id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i> </a></li>
                                 </c:if>
                                     
                             </ul>

@@ -219,7 +219,7 @@
                                         <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;">Thông Tin Đặt Hàng</h4><br>
                                         
                                         
-                                        <form action="checkout" method="post">
+                                        <form action="checkout?bid=${sessionScope.branch_id}" method="post">
                                             <input type="hidden" value="${user.user_id}" name="id">
                                             <div class="form-group" style="font-weight: bold;">
                                                 Họ và tên<input type="text" class="form-control" id="exampleInputPassword1" value="${user.full_name}" disabled="">
@@ -332,7 +332,7 @@
                                         <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;">Thông Tin Đặt Hàng</h4><br>
                                         
                                         
-                                        <form action="checkoutgg" method="post">
+                                        <form action="checkoutgg?bid=${sessionScope.branch_id}" method="post">
                                             <input type="hidden" value="${usergg.user_id}" name="id">
                                             <div class="form-group" style="font-weight: bold;">
                                                 Họ và tên<input type="text" class="form-control" id="exampleInputPassword1" value="${usergg.full_name}" disabled="">
