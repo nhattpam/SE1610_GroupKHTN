@@ -43,12 +43,11 @@
                                     <i class="fa fa-lock fa-4x"></i>
                                 </h3>
                                 <h2 class="text-center">Enter OTP</h2>
-                                <%
-                                    if (request.getAttribute("message") != null) {
-                                        out.print("<p class='text-danger ml-1'>" + request.getAttribute("message") + "</p>");
-                                    }
-
-                                %>
+    
+                                <c:if test="${ not empty message }">
+                                    <h5 class="text-center text-success">${message}</h5>
+                                    <c:remove var="message" scope="request"/>
+                                </c:if>
 
                                 <div class="panel-body">
 
