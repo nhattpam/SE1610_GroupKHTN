@@ -5,7 +5,9 @@
  */
 package controllers;
 
+import daos.OrderDAOImpl;
 import daos.OrderDetailsDAOImpl;
+import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,9 +43,16 @@ public class ViewOrderDetailsStaffController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             String order_id = request.getParameter("order_id");
+            OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
             OrderDetailsDAOImpl odao = new OrderDetailsDAOImpl(DBUtils.getConnection());
             List<OrderDetailsDTO> listOrderDetail = odao.viewOrderDetails(order_id);
+            OrderDTO ifo = dao.getOderdetail(order_id);
+            String delivery_address = ifo.getDelivery_address();
+            String payment_method = ifo.getPayment_method();
             request.setAttribute("listDetails", listOrderDetail);
+            request.setAttribute("order_id", order_id);
+            request.setAttribute("delivery_address", delivery_address);
+            request.setAttribute("payment_method", payment_method);
             request.getRequestDispatcher("view/staff/view_oderdetail.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(ViewOrderDetailsStaffController.class.getName()).log(Level.SEVERE, null, ex);

@@ -13,7 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utils.DBUtils;
@@ -68,19 +70,71 @@ public class FeedbackDAOImpl implements FeedbackDAO {
         return check;
     }
 
-    public static void main(String[] args) {
-        String feedback = "haefas";
-        int uid = 9;
-        int pid = 6;
-        Date now = new Date();
-        SimpleDateFormat x = new SimpleDateFormat();
-        String createdDate = x.format(now);
-        FeedbackDAOImpl fe = new FeedbackDAOImpl(DBUtils.getConnection());
+    @Override
+    public List<FeedbackDTO> viewAllfeedback() {
+        List<FeedbackDTO> list = new ArrayList<>();
         try {
-            fe.addFeedback(feedback, uid, createdDate, pid);
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT feedback_id,feedback,u.user_name,u.user_id,fb.create_date,product_id FROM feedback fb inner join users u on fb.user_id = u.user_id\n"
+                        + "Order by feedback_id DESC";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    UsersDTO user = new UsersDTO();
+                    user.setUser_id(rs.getInt(4));
+                    user.setUser_name(rs.getString(3));
+                    ProductDTO pro = new ProductDTO(rs.getInt("product_id"));
+                    FeedbackDTO fe = new FeedbackDTO(rs.getInt("feedback_id"), rs.getString("feedback"), user, rs.getString("create_date"), pro);
+                    list.add(fe);
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(FeedbackDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return list;
+    }
+
+    @Override
+    public List<FeedbackDTO> pagingFeedback(int index) {
+        List<FeedbackDTO> list = new ArrayList<>();
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT feedback_id,feedback,u.user_name,u.user_id,fb.create_date,product_id FROM feedback fb inner join users u on fb.user_id = u.user_id\n"
+                        + "Order by feedback_id DESC\n"
+                        + "OFFSET ? ROWS FETCH NEXT 2 ROWS ONLY";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setInt(1, (index - 1) * 2);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    UsersDTO user = new UsersDTO();
+                    user.setUser_id(rs.getInt(4));
+                    user.setUser_name(rs.getString(3));
+                    ProductDTO pro = new ProductDTO(rs.getInt("product_id"));
+                    FeedbackDTO fe = new FeedbackDTO(rs.getInt("feedback_id"), rs.getString("feedback"), user, rs.getString("create_date"), pro);
+                    list.add(fe);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FeedbackDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    @Override
+    public int getTotalFeedback() {
+        String sql = "SELECT COUNT (feedback_id) from feedback";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FeedbackDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
 }

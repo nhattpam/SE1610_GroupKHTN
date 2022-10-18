@@ -21,7 +21,8 @@ public interface OrderDAO {
     
     //nhatpam: function view order list
     public List<OrderDTO> getAllListOrder(int user_id);
-    
+    //hapham: function view address and payment method
+    public OrderDTO getOderdetail(String order_id);
     //get address
     public OrderDTO getOrderAddress(String order_id);
     //hapham: function veiw user of order
