@@ -28,6 +28,9 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <style>
+            
+        </style>
     </head>
 
     <body>
@@ -38,9 +41,9 @@
             <div class="modal-body text-center ">
                 <h3 class="text-center" style="color:white">BẠN GẦN NESTSONGAN</h3>
                 <p class="text-center" style="color:white">Hãy chọn tỉnh thành của bạn</p>
-                <a href="trang-chu?bid=1" class="btn btn-danger ml-10">Miền Bắc</a>
-                <a href="trang-chu?bid=2" class="btn btn-primary ml-10">Miền Trung</a>
-                <a href="trang-chu?bid=3" class="btn btn-warning ml-10">Miền Nam</a>
+                <a href="trang-chu?bid=1" class="btn btn-danger ml-10  btn-lg btn-block " style="background: #6a0e13 ">Miền Bắc</a>
+                <a href="trang-chu?bid=2" class="btn btn-danger ml-10  btn-lg btn-block " style="background: #6a0e13 ">Miền Trung</a>
+                <a href="trang-chu?bid=3" class="btn btn-danger ml-10  btn-lg btn-block " style="background: #6a0e13 ">Miền Nam</a>
             </div>
             <div class="modal-footer">
                 

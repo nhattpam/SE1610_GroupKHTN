@@ -133,16 +133,9 @@
                                 <img class="product__details__pic__item--large"
                                      src="products/${detail.photo}" alt="">
                             </div>
-                            <!--                            <div class="product__details__pic__slider owl-carousel">
-                                                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                                                                 src="img/product/details/thumb-1.jpg" alt="">
-                                                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                                                                 src="img/product/details/thumb-2.jpg" alt="">
-                                                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                                                                 src="img/product/details/thumb-3.jpg" alt="">
-                                                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                                                                 src="img/product/details/thumb-4.jpg" alt="">
-                                                        </div>-->
+                            <div>
+                                Bạn đang xem giá tại: <span style="font-weight: bold;">${q.branch_id.name}</span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -170,7 +163,7 @@
 
                             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                             <ul>
-                                <li><b>Số lượng còn lại</b> <span>${detail.quantity}</span></li>
+                                <li><b>Số lượng còn lại</b> <span>${q.quantity}</span></li>
                                 <li><b>Vận chuyển</b> <span><samp>Miễn Phí Vận Chuyển Toàn Quốc</samp></span></li>
                                 <li><b>Trọng lượng</b> <span>${detail.weight} gam</span></li>
                                 <!--                                <li><b>Share on</b>

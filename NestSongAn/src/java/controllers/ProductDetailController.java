@@ -6,10 +6,12 @@
 package controllers;
 
 import daos.ProductDAOImpl;
+import daos.QuantityProductDAOImpl;
 import dtos.CartDTO;
 import dtos.CategoryDTO;
 import java.util.List;
 import dtos.ProductDTO;
+import dtos.QuantityProductDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,6 +66,17 @@ public class ProductDetailController extends HttpServlet {
             sCart.setAttribute("cart", cart);
         }
         System.out.println(cart);
+        
+        //check branch
+        HttpSession sBranch = request.getSession();
+        
+        QuantityProductDAOImpl daoQuantity = new QuantityProductDAOImpl(DBUtils.getConnection());
+        //get branch id session
+        QuantityProductDTO q = daoQuantity.getBranch(product_id, (int) sBranch.getAttribute("branch_id"));
+        
+        request.setAttribute("q", q);
+        
+        
         
         request.getRequestDispatcher("product_details.jsp").forward(request, response);
     }
