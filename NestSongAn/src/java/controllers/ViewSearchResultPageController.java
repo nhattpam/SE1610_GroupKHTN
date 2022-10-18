@@ -31,7 +31,7 @@ public class ViewSearchResultPageController extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         req.setCharacterEncoding("utf-8");
-        
+        HttpSession session = req.getSession();
         ProductDAOImpl searchDAO = new ProductDAOImpl(DBUtils.getConnection());
         
         //get character tu nguoi dung
@@ -40,10 +40,14 @@ public class ViewSearchResultPageController extends HttpServlet{
         System.out.println(character);
         
         List<ProductDTO> listSearch = searchDAO.getProductBySearch(character);
-        
+        if(!listSearch.isEmpty()){
+
+            req.setAttribute("listSearch", listSearch);
+
+        }else{
         //in
-        req.setAttribute("listSearch", listSearch);
-        
+        session.setAttribute("wrongSearch", "Không tìm thấy kết quả!");
+        }
         //hien thi category
         ProductDAOImpl categoryDAO = new ProductDAOImpl(DBUtils.getConnection());
         List<CategoryDTO> listCategory = categoryDAO.getAllCategory();

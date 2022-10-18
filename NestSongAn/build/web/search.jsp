@@ -103,6 +103,13 @@
                     <div class="col-lg-12">
                         <div class="section-title">
                             <h2 style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Kết Quả Tìm Kiếm</h2>
+                            <br>
+                            <br>
+                            <c:if test="${not empty wrongSearch}">
+                                <h5>${wrongSearch}</h5>
+                                <c:remove var="wrongSearch" scope="session" />
+                            </c:if>
+
                             <style type="text/css">
                                 .section-title h2:after {
                                     position: absolute;
