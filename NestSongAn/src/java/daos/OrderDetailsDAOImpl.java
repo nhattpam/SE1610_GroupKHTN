@@ -65,9 +65,9 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
                 od.setQuantity(rs.getInt("quantity"));
                 od.setTotal_price(rs.getFloat("total_price"));
                 od.setProduct_id(p);
-                
+
                 list.add(od);
-                
+
             }
 
         } catch (Exception e) {
@@ -75,8 +75,7 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
         }
         return list;
     }
-    
-    
+
     public List<OrderDetailsDTO> viewOrderDetails(String order_id) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -123,5 +122,4 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
         return result;
     }
 
-    
 }

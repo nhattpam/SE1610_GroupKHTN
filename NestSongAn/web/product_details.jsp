@@ -220,7 +220,7 @@
                                                                 <c:if test="${not empty l.user_id.user_id}">
                                                                     <c:if test="${USER.user_id = l.user_id.user_id}"><i class="fa fa-user" width="60"></i></c:if>
                                                                 </c:if>
-                                                                
+
                                                                 <div class="card">
                                                                     <div class="card-header d-flex justify-content-between p-3">
                                                                         <p class="fw-bold mb-0">${f.user_id.user_name}</p>
@@ -305,7 +305,43 @@
 
                 </div>
             </div>
+            <div class="container">
+            <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title related__product__title">
+                            <h2>San Pham Pho Bien</h2>
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+                <c:forEach items="${listPopular}" var="p">
+                   <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="products/${p.photo}">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <c:if test="${empty USER && empty USERG}">
+                                            <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
+                                                </c:if>
+                                                <c:if test="${ not empty USER }">
+                                            <li><a href="add-cart?command=insert&product_id=${p.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>   
+                                                </c:if>    
+                                                <c:if test="${ not empty USERG }">
+                                            <li><a href="add-cart?command=insert&product_id=${p.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>    
+                                                </c:if>
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="detail?product_id=${p.product_id}">${p.name}</a></h6>
+                                    <h5><fmt:formatNumber type="number" groupingUsed="true" value="${p.price}" /> VNĐ</h5>
+                                </div>
+                            </div>
+                        </div>
+                </c:forEach>
+            </div>
+            </div>
         </section>
+
         <!-- Related Product Section End -->
 
         <!-- Footer Section Begin -->

@@ -29,6 +29,11 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) throws SQLException {
+        ProductDAOImpl pdao = new ProductDAOImpl(DBUtils.getConnection());
+        List<ProductDTO> plist = pdao.viewPopularProduct();
+        for (ProductDTO productDTO : plist) {
+            System.out.println(productDTO.getPhoto());
+        }
        UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
         FeedbackDAOImpl fedao = new FeedbackDAOImpl();
         List<FeedbackDTO> list = fedao.viewAllfeedback();

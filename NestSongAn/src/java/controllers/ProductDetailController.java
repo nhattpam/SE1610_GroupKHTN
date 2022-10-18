@@ -78,7 +78,10 @@ public class ProductDetailController extends HttpServlet {
         
         List<ProductDTO> listLastest = daoLastest.getAllProductLastest();
         request.setAttribute("listLastest", listLastest);
-        
+        //popular product
+        ProductDAOImpl daop = new ProductDAOImpl(DBUtils.getConnection());
+        List<ProductDTO> listPopular = daop.viewPopularProduct();
+        request.setAttribute("listPopular", listPopular);
         //check cart
         HttpSession sCart = request.getSession();
         CartDTO cart = (CartDTO) sCart.getAttribute("cart");
