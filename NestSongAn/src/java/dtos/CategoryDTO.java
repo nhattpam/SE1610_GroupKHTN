@@ -41,4 +41,10 @@ public class CategoryDTO {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "CategoryDTO{" + "category_id=" + category_id + ", name=" + name + '}';
+    }
+    
 }

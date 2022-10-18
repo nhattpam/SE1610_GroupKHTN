@@ -6,28 +6,36 @@
 package daos;
 
 import dtos.BranchDTO;
+import dtos.CategoryDTO;
 import dtos.ProductDTO;
 import dtos.QuantityProductDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import utils.DBUtils;
 
 /**
  *
  * @author Admin
  */
 public class QuantityProductDAOImpl implements QuantityProductDAO{
+
     private Connection conn;
 
     public QuantityProductDAOImpl(Connection conn) {
         this.conn = conn;
     }
-    @Override
+    public QuantityProductDAOImpl() {
+    }
+    
     //get branch name
+    @Override
     public QuantityProductDTO getBranch(int product_id, int branch_id) {
         ProductDTO p = new ProductDTO();
-        BranchDTO b = new  BranchDTO();
+        BranchDTO b = new BranchDTO();
         QuantityProductDTO q = new QuantityProductDTO();
 
         try {
@@ -50,16 +58,15 @@ public class QuantityProductDAOImpl implements QuantityProductDAO{
                 q.setBranch_id(b);
                 q.setProduct_id(p);
                 q.setQuantity(rs.getInt("quantity"));
-                
-                
+
             }
         } catch (SQLException ex) {
         }
         return q;
     }
     
-    @Override
     //sub the quantity after buy
+    @Override
     public QuantityProductDTO subQuantityAfterBuy(int quantity, int product_id, int branch_id) {
         ProductDTO p = new ProductDTO();
         BranchDTO b = new  BranchDTO();
@@ -92,5 +99,46 @@ public class QuantityProductDAOImpl implements QuantityProductDAO{
         } catch (SQLException ex) {
         }
         return q;
+    }
+    //Hung
+    public List<QuantityProductDTO> getProduct() throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<QuantityProductDTO> result = new ArrayList<QuantityProductDTO>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT p.product_id, p.name, p.code, p.weight, p.price, p.photo, p.category_id, c.name as category_name, qp.branch_id, qp.quantity,b.name as branch_name\n"
+                        + "FROM product p inner JOIN category c\n"
+                        + "on p.category_id=c.category_id\n"
+                        + "inner JOIN quantity_product qp\n"
+                        + "on p.product_id=qp.product_id\n"
+                        + "inner JOIN branch b\n"
+                        + "on qp.branch_id=b.branch_id";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    CategoryDTO categoryDTO = new CategoryDTO(rs.getInt("category_id"), rs.getString("category_name"));
+                    ProductDTO productDTO 
+                            = new ProductDTO(rs.getInt("product_id"), rs.getString("name"), rs.getString("code"),
+                                    rs.getFloat("price"), rs.getInt("weight"), rs.getString("photo"), categoryDTO);
+                    BranchDTO branchDTO = new BranchDTO(rs.getInt("branch_id"), rs.getString("branch_name"));
+                    QuantityProductDTO quantityProductDTO = new QuantityProductDTO(productDTO, branchDTO, rs.getInt("quantity"));
+                    result.add(quantityProductDTO);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 }

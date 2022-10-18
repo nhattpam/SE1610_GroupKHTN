@@ -46,5 +46,10 @@ public class QuantityProductDTO {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "QuantityProductDTO{" + "product_id=" + product_id + ", branch_id=" + branch_id + ", quantity=" + quantity + '}';
+    }
     
 }

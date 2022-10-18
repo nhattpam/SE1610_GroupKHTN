@@ -17,6 +17,11 @@ public class BranchDTO {
     public BranchDTO() {
     }
 
+    public BranchDTO(int branch_id, String name) {
+        this.branch_id = branch_id;
+        this.name = name;
+    }
+
     public BranchDTO(int branch_id, String name, LocationDTO location_id) {
         this.branch_id = branch_id;
         this.name = name;
@@ -45,6 +50,11 @@ public class BranchDTO {
 
     public void setLocation_id(LocationDTO location_id) {
         this.location_id = location_id;
+    }
+
+    @Override
+    public String toString() {
+        return "BranchDTO{" + "branch_id=" + branch_id + ", name=" + name + ", location_id=" + location_id + '}';
     }
     
 }

@@ -38,6 +38,16 @@ public class ProductDTO implements Comparable<ProductDTO> {
     public ProductDTO(String name) {
         this.name = name;
     }
+
+    public ProductDTO(int product_id, String name, String code, float price, int weight, String photo, CategoryDTO category_id) {
+        this.product_id = product_id;
+        this.name = name;
+        this.code = code;
+        this.price = price;
+        this.weight = weight;
+        this.photo = photo;
+        this.category_id = category_id;
+    }
     
 
     public ProductDTO(String name, String code, String short_description, String full_description, float price, int weight, String photo, String create_date, String edit_date, CategoryDTO category_id, int quantity) {
@@ -219,7 +229,7 @@ public class ProductDTO implements Comparable<ProductDTO> {
 
     @Override
     public String toString() {
-        return "ProductDTO{" + "name=" + name + ", code=" + code + ", short_description=" + short_description + ", full_description=" + full_description + ", price=" + price + " , weight =" + weight + ", photo=" + photo + ", create_date=" + create_date + ", edit_date=" + edit_date + ", category_id=" + category_id.getCategory_id() + ", quantity=" + quantity + '}' + "\n";
+        return "ProductDTO{product_ID="+product_id + "name=" + name + ", code=" + code + ", short_description=" + short_description + ", full_description=" + full_description + ", price=" + price + " , weight =" + weight + ", photo=" + photo + ", create_date=" + create_date + ", edit_date=" + edit_date + ", category_id=" + category_id.getCategory_id() + ", quantity=" + quantity + '}' + "\n";
     }
      
     
