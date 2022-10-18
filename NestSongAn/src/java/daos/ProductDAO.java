@@ -58,4 +58,6 @@ public interface ProductDAO {
     //Hung sort product by price asc
     public List<ProductDTO> getProductAsc() throws SQLException;
     public List<ProductDTO> getProductAsc(int categoryId) throws SQLException ;
+    
+     public List<ProductDTO> viewPopularProduct();
 }
