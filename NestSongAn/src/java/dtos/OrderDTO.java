@@ -25,6 +25,11 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
+    public OrderDTO(String order_id) {
+        this.order_id = order_id;
+    }
+    
+
     public OrderDTO(String order_id, String order_date, int status, UsersDTO user_id) {
         this.order_id = order_id;
         this.order_date = order_date;

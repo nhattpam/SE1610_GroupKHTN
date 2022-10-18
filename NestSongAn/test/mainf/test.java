@@ -9,6 +9,7 @@ import daos.FeedbackDAOImpl;
 import daos.OrderDAOImpl;
 import daos.OrderDetailsDAOImpl;
 import daos.ProductDAOImpl;
+import daos.QuantityProductDAOImpl;
 import daos.UserDAOImpl;
 import dtos.CategoryDTO;
 import dtos.FeedbackDTO;
@@ -29,31 +30,17 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) throws SQLException {
-        ProductDAOImpl pdao = new ProductDAOImpl(DBUtils.getConnection());
-        List<ProductDTO> plist = pdao.viewPopularProduct();
-        for (ProductDTO productDTO : plist) {
-            System.out.println(productDTO.getPhoto());
+        QuantityProductDAOImpl dao = new QuantityProductDAOImpl(DBUtils.getConnection());
+        
+        OrderDetailsDAOImpl dao2 = new OrderDetailsDAOImpl(DBUtils.getConnection());
+        
+        List<OrderDetailsDTO> list = dao2.getOrderDetailsToSubQuantity("1666012108557");
+        for (OrderDetailsDTO o : list) {
+            System.out.println(o.getOrder_id().getOrder_id());
+            System.out.println("----");
+            System.out.println(o.getProduct_id().getProduct_id());
+            System.out.println("----");
+            System.out.println(o.getQuantity());
         }
-       UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
-        FeedbackDAOImpl fedao = new FeedbackDAOImpl();
-        List<FeedbackDTO> list = fedao.viewAllfeedback();
-        List<FeedbackDTO> list1 = fedao.pagingFeedback(2);
-        int i = fedao.getTotalFeedback();
-       UsersDTO u = dao.viewAccountStaff(4);
-       String order_id = "1665556079080";
-//       
-//        System.out.println(u.getEmail() + ", id: " + u.getUser_id() + ", " + u.getPassword());
-        OrderDAOImpl oda = new OrderDAOImpl(DBUtils.getConnection());
-        OrderDTO o = oda.getOderdetail(order_id);
-//        System.out.println(o.getDelivery_address()+", "+o.getPayment_method());
-        for (FeedbackDTO feedbackDTO : list) {
-            System.out.println(feedbackDTO.getFeedback_id()+", "+feedbackDTO.getUser_id().getUser_name()+", "+feedbackDTO.getFeedback()+", "+feedbackDTO.getCreate_date()+
-                    ", "+feedbackDTO.getProduct_id().getProduct_id()+", "+feedbackDTO.getUser_id().getUser_id());
-        }
-        for (FeedbackDTO feedbackDTO : list1) {
-            System.out.println(feedbackDTO.getFeedback_id()+", "+feedbackDTO.getUser_id().getUser_name()+", "+feedbackDTO.getFeedback()+", "+feedbackDTO.getCreate_date()+
-                    ", "+feedbackDTO.getProduct_id().getProduct_id()+", "+feedbackDTO.getUser_id().getUser_id());
-        }
-        System.out.println(i);
     }
 }

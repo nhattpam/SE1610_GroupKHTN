@@ -5,10 +5,16 @@
  */
 package daos;
 
+import dtos.QuantityProductDTO;
+
 /**
  *
  * @author Admin
  */
 public interface QuantityProductDAO {
+    //get branch name
+    public QuantityProductDTO getBranch(int product_id, int branch_id);
     
+    //sub the quantity after buy
+    public QuantityProductDTO subQuantityAfterBuy(int quantity, int product_id, int branch_id);
 }
