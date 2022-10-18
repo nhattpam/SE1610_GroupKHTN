@@ -30,17 +30,9 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) throws SQLException {
-        QuantityProductDAOImpl dao = new QuantityProductDAOImpl(DBUtils.getConnection());
-        
-        OrderDetailsDAOImpl dao2 = new OrderDetailsDAOImpl(DBUtils.getConnection());
-        
-        List<OrderDetailsDTO> list = dao2.getOrderDetailsToSubQuantity("1666012108557");
-        for (OrderDetailsDTO o : list) {
-            System.out.println(o.getOrder_id().getOrder_id());
-            System.out.println("----");
-            System.out.println(o.getProduct_id().getProduct_id());
-            System.out.println("----");
-            System.out.println(o.getQuantity());
-        }
+          UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
+
+        List<UsersDTO> listFullStaff = dao.getStaffList();
+        System.out.println(listFullStaff);
     }
 }
