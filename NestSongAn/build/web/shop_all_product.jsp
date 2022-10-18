@@ -77,7 +77,7 @@
                             </div>
                             <ul>
                                 <c:forEach items="${cList}" var="l">
-                                    <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
+                                    <li><a href="danh-muc?cateId=${l.category_id}&bid=${sessionScope.branch_id}">${l.name}</a></li>
                                     </c:forEach>
 
                             </ul>
@@ -155,7 +155,7 @@
                             <ul>
                                 <li class="active" data-filter="*">All</li>
                                     <c:forEach items="${cList}" var="l">
-                                    <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
+                                    <li><a href="danh-muc?cateId=${l.category_id}&bid=${sessionScope.branch_id}">${l.name}</a></li>
                                     </c:forEach>
                             </ul>
                             </br>
@@ -180,16 +180,16 @@
                                             <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
                                         </c:if>
                                         <c:if test="${ not empty USER }">
-                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>   
+                                                <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-cart"></i></a></li>   
                                         </c:if>    
                                         <c:if test="${ not empty USERG }">
-                                             <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>    
+                                             <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-cart"></i></a></li>    
                                         </c:if>
 
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
-                                    <h6><a href="detail?product_id=${l.product_id}">${l.name}</a></h6>
+                                    <h6><a href="detail?product_id=${l.product_id}&bid=${sessionScope.branch_id}">${l.name}</a></h6>
                                     <h5><fmt:formatNumber type="number" groupingUsed="true" value="${l.price}" /> VNĐ</h5>
                                 </div>
 
