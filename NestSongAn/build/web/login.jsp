@@ -168,6 +168,10 @@
                     <h5 class="text-center text-success">${succMsg}</h5>
                     <c:remove var="succMsg" scope="session"/>
                 </c:if>
+                <c:if test="${ not empty success }">
+                    <h5 class="text-center text-success">${success}</h5>
+                    <c:remove var="success" scope="session"/>
+                </c:if>
                 <c:if test="${ not empty LoginError }">
                     <h5 class="text-center text-danger">${LoginError}</h5>
                 </c:if>

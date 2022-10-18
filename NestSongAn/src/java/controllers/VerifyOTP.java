@@ -6,6 +6,7 @@
 package controllers;
 
 import daos.UserDAOImpl;
+import dtos.UsersDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -26,27 +27,26 @@ public class VerifyOTP extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        int value = Integer.parseInt(request.getParameter("otp"));
+        int value = Integer.parseInt(request.getParameter("otp"));
         HttpSession session = request.getSession();
-//        int otp = (int) session.getAttribute("otp");
-        String email = (String) session.getAttribute("email");
+        int otp = (int) session.getAttribute("otp");
         RequestDispatcher dispatcher = null;
-        int status = 1;
+        UsersDTO us = (UsersDTO) session.getAttribute("fulltopping");
         try {
-////            if (value == otp) {
+            if (value == otp) {
                 UserDAOImpl dao = new UserDAOImpl();
-                dao.updateStatus(status, email);
-                request.setAttribute("status", "success");
-                response.sendRedirect("LoginServlet");
-                dispatcher.forward(request, response);
-
-////            } else {
-//                request.setAttribute("message", "wrong otp");
-//
-//                dispatcher = request.getRequestDispatcher("RegisterOTP.jsp");
-//                dispatcher.forward(request, response);
-
-//            }
+                System.out.println(us);
+                boolean result = dao.userRegister(us);
+                if (result) {
+                    session.setAttribute("success", "Dang ki thanh cong!!!");
+                    response.sendRedirect("LoginServlet");
+                } else {
+                    response.sendRedirect("RegisterAccountController");
+                }
+            } else {
+                request.setAttribute("status", "resetFailed");
+                dispatcher = request.getRequestDispatcher("error.jsp");
+            }
         } catch (Exception e) {
 
         }

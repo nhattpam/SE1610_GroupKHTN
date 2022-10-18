@@ -93,8 +93,8 @@ public class UserDAOImpl implements UserDAO {
 
         try {
             String sql = "INSERT INTO users(full_name,user_name,password,email,phone,status,create_date,edited_date,role_id) VALUES (?,?,?,?,?,?,?,?,?)";
+            conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-
             ps.setString(1, us.getFull_name());
             ps.setString(2, us.getUser_name());
             ps.setString(3, us.getPassword());

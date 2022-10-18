@@ -66,7 +66,7 @@ public class RegisterAccountController extends HttpServlet {
             keepInput.setAttribute("phone", phone);
             keepInput.setAttribute("email", email);
 
-            int status = 0; //0: tai khoan in-active: khong hoat dong
+            int status = 1; //0: tai khoan in-active: khong hoat dong
 
             Date now = new Date();
             SimpleDateFormat x = new SimpleDateFormat();
@@ -132,7 +132,7 @@ public class RegisterAccountController extends HttpServlet {
             if (check) {
                 String checkPassword = toHexString(getSHA(password));
                 UsersDTO us = new UsersDTO(full_name, user_name, checkPassword, email, phone, status, create_date, edited_date, role_id);
-
+                keepInput.setAttribute("fulltopping", us);
                 int otpvalue = 0;
                 Random rand = new Random();
                 otpvalue = rand.nextInt(1255650);
@@ -157,23 +157,13 @@ public class RegisterAccountController extends HttpServlet {
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
                 message.setSubject("Verify Email");
                 message.setText("Your OTP is: " + otpvalue);
-                // send message
-
-                String htmlContent = "Your Link is: <a href=\""
-                        + "http://localhost:8080/NestSongAn/VerifyOTP\""
-                        + ">Xác nhận tài khoản</a>";
-                // send message
-                message.setContent(htmlContent, "text/html; charset=utf-8");
                 Transport.send(message);
-                resp.sendRedirect("LoginServlet");
-                boolean result = dao.userRegister(us);
-                if (result == true) {
-                    keepInput.setAttribute("succMsg", "Vui lòng đăng nhập email để kích hoạt tài khoản.");
-                    // sending otp
-
-                } else {
-                    resp.sendRedirect("RegisterAccountController");
-                }
+                RequestDispatcher dispatcher = null;
+                dispatcher = req.getRequestDispatcher("registerotp.jsp");
+                req.setAttribute("message", "OTP is sent to your email id");
+                //request.setAttribute("connection", con);
+                keepInput.setAttribute("otp", otpvalue);
+                dispatcher.forward(req, resp);
             }
 
         } catch (Exception e) {
