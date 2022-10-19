@@ -7,6 +7,7 @@ package controllers;
 
 import daos.OrderDAOImpl;
 import daos.OrderDetailsDAOImpl;
+import daos.QuantityProductDAOImpl;
 import daos.UserDAOImpl;
 import dtos.CartDTO;
 import dtos.GoogleDTO;
@@ -159,6 +160,15 @@ public class CheckoutGoogleController extends HttpServlet {
                         ProductDTO p = new ProductDTO();
                         p.setProduct_id(ds.getKey().getProduct_id());
                         orderDetailsDAO.addOrderDetails(new OrderDetailsDTO(od, p, ds.getKey().getPrice(), ds.getValue()));
+                        HttpSession getUid = request.getSession();
+//                        for (OrderDetailsDTO odtl : odtls) {
+//                            System.out.println("---------------------");
+//                            System.out.println("checkout-pid: " + odtl.getProduct_id().getProduct_id());
+//                            System.out.println("checkout-quantity: " + odtl.getQuantity());
+//                            
+//                        }
+                        QuantityProductDAOImpl dao3 = new QuantityProductDAOImpl(DBUtils.getConnection());
+                        dao3.subQuantityAfterBuy(ds.getValue(), ds.getKey().getProduct_id(), (int) getUid.getAttribute("branch_id"));
                     }
                     session.removeAttribute("cart");
                     response.sendRedirect("success-order");
