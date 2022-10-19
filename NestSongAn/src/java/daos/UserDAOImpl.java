@@ -662,4 +662,19 @@ public class UserDAOImpl implements UserDAO {
         return u;
     }
 
+    
+    //khang tran: function delete staff account
+    @Override
+    public void deteleStaffAccount(int user_id) {
+        try {
+            String sql = "DELETE FROM users where user_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, user_id);
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

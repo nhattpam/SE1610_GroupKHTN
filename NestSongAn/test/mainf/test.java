@@ -32,7 +32,6 @@ public class test {
     public static void main(String[] args) throws SQLException {
           UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
 
-        List<UsersDTO> listFullStaff = dao.getStaffList();
-        System.out.println(listFullStaff);
+       dao.deteleStaffAccount(17);
     }
 }

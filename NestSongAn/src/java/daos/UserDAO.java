@@ -64,5 +64,7 @@ public interface UserDAO {
      
      //nhattpham: get phone by email gg
     public UsersDTO getPhone(String email);
-
+    
+    //khang tran: function delete staff account
+    public void deteleStaffAccount(int user_id);
 }
