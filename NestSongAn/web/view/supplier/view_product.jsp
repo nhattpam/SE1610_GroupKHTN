@@ -219,8 +219,10 @@
                                         <td>${l.quantity}</td>
                                         <td>${l.branch_id.name}</td>
                                         <td>${l.product_id.category_id.name}</td>
-                                        <td>
-                                            <a href="" class="btn btn-sm btn-primary"> Nhập hàng</a>
+                                        <td>                                           
+                                            <a href="ImportProductController?product_id=${l.product_id.product_id}&branch_id=${l.branch_id.branch_id}&branch_name=${l.branch_id.name}" class="btn btn-sm btn-primary"> 
+                                                Nhập hàng
+                                            </a>                                            
                                         </td>
                                     </tr>
                                 </c:forEach>

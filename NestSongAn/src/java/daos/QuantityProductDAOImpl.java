@@ -21,16 +21,17 @@ import utils.DBUtils;
  *
  * @author Admin
  */
-public class QuantityProductDAOImpl implements QuantityProductDAO{
+public class QuantityProductDAOImpl implements QuantityProductDAO {
 
     private Connection conn;
 
     public QuantityProductDAOImpl(Connection conn) {
         this.conn = conn;
     }
+
     public QuantityProductDAOImpl() {
     }
-    
+
     //get branch name
     @Override
     public QuantityProductDTO getBranch(int product_id, int branch_id) {
@@ -64,17 +65,17 @@ public class QuantityProductDAOImpl implements QuantityProductDAO{
         }
         return q;
     }
-    
+
     //sub the quantity after buy
     @Override
     public QuantityProductDTO subQuantityAfterBuy(int quantity, int product_id, int branch_id) {
         ProductDTO p = new ProductDTO();
-        BranchDTO b = new  BranchDTO();
+        BranchDTO b = new BranchDTO();
         QuantityProductDTO q = new QuantityProductDTO();
 
         try {
             String sql = "UPDATE quantity_product\n"
-                    + "SET quantity = quantity - '" +  quantity + "'"
+                    + "SET quantity = quantity - '" + quantity + "'"
                     + "WHERE product_id = ? and branch_id = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -93,8 +94,7 @@ public class QuantityProductDAOImpl implements QuantityProductDAO{
                 q.setBranch_id(b);
                 q.setProduct_id(p);
                 q.setQuantity(rs.getInt("quantity"));
-                
-                
+
             }
         } catch (SQLException ex) {
         }
@@ -120,7 +120,7 @@ public class QuantityProductDAOImpl implements QuantityProductDAO{
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     CategoryDTO categoryDTO = new CategoryDTO(rs.getInt("category_id"), rs.getString("category_name"));
-                    ProductDTO productDTO 
+                    ProductDTO productDTO
                             = new ProductDTO(rs.getInt("product_id"), rs.getString("name"), rs.getString("code"),
                                     rs.getFloat("price"), rs.getInt("weight"), rs.getString("photo"), categoryDTO);
                     BranchDTO branchDTO = new BranchDTO(rs.getInt("branch_id"), rs.getString("branch_name"));
@@ -132,6 +132,37 @@ public class QuantityProductDAOImpl implements QuantityProductDAO{
             if (rs != null) {
                 rs.close();
             }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    //Hung
+    public boolean importProduct(int quantity, int productID, int branchID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "Update quantity_product\n"
+                        + "Set quantity=quantity+?\n"
+                        + "Where product_id=? and branch_id=?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, quantity);
+                stm.setInt(2, productID);
+                stm.setInt(3, branchID);
+                int i=stm.executeUpdate();
+                if (i>0) {
+                    result=true;
+                }
+            }
+        } finally {
             if (stm != null) {
                 stm.close();
             }

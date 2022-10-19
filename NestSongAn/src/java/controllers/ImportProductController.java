@@ -5,26 +5,29 @@
  */
 package controllers;
 
+import daos.ImportInvoiceDAOImpl;
+import daos.ProductDAOImpl;
 import daos.QuantityProductDAOImpl;
+import dtos.BranchDTO;
+import dtos.ProductDTO;
 import dtos.QuantityProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.DBUtils;
 
 /**
  *
  * @author HUNG
  */
-@WebServlet(name = "ViewProductSupplierController", urlPatterns = {"/ViewProductSupplierController"})
-public class ViewProductSupplierController extends HttpServlet {
+@WebServlet(name = "ImportProductController", urlPatterns = {"/ImportProductController"})
+public class ImportProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,14 +41,24 @@ public class ViewProductSupplierController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url="view/supplier/view_product.jsp";
+        String url = "view/supplier/import_product.jsp";
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        int product_id = Integer.parseInt(request.getParameter("product_id"));
+        int branch_id = Integer.parseInt(request.getParameter("branch_id"));
         try {
-            QuantityProductDAOImpl dao = new QuantityProductDAOImpl();
-            List<QuantityProductDTO> listProduct;
-            listProduct = dao.getProduct();
-            request.setAttribute("listProduct", listProduct);
+            //
+            QuantityProductDAOImpl quantityProductDAOImpl = new QuantityProductDAOImpl();
+            ImportInvoiceDAOImpl importInvoiceDAOImpl=new ImportInvoiceDAOImpl();
+            //
+            boolean result=quantityProductDAOImpl.importProduct(quantity, product_id, branch_id);
+            result=importInvoiceDAOImpl.addNewInvoice(quantity, product_id, branch_id);
+            if (result==true) {
+                request.setAttribute("succMsg", "Nhập hàng thành công");
+            }else{
+                request.setAttribute("failedMsg", "Nhập hàng không thành công");
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(ViewProductSupplierController.class.getName()).log(Level.SEVERE, null, ex);
+            log("SQL EX ImportProduct "+ex.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
@@ -63,7 +76,23 @@ public class ViewProductSupplierController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int product_id = Integer.parseInt(request.getParameter("product_id"));
+        int branch_id = Integer.parseInt(request.getParameter("branch_id"));
+        String branch_name = request.getParameter("branch_name");
+        String url = "view/supplier/import_product.jsp";
+        try {
+            Connection conn = DBUtils.getConnection();
+            ProductDTO productDTO;
+            BranchDTO branchDTO = new BranchDTO(branch_id, branch_name);
+
+            ProductDAOImpl productDAOImpl = new ProductDAOImpl(conn);
+            productDTO = productDAOImpl.getProductId(product_id);
+
+            request.setAttribute("product", productDTO);
+            request.setAttribute("branch", branchDTO);
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     /**
