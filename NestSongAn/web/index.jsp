@@ -35,19 +35,15 @@
 
     <body>
         <div class="modal hide fade" id="myModal">
-            <div class="modal-header text-center" style="color:white">
-                
-            </div>
+
             <div class="modal-body text-center ">
-                <h3 class="text-center" style="color:white">BẠN GẦN NESTSONGAN</h3>
-                <p class="text-center" style="color:white">Hãy chọn tỉnh thành của bạn</p>
-                <a href="trang-chu?bid=1" class="btn btn-danger ml-10  btn-lg btn-block " style="background: #6a0e13 ">Miền Bắc</a>
-                <a href="trang-chu?bid=2" class="btn btn-danger ml-10  btn-lg btn-block " style="background: #6a0e13 ">Miền Trung</a>
-                <a href="trang-chu?bid=3" class="btn btn-danger ml-10  btn-lg btn-block " style="background: #6a0e13 ">Miền Nam</a>
+                <h3 class="text-center" style="color:white; font-weight: bold;">BẠN GẦN NESTSONGAN</h3>
+                <p class="text-center" style="color:white; font-size: x-large; font: bold; ">Hãy chọn tỉnh thành của bạn</p>
+                <a href="trang-chu?bid=1" class="btn btn-danger ml-10  btn-lg mb-3 " style="background: #6a0e13;  width: 50% ">Miền Bắc</a>
+                <a href="trang-chu?bid=2" class="btn btn-danger ml-10  btn-lg mb-3 " style="background: #6a0e13;  width: 50% ">Miền Trung</a>
+                <a href="trang-chu?bid=3" class="btn btn-danger ml-10  btn-lg  " style="background: #6a0e13; width: 50% ">Miền Nam</a>
             </div>
-            <div class="modal-footer">
-                
-            </div>
+            
         </div>
         <!-- Page Preloder -->
         <div id="preloder">
