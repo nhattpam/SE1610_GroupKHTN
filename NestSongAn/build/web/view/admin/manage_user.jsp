@@ -198,6 +198,14 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="manage-staff" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Quản Lý Nhân Viên
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="CreateStaffAccount" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
@@ -231,38 +239,70 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${listFullUser}" var="l">
-                                <tr>
-                                    <td>
-                                        ${l.user_id}
-                                    </td>
-                                    <td>
-                                        ${l.full_name}
-                                    </td>
-                                    <td>
-                                         ${l.email}
-                                    </td>
-                                    <td>
-                                         ${l.create_date}
-                                    </td>
-                                    <td>
-                                        ${l.edit_date}
-                                    </td>
-                                    <td>
-                                        ${l.status}
-                                    </td>
-                                    <td>
-                                        ${l.role_id.role}
-                                    </td>
-                                    <td>
-                                        <c:if test = "${l.role_id.role == 'staff'}">
-                                            <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
-                                        </c:if>
-                                        
-                                        <a href="" class="btn btn-sm btn-danger"> action</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                                <c:forEach items="${listFullUser}" var="l">
+                                    <tr>
+                                        <td>
+                                            ${l.user_id}
+                                        </td>
+                                        <td>
+                                            ${l.full_name}
+                                        </td>
+                                        <td>
+                                            ${l.email}
+                                        </td>
+                                        <td>
+                                            ${l.create_date}
+                                        </td>
+                                        <td>
+                                            ${l.edit_date}
+                                        </td>
+                                        <td>
+                                            ${l.status}
+                                        </td>
+                                        <td>
+                                            ${l.role_id.role}
+                                        </td>
+                                        <td>
+                                            <c:if test = "${l.role_id.role == 'staff'}">
+                                                <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
+                                            </c:if>
+
+                                            <a href="" class="btn btn-sm btn-danger"> action</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <c:forEach items="${listFullStaff}" var="s">
+                                    <tr>
+                                        <td>
+                                            ${s.user_id}
+                                        </td>
+                                        <td>
+                                            ${s.full_name}
+                                        </td>
+                                        <td>
+                                            ${s.email}
+                                        </td>
+                                        <td>
+                                            ${s.create_date}
+                                        </td>
+                                        <td>
+                                            ${s.edit_date}
+                                        </td>
+                                        <td>
+                                            ${s.status}
+                                        </td>
+                                        <td>
+                                            ${s.role_id.role}
+                                        </td>
+                                        <td>
+                                            <c:if test = "${s.role_id.role == 'staff'}">
+                                                <a href="edit-staff?uid=${s.user_id}&full_name=${s.full_name}&user_name=${s.user_name}&phone=${s.phone}&email=${s.email}" class="btn btn-sm btn-primary"> Sửa</a>
+                                            </c:if>
+
+                                            <a href="" class="btn btn-sm btn-danger"> action</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -275,7 +315,7 @@
                 All rights reserved.
                 <div class="float-right d-none d-sm-inline-block">
                     <form action="ExcelController">
-                       <input type="submit" name="action" value="Export All User to Excel">
+                        <input type="submit" name="action" value="Export All User to Excel">
                     </form>
                     <b>Version</b> 3.0.4
                 </div>
