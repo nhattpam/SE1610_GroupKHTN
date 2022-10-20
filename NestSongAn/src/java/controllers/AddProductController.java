@@ -6,8 +6,11 @@
 package controllers;
 
 import daos.ProductDAOImpl;
+import daos.QuantityProductDAOImpl;
+import dtos.BranchDTO;
 import dtos.CategoryDTO;
 import dtos.ProductDTO;
+import dtos.QuantityProductDTO;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -93,6 +96,36 @@ public class AddProductController extends HttpServlet {
                     part.write(path + File.separator + fileName);
 
                     session.setAttribute("succMsg", "Thêm sản phẩm thành công...");
+                    //insert into quantity_product
+                    ProductDAOImpl daoCheckId = new ProductDAOImpl(DBUtils.getConnection());
+                    int pid = daoCheckId.checkProductId(name);
+                    System.out.println(pid);
+                    QuantityProductDAOImpl daoAdd = new QuantityProductDAOImpl(DBUtils.getConnection());
+                    QuantityProductDTO q = new QuantityProductDTO();
+                    ProductDTO p_id = new ProductDTO(pid);
+                    BranchDTO b_id = new BranchDTO(1);
+                    q.setProduct_id(p_id);
+                    q.setBranch_id(b_id);
+                    q.setQuantity(quantity);
+                    daoAdd.addProductQuantity(q);
+                    //
+                    QuantityProductDTO q2 = new QuantityProductDTO();
+                    ProductDTO p_id2 = new ProductDTO(pid);
+                    BranchDTO b_id2 = new BranchDTO(2);
+                    q2.setProduct_id(p_id2);
+                    q2.setBranch_id(b_id2);
+                    q2.setQuantity(quantity);
+                    daoAdd.addProductQuantity(q2);
+                    //
+                    QuantityProductDTO q3 = new QuantityProductDTO();
+                    ProductDTO p_id3 = new ProductDTO(pid);
+                    BranchDTO b_id3 = new BranchDTO(3);
+                    q3.setProduct_id(p_id3);
+                    q3.setBranch_id(b_id3);
+                    q3.setQuantity(quantity);
+                    daoAdd.addProductQuantity(q3);
+                    //
+                    //insert into quantity_product
                     resp.sendRedirect("add-product");
                 } else {
                     session.setAttribute("failedMsg", "Có lỗi trên hệ thống...");

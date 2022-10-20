@@ -641,4 +641,24 @@ public class ProductDAOImpl implements ProductDAO {
         return list;
 
     }
+    
+    @Override
+    //check product_id by name
+    public int checkProductId(String name){
+        int product_id = 0;
+        try {
+            String sql = "SELECT name, product_id FROM product \n"
+                    + "WHERE name LIKE N'"+ name +"'";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                product_id = rs.getInt("product_id");
+                rs.getString("name");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return product_id;
+    }
 }

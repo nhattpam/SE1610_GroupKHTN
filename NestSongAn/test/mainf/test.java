@@ -11,11 +11,13 @@ import daos.OrderDetailsDAOImpl;
 import daos.ProductDAOImpl;
 import daos.QuantityProductDAOImpl;
 import daos.UserDAOImpl;
+import dtos.BranchDTO;
 import dtos.CategoryDTO;
 import dtos.FeedbackDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import dtos.ProductDTO;
+import dtos.QuantityProductDTO;
 import dtos.UsersDTO;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,8 +32,15 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) throws SQLException {
-          UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
-
-       dao.deteleStaffAccount(17);
+          QuantityProductDAOImpl daoAdd = new QuantityProductDAOImpl(DBUtils.getConnection());
+          QuantityProductDTO q = new QuantityProductDTO();
+          ProductDTO p_id = new ProductDTO(22);
+          BranchDTO b_id = new BranchDTO(1);
+          q.setProduct_id(p_id);
+          q.setBranch_id(b_id);
+          q.setQuantity(11);
+          daoAdd.addProductQuantity(q);
+          
+          
     }
 }

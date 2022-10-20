@@ -17,6 +17,11 @@ public class BranchDTO {
     public BranchDTO() {
     }
 
+    public BranchDTO(int branch_id) {
+        this.branch_id = branch_id;
+    }
+    
+
     public BranchDTO(int branch_id, String name) {
         this.branch_id = branch_id;
         this.name = name;

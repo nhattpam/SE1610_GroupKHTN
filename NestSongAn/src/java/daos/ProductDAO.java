@@ -7,6 +7,7 @@ package daos;
 
 import dtos.CategoryDTO;
 import dtos.ProductDTO;
+import dtos.QuantityProductDTO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -60,4 +61,7 @@ public interface ProductDAO {
     public List<ProductDTO> getProductAsc(int categoryId) throws SQLException ;
     
      public List<ProductDTO> viewPopularProduct();
+     
+     //check product_id by name
+    public int checkProductId(String name);
 }

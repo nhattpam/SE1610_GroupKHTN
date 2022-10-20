@@ -17,4 +17,7 @@ public interface QuantityProductDAO {
     
     //sub the quantity after buy
     public QuantityProductDTO subQuantityAfterBuy(int quantity, int product_id, int branch_id);
+    
+     //insert into quantity_product
+    public void addProductQuantity(QuantityProductDTO q);
 }
