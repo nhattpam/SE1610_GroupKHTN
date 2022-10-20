@@ -40,7 +40,7 @@ public class ViewSearchResultPageController extends HttpServlet{
         System.out.println(character);
         
         List<ProductDTO> listSearch = searchDAO.getProductBySearch(character);
-        if(!listSearch.isEmpty()){
+        if(!listSearch.isEmpty() && !character.equals("")){
 
             req.setAttribute("listSearch", listSearch);
 
