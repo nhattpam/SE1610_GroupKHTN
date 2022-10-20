@@ -137,4 +137,31 @@ public class FeedbackDAOImpl implements FeedbackDAO {
         return 0;
     }
 
+    @Override
+    public List<FeedbackDTO> viewFeedbackProduct(int product_id) {
+         List<FeedbackDTO> list = new ArrayList<>();
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT feedback_id,feedback,u.user_name,u.user_id,fb.create_date,product_id FROM feedback fb inner join users u on fb.user_id = u.user_id\n"
+                        +"WHERE product_id = ?\n"
+                        + "Order by feedback_id DESC\n";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setInt(1, product_id);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    UsersDTO user = new UsersDTO();
+                    user.setUser_id(rs.getInt(4));
+                    user.setUser_name(rs.getString(3));
+                    ProductDTO pro = new ProductDTO(rs.getInt("product_id"));
+                    FeedbackDTO fe = new FeedbackDTO(rs.getInt("feedback_id"), rs.getString("feedback"), user, rs.getString(5), pro);
+                    list.add(fe);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FeedbackDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
 }

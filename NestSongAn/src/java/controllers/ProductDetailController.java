@@ -55,7 +55,7 @@ public class ProductDetailController extends HttpServlet {
         
         //view all feedback
         FeedbackDAOImpl fedao = new FeedbackDAOImpl(DBUtils.getConnection());
-        List<FeedbackDTO> felist = fedao.viewAllfeedback();
+        List<FeedbackDTO> felist = fedao.viewFeedbackProduct(product_id);
         request.setAttribute("listFeedback", felist);
         
         //phan trang

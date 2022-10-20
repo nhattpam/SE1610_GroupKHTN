@@ -252,8 +252,20 @@
                                         <td>${o.order_date}</td>
                                         <td><a href="view-orderdetails?order_id=${o.order_id}" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i></a></td>
                                         <td>
-                                            <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary">Đồng ý</a><br>
-                                            <a href="delete?pid=${l.product_id}" class="btn btn-sm btn-danger">Từ chối</a>
+                                             <c:if test = "${o.status == 1}">
+                                                <a href="approve?orderid=${o.order_id}" class="btn btn-sm btn-primary">Đồng ý</a><br>
+                                                
+                                                <a href="decline?orderid=${o.order_id}" class="btn btn-sm btn-danger">Từ chối</a>
+                                            </c:if>
+                                            <c:if test = "${o.status == 2}">
+
+                                            </c:if>
+                                            <c:if test = "${o.status == 3}">
+
+                                            </c:if>
+                                            <c:if test = "${o.status == 4}">
+
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>

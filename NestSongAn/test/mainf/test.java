@@ -31,7 +31,12 @@ public class test {
 
     public static void main(String[] args) throws SQLException {
           UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
-
+          int product_id = 19;
+          FeedbackDAOImpl fedao = new FeedbackDAOImpl(DBUtils.getConnection());
+        List<FeedbackDTO> felist = fedao.viewFeedbackProduct(product_id);
+        for (FeedbackDTO feedbackDTO : felist) {
+            System.out.println(feedbackDTO.getFeedback());
+        }
         List<UsersDTO> listFullStaff = dao.getStaffList();
         System.out.println(listFullStaff);
     }

@@ -27,4 +27,6 @@ public interface OrderDAO {
     public OrderDTO getOrderAddress(String order_id);
     //hapham: function veiw user of order
     public List<OrderDTO> viewUserOrder() throws SQLException;
+    //hapham: function edit order status
+    public void editOrderStatus(String order_id, int index);
 }
