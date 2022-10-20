@@ -22,4 +22,6 @@ public interface FeedbackDAO {
     public List<FeedbackDTO> pagingFeedback(int index);
     //dem so luong feedback
     public int getTotalFeedback();
+    //hapham function view comment product
+    public List<FeedbackDTO> viewFeedbackProduct(int product_id);
 }

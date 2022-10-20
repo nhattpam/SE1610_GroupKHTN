@@ -81,6 +81,18 @@
                             <div class="featured__item">
 
                                 <div class="featured__item__pic set-bg" data-setbg="products/${l.photo}">
+                                     <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <c:if test="${empty USER && empty USERG}">
+                                            <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
+                                                </c:if>
+                                                <c:if test="${ not empty USER }">
+                                            <li><a href="add-cart?command=insert&product_id=${p.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>   
+                                                </c:if>    
+                                                <c:if test="${ not empty USERG }">
+                                            <li><a href="add-cart?command=insert&product_id=${p.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>    
+                                                </c:if>
+                                    </ul>
                                 </div>
                                 <div class="featured__item__text">
                                     <h6><a href="detail?product_id=${l.product_id}&bid=${sessionScope.branch_id}">${l.name}</a></h6>

@@ -11,13 +11,11 @@ import daos.OrderDetailsDAOImpl;
 import daos.ProductDAOImpl;
 import daos.QuantityProductDAOImpl;
 import daos.UserDAOImpl;
-import dtos.BranchDTO;
 import dtos.CategoryDTO;
 import dtos.FeedbackDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import dtos.ProductDTO;
-import dtos.QuantityProductDTO;
 import dtos.UsersDTO;
 import java.sql.SQLException;
 import java.util.List;
@@ -32,15 +30,14 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) throws SQLException {
-          QuantityProductDAOImpl daoAdd = new QuantityProductDAOImpl(DBUtils.getConnection());
-          QuantityProductDTO q = new QuantityProductDTO();
-          ProductDTO p_id = new ProductDTO(22);
-          BranchDTO b_id = new BranchDTO(1);
-          q.setProduct_id(p_id);
-          q.setBranch_id(b_id);
-          q.setQuantity(11);
-          daoAdd.addProductQuantity(q);
-          
-          
+          UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
+          int product_id = 19;
+          FeedbackDAOImpl fedao = new FeedbackDAOImpl(DBUtils.getConnection());
+        List<FeedbackDTO> felist = fedao.viewFeedbackProduct(product_id);
+        for (FeedbackDTO feedbackDTO : felist) {
+            System.out.println(feedbackDTO.getFeedback());
+        }
+        List<UsersDTO> listFullStaff = dao.getStaffList();
+        System.out.println(listFullStaff);
     }
 }

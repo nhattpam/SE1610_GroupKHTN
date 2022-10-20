@@ -24,32 +24,6 @@ import utils.DBUtils;
  */
 public class AddFeedbackController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -59,39 +33,16 @@ public class AddFeedbackController extends HttpServlet {
             String feedback = request.getParameter("feedback");
             int uid = Integer.parseInt(request.getParameter("uid"));
             int pid = Integer.parseInt(request.getParameter("pid"));
-            boolean check = true;
             Date now = new Date();
             SimpleDateFormat x = new SimpleDateFormat();
             String createdDate = x.format(now);
-            if (feedback == null) {
-                check = false;
-            }
-            if (uid != 0) {
-                response.sendRedirect("loginController");
-            }
-            if (pid == 0) {
-                check = false;
-            }
-            if (check) {
-                FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
-                fed.addFeedback(feedback, uid, createdDate, pid);
-            }
-            response.sendRedirect("detail?product_id="+pid);
+            FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
+            fed.addFeedback(feedback, uid, createdDate, pid);
+            response.sendRedirect("detail?product_id=" + pid);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

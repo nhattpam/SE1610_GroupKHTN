@@ -215,15 +215,12 @@
 
                                                     <div class="col-md-6 col-lg-7 col-xl-8">
                                                         <c:forEach items="${listFeedback}" var="f">
-                                                            <li class="d-flex justify-content-between mb-4" width="60">
-                                                                <c:if test="${empty l.user_id.user_id}"></c:if>
-                                                                <c:if test="${not empty l.user_id.user_id}">
-                                                                    <c:if test="${USER.user_id = l.user_id.user_id}"><i class="fa fa-user" width="60"></i></c:if>
-                                                                </c:if>
+                                                            <li class="d-flex justify-content-between mb-3" width="30">
+                                                                <c:if test="${f.user_id.user_id == USER.user_id}"><i class="fa fa-user" width="60"></i></c:if>
 
-                                                                <div class="card">
-                                                                    <div class="card-header d-flex justify-content-between p-3">
-                                                                        <p class="fw-bold mb-0">${f.user_id.user_name}</p>
+                                                                    <div class="card">
+                                                                        <div class="card-header d-flex justify-content-between p-3">
+                                                                            <p class="fw-bold mb-0">${f.user_id.user_name}</p>
                                                                         <p class="text-muted small mb-0"><i class="far fa-clock"></i> ${f.create_date}</p>
                                                                     </div>
                                                                     <div class="card-body">
@@ -234,20 +231,31 @@
                                                                 </div>
                                                             </li>
                                                         </c:forEach>
-
-                                                        <!--input-->
-                                                        <form action="AddFeedback" method="POST">
+                                                        <c:if test="${empty USER.user_id}">
                                                             <li class="bg-white mb-3">
                                                                 <div class="form-outline">
-                                                                    <input type="hidden" name="uid" value="${USER.user_id}">
-                                                                    <input type="hidden" name="pid" value="${detail.product_id}">
-                                                                    <textarea type="textarea" class="form-control" id="textAreaExample2" rows="4" name="feedback"></textarea>
+                                                                                                                               
+                                                                    <textarea type="textarea" class="form-control" id="textAreaExample2" name="feedback"></textarea>
                                                                     <label class="form-label" for="textAreaExample2">Message</label>
                                                                 </div>
                                                             </li>
-                                                            <button type="input" class="btn btn-info btn-rounded float-end">Send</button>
-                                                        </form>
+                                                            <a href="loginController" type="input" class="btn btn-info btn-rounded float-end">Send</a>
+                                                        </c:if>
+                                                        <c:if test="${not empty USER.user_id}">
+                                                            <!--input-->
+                                                            <form action="AddFeedback" method="POST">
+                                                                <li class="bg-white mb-3">
+                                                                    <div class="form-outline">
+                                                                        <input type="hidden" name="uid" value="${USER.user_id}">
+                                                                    <input type="hidden" name="pid" value="${detail.product_id}"> 
+                                                                        <textarea type="textarea" class="form-control" id="textAreaExample2" name="feedback"></textarea>
+                                                                        <label class="form-label" for="textAreaExample2">Message</label>
+                                                                    </div>
+                                                                </li>
+                                                                <button type="input" class="btn btn-info btn-rounded float-end">Send</button>
 
+                                                            </form>
+                                                        </c:if>
                                                         </ul>
 
                                                     </div>
@@ -306,16 +314,16 @@
                 </div>
             </div>
             <div class="container">
-            <div class="row">
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title related__product__title">
                             <h2>San Pham Pho Bien</h2>
                         </div>
                     </div>
                 </div>
-            <div class="row">
-                <c:forEach items="${listPopular}" var="p">
-                   <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="row">
+                    <c:forEach items="${listPopular}" var="p">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="products/${p.photo}">
                                     <ul class="product__item__pic__hover">
@@ -337,8 +345,8 @@
                                 </div>
                             </div>
                         </div>
-                </c:forEach>
-            </div>
+                    </c:forEach>
+                </div>
             </div>
         </section>
 
