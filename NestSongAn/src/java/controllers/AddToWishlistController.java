@@ -44,7 +44,7 @@ public class AddToWishlistController extends HttpServlet {
         } catch (Exception e) {
             
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
         }
     }
 

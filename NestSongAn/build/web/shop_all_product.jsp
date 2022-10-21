@@ -180,7 +180,7 @@
                                             <li><a href="AddToWishlistController?product_id=${l.product_id}&user_id=${USER.user_id}"><i class="fa fa-heart"></i></a></li>
                                                 </c:if>
                                                 <c:if test="${ not empty USERG }">
-                                            <li><a href="AddToWishlistController?product_id=${l.product_id}&user_id=${USERG.user_id}"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="AddToWishlistController?product_id=${l.product_id}&user_id=${USERG.id}"><i class="fa fa-heart"></i></a></li>
                                                 </c:if>
                                         <!--<li><a href="#"><i class="fa fa-retweet"></i></a></li>-->
 
