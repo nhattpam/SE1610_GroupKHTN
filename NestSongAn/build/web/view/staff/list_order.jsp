@@ -258,7 +258,7 @@
                                                 <a href="decline?orderid=${o.order_id}" class="btn btn-sm btn-danger">Từ chối</a>
                                             </c:if>
                                             <c:if test = "${o.status == 2}">
-
+                                                <h5 style="color: #00ff66"> Đã gửi</h5>
                                             </c:if>
                                             <c:if test = "${o.status == 3}">
 

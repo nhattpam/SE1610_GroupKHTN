@@ -1,8 +1,12 @@
 package controllers;
 
+import daos.UserDAOImpl;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -30,50 +34,55 @@ public class ForgotPasswordController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String email = request.getParameter("email");
-        RequestDispatcher dispatcher = null;
-        int otpvalue = 0;
-        HttpSession mySession = request.getSession();
-
-        if (email != null || !email.equals("")) {
-            // sending otp
-            Random rand = new Random();
-            otpvalue = rand.nextInt(1255650);
-
-            String to = email;// change accordingly
-            // Get the session object
-            Properties props = new Properties();
-            props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.socketFactory.port", "465");
-            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.port", "465");
-            Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(MyEmail, MyEmailPass);// Put your email
-                    // id and
-                    // password here
+        try {
+            String email = request.getParameter("email");
+            RequestDispatcher dispatcher = null;
+            int otpvalue = 0;
+            HttpSession mySession = request.getSession();
+            UserDAOImpl dao = new UserDAOImpl();
+            boolean daol = dao.checkDuplicateEmail(email);
+            if (email != null && !email.equals("") && daol) {
+                // sending otp
+                Random rand = new Random();
+                otpvalue = rand.nextInt(1255650);
+                
+                String to = email;// change accordingly
+                // Get the session object
+                Properties props = new Properties();
+                props.put("mail.smtp.host", "smtp.gmail.com");
+                props.put("mail.smtp.socketFactory.port", "465");
+                props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.port", "465");
+                Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(MyEmail, MyEmailPass);// Put your email
+                        // id and
+                        // password here
+                    }
+                });
+                // compose message
+                try {
+                    MimeMessage message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(email));// change accordingly
+                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+                    message.setSubject("Hello");
+                    message.setText("Your OTP is: " + otpvalue);
+                    Transport.send(message);
+                    System.out.println("Message sent successfully");
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
                 }
-            });
-            // compose message
-            try {
-                MimeMessage message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(email));// change accordingly
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-                message.setSubject("Hello");
-                message.setText("Your OTP is: " + otpvalue);  
-                Transport.send(message);
-                System.out.println("Message sent successfully");
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
+                dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
+                request.setAttribute("message", "OTP is sent to your email id");
+                //request.setAttribute("connection", con);
+                mySession.setAttribute("otp", otpvalue);
+                mySession.setAttribute("email", email);
+                dispatcher.forward(request, response);
+                //request.setAttribute("status", "success");
             }
-            dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
-            request.setAttribute("message", "OTP is sent to your email id");
-            //request.setAttribute("connection", con);
-            mySession.setAttribute("otp", otpvalue);
-            mySession.setAttribute("email", email);
-            dispatcher.forward(request, response);
-            //request.setAttribute("status", "success");
+        } catch (SQLException ex) {
+            Logger.getLogger(ForgotPasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

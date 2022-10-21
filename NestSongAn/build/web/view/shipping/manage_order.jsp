@@ -11,11 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Danh Sách Sản Phẩm</title>
+        <title>Danh Sách Người Dùng</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/fontawesome-free/css/all.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -183,7 +182,7 @@
                                  with font-awesome or any other icon font library -->
 
                             <li class="nav-item">
-                                <a href="staff-dashboard" class="nav-link">
+                                <a href="admin-dashboard" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thống Kê
@@ -191,30 +190,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="add-product" class="nav-link">
+                                <a href="manage-shipper" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
-                                        Thêm Sản Phẩm
+                                        Quản Lý Đơn Hàng
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="list-products" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Danh Sách Sản Phẩm
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="list-orders" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Danh Sách Đặt Hàng
-                                    </p>
-                                </a>
-                            </li>
-
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -224,47 +206,45 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row crd-ho">
                         <table class="table table-striped">
                             <thead class="bg-dark text-white">
                                 <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Họ và tên</th>
-                                    <th scope="col">Tên người dùng</th>
-                                    <th scope="col">Địa chỉ Email</th>
+                                    <th scope="col">Tên</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col">Số điện thoại</th>
-                                    <th scope="col">Ngày đặt hàng</th>
-                                    <th scope="col">Thông tin chi tiết</th>
-                                    <th scope="col">Hành động</th>
+                                    <th scope="col">Địa chỉ</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Tổng tiền</th>
+                                    <th scope="col">Trạng thái</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${listOrder}" var="o">
-                                    <%--<c:set var="price" value="123.2" />--%>  
+                                <c:forEach items="${listShip}" var="l">
                                     <tr>
-                                        <!--<th scope="row">1</th>-->
-                                        <td>${o.order_id}</td>
-                                        <td>${o.user_id.full_name}</td>
-                                        <td>${o.user_id.user_name}</td>
-                                        <td>${o.user_id.email}</td>
-                                        <td>${o.user_id.phone}</td>
-                                        <td>${o.order_date}</td>
-                                        <td><a href="view-orderdetails?order_id=${o.order_id}" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i></a></td>
                                         <td>
-                                             <c:if test = "${o.status == 1}">
-                                                <a href="approve?orderid=${o.order_id}" class="btn btn-sm btn-primary">Đồng ý</a><br>
-                                                
-                                                <a href="decline?orderid=${o.order_id}" class="btn btn-sm btn-danger">Từ chối</a>
-                                            </c:if>
-                                            <c:if test = "${o.status == 2}">
-                                                <h5 style="color: #00ff66"> Đã gửi</h5>
-                                            </c:if>
-                                            <c:if test = "${o.status == 3}">
+                                            ${l.user_id.full_name}
+                                        </td>
+                                        <td>
+                                            ${l.user_id.email}
+                                        </td>
+                                        <td>
+                                            ${l.user_id.phone}
+                                        </td>
+                                        <td>
+                                            ${l.order_id.delivery_address}
+                                        </td>
+                                        <td>
+                                            ${l.quantity}
+                                        </td>
+                                        <td>
+                                            ${l.total_price}
+                                        </td>
 
-                                            </c:if>
-                                            <c:if test = "${o.status == 4}">
-
+                                        <td>                                           
+                                            <c:if test = "${l.order_id.status == 2}">
+                                                <h5 style="color: #00ff66"> Đang vận chuyển</h5>
                                             </c:if>
                                         </td>
                                     </tr>
@@ -275,13 +255,14 @@
                 </div>
             </div>
 
-
-
             <!-- /.content-wrapper -->
             <footer class="main-footer">
                 <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
                 All rights reserved.
                 <div class="float-right d-none d-sm-inline-block">
+                    <form action="ExcelController">
+                        <input type="submit" name="action" value="Export All User to Excel">
+                    </form>
                     <b>Version</b> 3.0.4
                 </div>
             </footer>
