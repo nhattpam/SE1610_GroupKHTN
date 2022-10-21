@@ -6,6 +6,7 @@
 package controllers;
 
 import daos.ProductDAOImpl;
+import dtos.CartDTO;
 import dtos.CategoryDTO;
 import dtos.ProductDTO;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.DBUtils;
 
 /**
@@ -53,6 +55,13 @@ public class ViewCategory2Controller extends HttpServlet{
         List<ProductDTO> listPaging = dao4.pagingProductByCategory(index, 2);
         req.setAttribute("listPaging", listPaging);
         
+        //check empty cart
+        HttpSession sCart = req.getSession();
+        CartDTO cart = (CartDTO) sCart.getAttribute("cart");
+        if (cart == null) {
+            cart = new CartDTO();
+            sCart.setAttribute("cart", cart);
+        }
         
         req.getRequestDispatcher("category/yen-tinh-che.jsp").forward(req, resp);
     }
