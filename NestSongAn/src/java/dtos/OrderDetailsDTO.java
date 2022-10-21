@@ -15,7 +15,7 @@ public class OrderDetailsDTO {
     private float total_price;
     private ProductDTO product_id;
     private OrderDTO order_id;
-
+    private UsersDTO user_id;
     public OrderDetailsDTO() {
     }
 
@@ -33,6 +33,22 @@ public class OrderDetailsDTO {
         this.total_price = total_price;
         this.product_id = product_id;
         this.order_id = order_id;
+    }
+
+    public OrderDetailsDTO(int order_details_id, int quantity, float total_price, OrderDTO order_id, UsersDTO user_id) {
+        this.order_details_id = order_details_id;
+        this.quantity = quantity;
+        this.total_price = total_price;
+        this.order_id = order_id;
+        this.user_id = user_id;
+    }
+
+    public UsersDTO getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(UsersDTO user_id) {
+        this.user_id = user_id;
     }
 
     public int getOrder_details_id() {

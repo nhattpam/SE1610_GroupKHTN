@@ -8,6 +8,7 @@ package daos;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import dtos.ProductDTO;
+import dtos.UsersDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -105,6 +106,57 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
                     int order_details_id = rs.getInt(6);
                     int product_id = rs.getInt(8);
                     OrderDetailsDTO ord = new OrderDetailsDTO(order_details_id, quantity, total_price, pro, o);
+                    result.add(ord);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public List<OrderDetailsDTO> viewCustomer() throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<OrderDetailsDTO> result = new ArrayList<>();
+        UsersDTO us = null;
+        OrderDTO o = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT u.full_name,u.phone,u.email,\n"
+                        + " od.quantity, od.total_price,\n"
+                        + " o.delivery_address, o.payment_method,od.order_details_id,\n"
+                        + " u.user_id, od.order_id,o.status\n"
+                        + "FROM  users u inner join [order] o on u.user_id = o.user_id\n"
+                        + "              inner join order_details od on od.order_id = o.order_id\n"
+                        + "WHERE o.status = 2";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    us = new UsersDTO();
+                    us.setFull_name(rs.getString(1));
+                    us.setPhone(rs.getString(2));
+                    us.setEmail(rs.getString(3));
+                    us.setUser_id(rs.getInt(9));
+                    o = new OrderDTO();
+                    o.setOrder_id(rs.getString(10));
+                    o.setDelivery_address(rs.getString(6));
+                    o.setPayment_method(rs.getString(7));
+                    o.setStatus(rs.getInt(11));
+                    int quantity = rs.getInt(4);
+                    float total_price = rs.getFloat(5);
+                    int order_details_id = rs.getInt(8);
+                    OrderDetailsDTO ord = new OrderDetailsDTO(order_details_id, quantity, total_price, o, us);
                     result.add(ord);
                 }
             }
