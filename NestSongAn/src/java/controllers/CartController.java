@@ -41,9 +41,9 @@ public class CartController extends HttpServlet {
         HttpSession session = request.getSession();
         int branch_id1 = (int) session.getAttribute("branch_id");
 //        System.out.println("request: " + branch_id);
-        System.out.println("session cart: " + branch_id1);
+//        System.out.println("session cart: " + branch_id1);
         int product_id = Integer.parseInt(request.getParameter("product_id"));
-        System.out.println(product_id);
+//        System.out.println(product_id);
         
         QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
         QuantityProductDTO q = daoCheck.getBranch(product_id, branch_id1);
@@ -51,7 +51,7 @@ public class CartController extends HttpServlet {
 //        int quantityInput = (int) session.getAttribute("quantityInput");
 //        System.out.println(quantityInput);
         session.setAttribute("q", q.getQuantity());
-        System.out.println("qu: " + q.getQuantity());
+//        System.out.println("qu: " + q.getQuantity());
 
     }
 
@@ -61,6 +61,7 @@ public class CartController extends HttpServlet {
 
         HttpSession session = request.getSession();
         CartDTO cart = (CartDTO) session.getAttribute("cart");
+        int branch_id1 = (int) session.getAttribute("branch_id");
         int product_id = Integer.parseInt(request.getParameter("product_id"));
         String command = request.getParameter("command");
         ArrayList<Long> listBuy = null;
@@ -80,6 +81,18 @@ public class CartController extends HttpServlet {
                     }
                     if (listBuy.indexOf(idBuy) == -1) {
                         cart.addToCart(p, 1);
+                        TreeMap<ProductDTO, Integer> list = cart.getList();
+                        QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
+
+                        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
+                            System.out.println("Hello: " + ds.getKey().getProduct_id());
+                            QuantityProductDTO q = daoCheck.getBranch(ds.getKey().getProduct_id(), branch_id1);
+//                            System.out.println(ds.getKey().getProduct_id() + ", so luong dang chon: " + ds.getValue() + " co so luong trong kho: " + q.getQuantity());
+                            if (ds.getValue() > q.getQuantity()) {
+//                                System.out.println(ds.getKey().getProduct_id() + " Vuot qua so luong trong kho");
+                                session.setAttribute("wrongQuantity", "Vượt quá số lượng trong kho");
+                            }
+                        }
                         listBuy.add(idBuy);
                     }
 //                    url = "/cart.jsp";
@@ -92,6 +105,18 @@ public class CartController extends HttpServlet {
                     }
                     if (listBuy.indexOf(idBuy) == -1) {
                         cart.addToCart(p, 1);
+                        TreeMap<ProductDTO, Integer> list = cart.getList();
+                        QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
+
+                        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
+                            System.out.println("Hello: " + ds.getKey().getProduct_id());
+                            QuantityProductDTO q = daoCheck.getBranch(ds.getKey().getProduct_id(), branch_id1);
+//                            System.out.println(ds.getKey().getProduct_id() + ", so luong dang chon: " + ds.getValue() + " co so luong trong kho: " + q.getQuantity());
+                            if (ds.getValue() > q.getQuantity()) {
+//                                System.out.println(ds.getKey().getProduct_id() + " Vuot qua so luong trong kho");
+                                session.setAttribute("wrongQuantity", "Vượt quá số lượng trong kho");
+                            }
+                        }
                         listBuy.add(idBuy);
                     }
 //                    url = "/cart.jsp";
@@ -104,6 +129,18 @@ public class CartController extends HttpServlet {
                     }
                     if (listBuy.indexOf(idBuy) == -1) {
                         cart.subToCart(p, 1);
+                        TreeMap<ProductDTO, Integer> list = cart.getList();
+                        QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
+
+                        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
+                            System.out.println("Hello: " + ds.getKey().getProduct_id());
+                            QuantityProductDTO q = daoCheck.getBranch(ds.getKey().getProduct_id(), branch_id1);
+//                            System.out.println(ds.getKey().getProduct_id() + ", so luong dang chon: " + ds.getValue() + " co so luong trong kho: " + q.getQuantity());
+                            if (ds.getValue() > q.getQuantity()) {
+//                                System.out.println(ds.getKey().getProduct_id() + " Vuot qua so luong trong kho");
+                                session.setAttribute("wrongQuantity", "Vượt quá số lượng trong kho");
+                            }
+                        }
                         listBuy.add(idBuy);
                     }
 //                    url = "/cart.jsp";

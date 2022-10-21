@@ -37,7 +37,7 @@ public class ViewCartPageController extends HttpServlet {
         }
         TreeMap<ProductDTO, Integer> list = cart.getList();
         req.setAttribute("list", list);
-            System.out.println(req.getAttribute("list"));
+//            System.out.println(req.getAttribute("list"));
  
         float totalSum = 0;
         req.setAttribute("totalSum", totalSum);
@@ -46,7 +46,7 @@ public class ViewCartPageController extends HttpServlet {
 //        int branch_id =Integer.parseInt(req.getParameter("bid"));
         int branch_id1 = (int) session.getAttribute("branch_id");
 //        System.out.println("request: " + branch_id);
-        System.out.println("session: " + branch_id1);
+//        System.out.println("session: " + branch_id1);
         
         req.getRequestDispatcher("cart.jsp").forward(req, resp);
     }

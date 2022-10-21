@@ -209,7 +209,8 @@
                         </thead>
                         <tbody>
                             <c:set var="TotalPriceAll" scope="session" value="0" />
-                            <c:set var="quantityWrong" scope="request" value="Vượt quá số lượng trong kho" />
+                            <c:set var="noti" scope="session" value="${wrongQuantity}" />
+                           
                             <c:forEach items="${requestScope.list}" var="map">
                                 <tr>
                                     <td class="cart_product">
@@ -224,12 +225,12 @@
                                     </td>
 
                                     <td class="cart_quantity">
-                                        <c:if test="${map.value > sessionScope.q}" >
-                                             <%--<c:set var="quantityWrong" scope="request" value="Vượt quá số lượng trong kho" />--%>
-                                             <c:out value="${quantityWrong}" />
-                                             <c:remove var="quantityWrong" scope="request"/>
-                                        </c:if>
+                                        
                                         <div class="cart_quantity_button">
+                                            <c:if test="${ not empty wrongQuantity }">
+                                                <p class="text-danger">${wrongQuantity}</p>
+                                                <c:remove var="wrongQuantity" scope="session"/>
+                                            </c:if>
                                             <a class="cart_quantity_up" href="add-cart?command=plus&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"> + </a>
                                             <input class="cart_quantity_input" type="text" value="${map.value}" autocomplete="off" size="2" disabled="">
                                             <a class="cart_quantity_down" href="add-cart?command=sub&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"> - </a>
@@ -261,18 +262,20 @@
                 </div>
                 <div  class="container-fluid mb-5" style="color: white">
                     <c:if test="${ not empty USER }">
-                        <c:if test="${ empty requestScope.list }">
+                        <c:if test="${ empty requestScope.list }" >
                             Giỏ hàng trống
                         </c:if>
-                        <c:if test="${ not empty requestScope.list  && not empty requestScope.quantityWrong }">
+                        <c:if test="${ not empty requestScope.list && empty sessionScope.noti}">
                             <a class="btn btn-custom btn-lg btn-block" href="checkout?bid=${sessionScope.branch_id}" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
                         </c:if>
+                            
                     </c:if>
+                     
                     <c:if test="${ not empty USERG }">
                         <c:if test="${ empty requestScope.list }">
                             Giỏ hàng trống
                         </c:if>
-                        <c:if test="${ not empty requestScope.list && not empty requestScope.quantityWrong }">
+                        <c:if test="${ not empty requestScope.list && empty sessionScope.noti }">
                             <a class="btn btn-custom btn-lg btn-block" href="checkoutgg?bid=${sessionScope.branch_id}" id="button">TIẾN HÀNH ĐẶT HÀNG</a>
                         </c:if>
                     </c:if>
