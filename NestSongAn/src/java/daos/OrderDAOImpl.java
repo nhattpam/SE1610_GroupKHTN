@@ -23,14 +23,15 @@ import utils.DBUtils;
  *
  * @author Admin
  */
-public class OrderDAOImpl implements OrderDAO{
+public class OrderDAOImpl implements OrderDAO {
+
     private Connection conn;
 
     public OrderDAOImpl(Connection conn) {
         this.conn = conn;
     }
 
-     //nhattpam: function checkout
+    //nhattpam: function checkout
     @Override
     public void addOrder(OrderDTO od) {
         String sql = "INSERT INTO [order] (order_id,user_id,delivery_address,payment_method,order_date,total_price,status) VALUES(?,?,?,?,?,?,?)";
@@ -43,7 +44,7 @@ public class OrderDAOImpl implements OrderDAO{
             ps.setString(5, od.getOrder_date());
             ps.setFloat(6, od.getTotal_price());
             ps.setInt(7, od.getStatus());
-            
+
             ps.executeUpdate();
         } catch (SQLException e) {
         }
@@ -68,7 +69,7 @@ public class OrderDAOImpl implements OrderDAO{
 //                UsersDTO u = new UsersDTO(rs.getInt("user_id"));
 //                o.setUser_id(u);
                 list.add(o);
-                
+
             }
 
         } catch (Exception e) {
@@ -94,12 +95,13 @@ public class OrderDAOImpl implements OrderDAO{
         }
         return o;
     }
+
     public List<OrderDTO> viewUserOrder() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         List<OrderDTO> result = new ArrayList<>();
-        
+
         try {
             con = DBUtils.getConnection();
             if (con != null) {
@@ -108,7 +110,7 @@ public class OrderDAOImpl implements OrderDAO{
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    UsersDTO user = new UsersDTO(rs.getInt(8),rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                    UsersDTO user = new UsersDTO(rs.getInt(8), rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
                     String orderid = rs.getString(7);
                     int status = rs.getInt(6);
                     String order_date = rs.getString(5);
@@ -166,5 +168,50 @@ public class OrderDAOImpl implements OrderDAO{
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+//Minh Thanh
+    @Override
+    public List<OrderDTO> viewOrderList() throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<OrderDTO> result = new ArrayList<>();
+        
+        OrderDTO o = null;
+        UsersDTO u = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT u.full_name,u.phone,\n"
+                        + "       o.delivery_address, o.total_price\n"
+                        + "      ,o.status,o.order_id\n"
+                        + "FROM  users u inner join [order] o on u.user_id = o.user_id\n"
+                        + "WHERE o.status = 2";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    u = new UsersDTO();
+                    u.setFull_name(rs.getString(1));
+                    u.setPhone(rs.getString(2));
+                    float total_price = rs.getFloat(4);
+                    String delivery_address = rs.getString(3);
+                    int status = rs.getInt(5);
+                    String order_id = rs.getString(6);
+                    OrderDTO odr = new OrderDTO(order_id, delivery_address, total_price, status, u);
+                    result.add(odr);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 }

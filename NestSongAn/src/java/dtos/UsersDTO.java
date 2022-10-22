@@ -37,6 +37,10 @@ public class UsersDTO implements Serializable{
         this.user_id = user_id;
     }
 
+    public UsersDTO(String full_name) {
+        this.full_name = full_name;
+    }
+
 
     public UsersDTO(int user_id, String full_name, String user_name, String email, String phone) {
         this.user_id = user_id;

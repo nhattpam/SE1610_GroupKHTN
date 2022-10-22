@@ -5,7 +5,9 @@
  */
 package controllers;
 
+import daos.OrderDAOImpl;
 import daos.OrderDetailsDAOImpl;
+import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,9 +35,9 @@ public class ViewShipperOrderController extends HttpServlet {
         
         try {
             response.setContentType("text/html;charset=UTF-8");
-            OrderDetailsDAOImpl dao = new OrderDetailsDAOImpl(DBUtils.getConnection());
+            OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
             
-            List<OrderDetailsDTO> list = dao.viewCustomer();
+            List<OrderDTO> list = dao.viewOrderList();
             
             request.setAttribute("listShip", list);
             
