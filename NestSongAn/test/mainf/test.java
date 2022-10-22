@@ -30,10 +30,10 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) throws SQLException {
-        OrderDetailsDAOImpl dao = new OrderDetailsDAOImpl(DBUtils.getConnection());
-        List<OrderDetailsDTO> list = dao.viewCustomer();
-        for (OrderDetailsDTO orderDetailsDTO : list) {
-            System.out.println(orderDetailsDTO.getUser_id().getFull_name());
+        OrderDAOImpl dap = new OrderDAOImpl(DBUtils.getConnection());
+        List<OrderDTO> o = dap.viewOrderList();
+        for (OrderDTO orderDTO : o) {
+            System.out.println(orderDTO.getOrder_id());
         }
     }
 }

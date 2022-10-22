@@ -212,11 +212,10 @@
                             <thead class="bg-dark text-white">
                                 <tr>
                                     <th scope="col">Tên</th>
-                                    <th scope="col">Email</th>
                                     <th scope="col">Số điện thoại</th>
                                     <th scope="col">Địa chỉ</th>
-                                    <th scope="col">Số lượng</th>
                                     <th scope="col">Tổng tiền</th>
+                                    <th scope="col">Mã đơn hàng</th>
                                     <th scope="col">Trạng thái</th>
                                 </tr>
                             </thead>
@@ -227,23 +226,20 @@
                                             ${l.user_id.full_name}
                                         </td>
                                         <td>
-                                            ${l.user_id.email}
-                                        </td>
-                                        <td>
                                             ${l.user_id.phone}
                                         </td>
                                         <td>
-                                            ${l.order_id.delivery_address}
+                                            ${l.delivery_address}
                                         </td>
                                         <td>
-                                            ${l.quantity}
+                                            <fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ
                                         </td>
                                         <td>
-                                            ${l.total_price}
+                                            ${l.order_id}
                                         </td>
 
                                         <td>                                           
-                                            <c:if test = "${l.order_id.status == 2}">
+                                            <c:if test = "${l.status == 2}">
                                                 <h5 style="color: #00ff66"> Đang vận chuyển</h5>
                                             </c:if>
                                         </td>
@@ -260,9 +256,6 @@
                 <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
                 All rights reserved.
                 <div class="float-right d-none d-sm-inline-block">
-                    <form action="ExcelController">
-                        <input type="submit" name="action" value="Export All User to Excel">
-                    </form>
                     <b>Version</b> 3.0.4
                 </div>
             </footer>
