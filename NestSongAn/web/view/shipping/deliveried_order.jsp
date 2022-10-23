@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Danh Sách Đơn Hàng</title>
+        <title>Đơn Hàng Đã Giao</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -219,38 +219,25 @@
                         <table class="table table-striped">
                             <thead class="bg-dark text-white">
                                 <tr>
-                                    <th scope="col">Tên</th>
-                                    <th scope="col">Số điện thoại</th>
-                                    <th scope="col">Địa chỉ</th>
-                                    <th scope="col">Tổng tiền</th>
                                     <th scope="col">Mã đơn hàng</th>
-                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Địa chỉ giao hàng</th>
+                                    <th scope="col">Ngày đặt hàng</th>
+                                    <th scope="col">Ngày giao hàng</th>
+                                    <th scope="col">Giá trị đơn hàng</th>
+                                    <th scope="col">Mã khách hàng</th>
+                                    <th scope="col">Nơi lấy hàng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${listShip}" var="l">
+                                <c:forEach items="${listDeliveryOrrder}" var="l">
                                     <tr>
-                                        <td>
-                                            ${l.user_id.full_name}
-                                        </td>
-                                        <td>
-                                            ${l.user_id.phone}
-                                        </td>
-                                        <td>
-                                            ${l.delivery_address}
-                                        </td>
-                                        <td>
-                                            <fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ
-                                        </td>
-                                        <td>
-                                            ${l.order_id}
-                                        </td>
-
-                                        <td>                                           
-                                            <c:if test = "${l.status == 2}">
-                                                <h5 style="color: #00ff66"> Đang vận chuyển</h5>
-                                            </c:if>
-                                        </td>
+                                        <td>${l.order_id}</td>
+                                        <td>${l.delivery_address}</td>
+                                        <td>${l.order_date}</td>
+                                        <td>${l.delivery_date}</td>
+                                        <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
+                                        <td>${l.user_id.user_id}</td>  
+                                        <td>${l.location_id.name}</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

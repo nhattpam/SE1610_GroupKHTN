@@ -5,6 +5,7 @@
  */
 package daos;
 
+import dtos.LocationDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import dtos.UserRoleDTO;
@@ -230,5 +231,42 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return 0;
         
+    }
+    
+    @Override
+    //khang tran: function view list order deliverired
+    public List<OrderDTO> vỉewDeliveriedOrders(){
+        List<OrderDTO> list = new ArrayList<>();
+        LocationDTO lo = null;
+        try {
+            String sql = "SELECT o.order_id, o.delivery_address,\n"
+                    + " o.order_date, o.delivery_date,\n"
+                    + " o.total_price, o.user_id, l.name\n"
+                    + "FROM [order] o INNER JOIN location l\n"
+                    + "ON o.location_id = l.location_id\n"
+                    + "WHERE status = 3";
+            
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                OrderDTO o = new OrderDTO();
+                o.setOrder_id(rs.getString("order_id"));
+                o.setDelivery_address(rs.getString("delivery_address"));
+                o.setOrder_date(rs.getString("order_date"));
+                o.setDelivery_date(rs.getString("delivery_date"));
+                o.setTotal_price(rs.getFloat("total_price"));
+                UsersDTO u = new UsersDTO();
+                u.setUser_id(rs.getInt("user_id"));
+                o.setUser_id(u);
+                lo = new LocationDTO();
+                lo.setName(rs.getString("name")); 
+                o.setLocation_id(lo); 
+                list.add(o); 
+                
+            }
+            
+        } catch (Exception e) {
+        }
+        return list;
     }
 }

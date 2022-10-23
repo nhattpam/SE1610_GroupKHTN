@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Danh Sách Người Dùng</title>
+        <title>Danh Sách Đơn Hàng</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -182,7 +182,7 @@
                                  with font-awesome or any other icon font library -->
 
                             <li class="nav-item">
-                                <a href="admin-dashboard" class="nav-link">
+                                <a href="shipper-dashboard" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thống Kê
@@ -194,6 +194,14 @@
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Quản Lý Đơn Hàng
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="deliveried-order" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Đơn Hàng Đã Giao
                                     </p>
                                 </a>
                             </li>
