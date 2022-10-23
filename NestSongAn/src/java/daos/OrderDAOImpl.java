@@ -214,4 +214,21 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return result;
     }
+    //income
+    public float viewIncome(){
+        try {
+            String sql = "SELECT SUM(total_price) AS income\n"
+                    + "FROM [order]\n"
+                    + "WHERE status = 3 ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return rs.getFloat(1);
+            }
+            
+        } catch (Exception e) {
+        }
+        return 0;
+        
+    }
 }

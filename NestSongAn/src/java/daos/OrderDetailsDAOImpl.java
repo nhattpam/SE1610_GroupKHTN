@@ -122,6 +122,37 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
         }
         return result;
     }
+    
+    @Override
+    //hot selling
+    public List<OrderDetailsDTO> viewHotSelling(){
+        List<OrderDetailsDTO> list = new ArrayList<>();
+        OrderDetailsDTO od = null;
+        ProductDTO p = null;
+        try {
+            String sql = "SELECT o.product_id,p.code,p.photo, p.name, p.price , COUNT(o.product_id) AS HotSelling \n"
+                    + "FROM order_details o INNER JOIN product p\n"
+                    + "ON o.product_id = p.product_id\n"
+                    + "GROUP BY o.product_id,p.code, p.photo, p.name, p.price\n"
+                    + "HAVING COUNT(o.product_id) > 5\n"
+                    + "";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                od = new OrderDetailsDTO();
+                p = new ProductDTO();
+                p.setCode(rs.getString("code"));
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setName(rs.getString("name"));
+                p.setPrice(rs.getFloat("price"));
+                p.setPhoto(rs.getString("photo"));
+                od.setProduct_id(p);
+                list.add(od);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
     
 

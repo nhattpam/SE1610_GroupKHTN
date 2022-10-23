@@ -19,6 +19,11 @@ public class OrderDetailsDTO {
     public OrderDetailsDTO() {
     }
 
+    public OrderDetailsDTO(ProductDTO product_id) {
+        this.product_id = product_id;
+    }
+
+    
     public OrderDetailsDTO(OrderDTO order_id, ProductDTO product_id, float total_price, int quantity) {
         this.quantity = quantity;
         this.total_price = total_price;
