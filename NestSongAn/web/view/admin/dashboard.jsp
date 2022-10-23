@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -228,61 +230,40 @@
                     <div class="container-fluid">
                         <!--<h5 class="mb-2">Quản Lý Người Dùng</h5>-->
                         <div class="row">
-
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
-                                    <div class="info-box-content">
-                                        <a href="manage-user">
-                                            <span class="info-box-text">Quản Lý Người Dùng</span>
-                                            <!--<span class="info-box-number">1,410</span>-->
-                                        </a>
-                                    </div>
-                                    <!-- /.info-box-content -->
+                            <div class="col-md-12">
+                                <h5>Sản phẩm bán chạy</h5>
+                                <div class="row crd-ho">
+                                    <table class="table table-striped">
+                                        <thead class="bg-dark text-white">
+                                            <tr>
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Mã sản phẩm</th>
+                                                <th scope="col">Ảnh</th>
+                                                <th scope="col">Tên sản phẩm</th>
+                                                <th scope="col">Giá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${listHotSelling}" var="l">
+                                                <tr>
+                                                    <td>${l.product_id.product_id}</td>
+                                                    <td>${l.product_id.code}</td>
+                                                    <td><img src="products/${l.product_id.photo}" style="width: 50px; height: 50px;"></td>
+                                                    <td>${l.product_id.name}</td>
+                                                    <td>
+                                            <fmt:formatNumber type="number" groupingUsed="true" value="${l.product_id.price}" /> VNĐ
+                                        </td>
+                                                    
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <!-- /.info-box -->
+                                <h5>Doanh thu cửa hàng</h5>
+                                <h6 style="color: green; font-weight: bold;"><fmt:formatNumber type="number" groupingUsed="true" value="${income}" /> VNĐ</h6>
+                                
                             </div>
-
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Bookmarks</span>
-                                        <span class="info-box-number">410</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Uploads</span>
-                                        <span class="info-box-number">13,648</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Likes</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
+                            
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
