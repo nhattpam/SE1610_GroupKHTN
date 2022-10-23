@@ -228,7 +228,45 @@
                                         
                                         <div class="cart_quantity_button">
                                             <c:if test="${ not empty wrongQuantity }">
-                                                <p class="text-danger">${wrongQuantity}</p>
+                                                <!--<p class="text-danger">${wrongQuantity}</p>-->
+                                                <!-- Modal: modalAbandonedCart-->
+                                                <div class="modal fade right" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                     aria-hidden="true" data-backdrop="false">
+                                                    <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+                                                        <!--Content-->
+                                                        <div class="modal-content">
+                                                            <!--Header-->
+                                                            <div class="modal-header" style="background-color:#6a0e13">
+                                                                <p class="heading text-white">THÔNG BÁO
+                                                                </p>
+
+                                                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true" class="white-text">&times;</span>
+                                                                </button>
+                                                            </div>
+
+                                                            <!--Body-->
+                                                            <div class="modal-body">
+
+                                                                <div class="row">
+
+                                                                    <div class="col-12 text-center">
+                                                                        <p class="text-danger">Số lượng sản phẩm đã đạt đến mức tối đa</p>
+                                                                        <!--<p>No pressure, your product will be waiting for you in the cart.</p>-->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!--Footer-->
+                                                            <div class="modal-footer justify-content-center">
+                                                                <!--<a type="button" class="btn btn-info">Go to cart</a>-->
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" id="button">OK</button>
+                                                            </div>
+                                                        </div>
+                                                        <!--/.Content-->
+                                                    </div>
+                                                </div>
+                                                <!-- Modal: modalAbandonedCart-->
                                                 <c:remove var="wrongQuantity" scope="session"/>
                                             </c:if>
                                             <a class="cart_quantity_up" href="add-cart?command=plus&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"> + </a>
@@ -292,6 +330,9 @@
     $('#myModal').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus');
     });
+    $('#exampleModal').modal({
+  show: true
+})
 </script>
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
