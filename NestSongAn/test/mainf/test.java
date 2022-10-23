@@ -30,7 +30,12 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) throws SQLException {
-        OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
-        System.out.println(dao.viewIncome());
+        OrderDAOImpl dao = new  
+            OrderDAOImpl(DBUtils.getConnection());
+        
+        List<OrderDTO> list = dao.vỉewDeliveriedOrders();
+        for (OrderDTO o : list) {
+            System.out.println(o.getOrder_id() + o.getLocation_id().getName());
+        }
     }
 }

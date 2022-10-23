@@ -31,4 +31,7 @@ public interface OrderDAO {
     public void editOrderStatus(String order_id, int index);
     
     public List<OrderDTO> viewOrderList() throws SQLException;
+    
+    //khang tran: function view list order deliverired
+    public List<OrderDTO> vỉewDeliveriedOrders();
 }
