@@ -30,11 +30,12 @@ public class OrderDTO {
     }
     
 
-    public OrderDTO(String order_id, String order_date, int status, UsersDTO user_id) {
+    public OrderDTO(String order_id, String order_date, int status, UsersDTO user_id, LocationDTO location_id) {
         this.order_id = order_id;
         this.order_date = order_date;
         this.status = status;
         this.user_id = user_id;
+        this.location_id = location_id;
     }
 
     public OrderDTO(String order_id, String delivery_address, float total_price, int status, UsersDTO user_id) {

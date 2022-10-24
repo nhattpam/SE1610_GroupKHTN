@@ -6,7 +6,6 @@
 package controllers;
 
 import daos.OrderDAOImpl;
-import dtos.OrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,8 +19,8 @@ import utils.DBUtils;
  *
  * @author haph1
  */
-@WebServlet("/approve")
-public class ApproveOrderController extends HttpServlet {
+@WebServlet(name = "AddLocationOrderController", urlPatterns = {"/addorderlocate"})
+public class AddLocationOrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,9 +35,9 @@ public class ApproveOrderController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String order_id = request.getParameter("orderid");
-        int d = 2;
+        int location_id = Integer.parseInt(request.getParameter("location_id"));
         OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
-        dao.editOrderStatus(order_id, d);
+        dao.editLocationOrder(order_id, location_id);
         response.sendRedirect("list-orders");
     }
 

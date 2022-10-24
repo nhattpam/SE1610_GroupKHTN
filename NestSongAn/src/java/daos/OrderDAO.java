@@ -5,6 +5,7 @@
  */
 package daos;
 
+import dtos.LocationDTO;
 import dtos.OrderDTO;
 import dtos.UsersDTO;
 import java.sql.SQLException;
@@ -29,7 +30,10 @@ public interface OrderDAO {
     public List<OrderDTO> viewUserOrder() throws SQLException;
     //hapham: function edit order status
     public void editOrderStatus(String order_id, int index);
-    
+    //hapham: function edit order location
+    public void editLocationOrder(String order_id, int index);
+    public List<LocationDTO> getLocation();
+    public int getLocation(int location_id);
     public List<OrderDTO> viewOrderList() throws SQLException;
     
     //khang tran: function view list order deliverired

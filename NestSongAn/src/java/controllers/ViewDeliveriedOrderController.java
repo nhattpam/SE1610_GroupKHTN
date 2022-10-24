@@ -9,6 +9,7 @@ import daos.OrderDAOImpl;
 import dtos.OrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +21,8 @@ import utils.DBUtils;
  *
  * @author haph1
  */
-@WebServlet("/approve")
-public class ApproveOrderController extends HttpServlet {
+@WebServlet("/deliveried-orders")
+public class ViewDeliveriedOrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,11 +36,10 @@ public class ApproveOrderController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String order_id = request.getParameter("orderid");
-        int d = 2;
         OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
-        dao.editOrderStatus(order_id, d);
-        response.sendRedirect("list-orders");
+        List<OrderDTO> olist = dao.vỉewDeliveriedOrders();
+        request.setAttribute("listDeliveryOrrder", olist);
+        request.getRequestDispatcher("view/shipping/deliveried_order.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

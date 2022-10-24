@@ -7,6 +7,7 @@ package controllers;
 
 import daos.OrderDAOImpl;
 import daos.OrderDetailsDAOImpl;
+import dtos.LocationDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import java.io.IOException;
@@ -20,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.DBUtils;
 
 /**
@@ -42,9 +44,12 @@ public class ViewListOrderStaffController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
             OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
+            List<LocationDTO> listlocate = dao.getLocation();
             List<OrderDTO> listOrder = dao.viewUserOrder();
             request.setAttribute("listOrder", listOrder);
+            request.setAttribute("location", listlocate);
             request.getRequestDispatcher("view/staff/list_order.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(ViewListOrderStaffController.class.getName()).log(Level.SEVERE, null, ex);
