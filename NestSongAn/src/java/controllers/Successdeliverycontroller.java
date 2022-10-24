@@ -6,7 +6,6 @@
 package controllers;
 
 import daos.OrderDAOImpl;
-import dtos.OrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,8 +19,8 @@ import utils.DBUtils;
  *
  * @author haph1
  */
-@WebServlet("/approve")
-public class ApproveOrderController extends HttpServlet {
+@WebServlet("/successdelivery")
+public class Successdeliverycontroller extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +35,10 @@ public class ApproveOrderController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String order_id = request.getParameter("orderid");
-        int d = 2;
+        int d = 3;
         OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
         dao.editOrderStatus(order_id, d);
-        response.sendRedirect("list-orders");
+        response.sendRedirect("manage-shipper");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

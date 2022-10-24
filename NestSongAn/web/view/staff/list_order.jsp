@@ -224,7 +224,8 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <div class="container">
+                ${location_id}
+                <div class="container-fluid">
                     <div class="row crd-ho">
                         <table class="table table-striped">
                             <thead class="bg-dark text-white">
@@ -244,7 +245,10 @@
                                     <%--<c:set var="price" value="123.2" />--%>  
                                     <tr>
                                         <!--<th scope="row">1</th>-->
-                                        <td>${o.order_id}</td>
+                                        <td>
+                                            ${o.order_id}
+                                            <input type="hidden" name="order_id" value="${o.order_id}">
+                                        </td>
                                         <td>${o.user_id.full_name}</td>
                                         <td>${o.user_id.user_name}</td>
                                         <td>${o.user_id.email}</td>
@@ -252,19 +256,29 @@
                                         <td>${o.order_date}</td>
                                         <td><a href="view-orderdetails?order_id=${o.order_id}" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i></a></td>
                                         <td>
-                                             <c:if test = "${o.status == 1}">
-                                                <a href="approve?orderid=${o.order_id}" class="btn btn-sm btn-primary">Đồng ý</a><br>
-                                                
+                                            <c:if test = "${o.status == 1}">
+                                                <a href="approve?orderid=${o.order_id}" class="btn btn-sm btn-primary">Đồng ý</a>
                                                 <a href="decline?orderid=${o.order_id}" class="btn btn-sm btn-danger">Từ chối</a>
                                             </c:if>
                                             <c:if test = "${o.status == 2}">
-                                                <h5 style="color: #00ff66"> Đã gửi</h5>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Chi nhánh
+                                                        <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu">
+                                                        <c:forEach items="${location}" var="l">
+                                                            <li><a href="addorderlocate?orderid=${o.order_id}&location_id=${l.location_id}" class="dropdown-item">${l.name}</a></li>
+                                                        </c:forEach>
+                                                    </ul>
+                                                </div>
                                             </c:if>
                                             <c:if test = "${o.status == 3}">
-
+                                                <h5 style="color: #00ff66"> Đã giao cho khách</h5>
                                             </c:if>
                                             <c:if test = "${o.status == 4}">
-
+                                                <h5 style="color: red"> Đã từ chối</h5>
+                                            </c:if>
+                                            <c:if test = "${o.status == 5}">
+                                                <h5 style="color: red"> Không giao được cho khách</h5>
                                             </c:if>
                                         </td>
                                     </tr>

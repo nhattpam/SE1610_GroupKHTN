@@ -240,7 +240,7 @@
                                             ${l.delivery_address}
                                         </td>
                                         <td>
-                                            <fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ
+                                            <fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}"/> VNĐ
                                         </td>
                                         <td>
                                             ${l.order_id}
@@ -248,7 +248,8 @@
 
                                         <td>                                           
                                             <c:if test = "${l.status == 2}">
-                                                <h5 style="color: #00ff66"> Đang vận chuyển</h5>
+                                                <a href="successdelivery?orderid=${l.order_id}" class="btn btn-sm btn-success">Thành công</a>
+                                                <a href="faildelivery?orderid=${l.order_id}" class="btn btn-sm btn-danger">Thất bại</a>
                                             </c:if>
                                         </td>
                                     </tr>

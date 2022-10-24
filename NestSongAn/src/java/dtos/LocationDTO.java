@@ -16,6 +16,10 @@ public class LocationDTO {
     public LocationDTO() {
     }
 
+    public LocationDTO(int location_id) {
+        this.location_id = location_id;
+    }
+    
     public LocationDTO(int location_id, String name) {
         this.location_id = location_id;
         this.name = name;

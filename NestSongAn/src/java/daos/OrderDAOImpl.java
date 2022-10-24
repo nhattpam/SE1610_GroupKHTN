@@ -106,16 +106,17 @@ public class OrderDAOImpl implements OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "SELECT u.full_name, u.user_name, u.email, u.phone, o.order_date, o.status, o.order_id, o.user_id\n"
+                String sql = "SELECT u.full_name, u.user_name, u.email, u.phone, o.order_date, o.status, o.order_id, o.user_id,o.location_id\n"
                         + "FROM [order] o inner join users u on o.user_id = u.user_id";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
+                    LocationDTO location = new LocationDTO(rs.getInt(9));
                     UsersDTO user = new UsersDTO(rs.getInt(8), rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
                     String orderid = rs.getString(7);
                     int status = rs.getInt(6);
                     String order_date = rs.getString(5);
-                    OrderDTO uoder = new OrderDTO(orderid, order_date, status, user);
+                    OrderDTO uoder = new OrderDTO(orderid, order_date, status, user,location);
                     result.add(uoder);
                 }
             }
@@ -269,4 +270,61 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return list;
     }
+
+    @Override
+    public void editLocationOrder(String order_id, int index) {
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE [order] SET location_id = ? WHERE order_id LIKE ?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setInt(1, index);
+                ps.setString(2, order_id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public List<LocationDTO> getLocation() {
+        List<LocationDTO> list = new ArrayList<>();
+        try{
+            conn = DBUtils.getConnection();
+            if(conn!=null){
+                String sql = "SELECT location_id, name FROM location";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                    LocationDTO loate = new LocationDTO(rs.getInt("location_id"), rs.getString("name"));
+                    list.add(loate);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    @Override
+    public int getLocation(int location_id) {
+        try{
+            conn = DBUtils.getConnection();
+            if(conn!=null){
+                String sql = "SELECT location_id FROM location WHERE location_id = ?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setInt(1, location_id);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                    return rs.getInt("location_id");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+   
 }
