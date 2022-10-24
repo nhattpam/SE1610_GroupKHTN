@@ -7,6 +7,7 @@ package controllers;
 
 import daos.UserDAO;
 import daos.UserDAOImpl;
+import daos.WishListDAO;
 import daos.WishListDAOImpl;
 import dtos.GoogleDTO;
 import dtos.UsersDTO;
@@ -23,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author HUNG
  */
-@WebServlet(name = "AddToWishlistController", urlPatterns = {"/AddToWishlistController"})
-public class AddToWishlistController extends HttpServlet {
+@WebServlet(name = "DeleteWishlistController", urlPatterns = {"/DeleteWishlistController"})
+public class DeleteWishlistController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,26 +39,24 @@ public class AddToWishlistController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(false);
-        UsersDTO user = (UsersDTO) session.getAttribute("USER");
-        GoogleDTO userg = (GoogleDTO) session.getAttribute("USERG");
-        String url = "shop-products";
+        HttpSession session=request.getSession(false);
+        String url="ViewWishlist";
         try {
-            WishListDAOImpl dao = new WishListDAOImpl();
-            int productID = Integer.parseInt(request.getParameter("product_id"));
-            if (user != null) {
-                int user_id = Integer.parseInt(request.getParameter("user_id"));                
-                dao.addToWishList(user_id, productID);
+            int product_id=Integer.parseInt(request.getParameter("product_id"));
+            UsersDTO user=(UsersDTO)session.getAttribute("USER");
+            GoogleDTO userg=(GoogleDTO)session.getAttribute("USERG");
+            WishListDAO dao=new WishListDAOImpl();
+            if (user!=null) {
+                dao.removeFromWishList(user.getUser_id(), product_id);
             }
             if (userg!=null) {
                 UserDAO userDAO=new UserDAOImpl();
                 UsersDTO load =userDAO.viewAccountByEmail(userg.getEmail());
-                dao.addToWishList(load.getUser_id(), productID);                        
+                dao.removeFromWishList(load.getUser_id(), product_id);
             }
-
-        } catch (Exception e) {
-
-        } finally {
+        }catch(Exception e){
+            
+        }finally{
             response.sendRedirect(url);
         }
     }

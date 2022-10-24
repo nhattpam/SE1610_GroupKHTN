@@ -39,6 +39,15 @@ public class ProductDTO implements Comparable<ProductDTO> {
         this.name = name;
     }
 
+    public ProductDTO(int product_id, String name, String short_description, float price, String photo, CategoryDTO category_id) {
+        this.product_id = product_id;
+        this.name = name;
+        this.short_description = short_description;
+        this.price = price;
+        this.photo = photo;
+        this.category_id = category_id;
+    }
+    
     public ProductDTO(int product_id, String name, String code, float price, int weight, String photo, CategoryDTO category_id) {
         this.product_id = product_id;
         this.name = name;

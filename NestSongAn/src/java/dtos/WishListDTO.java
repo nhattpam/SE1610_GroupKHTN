@@ -10,26 +10,26 @@ package dtos;
  * @author Admin
  */
 public class WishListDTO {
-    private int quantity;
+    private String create_date;
     private UsersDTO user_id;
     private ProductDTO product_id;
 
     public WishListDTO() {
     }
 
-    public WishListDTO(int quantity, UsersDTO user_id, ProductDTO product_id) {
-        this.quantity = quantity;
+    public WishListDTO(String create_date, UsersDTO user_id, ProductDTO product_id) {
+        this.create_date = create_date;
         this.user_id = user_id;
         this.product_id = product_id;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getCreate_date() {
+        return create_date;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
+    }    
 
     public UsersDTO getUser_id() {
         return user_id;
