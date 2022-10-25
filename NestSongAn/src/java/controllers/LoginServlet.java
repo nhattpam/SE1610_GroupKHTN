@@ -31,13 +31,14 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-
+    
     private static final String LOGIN_PAGE = "loginPage";
-    private static final String HOME_PAGE ="";
-    private static final String STAFF_PAGE ="staffPage";
-    private static final String ADMIN_PAGE ="adminPage";
-    private static final String SHIPPER_PAGE ="shipperPage";
-    private static final String SUPPLIER_PAGE ="supplierPage";
+    private static final String HOME_PAGE = "";
+    private static final String STAFF_PAGE = "staffPage";
+    private static final String ADMIN_PAGE = "admin-dashboard";
+    private static final String SHIPPER_PAGE = "shipperPage";
+    private static final String SUPPLIER_PAGE = "supplierPage";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -56,25 +57,25 @@ public class LoginServlet extends HttpServlet {
         
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
-        String url=siteMaps.getProperty(LOGIN_PAGE);                                          // default to login page if error
-        String errorMessage="Wrong username or password";
+        String url = siteMaps.getProperty(LOGIN_PAGE);                                          // default to login page if error
+        String errorMessage = "Wrong username or password";
         try {
-            String hashedPassword=toHexString(getSHA(password));
+            String hashedPassword = toHexString(getSHA(password));
             //1:call DAO
             //new obj DAO && call method from DAO
             UserDAO dao = new UserDAOImpl();
-            UsersDTO result = dao.checkLogin(username, hashedPassword);                
+            UsersDTO result = dao.checkLogin(username, hashedPassword);
             //2.process 
             HttpSession session = request.getSession();//true
             session.setAttribute("USER", result);
-            if(result==null){
+            if (result == null) {
                 request.setAttribute("LoginError", errorMessage);
             }
             if (result != null && result.getRole_id().getRole().equals("customer")) {          // Role name = customer                                                                  
-                if (result.getStatus()==1) {
+                if (result.getStatus() == 1) {
                     url = siteMaps.getProperty(HOME_PAGE);   // to home page
                     response.sendRedirect(url);
-                }else{
+                } else {
                     request.setAttribute("inactive", "Xin hãy xác thực email để kích hoạt tài khoản");
                     session.removeAttribute("USER");
                 }
@@ -83,23 +84,24 @@ public class LoginServlet extends HttpServlet {
                 url = siteMaps.getProperty(STAFF_PAGE);                                                       // to staff page
             }
             if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role name = admin 
-                url = siteMaps.getProperty(ADMIN_PAGE);                                                      // to admin page
+                url = ADMIN_PAGE;                                                      // to admin page
             }
             if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role name = supplier 
                 url = siteMaps.getProperty(SUPPLIER_PAGE);                                                        // to supplier page
             }
             if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role name = shipper 
                 url = siteMaps.getProperty(SHIPPER_PAGE);                                                     // to shipper page
-            }          
+            }            
         } catch (NamingException ex) {            
             log("LoginServlet_Naming" + ex.getMessage());
         } catch (SQLException ex) {
             log("LoginServlet_SQL" + ex.getMessage());
         } catch (NoSuchAlgorithmException ex) {
-            log("HashPassword error"+ex.getMessage());
+            log("HashPassword error" + ex.getMessage());
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+//            RequestDispatcher rd = request.getRequestDispatcher(url);
+//            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 
@@ -151,7 +153,7 @@ public class LoginServlet extends HttpServlet {
         // and return array of byte
         return md.digest(input.getBytes(StandardCharsets.UTF_8));
     }
-
+    
     public static String toHexString(byte[] hash) {
         // Convert byte array into signum representation
         BigInteger number = new BigInteger(1, hash);
@@ -163,7 +165,7 @@ public class LoginServlet extends HttpServlet {
         while (hexString.length() < 64) {
             hexString.insert(0, '0');
         }
-
+        
         return hexString.toString();
     }
     //hàm mã hóa sha256
