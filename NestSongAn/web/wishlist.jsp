@@ -103,10 +103,10 @@
                             <p>${dto.product_id.short_description}</p>
                             <p>Ngày thêm: ${dto.create_date}</p>
                             <c:if test="${ not empty USER }">
-                                <a href="add-cart?command=insert&product_id=${dto.product_id.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                                <a href="add-cart?command=insert&product_id=${dto.product_id.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
                             </c:if>
                             <c:if test="${ not empty USERG }">
-                                <a href="add-cart?command=insert&product_id=${dto.product_id.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                                <a href="add-cart?command=insert&product_id=${dto.product_id.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
                             </c:if>
                             <c:if test="${ not empty USER }">
                                 <a href="DeleteWishlistController?product_id=${dto.product_id.product_id}" class="primary-btn" style="background: #6a0e13;">XÓA KHỎI YÊU THÍCH</a> 

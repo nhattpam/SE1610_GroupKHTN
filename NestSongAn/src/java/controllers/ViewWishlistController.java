@@ -9,6 +9,7 @@ import daos.UserDAO;
 import daos.UserDAOImpl;
 import daos.WishListDAO;
 import daos.WishListDAOImpl;
+import dtos.CartDTO;
 import dtos.GoogleDTO;
 import dtos.UsersDTO;
 import dtos.WishListDTO;
@@ -64,9 +65,9 @@ public class ViewWishlistController extends HttpServlet {
                     endPage++;
                 }
                 //load list
-                List<WishListDTO> list = wishListDAO.getWishlist(user.getUser_id(), index);  
+                List<WishListDTO> list = wishListDAO.getWishlist(user.getUser_id(), index);
                 for (WishListDTO wishListDTO : list) {
-                    System.out.println(wishListDTO.getProduct_id().toString()); 
+                    System.out.println(wishListDTO.getProduct_id().toString());
                 }
                 request.setAttribute("list", list);
                 request.setAttribute("endPage", endPage);
@@ -81,7 +82,7 @@ public class ViewWishlistController extends HttpServlet {
                 int count = wishListDAO.getNumsOfItem(processDTO.getUser_id());
                 // set number of page
                 int endPage = count / 5;
-                if (endPage % 5 != 0 ) {
+                if (endPage % 5 != 0) {
                     endPage++;
                 }
                 //load list
@@ -89,6 +90,13 @@ public class ViewWishlistController extends HttpServlet {
 
                 request.setAttribute("list", list);
                 request.setAttribute("endPage", endPage);
+            }
+            //check empty cart
+            HttpSession sCart = request.getSession();
+            CartDTO cart = (CartDTO) sCart.getAttribute("cart");
+            if (cart == null) {
+                cart = new CartDTO();
+                sCart.setAttribute("cart", cart);
             }
         } catch (Exception e) {
 

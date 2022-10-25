@@ -217,10 +217,10 @@
                                     <li><a href="loginController"><i class="fa fa-heart"></i> </a></li>
                                 </c:if>
                                 <c:if test="${ not empty USER }">
-                                    <li><a href="ViewWishlist"><i class="fa fa-heart"></i> </a></li>
+                                    <li><a href="ViewWishlist?bid=${sessionScope.branch_id}"><i class="fa fa-heart"></i> </a></li>
                                 </c:if>
                                 <c:if test="${ not empty USERG }">
-                                    <li><a href="ViewWishlist"><i class="fa fa-heart"></i> </a></li>
+                                    <li><a href="ViewWishlist?bid=${sessionScope.branch_id}"><i class="fa fa-heart"></i> </a></li>
                                 </c:if>
                                 <c:if test="${empty USER && empty USERG}">
                                     <li><a href="loginController"><i class="fa fa-shopping-bag"></i> </a></li>
