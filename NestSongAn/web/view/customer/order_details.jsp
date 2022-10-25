@@ -32,90 +32,210 @@
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
         <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
+
     </head>
-    <body>
-        <jsp:include page="../../header.jsp" />
-        <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
-        <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG"); %>
-        <c:if test="${not empty user }">
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
 
-            <div class="container">
-                <h4 style="color: #6a0e13">Chi tiết đơn hàng #${order_id}</h4>
-                <p><span style="font-weight: bold">Cửa hàng: </span>Song Ân</p>
-                <p><span style="font-weight: bold">Tên khách hàng:  </span><%= u.getFull_name()%></p>
-                <p><span style="font-weight: bold">Số điện thoại: </span><%= u.getPhone()%></p>
-                <p><span style="font-weight: bold">Địa chỉ: </span>${address}</p>
-                <table class="table table-striped">
-                    <thead>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <jsp:include page="../../header.jsp" />
+    <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
+    <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>
+    <c:if test="${not empty user }">
+
+        <div class="container">
+            <h4 style="color: #6a0e13">Chi tiết đơn hàng #${order_id}</h4>            
+            <p><span style="font-weight: bold">Cửa hàng: </span>Song Ân</p>
+            <p><span style="font-weight: bold">Tên khách hàng:  </span><%= u.getFull_name()%></p>
+            <p><span style="font-weight: bold">Số điện thoại: </span><%= u.getPhone()%></p>
+            <p><span style="font-weight: bold">Địa chỉ: </span>${address}</p>
+
+
+            <table class="table table-striped">
+                <thead>
+
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">ĐVT</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Đánh giá</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <c:forEach items="${listOrderDetail}" var="l">
 
                         <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Sản phẩm</th>
-                            <th scope="col">ĐVT</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Đơn giá</th>
+                            <td>${l.order_details_id}</td>
+                            <td>${l.product_id.name}</td>
+                            <td>1</td>
+                            <td>${l.quantity}</td>
+                            <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Đánh giá
+                                </button>
+                                <form action="AddFeedback" method="POST">
+                                    <c:if test="${not empty feedbackE }">
+                                        <h5 class="text-center text-success">${feedbackE}</h5>
+                                        <c:remove var="feedbackE" scope="request"/>
+                                    </c:if>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Đánh giá sản phẩm</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <div class="form-outline">
+
+                                                        <input type="hidden" name="orderid" value="${order_id}"/>
+                                                        <input type="hidden" name="uid" value="<%= u.getUser_id()%>">
+                                                        <input type="hidden" name="pid" value="${l.product_id.product_id}"> 
+                                                        <textarea type="textarea" class="form-control" id="textAreaExample2" name="feedback"></textarea>
+                                                        <label class="form-label" for="textAreaExample2">Tin nhắn</label>
+                                                    </div>
+                                                    <button type="input" class="btn btn-info btn-rounded float-end">Gửi</button>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${listOrderDetail}" var="l">
+                    </c:forEach>
 
-                            <tr>
-                                <td>${l.order_details_id}</td>
-                                <td>${l.product_id.name}</td>
-                                <td>1</td>
-                                <td>${l.quantity}</td>
-                                <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
-                            </tr>
-                        </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </c:if>
+    <c:if test="${not empty usergg }">
+        <div class="container">
+            <h4 style="color: #6a0e13">Chi tiết đơn hàng #${order_id}</h4>
+            <p><span style="font-weight: bold">Cửa hàng: </span>Song Ân</p>
+            <p><span style="font-weight: bold">Tên khách hàng:  </span><%= us.getName()%></p>
+            <p><span style="font-weight: bold">Email: </span><%= us.getEmail()%></p>
+            <p><span style="font-weight: bold">Địa chỉ: </span>${address}</p>
+            <table class="table table-striped">
+                <thead>
 
-                    </tbody>
-                </table>
-            </div>
-        </c:if>
-        <c:if test="${not empty usergg }">
-            <div class="container">
-                <h4 style="color: #6a0e13">Chi tiết đơn hàng #${order_id}</h4>
-                <p><span style="font-weight: bold">Cửa hàng: </span>Song Ân</p>
-                <p><span style="font-weight: bold">Tên khách hàng:  </span><%= us.getName()%></p>
-                <p><span style="font-weight: bold">Email: </span><%= us.getEmail() %></p>
-                <p><span style="font-weight: bold">Địa chỉ: </span>${address}</p>
-                <table class="table table-striped">
-                    <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">ĐVT</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Đánh giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${listOrderDetail}" var="l">
 
                         <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Sản phẩm</th>
-                            <th scope="col">ĐVT</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Đơn giá</th>
+                            <td>${l.order_details_id}</td>
+                            <td>${l.product_id.name}</td>
+                            <td>1</td>
+                            <td>${l.quantity}</td>
+                            <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                       <c:forEach items="${listOrderDetail}" var="l">
+                    </c:forEach>
 
-                            <tr>
-                                <td>${l.order_details_id}</td>
-                                <td>${l.product_id.name}</td>
-                                <td>1</td>
-                                <td>${l.quantity}</td>
-                                <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
-                            </tr>
-                        </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </c:if>
 
-                    </tbody>
-                </table>
-            </div>
-        </c:if>
+    <jsp:include page="../../footer.jsp" />
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
 
-        <jsp:include page="../../footer.jsp" />
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
-    </body>
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
 </html>

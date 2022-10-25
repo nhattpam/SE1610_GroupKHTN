@@ -213,14 +213,14 @@
 
                                                 <div class="row">
 
-                                                    <div class="col-md-6 col-lg-7 col-xl-8">
-                                                        <c:forEach items="${listFeedback}" var="f">
+                                                    <div class="col-md-6 col-lg-7 col-xl-8">     
+                                                         <c:forEach items="${listFeedback}" var="f">
                                                             <li class="d-flex justify-content-between mb-3" width="30">
-                                                                <c:if test="${f.user_id.user_id == USER.user_id}"><i class="fa fa-user" width="60"></i></c:if>
+                                                                <c:if test="${f.user_id.user_id == USER.user_id}"><i class="" width="60"></i></c:if>
 
                                                                     <div class="card">
                                                                         <div class="card-header d-flex justify-content-between p-3">
-                                                                            <p class="fw-bold mb-0">${f.user_id.user_name}</p>
+                                                                            <p class="fw-bold mb-0">${f.user_id.full_name}</p>
                                                                         <p class="text-muted small mb-0"><i class="far fa-clock"></i> ${f.create_date}</p>
                                                                     </div>
                                                                     <div class="card-body">
@@ -231,33 +231,6 @@
                                                                 </div>
                                                             </li>
                                                         </c:forEach>
-                                                        <c:if test="${empty USER.user_id}">
-                                                            <li class="bg-white mb-3">
-                                                                <div class="form-outline">
-                                                                                                                               
-                                                                    <textarea type="textarea" class="form-control" id="textAreaExample2" name="feedback"></textarea>
-                                                                    <label class="form-label" for="textAreaExample2">Message</label>
-                                                                </div>
-                                                            </li>
-                                                            <a href="loginController" type="input" class="btn btn-info btn-rounded float-end">Send</a>
-                                                        </c:if>
-                                                        <c:if test="${not empty USER.user_id}">
-                                                            <!--input-->
-                                                            <form action="AddFeedback" method="POST">
-                                                                <li class="bg-white mb-3">
-                                                                    <div class="form-outline">
-                                                                        <input type="hidden" name="uid" value="${USER.user_id}">
-                                                                    <input type="hidden" name="pid" value="${detail.product_id}"> 
-                                                                        <textarea type="textarea" class="form-control" id="textAreaExample2" name="feedback"></textarea>
-                                                                        <label class="form-label" for="textAreaExample2">Message</label>
-                                                                    </div>
-                                                                </li>
-                                                                <button type="input" class="btn btn-info btn-rounded float-end">Send</button>
-
-                                                            </form>
-                                                        </c:if>
-                                                        </ul>
-
                                                     </div>
 
                                                 </div>
@@ -317,7 +290,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title related__product__title">
-                            <h2>San Pham Pho Bien</h2>
+                            <h2>Sản Phẩm Phổ Biến</h2>
                         </div>
                     </div>
                 </div>

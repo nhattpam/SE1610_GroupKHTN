@@ -326,5 +326,38 @@ public class OrderDAOImpl implements OrderDAO {
         return 0;
     }
 
-   
+   public List<OrderDTO> viewCompleOrder() throws SQLException {
+       List<OrderDTO> result = new ArrayList<>();
+       OrderDTO o = null;
+       UsersDTO u = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+       try{
+           conn = DBUtils.getConnection();
+           if(conn != null){
+               String sql = "SELECT u.full_name, u.phone, \n"
+                       +" o.delivery_address, o.total_price\n"
+                       +",o.status,o.order_id\n"
+                       +"FROM users u inner join [order] o on u.user_id = o.user_id\n"
+                       +"WHERE o.status = 3";
+               stm = conn.prepareStatement(sql);
+               rs = stm.executeQuery();
+               while(rs.next()){
+                   u = new UsersDTO();
+                   u.setFull_name(rs.getString(1));
+                   u.setPhone(rs.getString(2));
+                   float total_price = rs.getFloat(4);
+                   String delivery_address = rs.getString(3);
+                   int status = rs.getInt(5);
+                   String order_id = rs.getString(6);
+                   OrderDTO od = new OrderDTO(order_id, delivery_address, total_price, status, u);
+                   result.add(od);
+               }
+           }
+           
+       }catch(SQLException ex){
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return result;
+   }
 }
