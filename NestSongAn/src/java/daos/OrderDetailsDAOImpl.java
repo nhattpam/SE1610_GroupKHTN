@@ -53,21 +53,23 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
         List<OrderDetailsDTO> list = new ArrayList<>();
 
         try {
-            String sql = "SELECT od.order_details_id, od.quantity, od.total_price, p.name\n"
+            String sql = "SELECT od.order_details_id, od.quantity, od.total_price, p.name, p.product_id\n"
                     + " FROM order_details od INNER JOIN product p \n"
                     + " ON od.product_id = p.product_id\n"
                     + " where od.order_id like '" + order_id + "'";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ProductDTO p = new ProductDTO(rs.getString("name"));
-                OrderDetailsDTO od = new OrderDetailsDTO();
-                od.setOrder_details_id(rs.getInt("order_details_id"));
-                od.setQuantity(rs.getInt("quantity"));
-                od.setTotal_price(rs.getFloat("total_price"));
-                od.setProduct_id(p);
-
-                list.add(od);
+                ProductDTO p = new ProductDTO();
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setName(rs.getString("name"));
+                int order_details_id = rs.getInt("order_details_id");
+                int quantity = rs.getInt("quantity");
+                float total_price = rs.getFloat("total_price");
+                //od.setProduct_id(p);
+                
+                OrderDetailsDTO ode = new OrderDetailsDTO(order_details_id, quantity, total_price, p);
+                list.add(ode);
 
             }
 
