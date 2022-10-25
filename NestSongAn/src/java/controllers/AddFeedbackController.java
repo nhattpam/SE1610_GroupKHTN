@@ -6,9 +6,12 @@
 package controllers;
 
 import daos.FeedbackDAOImpl;
+import daos.OrderDAOImpl;
+import dtos.OrderDTO;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -29,17 +32,24 @@ public class AddFeedbackController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
+        String oid = request.getParameter("orderid");
+        int uid = Integer.parseInt(request.getParameter("uid"));
+        int pid = Integer.parseInt(request.getParameter("pid"));
         try {
+            OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
+            List<OrderDTO> check = dao.viewCompleOrder();
+            if(!check.isEmpty()){
             String feedback = request.getParameter("feedback");
-            int uid = Integer.parseInt(request.getParameter("uid"));
-            int pid = Integer.parseInt(request.getParameter("pid"));
             Date now = new Date();
             SimpleDateFormat x = new SimpleDateFormat();
             String createdDate = x.format(now);
             FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
             fed.addFeedback(feedback, uid, createdDate, pid);
             response.sendRedirect("detail?product_id=" + pid);
-
+            }else{
+                request.setAttribute("feedbackE", "Bạn chỉ được đánh giá sau khi mua sản phẩm!!!");
+                response.sendRedirect("order-details?order_id="+oid);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
