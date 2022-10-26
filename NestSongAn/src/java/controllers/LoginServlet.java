@@ -85,6 +85,7 @@ public class LoginServlet extends HttpServlet {
             }
             if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role name = admin 
                 url = ADMIN_PAGE;                                                      // to admin page
+                response.sendRedirect(url);
             }
             if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role name = supplier 
                 url = siteMaps.getProperty(SUPPLIER_PAGE);                                                        // to supplier page
@@ -99,9 +100,9 @@ public class LoginServlet extends HttpServlet {
         } catch (NoSuchAlgorithmException ex) {
             log("HashPassword error" + ex.getMessage());
         } finally {
-//            RequestDispatcher rd = request.getRequestDispatcher(url);
-//            rd.forward(request, response);
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+//            response.sendRedirect(url);
         }
     }
 
