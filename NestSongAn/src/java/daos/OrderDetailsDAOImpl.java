@@ -53,9 +53,9 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
         List<OrderDetailsDTO> list = new ArrayList<>();
 
         try {
-            String sql = "SELECT od.order_details_id, od.quantity, od.total_price, p.name, p.product_id\n"
-                    + " FROM order_details od INNER JOIN product p \n"
-                    + " ON od.product_id = p.product_id\n"
+            String sql = "SELECT od.order_details_id, od.quantity, od.total_price, p.name, p.product_id, o.status\n"
+                    + "                   FROM order_details od INNER JOIN product p ON od.product_id = p.product_id\n"
+                    + "inner join [order] o on o.order_id = od.order_id\n"
                     + " where od.order_id like '" + order_id + "'";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -66,9 +66,9 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
                 int order_details_id = rs.getInt("order_details_id");
                 int quantity = rs.getInt("quantity");
                 float total_price = rs.getFloat("total_price");
-                //od.setProduct_id(p);
-                
-                OrderDetailsDTO ode = new OrderDetailsDTO(order_details_id, quantity, total_price, p);
+                OrderDTO o = new OrderDTO();
+                o.setStatus(rs.getInt("status"));
+                OrderDetailsDTO ode = new OrderDetailsDTO(order_details_id, quantity, total_price, p,o);
                 list.add(ode);
 
             }
@@ -124,10 +124,10 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
         }
         return result;
     }
-    
+
     @Override
     //hot selling
-    public List<OrderDetailsDTO> viewHotSelling(){
+    public List<OrderDetailsDTO> viewHotSelling() {
         List<OrderDetailsDTO> list = new ArrayList<>();
         OrderDetailsDTO od = null;
         ProductDTO p = null;
@@ -140,7 +140,7 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
                     + "";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 od = new OrderDetailsDTO();
                 p = new ProductDTO();
                 p.setCode(rs.getString("code"));
@@ -155,7 +155,5 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
         }
         return list;
     }
-
-    
 
 }

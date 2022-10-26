@@ -88,10 +88,9 @@
         <div class="container">
             <h4 style="color: #6a0e13">Chi tiết đơn hàng #${order_id}</h4>            
             <p><span style="font-weight: bold">Cửa hàng: </span>Song Ân</p>
-            <p><span style="font-weight: bold">Tên khách hàng:  </span><%= u.getFull_name()%></p>
-            <p><span style="font-weight: bold">Số điện thoại: </span><%= u.getPhone()%></p>
+            <p><span style="font-weight: bold">Tên khách hàng:  </span>${user.full_name}</p>
+            <p><span style="font-weight: bold">Số điện thoại: </span>${user.phone}</p>
             <p><span style="font-weight: bold">Địa chỉ: </span>${address}</p>
-
 
             <table class="table table-striped">
                 <thead>
@@ -112,50 +111,16 @@
                         <tr>
                             <td>${l.order_details_id}</td>
                             <td>${l.product_id.name}</td>
-                            <td>1</td>
+                            <td>${l.order_id.status}</td>
                             <td>${l.quantity}</td>
                             <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
                             <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    Đánh giá
-                                </button>
-                                <form action="AddFeedback" method="POST">
-                                    <c:if test="${not empty feedbackE }">
-                                        <h5 class="text-center text-success">${feedbackE}</h5>
-                                        <c:remove var="feedbackE" scope="request"/>
-                                    </c:if>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Đánh giá sản phẩm</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-
-                                                <div class="modal-body">
-                                                    <div class="form-outline">
-
-                                                        <input type="hidden" name="orderid" value="${order_id}"/>
-                                                        <input type="hidden" name="uid" value="<%= u.getUser_id()%>">
-                                                        <input type="hidden" name="pid" value="${l.product_id.product_id}"> 
-                                                        <textarea type="textarea" class="form-control" id="textAreaExample2" name="feedback"></textarea>
-                                                        <label class="form-label" for="textAreaExample2">Tin nhắn</label>
-                                                    </div>
-                                                    <button type="input" class="btn btn-info btn-rounded float-end">Gửi</button>
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-
-                            </td>
+                                <c:if test = "${l.order_id.status == '3'}">
+                                    <a href="feedback?pid=${l.product_id.product_id}&uid=${user.user_id}" style="color: #6a0e13">Đánh giá</a>
+                                </c:if>
+                                <c:if test = "${l.order_id.status == '1' || '2' ||'4' ||'5'}">
+                                </c:if>
+                            </td
                         </tr>
                     </c:forEach>
 
