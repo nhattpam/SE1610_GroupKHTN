@@ -66,9 +66,9 @@ public class ViewWishlistController extends HttpServlet {
                 }
                 //load list
                 List<WishListDTO> list = wishListDAO.getWishlist(user.getUser_id(), index);
-                for (WishListDTO wishListDTO : list) {
-                    System.out.println(wishListDTO.getProduct_id().toString());
-                }
+//                for (WishListDTO wishListDTO : list) {
+//                    System.out.println(wishListDTO.getProduct_id().toString());
+//                }
                 request.setAttribute("list", list);
                 request.setAttribute("endPage", endPage);
             }

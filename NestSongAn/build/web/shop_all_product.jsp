@@ -153,15 +153,21 @@
                         </div>
                         <div class="featured__controls">
                             <ul>
-                                <li class="active" data-filter="*">All</li>
+                                <li class="active" data-filter="*"><a href="shop-products?bid=${sessionScope.branch_id}">All</a></li>
                                     <c:forEach items="${cList}" var="l">
-                                    <li><a href="danh-muc?cateId=${l.category_id}&bid=${sessionScope.branch_id}">${l.name}</a></li>
+                                    <li><a href="SortPriceController?cateId=${l.category_id}&bid=${sessionScope.branch_id}">${l.name}</a></li>
                                     </c:forEach>
                             </ul>
                             </br>
                             <ul>
-                                <li><a href="">Giá tăng dần</a></li>
-                                <li><a href="">Giá giảm dần</a></li>
+                                <c:if test="${empty cateId}">
+                                    <li><a href="SortPriceController?sort=1">Giá tăng dần</a></li>
+                                    <li><a href="SortPriceController?sort=2">Giá giảm dần</a></li>
+                                    </c:if>
+                                    <c:if test="${not empty cateId}">
+                                    <li><a href="SortPriceController?sort=1&cateId=${cateId}">Giá tăng dần</a></li>
+                                    <li><a href="SortPriceController?sort=2&cateId=${cateId}">Giá giảm dần</a></li>
+                                    </c:if>
                             </ul>
                         </div>
                     </div>
@@ -210,6 +216,22 @@
                 <c:forEach begin="1" end="${endPage}" var="i">
                     <a href="shop-products?index=${i}" class="pagi">${i}</a>
                 </c:forEach>
+                <c:if test="${not empty endPageS}">
+                    <c:forEach begin="1" end="${endPageS}" var="i">
+                        <c:if test="${empty cateId && empty sort}">
+                            <a href="SortPriceController?index=${i}" class="pagi">${i}</a>
+                        </c:if>
+                        <c:if test="${empty cateId && not empty sort}">
+                            <a href="SortPriceController?index=${i}&sort=${sort}" class="pagi">${i}</a>
+                        </c:if>
+                        <c:if test="${not empty cateId && empty sort}">
+                            <a href="SortPriceController?index=${i}&cateId=${cateId}" class="pagi">${i}</a>
+                        </c:if>
+                        <c:if test="${not empty cateId && not empty sort}">
+                            <a href="SortPriceController?index=${i}&cateId=${cateId}&sort=${sort}" class="pagi">${i}</a>
+                        </c:if>                        
+                    </c:forEach>
+                </c:if>
             </div>
 
         </section>

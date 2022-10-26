@@ -54,11 +54,11 @@ public interface ProductDAO {
     public int getTotalProductByCategory1();
     
     //hung: sort by price descending
-    public List<ProductDTO> getProductDesc() throws SQLException;
-    public List<ProductDTO> getProductDesc(int categoryId) throws SQLException ;
+    public List<ProductDTO> getProductDesc(int index) throws SQLException;
+    public List<ProductDTO> getProductDesc(int categoryId, int index) throws SQLException ;
     //Hung sort product by price asc
-    public List<ProductDTO> getProductAsc() throws SQLException;
-    public List<ProductDTO> getProductAsc(int categoryId) throws SQLException ;
+    public List<ProductDTO> getProductAsc(int index) throws SQLException;
+    public List<ProductDTO> getProductAsc(int categoryId, int index) throws SQLException ;
     
      public List<ProductDTO> viewPopularProduct();
      

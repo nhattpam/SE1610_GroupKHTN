@@ -460,7 +460,8 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     //Hung sort product by price asc
-    public List<ProductDTO> getProductAsc(int categoryId) throws SQLException {
+    @Override
+    public List<ProductDTO> getProductAsc(int categoryId, int index) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         List<ProductDTO> result = new ArrayList<>();
@@ -468,11 +469,14 @@ public class ProductDAOImpl implements ProductDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select product_id, photo, name, price from product "
-                        + "where category_id=?"
-                        + "order by price asc";
+                String sql = "Select product_id, photo, name, price \n"
+                        + "From product \n"
+                        + "Where category_id=? \n"
+                        + "Order by price asc\n"
+                        + "Offset ? rows fetch next 3 rows only";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, categoryId);
+                stm.setInt(2, (index - 1) * 3);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     ProductDTO p = new ProductDTO();
@@ -499,7 +503,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     //Hung sort product by price asc
     @Override
-    public List<ProductDTO> getProductAsc() throws SQLException {
+    public List<ProductDTO> getProductAsc(int index) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         List<ProductDTO> result = new ArrayList<>();
@@ -507,48 +511,12 @@ public class ProductDAOImpl implements ProductDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select product_id, photo, name, price from product "
-                        + "order by price asc";
+                String sql = "Select product_id, photo, name, price \n"
+                        + "From product \n"
+                        + "Order by price asc\n"
+                        + "Offset ? rows fetch next 3 rows only";
                 stm = con.prepareStatement(sql);
-                rs = stm.executeQuery();
-                while (rs.next()) {
-                    ProductDTO p = new ProductDTO();
-                    p.setProduct_id(rs.getInt("product_id"));
-                    p.setPhoto(rs.getString("photo"));
-                    p.setName(rs.getString("name"));
-                    p.setPrice(rs.getFloat("price"));
-                    result.add(p);
-                }
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-
-        }
-        return result;
-    }
-
-    //Hung sort product by price desc
-    public List<ProductDTO> getProductDesc(int categoryId) throws SQLException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        List<ProductDTO> result = new ArrayList<>();
-        ResultSet rs = null;
-        try {
-            con = DBUtils.getConnection();
-            if (con != null) {
-                String sql = "select product_id, photo, name, price from product\n"
-                        + "where category_id=?"
-                        + "order by price desc";
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, categoryId);
+                stm.setInt(1, (index - 1) * 3);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     ProductDTO p = new ProductDTO();
@@ -576,7 +544,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     //Hung sort product by price desc
     @Override
-    public List<ProductDTO> getProductDesc() throws SQLException {
+    public List<ProductDTO> getProductDesc(int categoryId, int index) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         List<ProductDTO> result = new ArrayList<>();
@@ -584,9 +552,55 @@ public class ProductDAOImpl implements ProductDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select product_id, photo, name, price from product\n"
-                        + "order by price desc";
+                String sql = "Select product_id, photo, name, price \n"
+                        + "From product \n"
+                        + "Where category_id=? \n"
+                        + "Order by price desc\n"
+                        + "Offset ? rows fetch next 3 rows only";
                 stm = con.prepareStatement(sql);
+                stm.setInt(1, categoryId);
+                stm.setInt(2, (index - 1) * 3);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    ProductDTO p = new ProductDTO();
+                    p.setProduct_id(rs.getInt("product_id"));
+                    p.setPhoto(rs.getString("photo"));
+                    p.setName(rs.getString("name"));
+                    p.setPrice(rs.getFloat("price"));
+                    result.add(p);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+        return result;
+    }
+
+    //Hung sort product by price desc
+    @Override
+    public List<ProductDTO> getProductDesc(int index) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        List<ProductDTO> result = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "Select product_id, photo, name, price \n"
+                        + "From product \n"                        
+                        + "Order by price desc\n"
+                        + "Offset ? rows fetch next 3 rows only";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, (index - 1) * 3);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     ProductDTO p = new ProductDTO();
@@ -641,18 +655,18 @@ public class ProductDAOImpl implements ProductDAO {
         return list;
 
     }
-    
+
     @Override
     //check product_id by name
-    public int checkProductId(String name){
+    public int checkProductId(String name) {
         int product_id = 0;
         try {
             String sql = "SELECT name, product_id FROM product \n"
-                    + "WHERE name LIKE N'"+ name +"'";
+                    + "WHERE name LIKE N'" + name + "'";
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 product_id = rs.getInt("product_id");
                 rs.getString("name");
             }
@@ -660,5 +674,37 @@ public class ProductDAOImpl implements ProductDAO {
             e.printStackTrace();
         }
         return product_id;
+    }
+
+    //Hung count product by category
+    public int getCountByCategory(int categoryID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        int result = 0;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT COUNT (*) from product where category_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, categoryID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+        return result;
     }
 }
