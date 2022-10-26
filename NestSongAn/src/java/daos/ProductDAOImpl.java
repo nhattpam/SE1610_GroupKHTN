@@ -632,10 +632,10 @@ public class ProductDAOImpl implements ProductDAO {
         List<ProductDTO> list = new ArrayList<>();
 
         try {
-            String sql = "SELECT p.name,p.photo,p.price, SUM(od.quantity) as 'quantity'\n"
+            String sql = "SELECT p.name,p.photo,p.price,p.product_id, SUM(od.quantity) as 'quantity'\n"
                     + "FROM order_details od INNER JOIN product p \n"
                     + "ON od.product_id = p.product_id\n"
-                    + "group by p.name,p.photo,p.price\n"
+                    + "group by p.name,p.photo,p.price,p.product_id\n"
                     + "order by SUM(od.quantity) desc";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -645,6 +645,7 @@ public class ProductDAOImpl implements ProductDAO {
                 p.setName(rs.getString(1));
                 p.setPhoto(rs.getString(2));
                 p.setPrice(rs.getInt(3));
+                p.setProduct_id(rs.getInt(4));
                 list.add(p);
                 i++;
             }

@@ -111,7 +111,7 @@
                         <tr>
                             <td>${l.order_details_id}</td>
                             <td>${l.product_id.name}</td>
-                            <td>${l.order_id.status}</td>
+                            <td>1</td>
                             <td>${l.quantity}</td>
                             <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
                             <td>
