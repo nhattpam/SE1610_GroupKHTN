@@ -26,26 +26,44 @@
                 -o-background-size: cover;
                 background-size: cover;
             }
-            textarea{
-                 background:url('img/signup.jpg') no-repeat center center fixed;
-            }
+            a {
+                color: #19aa8d;
+                text-decoration: none;
+            }	
         </style>
     </head>
+
     <body>
+    <jsp:include page="../../header.jsp" />
+
         <div class="container mt-20">
             <div class="row mt-20">
+
                 <div class="col-md-12" style="margin-top: 180px; margin-left:200px ">
+                    <a href="order-details?order_id=${oid}" style="background: #6a0e13 !important; color: white">Trở về</a>
+                    
+                <c:if test="${empty feedbackError }">
+                </c:if>
+                    
+                <c:if test="${ not empty feedbackError }">
+                    <p class="text-danger">${feedbackError}</p>   
+                    <c:remove var="feedbackError" scope="session"/>
+                </c:if>
                     <form action="AddFeedback" method="POST">
                         <div class="form-outline mt-20">
+
                             <input type="hidden" name="uid" value="${uid}">
                             <input type="hidden" name="pid" value="${pid}"> 
+                            <input type="hidden" name="oid" value="${oid}"> 
                             <textarea class="textarea is-danger" placeholder="Đánh giá của bạn giúp chúng tôi phát triển!" type="textarea" class="form-control" id="textAreaExample2" name="feedback" rows="10" cols="50"></textarea>
                             <label class="form-label" for="textAreaExample2"></label>
                         </div>
-                        <button type="input" class="btn btn-danger" style="background: #6a0e13 !important; color: white">Đánh giá</button>
+                        <button type="submit" class="btn btn-danger" style="background: #6a0e13 !important; color: white">Đánh giá</button>
                     </form>
                 </div>
             </div>
         </div>
+    <jsp:include page="../../footer.jsp" />
+
     </body>
 </html>

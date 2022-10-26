@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.DBUtils;
 
 /**
@@ -32,23 +33,32 @@ public class AddFeedbackController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-        String oid = request.getParameter("orderid");
+        String oid = request.getParameter("oid");
+        
         int uid = Integer.parseInt(request.getParameter("uid"));
         int pid = Integer.parseInt(request.getParameter("pid"));
+        HttpSession sessionValidate = request.getSession();
+
         try {
+
             OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
             List<OrderDTO> check = dao.viewCompleOrder();
-            if(!check.isEmpty()){
-            String feedback = request.getParameter("feedback");
-            Date now = new Date();
-            SimpleDateFormat x = new SimpleDateFormat();
-            String createdDate = x.format(now);
-            FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
-            fed.addFeedback(feedback, uid, createdDate, pid);
-            response.sendRedirect("detail?product_id=" + pid);
-            }else{
-                request.setAttribute("feedbackE", "Bạn chỉ được đánh giá sau khi mua sản phẩm!!!");
-                response.sendRedirect("order-details?order_id="+oid);
+            if (!check.isEmpty()) {
+                String feedback = request.getParameter("feedback");
+                boolean f = true;
+                if (feedback == null || feedback == "") {
+                    sessionValidate.setAttribute("feedbackError", "Không được để trống!!!");
+                    f = false;
+                    response.sendRedirect("feedback?pid=" + pid + "&uid=" + uid + "&oid=" + oid);
+                }
+                if (f) {
+                    Date now = new Date();
+                    SimpleDateFormat x = new SimpleDateFormat();
+                    String createdDate = x.format(now);
+                    FeedbackDAOImpl fed = new FeedbackDAOImpl(DBUtils.getConnection());
+                    fed.addFeedback(feedback, uid, createdDate, pid);
+                    response.sendRedirect("detail?product_id=" + pid);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -26,6 +26,7 @@ public class ViewAddFeedBack extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setAttribute("pid", request.getParameter("pid"));
         request.setAttribute("uid", request.getParameter("uid"));
+        request.setAttribute("oid", request.getParameter("oid"));
         
         request.getRequestDispatcher("view/customer/feedback.jsp").forward(request, response);
     }
