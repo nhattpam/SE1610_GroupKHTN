@@ -69,6 +69,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
         }
         return check;
     }
+
     @Override
     public List<FeedbackDTO> viewAllfeedback() {
         List<FeedbackDTO> list = new ArrayList<>();
@@ -138,12 +139,12 @@ public class FeedbackDAOImpl implements FeedbackDAO {
 
     @Override
     public List<FeedbackDTO> viewFeedbackProduct(int product_id) {
-         List<FeedbackDTO> list = new ArrayList<>();
+        List<FeedbackDTO> list = new ArrayList<>();
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "SELECT feedback_id,feedback,u.full_name,u.user_id,fb.create_date,product_id FROM feedback fb inner join users u on fb.user_id = u.user_id\n"
-                        +"WHERE product_id = ?\n"
+                        + "WHERE product_id = ?\n"
                         + "Order by feedback_id DESC\n";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, product_id);
@@ -161,6 +162,22 @@ public class FeedbackDAOImpl implements FeedbackDAO {
             Logger.getLogger(FeedbackDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    @Override
+    public void deleteFeedback(int fid) {
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "DELETE FROM feedback \n"
+                        + "WHERE feedback_id = ?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setInt(1, fid);
+                ps.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FeedbackDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

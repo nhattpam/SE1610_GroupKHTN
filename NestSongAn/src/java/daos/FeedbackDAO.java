@@ -24,4 +24,6 @@ public interface FeedbackDAO {
     public int getTotalFeedback();
     //hapham function view comment product
     public List<FeedbackDTO> viewFeedbackProduct(int product_id);
+    //hapham: function delete feedback
+    public void deleteFeedback(int fid);
 }

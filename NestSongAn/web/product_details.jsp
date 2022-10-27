@@ -214,14 +214,27 @@
                                                 <div class="row">
 
                                                     <div class="col-md-6 col-lg-7 col-xl-8">     
-                                                         <c:forEach items="${listFeedback}" var="f">
+                                                        <c:forEach items="${listFeedback}" var="f">
                                                             <li class="d-flex justify-content-between mb-3" width="30">
                                                                 <c:if test="${f.user_id.user_id == USER.user_id}"><i class="" width="60"></i></c:if>
-
                                                                     <div class="card">
                                                                         <div class="card-header d-flex justify-content-between p-3">
                                                                             <p class="fw-bold mb-0">${f.user_id.full_name}</p>
                                                                         <p class="text-muted small mb-0"><i class="far fa-clock"></i> ${f.create_date}</p>
+                                                                        <c:if test="${f.user_id.user_id == USER.user_id}">
+                                                                            <div class="header__top__right__language fw-bold mb-0">
+                                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                                <ul>
+
+                                                                                    <li><a href="deletefeedback?fid=${f.feedback_id}&pid=${f.product_id.product_id}" style="color: white;">Gỡ xuống</a></li>
+
+                                                                                    <c:if test="${empty USER && empty USERG}">
+                                                                                        <li><a href="loginController" style="color: white;">Gỡ xuống</a></li>
+                                                                                        </c:if>    
+
+                                                                                </ul>
+                                                                            </div>
+                                                                        </c:if>
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <p class="mb-0">
