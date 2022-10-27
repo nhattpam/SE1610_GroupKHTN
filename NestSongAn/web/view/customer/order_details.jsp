@@ -81,8 +81,6 @@
 <body>
 
     <jsp:include page="../../header.jsp" />
-    <% UsersDTO u = (UsersDTO) session.getAttribute("USER");%>
-    <% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>
     <c:if test="${not empty user }">
 
         <div class="container">
@@ -132,8 +130,8 @@
         <div class="container">
             <h4 style="color: #6a0e13">Chi tiết đơn hàng #${order_id}</h4>
             <p><span style="font-weight: bold">Cửa hàng: </span>Song Ân</p>
-            <p><span style="font-weight: bold">Tên khách hàng:  </span><%= us.getName()%></p>
-            <p><span style="font-weight: bold">Email: </span><%= us.getEmail()%></p>
+            <p><span style="font-weight: bold">Tên khách hàng:  </span>${sessionScope.USERG.name}</p>
+            <p><span style="font-weight: bold">Email: </span>${sessionScope.USERG.email}</p>
             <p><span style="font-weight: bold">Địa chỉ: </span>${address}</p>
             <table class="table table-striped">
                 <thead>

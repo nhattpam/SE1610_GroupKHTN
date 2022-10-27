@@ -166,7 +166,7 @@
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
                                             <li><a href="MyProfile?uid=${USERG.id}" style="color: white;">Tài Khoản</a></li>
-                                            <li><a href="my-order-gg?uid=${USERG.id}" style="color: white;">Lịch sử mua</a></li>
+                                            <li><a href="my-order-gg" style="color: white;">Lịch sử mua</a></li>
                                                 <c:url var="logout" value="logoutController"/>
                                             <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>
                                         </ul>
