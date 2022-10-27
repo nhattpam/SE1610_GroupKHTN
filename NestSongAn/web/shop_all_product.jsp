@@ -112,7 +112,7 @@
         <!-- Hero Section End -->
 
         <!-- Breadcrumb Section Begin -->
-        <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <section class="breadcrumb-section set-bg" data-setbg="img/imang1.png">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -120,7 +120,7 @@
                             <h2>Sản Phẩm Của Nest Song Ân</h2>
                             <div class="breadcrumb__option">
                                 <a href="home">Trang chủ</a>
-                                <span>Shop</span>
+                                <span>Sản phẩm</span>
                             </div>
                         </div>
                     </div>
@@ -148,6 +148,16 @@
                                 }
                                 .featured__controls a{
                                     color: black;
+                                }
+                                .featured__controls ul li:after {
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: -2px;
+                                    width: 100%;
+                                    height: 2px;
+                                    background: #6a0e13;
+                                    content: "";
+                                    opacity: 0;
                                 }
                             </style>
                         </div>
