@@ -96,7 +96,7 @@ public class CartController extends HttpServlet {
                         listBuy.add(idBuy);
                     }
 //                    url = "/cart.jsp";
-                    url = "/shop-products";
+                    url = "shop-products";
                     break;
                 case "plus":
                     if (listBuy == null) {
@@ -120,7 +120,7 @@ public class CartController extends HttpServlet {
                         listBuy.add(idBuy);
                     }
 //                    url = "/cart.jsp";
-                    url = "/my-cart";
+                    url = "my-cart";
                     break;
                 case "sub":
                     if (listBuy == null) {
@@ -144,18 +144,17 @@ public class CartController extends HttpServlet {
                         listBuy.add(idBuy);
                     }
 //                    url = "/cart.jsp";
-                     url = "/my-cart";
+                     url = "my-cart";
                     break;
                 case "remove":
                     cart.removeToCart(p);
 //                    url = "/cart.jsp";
-                     url = "/my-cart";
+                     url = "my-cart";
                     break;
                 default:
                     break;
             }
-            RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         } catch (NumberFormatException e) {
         }
     }
