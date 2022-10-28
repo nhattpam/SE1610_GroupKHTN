@@ -33,9 +33,7 @@ public class test {
         OrderDAOImpl dao = new  
             OrderDAOImpl(DBUtils.getConnection());
         
-        List<OrderDTO> list = dao.vỉewDeliveriedOrders();
-        for (OrderDTO o : list) {
-            System.out.println(o.getOrder_id() + o.getLocation_id().getName());
-        }
+        float tt = dao.GetOrderTotalPrice("1666012483291");
+        System.out.println(tt);
     }
 }

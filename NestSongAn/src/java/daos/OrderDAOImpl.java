@@ -397,5 +397,18 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     public OrderDAOImpl() {
-    }    
+    }   
+    
+    public float GetOrderTotalPrice(String order_id){
+        String sql = "SELECT total_price FROM [order] where order_id = '" + order_id + "'";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return rs.getFloat(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
 }
