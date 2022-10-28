@@ -212,6 +212,14 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="list-orders" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Danh Sách đánh giá sản phẩm
+                                    </p>
+                                </a>
+                            </li>
 
                         </ul>
                     </nav>
@@ -266,7 +274,6 @@
                                     <td>${l.category_id.category_id}</td>
                                     <td>
                                         <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary"> Sửa</a>
-                                        <a href="delete?pid=${l.product_id}" class="btn btn-sm btn-danger"> Xoá</a>
                                     </td>
                                 </tr>
                             </c:forEach>

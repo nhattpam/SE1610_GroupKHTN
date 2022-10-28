@@ -208,7 +208,14 @@
                                     </p>
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a href="list-feedback" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Danh Sách đánh giá sản phẩm
+                                    </p>
+                                </a>
+                            </li>
 
                         </ul>
                     </nav>
