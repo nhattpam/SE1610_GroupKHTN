@@ -171,6 +171,7 @@ public class CheckoutGoogleController extends HttpServlet {
                         dao3.subQuantityAfterBuy(ds.getValue(), ds.getKey().getProduct_id(), (int) getUid.getAttribute("branch_id"));
                     }
                     session.removeAttribute("cart");
+                    session.setAttribute("order_id", od.getOrder_id());
                     response.sendRedirect("success-order");
 
                 } catch (Exception e) {
