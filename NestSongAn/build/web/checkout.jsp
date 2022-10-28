@@ -216,6 +216,10 @@
                                 <c:if test="${not empty user }">
                                     <div class="card">
                                         <div class="card-body">
+                                            <c:if test="${ not empty notiCheckout }">
+                                                <h5 class="text-center text-danger">${notiCheckout}</h5>
+                                                <c:remove var="notiCheckout" scope="session"/>
+                                            </c:if>
                                             <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;">Thông Tin Đặt Hàng</h4><br>
 
 
@@ -238,7 +242,7 @@
                                                     <c:set var = "tp" scope = "session" value = "${branch_id}"/>
                                                     <div class="col-12">
                                                         <select name="province" class="form-select selectpicker" required="">
-                                                            <option selected="">--Tỉnh/Thành Phố--</option>
+                                                            <option value="chooseCity" selected="">--Tỉnh/Thành Phố--</option>
                                                             <c:if test="${tp == 1}">
                                                                 <option value="Hoà Bình">Hoà Bình</option>
                                                                 <option value="Sơn La">Sơn La</option>
@@ -319,7 +323,7 @@
                                                 </div> 
                                                 <div class="form-group">
                                                     <select name="payment_method" required=""> 
-                                                        <option selected="">--Phương Thức Thanh Toán--</option>
+                                                        <option value="choosePay" selected="">--Phương Thức Thanh Toán--</option>
                                                         <option value="cod">Thanh toán khi nhận hàng</option>
                                                     </select><br>
                                                 </div> <br>
@@ -335,6 +339,10 @@
                                 <c:if test="${not empty usergg }">
                                     <div class="card">
                                         <div class="card-body">
+                                            <c:if test="${ not empty notiCheckout }">
+                                                <h5 class="text-center text-danger">${notiCheckout}</h5>
+                                                <c:remove var="notiCheckout" scope="session"/>
+                                            </c:if>
                                             <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;">Thông Tin Đặt Hàng</h4><br>
 
 
@@ -361,7 +369,7 @@
                                                     <c:set var = "tp" scope = "session" value = "${branch_id}"/>
                                                     <div class="col-12">
                                                         <select name="province" class="form-select selectpicker" required="">
-                                                            <option selected="">--Tỉnh/Thành Phố--</option>
+                                                            <option value="chooseCity" selected="">--Tỉnh/Thành Phố--</option>
                                                             <c:if test="${tp == 1}">
                                                                 <option value="Hoà Bình">Hoà Bình</option>
                                                                 <option value="Sơn La">Sơn La</option>
@@ -442,7 +450,7 @@
                                                 </div> 
                                                 <div class="form-group">
                                                     <select name="payment_method" required=""> 
-                                                        <option selected="">--Phương Thức Thanh Toán--</option>
+                                                        <option value="choosePay" selected="">--Phương Thức Thanh Toán--</option>
                                                         <option value="cod">Thanh toán khi nhận hàng</option>
                                                     </select><br>
                                                 </div> <br>

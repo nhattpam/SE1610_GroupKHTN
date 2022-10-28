@@ -115,7 +115,7 @@ public class CheckoutController extends HttpServlet {
                 sessionValidate.setAttribute("wrongAddress", "Địa chỉ không được rỗng");
                 check = false;
             }
-            if (check) {
+            if (check && !request.getParameter("province").equals("chooseCity") && !request.getParameter("payment_method").equals("choosePay")) {
                 try {
                     Date date = new Date();
                     String order_id = "" + date.getTime();
@@ -151,6 +151,9 @@ public class CheckoutController extends HttpServlet {
                     e.printStackTrace();
                 }
 
+            }
+            else{
+                session.setAttribute("notiCheckout", "Vui lòng kiểm tra lại tỉnh/thành phố hoặc phương thức thanh toán");
             }
         } catch (Exception e) {
         } finally{
