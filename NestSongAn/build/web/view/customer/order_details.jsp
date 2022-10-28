@@ -118,7 +118,7 @@
                                 </c:if>
                                 <c:if test = "${l.order_id.status == '1' || '2' ||'4' ||'5'}">
                                 </c:if>
-                            </td
+                            </td>
                         </tr>
                     </c:forEach>
 
@@ -154,6 +154,13 @@
                             <td>1</td>
                             <td>${l.quantity}</td>
                             <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
+                             <td>
+                                <c:if test = "${l.order_id.status == '3'}">
+                                    <a href="feedback?pid=${l.product_id.product_id}&uid=${user.user_id}&oid=${order_id}" style="color: #6a0e13">Đánh giá</a>
+                                </c:if>
+                                <c:if test = "${l.order_id.status == '1' || '2' ||'4' ||'5'}">
+                                </c:if>
+                            </td>
                         </tr>
                     </c:forEach>
 
