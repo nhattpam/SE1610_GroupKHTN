@@ -268,12 +268,7 @@
                                             <c:if test = "${l.role_id.role == 'staff'}">
                                                 <a href="delete-staff?uid=${l.user_id}" class="btn btn-sm btn-danger"> Xoá</a>
                                             </c:if>
-                                            <c:if test = "${l.role_id.role == 'customer'}">
-                                                <a href="" class="btn btn-sm btn-success"> Mở Ban</a>
-                                            </c:if>
-                                                <c:if test = "${l.role_id.role == 'customer'}">
-                                                <a href="" class="btn btn-sm btn-danger">Ban</a>
-                                            </c:if>
+                                           
                                                     
                                         </td>
                                     </tr>
