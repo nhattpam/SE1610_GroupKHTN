@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
     private static final String LOGIN_PAGE = "loginPage";
     private static final String HOME_PAGE = "";
     private static final String STAFF_PAGE = "staffPage";
-    private static final String ADMIN_PAGE = "admin-dashboard";
+    private static final String ADMIN_PAGE = "ViewSuccesfulDeliveryController";
     private static final String SHIPPER_PAGE = "shipperPage";
     private static final String SUPPLIER_PAGE = "supplierPage";
 

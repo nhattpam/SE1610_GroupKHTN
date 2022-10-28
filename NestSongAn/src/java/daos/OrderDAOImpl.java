@@ -116,7 +116,7 @@ public class OrderDAOImpl implements OrderDAO {
                     String orderid = rs.getString(7);
                     int status = rs.getInt(6);
                     String order_date = rs.getString(5);
-                    OrderDTO uoder = new OrderDTO(orderid, order_date, status, user,location);
+                    OrderDTO uoder = new OrderDTO(orderid, order_date, status, user, location);
                     result.add(uoder);
                 }
             }
@@ -172,13 +172,14 @@ public class OrderDAOImpl implements OrderDAO {
         }
     }
 //Minh Thanh
+
     @Override
     public List<OrderDTO> viewOrderList() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         List<OrderDTO> result = new ArrayList<>();
-        
+
         OrderDTO o = null;
         UsersDTO u = null;
         try {
@@ -216,27 +217,28 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return result;
     }
+
     //income
-    public float viewIncome(){
+    public float viewIncome() {
         try {
             String sql = "SELECT SUM(total_price) AS income\n"
                     + "FROM [order]\n"
                     + "WHERE status = 3 ";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 return rs.getFloat(1);
             }
-            
+
         } catch (Exception e) {
         }
         return 0;
-        
+
     }
-    
+
     @Override
     //khang tran: function view list order deliverired
-    public List<OrderDTO> vỉewDeliveriedOrders(){
+    public List<OrderDTO> vỉewDeliveriedOrders() {
         List<OrderDTO> list = new ArrayList<>();
         LocationDTO lo = null;
         try {
@@ -246,10 +248,10 @@ public class OrderDAOImpl implements OrderDAO {
                     + "FROM [order] o INNER JOIN location l\n"
                     + "ON o.location_id = l.location_id\n"
                     + "WHERE status = 3";
-            
+
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 OrderDTO o = new OrderDTO();
                 o.setOrder_id(rs.getString("order_id"));
                 o.setDelivery_address(rs.getString("delivery_address"));
@@ -260,12 +262,12 @@ public class OrderDAOImpl implements OrderDAO {
                 u.setUser_id(rs.getInt("user_id"));
                 o.setUser_id(u);
                 lo = new LocationDTO();
-                lo.setName(rs.getString("name")); 
-                o.setLocation_id(lo); 
-                list.add(o); 
-                
+                lo.setName(rs.getString("name"));
+                o.setLocation_id(lo);
+                list.add(o);
+
             }
-            
+
         } catch (Exception e) {
         }
         return list;
@@ -290,13 +292,13 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public List<LocationDTO> getLocation() {
         List<LocationDTO> list = new ArrayList<>();
-        try{
+        try {
             conn = DBUtils.getConnection();
-            if(conn!=null){
+            if (conn != null) {
                 String sql = "SELECT location_id, name FROM location";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     LocationDTO loate = new LocationDTO(rs.getInt("location_id"), rs.getString("name"));
                     list.add(loate);
                 }
@@ -309,14 +311,14 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public int getLocation(int location_id) {
-        try{
+        try {
             conn = DBUtils.getConnection();
-            if(conn!=null){
+            if (conn != null) {
                 String sql = "SELECT location_id FROM location WHERE location_id = ?";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, location_id);
                 ResultSet rs = ps.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     return rs.getInt("location_id");
                 }
             }
@@ -326,38 +328,74 @@ public class OrderDAOImpl implements OrderDAO {
         return 0;
     }
 
-   public List<OrderDTO> viewCompleOrder() throws SQLException {
-       List<OrderDTO> result = new ArrayList<>();
-       OrderDTO o = null;
-       UsersDTO u = null;
+    public List<OrderDTO> viewCompleOrder() throws SQLException {
+        List<OrderDTO> result = new ArrayList<>();
+        OrderDTO o = null;
+        UsersDTO u = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-       try{
-           conn = DBUtils.getConnection();
-           if(conn != null){
-               String sql = "SELECT u.full_name, u.phone, \n"
-                       +" o.delivery_address, o.total_price\n"
-                       +",o.status,o.order_id\n"
-                       +"FROM users u inner join [order] o on u.user_id = o.user_id\n"
-                       +"WHERE o.status = 3";
-               stm = conn.prepareStatement(sql);
-               rs = stm.executeQuery();
-               while(rs.next()){
-                   u = new UsersDTO();
-                   u.setFull_name(rs.getString(1));
-                   u.setPhone(rs.getString(2));
-                   float total_price = rs.getFloat(4);
-                   String delivery_address = rs.getString(3);
-                   int status = rs.getInt(5);
-                   String order_id = rs.getString(6);
-                   OrderDTO od = new OrderDTO(order_id, delivery_address, total_price, status, u);
-                   result.add(od);
-               }
-           }
-           
-       }catch(SQLException ex){
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT u.full_name, u.phone, \n"
+                        + " o.delivery_address, o.total_price\n"
+                        + ",o.status,o.order_id\n"
+                        + "FROM users u inner join [order] o on u.user_id = o.user_id\n"
+                        + "WHERE o.status = 3";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    u = new UsersDTO();
+                    u.setFull_name(rs.getString(1));
+                    u.setPhone(rs.getString(2));
+                    float total_price = rs.getFloat(4);
+                    String delivery_address = rs.getString(3);
+                    int status = rs.getInt(5);
+                    String order_id = rs.getString(6);
+                    OrderDTO od = new OrderDTO(order_id, delivery_address, total_price, status, u);
+                    result.add(od);
+                }
+            }
+
+        } catch (SQLException ex) {
             Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-       }
-       return result;
-   }
+        }
+        return result;
+    }
+
+    public int getTotalDeliveryByStatus(int status, String currentMonth) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "select COUNT(*) as number\n"
+                        + "from [order]\n"
+                        + "where status=? and order_date like ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, status);
+                stm.setString(2, currentMonth+"%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    result=rs.getInt("number");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public OrderDAOImpl() {
+    }    
 }

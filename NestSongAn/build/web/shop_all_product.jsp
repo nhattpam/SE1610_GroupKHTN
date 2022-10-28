@@ -77,7 +77,7 @@
                             </div>
                             <ul>
                                 <c:forEach items="${cList}" var="l">
-                                    <li><a href="danh-muc?cateId=${l.category_id}&bid=${sessionScope.branch_id}">${l.name}</a></li>
+                                    <li><a href="SortPriceController?cateId=${l.category_id}&bid=${sessionScope.branch_id}">${l.name}</a></li>
                                     </c:forEach>
 
                             </ul>
