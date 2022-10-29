@@ -50,10 +50,10 @@
                         <p class="text-danger">${feedbackError}</p>   
                         <c:remove var="feedbackError" scope="session"/>
                     </c:if>
-                        <form action="AddFeedback" method="POST">
+                        <form action="feedbackgg" method="POST">
                             <div class="form-outline mt-20">
 
-                                <input type="hidden" name="uid" value="${uid}">
+                                <input type="hidden" name="uid" value="${usergg}">
                                 <input type="hidden" name="pid" value="${pid}"> 
                                 <input type="hidden" name="oid" value="${oid}"> 
                                 <textarea class="textarea is-danger" placeholder="Đánh giá của bạn giúp chúng tôi phát triển!" type="textarea" class="form-control" id="textAreaExample2" name="feedback" rows="10" cols="50"></textarea>
