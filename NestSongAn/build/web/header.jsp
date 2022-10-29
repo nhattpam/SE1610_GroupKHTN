@@ -6,6 +6,7 @@
 
 <%@page import="dtos.GoogleDTO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page import="dtos.UsersDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -57,6 +58,9 @@
                 display: inline-block;
                 margin-right: 20px;
                 position: relative;
+            }
+            #number{
+                background: #6a0e13;
             }
         </style>
         <!--fixed navbar-->
@@ -226,10 +230,10 @@
                                     <li><a href="loginController"><i class="fa fa-shopping-bag"></i> </a></li>
                                 </c:if>
                                 <c:if test="${ not empty USER }">
-                                    <li><a href="my-cart?uid=${USER.user_id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i> </a></li>
+                                    <li><a href="my-cart?uid=${USER.user_id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i><span  id="number"><c:out value="${fn:length(sessionScope.list)}"/></span></a></li>
                                 </c:if>
                                 <c:if test="${ not empty USERG }">
-                                    <li><a href="my-cart?uid=${USERG.id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i> </a></li>
+                                        <li><a href="my-cart?uid=${USERG.id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i><span id="number"><c:out value="${fn:length(sessionScope.list)}"/></span></a></li>
                                 </c:if>
 
                             </ul>
