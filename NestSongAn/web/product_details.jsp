@@ -12,6 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -190,7 +191,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                       aria-selected="false">Đánh giá <span>(1)</span></a>
+                                       aria-selected="false">Đánh giá <span>(<c:out value="${fn:length(listFeedback)}"/>)</span></a>
                                 </li>
                             </ul>
                             <div class="tab-content">
