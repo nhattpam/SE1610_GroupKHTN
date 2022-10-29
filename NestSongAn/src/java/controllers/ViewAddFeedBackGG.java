@@ -5,6 +5,9 @@
  */
 package controllers;
 
+import daos.UserDAOImpl;
+import dtos.GoogleDTO;
+import dtos.UsersDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.DBUtils;
 
 /**
  *
@@ -25,10 +29,24 @@ public class ViewAddFeedBackGG extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setAttribute("pid", request.getParameter("pid"));
-        request.setAttribute("gid", request.getParameter("gid"));
         request.setAttribute("oid", request.getParameter("oid"));
-        
-        request.getRequestDispatcher("view/customer/feedback.jsp").forward(request, response);
+           HttpSession session = request.getSession();
+
+        GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");
+
+//        request.setAttribute("usergg", us);
+        System.out.println(us.getEmail());
+
+        UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
+
+        try {
+            UsersDTO u = dao.viewAccountByEmail(us.getEmail());
+            HttpSession s1 = request.getSession();
+            s1.setAttribute("usergg", u.getUser_id());
+        request.getRequestDispatcher("view/customer/feedbackgg.jsp").forward(request, response);
+         } catch (Exception e) {
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
