@@ -37,7 +37,7 @@ public class ViewCartPageController extends HttpServlet {
         }
         TreeMap<ProductDTO, Integer> list = cart.getList();
         req.setAttribute("list", list);
-        session.setAttribute("list", list);
+        session.setAttribute("numlist", list);
 //            System.out.println(req.getAttribute("list"));
  
         float totalSum = 0;

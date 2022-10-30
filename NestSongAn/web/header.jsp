@@ -230,10 +230,10 @@
                                     <li><a href="loginController"><i class="fa fa-shopping-bag"></i> </a></li>
                                 </c:if>
                                 <c:if test="${ not empty USER }">
-                                    <li><a href="my-cart?uid=${USER.user_id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i><span  id="number"><c:out value="${fn:length(sessionScope.list)}"/></span></a></li>
+                                    <li><a href="my-cart?uid=${USER.user_id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i><span  id="number"><c:out value="${fn:length(sessionScope.numlist)}"/></span></a></li>
                                 </c:if>
                                 <c:if test="${ not empty USERG }">
-                                        <li><a href="my-cart?uid=${USERG.id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i><span id="number"><c:out value="${fn:length(sessionScope.list)}"/></span></a></li>
+                                        <li><a href="my-cart?uid=${USERG.id}&bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag"></i><span id="number"><c:out value="${fn:length(sessionScope.numlist)}"/></span></a></li>
                                 </c:if>
 
                             </ul>
