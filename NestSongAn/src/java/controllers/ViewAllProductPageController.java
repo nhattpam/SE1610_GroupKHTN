@@ -11,6 +11,7 @@ import dtos.CategoryDTO;
 import dtos.ProductDTO;
 import java.io.IOException;
 import java.util.List;
+import java.util.TreeMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -69,7 +70,9 @@ public class ViewAllProductPageController extends HttpServlet {
             sCart.setAttribute("cart", cart);
         }
         System.out.println(cart);
-        
+        TreeMap<ProductDTO, Integer> list = cart.getList();
+        req.setAttribute("list", list);
+        sCart.setAttribute("numlist", list);
 
         req.getRequestDispatcher("shop_all_product.jsp").forward(req, resp);
     }
