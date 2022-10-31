@@ -411,4 +411,56 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return 0;
     }
+
+    @Override//status = 3
+    public int getCountSuccOrder() {
+        String sql = "SELECT COUNT(*) as sp\n"
+                + "FROM [order]\n"
+                + "where status = 3";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                //return ve ket qua int (boi vi no chi tra ve 1 so nguyen)
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0; //neu khong co ket qua thi tra ve 0
+    }
+    @Override
+    public int getCountFailOrder() {//status = 5
+        String sql = "SELECT COUNT(*) as sp\n"
+                + "FROM [order]\n"
+                + "where status = 5";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                //return ve ket qua int (boi vi no chi tra ve 1 so nguyen)
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0; //neu khong co ket qua thi tra ve 0
+    }
+    @Override
+    public int getPendingOrder() {//status = 2
+        
+        String sql = "SELECT COUNT(*) as sp\n"
+                + "FROM [order]\n"
+                + "where status = 2";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                //return ve ket qua int (boi vi no chi tra ve 1 so nguyen)
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0; //neu khong co ket qua thi tra ve 0
+    }
+    
+    
 }

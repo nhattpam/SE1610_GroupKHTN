@@ -33,7 +33,7 @@ public class test {
         OrderDAOImpl dao = new  
             OrderDAOImpl(DBUtils.getConnection());
         
-        float tt = dao.GetOrderTotalPrice("1666012483291");
-        System.out.println(tt);
+        int ketqua = dao.getCountSuccOrder();
+        System.out.println(ketqua);
     }
 }
