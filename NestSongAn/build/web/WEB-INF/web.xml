@@ -68,4 +68,8 @@
             30
         </session-timeout>
     </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/da-co-loi-xay-ra</location>
+    </error-page>
 </web-app>

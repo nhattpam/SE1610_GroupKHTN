@@ -65,7 +65,6 @@
         </style>
     </head>
     <body>
-        <jsp:include page="header.jsp"/>   
 
         <section class="page_404">
             <div class="container">
@@ -87,7 +86,6 @@
                 </div>
             </div>
         </section>
-        <jsp:include page="footer.jsp" />
         <!-- Js Plugins -->
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
