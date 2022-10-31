@@ -152,7 +152,8 @@
                             </div>
                             <div class="product__details__price"><fmt:formatNumber type="number" groupingUsed="true" value="${detail.price}" /> VNĐ</div>
                             <p>${detail.short_description}</p>
-                            <c:if test="${empty USER && empty USERG}">
+                            <c:if test="${q.quantity > 0}">
+                                <c:if test="${empty USER && empty USERG}">
                                 <a href="loginController" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
                             </c:if>
                             <c:if test="${ not empty USER }">
@@ -161,10 +162,16 @@
                             <c:if test="${ not empty USERG }">
                                 <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
                             </c:if>
-
+                            </c:if>
+                            
                             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                             <ul>
-                                <li><b>Số lượng còn lại</b> <span>${q.quantity}</span></li>
+                                <c:if test="${q.quantity == 0}">
+                                    <li><b>Số lượng còn lại</b> <span style="color: red; font-style: italic">Hết hàng</span></li>
+                                </c:if>
+                                    <c:if test="${q.quantity > 0}">
+                                    <li><b>Số lượng còn lại</b> <span>${q.quantity}</span></li>
+                                </c:if>
                                 <li><b>Vận chuyển</b> <span><samp>Miễn Phí Vận Chuyển Toàn Quốc</samp></span></li>
                                 <li><b>Trọng lượng</b> <span>${detail.weight} gam</span></li>
                                 <!--                                <li><b>Share on</b>
@@ -267,7 +274,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title related__product__title">
-                            <h2>Sản Phẩm Mới Nhất</h2>
+                            <h2 style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Sản Phẩm Mới Nhất</h2>
                         </div>
                     </div>
                 </div>
@@ -304,7 +311,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title related__product__title">
-                            <h2>Sản Phẩm Phổ Biến</h2>
+                            <h2 style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Sản Phẩm Phổ Biến</h2>
                         </div>
                     </div>
                 </div>
