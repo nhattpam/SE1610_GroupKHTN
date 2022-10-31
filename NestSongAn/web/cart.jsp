@@ -251,7 +251,7 @@
                                                                 <div class="row">
 
                                                                     <div class="col-12 text-center">
-                                                                        <p class="text-danger">Số lượng sản phẩm đã đạt đến mức tối đa</p>
+                                                                        <p class="text-danger">Số lượng sản phẩm đã vượt mức tối đa trong kho</p>
                                                                         <!--<p>No pressure, your product will be waiting for you in the cart.</p>-->
                                                                     </div>
                                                                 </div>
