@@ -228,60 +228,24 @@
                         <!--<h5 class="mb-2">Quản Lý Người Dùng</h5>-->
                         <div class="row">
 
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
-                                    <div class="info-box-content">
-                                        <a href="manage-shipper">
-                                            <span class="info-box-text">Quản Lý Đơn Hàng</span>
-                                            <!--<span class="info-box-number">1,410</span>-->
-                                        </a>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Bookmarks</span>
-                                        <span class="info-box-number">410</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Uploads</span>
-                                        <span class="info-box-number">13,648</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Likes</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Đang chờ vận chuyển</th>
+                                        <th scope="col">Đã giao</th>
+                                        <th scope="col">Giao thất bại</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">SL</th>
+                                        <td>${pending}</td>
+                                        <td>${succ}</td>
+                                        <td>${fail}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->

@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import daos.OrderDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.DBUtils;
 
 /**
  *
@@ -22,7 +24,21 @@ public class ViewShipperDashboardPageController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                request.getRequestDispatcher("view/shipping/dashboard.jsp").forward(request, response);
+
+        //sort status
+        OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
+        
+        //statu = 2
+        int pedingOrder = dao.getPendingOrder();
+        request.setAttribute("pending", pedingOrder);
+        //sttus = 3
+        int succOrder = dao.getCountSuccOrder();
+        request.setAttribute("succ", succOrder);
+        //sttu = 5
+        int failOrder = dao.getCountFailOrder();
+        request.setAttribute("fail", failOrder); //set atribute xong bắn qua trang dashoabrd
+        
+        request.getRequestDispatcher("view/shipping/dashboard.jsp").forward(request, response);
 
     }
 
