@@ -60,7 +60,8 @@ public interface UserDAO {
     
     //khang tran: function view list user in admin
      public List<UsersDTO> getAllListUser();
-    
+    //hapham: function search account by name
+     public List<UsersDTO> searchByName(String fullname);
      
      //nhattpham: get phone by email gg
     public UsersDTO getPhone(String email);

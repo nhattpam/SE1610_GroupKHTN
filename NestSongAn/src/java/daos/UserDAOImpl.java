@@ -66,8 +66,8 @@ public class UserDAOImpl implements UserDAO {
                     String phone = rs.getString("phone");
                     int roleId = rs.getInt("role_id");
                     String role = rs.getString("role");
-                    int status=rs.getInt("status");
-                    result = new UsersDTO(userId, fullname, username, email, phone, new UserRoleDTO(roleId, role),status);
+                    int status = rs.getInt("status");
+                    result = new UsersDTO(userId, fullname, username, email, phone, new UserRoleDTO(roleId, role), status);
                 }
 
             }
@@ -335,6 +335,7 @@ public class UserDAOImpl implements UserDAO {
         return check;
     }
 //    @Override
+
     public boolean updateStatus(int status, String email) throws SQLException {
         boolean check = false;
         Connection con = null;
@@ -346,7 +347,7 @@ public class UserDAOImpl implements UserDAO {
                 String sql = "UPDATE users SET status = 1 WHERE email = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, email);
-                rs = stm.executeQuery();  
+                rs = stm.executeQuery();
                 if (rs.next()) {
                     check = true;
                 }
@@ -605,6 +606,39 @@ public class UserDAOImpl implements UserDAO {
         return list;
     }
 
+    @Override
+    public List<UsersDTO> searchByName(String fullname) {
+        List<UsersDTO> list = new ArrayList<>();
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT u.user_id, u.full_name, u.user_name,u.phone, u.email, u.create_date, u.edited_date,u.status, ur.role\n"
+                        + "FROM USERS u INNER JOIN user_role ur\n"
+                        + "ON u.role_id = ur.role_id\n"
+                        + "WHERE u.full_name like ?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, fullname);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    UsersDTO u = new UsersDTO();
+                    UserRoleDTO role = new UserRoleDTO(rs.getString("role"));
+                    u.setUser_id(rs.getInt("user_id"));
+                    u.setFull_name(rs.getString("full_name"));
+                    u.setUser_name(rs.getString("user_name"));
+                    u.setPhone(rs.getString("phone"));
+                    u.setEmail(rs.getString("email"));
+                    u.setCreate_date(rs.getString("create_date"));
+                    u.setEdit_date(rs.getString("edited_date"));
+                    u.setStatus(rs.getInt("status"));
+                    u.setRole_id(role);
+                    list.add(u);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     //nhattpham: get phone by email gg
     @Override
     public UsersDTO getPhone(String email) {
@@ -623,7 +657,7 @@ public class UserDAOImpl implements UserDAO {
         }
         return u;
     }
-    
+
     public UsersDTO viewAccountStaff(int userId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -639,13 +673,13 @@ public class UserDAOImpl implements UserDAO {
                 stm.setInt(1, userId);
                 rs = stm.executeQuery();
                 if (rs.next()) {
-                     u = new UsersDTO();
-                     u.setFull_name(rs.getString("full_name"));
-                     u.setUser_name(rs.getString("user_name"));
-                     u.setEmail(rs.getString("email"));
-                     u.setPhone(rs.getString("phone"));
-                     u.setUser_id(rs.getInt("user_id"));
-                     u.setPassword(rs.getString("password"));
+                    u = new UsersDTO();
+                    u.setFull_name(rs.getString("full_name"));
+                    u.setUser_name(rs.getString("user_name"));
+                    u.setEmail(rs.getString("email"));
+                    u.setPhone(rs.getString("phone"));
+                    u.setUser_id(rs.getInt("user_id"));
+                    u.setPassword(rs.getString("password"));
                 }
             }
         } finally {
@@ -662,7 +696,6 @@ public class UserDAOImpl implements UserDAO {
         return u;
     }
 
-    
     //khang tran: function delete staff account
     @Override
     public void deteleStaffAccount(int user_id) {
@@ -671,7 +704,7 @@ public class UserDAOImpl implements UserDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
