@@ -160,7 +160,7 @@ public class RegisterAccountController extends HttpServlet {
                 Transport.send(message);
                 RequestDispatcher dispatcher = null;
                 dispatcher = req.getRequestDispatcher("registerotp.jsp");
-                req.setAttribute("message", "OTP is sent to your email id");
+                req.setAttribute("message", "Mã OTP đã được gửi tới email của bạn");
                 //request.setAttribute("connection", con);
                 keepInput.setAttribute("otp", otpvalue);
                 dispatcher.forward(req, resp);

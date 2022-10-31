@@ -198,8 +198,8 @@
                         <nav class="header__menu">
                             <ul>
                                 <li class="active"><a href="trang-chu?bid=${sessionScope.branch_id}" style="color: #6a0e13;">Trang Chủ</a></li>
-                                <li><a href="shop-products?bid=${sessionScope.branch_id}">Sản Phẩm</a></li>
-                                <li><a href="#">Về Song Ân</a>
+                                <li><a href="shop-products?bid=${sessionScope.branch_id}" style="color: #6a0e13;">Sản Phẩm</a></li>
+                                <li><a href="ve-song-an" style="color: #6a0e13;">Về Song Ân</a>
                                     <ul class="header__menu__dropdown">
                                         <li><a href="ve-song-an">Giới thiệu</a></li>
                                         <li><a href="huong-dan-mua-hang">Hướng dẫn mua hàng</a></li>

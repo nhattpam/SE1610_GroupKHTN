@@ -26,6 +26,10 @@
             .panel-body{
                 background: url('img/login.jpg') no-repeat center center fixed;
             }
+            .btn-custe{
+                background: #6a0e13 !important;
+                color: white;
+            }
         </style>
     </head>
 
@@ -42,7 +46,7 @@
                                 <h3>
                                     <i class="fa fa-lock fa-4x"></i>
                                 </h3>
-                                <h2 class="text-center">Enter OTP</h2>
+                                <h2 class="text-center">Nhập mã OTP</h2>
     
                                 <c:if test="${ not empty message }">
                                     <h5 class="text-center text-success">${message}</h5>
@@ -58,14 +62,14 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i
                                                         class="glyphicon glyphicon-envelope color-blue"></i></span> <input
-                                                    id="opt" name="otp" placeholder="Enter OTP"
+                                                    id="opt" name="otp" placeholder="Nhập mã OTP"
                                                     class="form-control" type="text" required="required">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <input name="recover-submit"
-                                                   class="btn btn-lg btn-primary btn-block"
-                                                   value="Submit" type="submit">
+                                                   class="btn btn-lg btn-custe btn-block"
+                                                   value="Gửi" type="submit" style="color:white">
                                         </div>
                                         <input type="hidden" class="hide" name="token" id="token"
                                                value="">

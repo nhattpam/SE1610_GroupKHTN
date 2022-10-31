@@ -42,7 +42,7 @@
                                 <h3>
                                     <i class="fa fa-lock fa-4x"></i>
                                 </h3>
-                                <h2 class="text-center">Enter OTP</h2>
+                                <h2 class="text-center">Nhập mã OTP</h2>
                                  <c:if test="${ not empty message }">
                                     <h5 class="text-center text-success">${message}</h5>
                                     <c:remove var="message" scope="request"/>

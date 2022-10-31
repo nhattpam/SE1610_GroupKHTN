@@ -28,12 +28,12 @@ public class ValidateOtp extends HttpServlet {
         if (value == otp) {
 
             request.setAttribute("email", request.getParameter("email"));
-            request.setAttribute("status", "success");
+            request.setAttribute("status", "Thành công");
             dispatcher = request.getRequestDispatcher("newPassword.jsp");
             dispatcher.forward(request, response);
 
         } else {
-            request.setAttribute("message", "wrong otp");
+            request.setAttribute("message", "Sai mã otp");
 
             dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
             dispatcher.forward(request, response);

@@ -38,13 +38,13 @@ public class VerifyOTP extends HttpServlet {
                 System.out.println(us);
                 boolean result = dao.userRegister(us);
                 if (result) {
-                    session.setAttribute("success", "Dang ki thanh cong!!!");
+                    session.setAttribute("success", "Đăng kí thành công!!!");
                     response.sendRedirect("LoginServlet");
                 } else {
                     response.sendRedirect("RegisterAccountController");
                 }
             } else {
-                request.setAttribute("status", "resetFailed");
+                request.setAttribute("status", "Có lỗi...");
                 dispatcher = request.getRequestDispatcher("error.jsp");
             }
         } catch (Exception e) {
