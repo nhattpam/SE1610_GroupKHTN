@@ -45,9 +45,9 @@
     <body>
         <jsp:include page="../header.jsp" />
         <div class="container text-center">
-            <h4 style="color: #ecca68;">BÍ QUYẾT KHỎE ĐẸP, KIẾN THỨC VỀ YẾN, CÔNG DỤNG YẾN SÀO</h4>
+            <h4 style="color: #ecca68; font-family: Tahoma, Verdana, Segoe, sans-serif;">BÍ QUYẾT KHỎE ĐẸP, KIẾN THỨC VỀ YẾN, CÔNG DỤNG YẾN SÀO</h4>
             <br>
-            <h3 style="color: #6a0e13; font-weight: bold">BÍ QUYẾT GIỮ ĐƯỢC DƯỠNG CHẤT CỦA YẾN SÀO KHI CHẾ BIẾN</h3>
+            <h3 style="color: #6a0e13; font-weight: bold; font-family: Tahoma, Verdana, Segoe, sans-serif;">BÍ QUYẾT GIÚP CHẾ BIẾN YẾN KHÔNG BỊ TANH</h3>
             <br>
             <br>
             <h5 style="text-align: left">Tổ yến trước hoặc sau khi chưng đều có mùi tanh tự nhiên giống lòng trắng trứng gà, điều này khiến nhiều người e ngại khi sử dụng. Trong bài viết này, Yến sào Song Ân sẽ chia sẻ cùng bạn <span style="font-weight: bold;">cách chưng yến không bị tanh</span> cực kỳ đơn giản mà ai cũng có thể tự thực hiện tại nhà.

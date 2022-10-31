@@ -133,7 +133,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title">
-                            <h2>Tất Cả</h2>
+                            <h2 style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Tất Cả</h2>
                             <style type="text/css">
                                 .section-title h2:after {
                                     position: absolute;

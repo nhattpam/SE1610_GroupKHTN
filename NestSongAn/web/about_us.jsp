@@ -45,16 +45,16 @@
     <body>
         <jsp:include page="header.jsp" />
         <div class="container text-center">
-            <h3 style="color: #6a0e13; font-weight: bold">VỀ SONG ÂN</h3>
+            <h3 style="color: #6a0e13; font-weight: bold; font-family: Tahoma, Verdana, Segoe, sans-serif;">VỀ SONG ÂN</h3>
             <br>
-            <h5 style="font-weight: bold; text-align: left">Tầm nhìn:</h5>
+            <h5 style="font-weight: bold; text-align: left; font-family: Tahoma, Verdana, Segoe, sans-serif;">Tầm nhìn:</h5>
             <h6  style="text-align: left">Vua Yến với mục tiêu là đơn vị cung cấp yến sào hàng đầu trong nước, mang sản phẩm yến sào của Vietnam ra với thế giới.</h6>
             <br>
-            <h5 style="font-weight: bold; text-align: left">Sứ Mệnh:</h5>
+            <h5 style="font-weight: bold; text-align: left; font-family: Tahoma, Verdana, Segoe, sans-serif;">Sứ Mệnh:</h5>
             <h6 style="text-align: left">Song Ân với sứ mệnh “Trao sức khỏe gửi yêu thương”. Sản phẩm yến sào tại Vua Yến không đơn giản chỉ là nguyên chất mà còn đảm bảo vi chất tổ yến cao nhất đến tay khách hàng. Với quy trình được kiểm soát chặt chẽ từ khâu hái tổ, sơ chế, chế biến và đóng gói sản phẩm.</h6>
             <h6 style="text-align: left">Mặt khác chúng tôi hướng tới khai thác tổ yến nhân đạo, tạo dựng môi trường sống tự nhiên bảo vệ chim yến, giúp chim yến phát triển bầy đàn.</h6>
             <br>
-            <h5 style="font-weight: bold; text-align: left">Giá trị cốt lõi:</h5>
+            <h5 style="font-weight: bold; text-align: left; font-family: Tahoma, Verdana, Segoe, sans-serif;">Giá trị cốt lõi:</h5>
             <ul style="text-align: left">
                 <li>Chất lượng: Tổ yến sào Song Ân có nguồn gốc từ yến nuôi và yến Kiên Giang 100% nguyên chất. Chúng tôi cam kết các sản phẩm đều được làm sạch và chưng theo phương pháp thủ công, không chất tạo mùi, bảo quản.</li>
                 <li>Tâm huyết: Vua yến đảm bảo thu hoạch yến nhân đạo, đảm bảo môi trường sống cho yến, phát triển mở rộng khu vực nuôi yến.</li>
@@ -62,7 +62,7 @@
                 <li>Phát triển bền vững: Song Ân cam kết tạo ra giá trị bền vững, đặt trọng tâm và lợi ích lâu dài cho quý khách hàng và đối tác.</li>
             </ul>
             <br>
-            <h6 style="text-align: left">Với phương châm “<span style="font-weight: bold">CHẤT LƯỢNG UY TÍN TẠO NÊN THƯƠNG HIỆU</span>“, chúng tôi đang nổ lực không ngừng để có thể đem lại những sản phẩm yến sào với chất lượng tốt nhất, một dịch vụ hoàn hảo nhất bằng cả tấm lòng của toàn thể nhân viên để khách hàng có thể tin tưởng tuyệt đối vào Yến Sào Vua Yến chúng tôi.
+            <h6 style="text-align: left">Với phương châm “<span style="font-weight: bold; font-family: Tahoma, Verdana, Segoe, sans-serif;">CHẤT LƯỢNG UY TÍN TẠO NÊN THƯƠNG HIỆU</span>“, chúng tôi đang nổ lực không ngừng để có thể đem lại những sản phẩm yến sào với chất lượng tốt nhất, một dịch vụ hoàn hảo nhất bằng cả tấm lòng của toàn thể nhân viên để khách hàng có thể tin tưởng tuyệt đối vào Yến Sào Vua Yến chúng tôi.
                 Công ty chúng tôi xin cam kết hoàn trả 200% giá trị sản phẩm nếu chứng minh sản phẩm của công ty chúng tôi là không thật.</h6>
             <div>
                 <br>
