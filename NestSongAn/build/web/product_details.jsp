@@ -141,7 +141,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="product__details__text">
-                            <h3>${detail.name}</h3>
+                            <h3  style="font-family: Tahoma, Verdana, Segoe, sans-serif;">${detail.name}</h3>
                             <div class="product__details__rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -197,7 +197,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                     <div class="product__details__tab__desc">
-                                        <h6>Giới thiệu về ${detail.name}</h6>
+                                        <h6  style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Giới thiệu về ${detail.name}</h6>
                                         <p>${detail.full_description}</p>
                                     </div>
                                 </div>
@@ -346,7 +346,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="footer__about">
                             <div class="footer__about__logo">
-                                <a href="./index.html"><img src="img/logo-song-an.jpg" style="width: 50%;" alt=""></a>
+                                <a href="./index.html"><img src="img/logo-song-an2.png" style="width: 50%;" alt=""></a>
                             </div>
                             <ul >
                                 <li style="color: white;">Địa chỉ: 60-49 Rạch Giá Kiên Giang</li>
@@ -378,7 +378,7 @@
                     <div class="col-lg-12">
                         <div class="footer__copyright">
                             <div class="footer__copyright__text"><p style="color: white;"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved KHTN <i class="fa fa-heart" aria-hidden="true"></i>
+                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bản quyền thuộc về Song Ân
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
                             <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
                         </div>

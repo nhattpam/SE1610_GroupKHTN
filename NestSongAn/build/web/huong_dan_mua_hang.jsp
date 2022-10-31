@@ -45,7 +45,7 @@
     <body>
         <jsp:include page="header.jsp" />
         <div class="container text-center">
-            <h3 style="color: #6a0e13; font-weight: bold">Hướng dẫn mua hàng & Thanh toán</h3>
+            <h3 style="color: #6a0e13; font-weight: bold; font-family: Tahoma, Verdana, Segoe, sans-serif;">Hướng dẫn mua hàng & Thanh toán</h3>
             <br>
             <h4 style="text-align: left;">Hướng dẫn mua hàng</h4><br>
             

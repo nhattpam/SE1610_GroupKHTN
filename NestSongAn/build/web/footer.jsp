@@ -37,7 +37,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="footer__about">
                             <div class="footer__about__logo">
-                                <a href="./index.html"><img src="img/logo-song-an.jpg" style="width: 50%;" alt=""></a>
+                                <a href="./index.html"><img src="img/logo-song-an2.png" style="width: 50%;" alt=""></a>
                             </div>
                             <ul >
                                 <li style="color: white;">Địa chỉ: 60-49 Rạch Giá Kiên Giang</li>
