@@ -85,7 +85,7 @@ public class CartController extends HttpServlet {
                         QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
 
                         for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
-                            System.out.println("Hello: " + ds.getKey().getProduct_id());
+//                            System.out.println("Hello: " + ds.getKey().getProduct_id());
                             QuantityProductDTO q = daoCheck.getBranch(ds.getKey().getProduct_id(), branch_id1);
 //                            System.out.println(ds.getKey().getProduct_id() + ", so luong dang chon: " + ds.getValue() + " co so luong trong kho: " + q.getQuantity());
                             if (ds.getValue() > q.getQuantity()) {
@@ -109,7 +109,7 @@ public class CartController extends HttpServlet {
                         QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
 
                         for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
-                            System.out.println("Hello: " + ds.getKey().getProduct_id());
+//                            System.out.println("Hello: " + ds.getKey().getProduct_id());
                             QuantityProductDTO q = daoCheck.getBranch(ds.getKey().getProduct_id(), branch_id1);
 //                            System.out.println(ds.getKey().getProduct_id() + ", so luong dang chon: " + ds.getValue() + " co so luong trong kho: " + q.getQuantity());
                             if (ds.getValue() > q.getQuantity()) {
@@ -133,7 +133,7 @@ public class CartController extends HttpServlet {
                         QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
 
                         for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
-                            System.out.println("Hello: " + ds.getKey().getProduct_id());
+//                            System.out.println("Hello: " + ds.getKey().getProduct_id());
                             QuantityProductDTO q = daoCheck.getBranch(ds.getKey().getProduct_id(), branch_id1);
 //                            System.out.println(ds.getKey().getProduct_id() + ", so luong dang chon: " + ds.getValue() + " co so luong trong kho: " + q.getQuantity());
                             if (ds.getValue() > q.getQuantity()) {

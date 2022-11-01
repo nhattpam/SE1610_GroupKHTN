@@ -68,7 +68,7 @@ public class ViewAllProductPageController extends HttpServlet {
             cart = new CartDTO();
             sCart.setAttribute("cart", cart);
         }
-        System.out.println(cart);
+//        System.out.println(cart);
         TreeMap<ProductDTO, Integer> list = cart.getList();
         req.setAttribute("list", list);
         sCart.setAttribute("numlist", list);
@@ -79,7 +79,7 @@ public class ViewAllProductPageController extends HttpServlet {
             //redirect if not customer
             HttpSession sessionn = req.getSession();
             UsersDTO uu = (UsersDTO) sessionn.getAttribute("USER");
-            System.out.println("DDya la: " + uu.getRole_id().getRole());
+//            System.out.println("DDya la: " + uu.getRole_id().getRole());
             if (uu.getRole_id().getRole().equals("staff")) {
                 resp.sendRedirect("staff-dashboard");
             }

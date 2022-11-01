@@ -30,7 +30,7 @@ public class TipSongAn2Controller extends HttpServlet{
             //redirect if not customer
             HttpSession sessionn = req.getSession();
             UsersDTO uu = (UsersDTO) sessionn.getAttribute("USER");
-            System.out.println("DDya la: " + uu.getRole_id().getRole());
+//            System.out.println("DDya la: " + uu.getRole_id().getRole());
             if (uu.getRole_id().getRole().equals("staff")) {
                 resp.sendRedirect("staff-dashboard");
             }

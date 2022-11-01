@@ -44,7 +44,7 @@ public class ViewHistoryOrderDetailGGController extends HttpServlet {
         
         //get order details
         String order_id = req.getParameter("order_id");
-        System.out.println(order_id);
+//        System.out.println(order_id);
         
          OrderDetailsDAOImpl dao = new OrderDetailsDAOImpl(DBUtils.getConnection());
            

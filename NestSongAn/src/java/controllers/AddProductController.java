@@ -99,7 +99,7 @@ public class AddProductController extends HttpServlet {
                     //insert into quantity_product
                     ProductDAOImpl daoCheckId = new ProductDAOImpl(DBUtils.getConnection());
                     int pid = daoCheckId.checkProductId(name);
-                    System.out.println(pid);
+//                    System.out.println(pid);
                     QuantityProductDAOImpl daoAdd = new QuantityProductDAOImpl(DBUtils.getConnection());
                     QuantityProductDTO q = new QuantityProductDTO();
                     ProductDTO p_id = new ProductDTO(pid);

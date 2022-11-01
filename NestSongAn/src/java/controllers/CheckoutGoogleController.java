@@ -54,13 +54,13 @@ public class CheckoutGoogleController extends HttpServlet {
         GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");
 
 //        request.setAttribute("usergg", us);
-        System.out.println(us.getEmail());
+//        System.out.println(us.getEmail());
 
         UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
 
         try {
             UsersDTO u = dao.viewAccountByEmail(us.getEmail());
-            System.out.println(u.getUser_id());
+//            System.out.println(u.getUser_id());
 
             HttpSession s1 = request.getSession();
 
@@ -105,24 +105,24 @@ public class CheckoutGoogleController extends HttpServlet {
             String delivery_address = address + ", " + request.getParameter("province");
             String payment_method = request.getParameter("payment_method");
 //        System.out.println("User_id: " + getUser_id + ", " + "branch: " + branch_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
-            System.out.println("User_id: " + getUser_id + ", " + "Address: " + delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
+//            System.out.println("User_id: " + getUser_id + ", " + "Address: " + delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
 
             HttpSession sessin = request.getSession();
 //            float totalPrice = (float) sessin.getAttribute("TotalPriceAll");
 //            System.out.println(totalPrice);
-            System.out.println(sessin.getAttribute("TotalPriceAll"));
+//            System.out.println(sessin.getAttribute("TotalPriceAll"));
             
             double tt = (double) sessin.getAttribute("TotalPriceAll");
-            System.out.println("this is tt: " + tt);
+//            System.out.println("this is tt: " + tt);
             
             float total = (float) tt;
-            System.out.println("this is t1: " + total);
+//            System.out.println("this is t1: " + total);
             
             
             HttpSession session = request.getSession();
             CartDTO cart = (CartDTO) session.getAttribute("cart");
 
-            System.out.println(cart.getList() + "\n");
+//            System.out.println(cart.getList() + "\n");
 
             Date now = new Date();
             SimpleDateFormat x = new SimpleDateFormat();
