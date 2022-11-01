@@ -29,8 +29,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author HUNG
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "LoginController", urlPatterns = {"/LoginServlet"})
+public class LoginController extends HttpServlet {
     
     private static final String LOGIN_PAGE = "loginPage";
     private static final String HOME_PAGE = "";

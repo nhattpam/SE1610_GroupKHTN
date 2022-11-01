@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author HUNG
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "LogoutController", urlPatterns = {"/LogoutServlet"})
+public class LogoutController extends HttpServlet {
 
 //private static final String HOME_PAGE = "";
     /**
