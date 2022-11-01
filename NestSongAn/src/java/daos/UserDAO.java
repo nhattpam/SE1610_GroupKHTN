@@ -21,7 +21,7 @@ public interface UserDAO {
     public UsersDTO checkLogin(String username, String password) throws SQLException, NamingException;
     //hapham: function edit account
 
-    public void editAccount(UsersDTO us) throws SQLException;
+    public void editAccount(UsersDTO us, String edited_date) throws SQLException;
     //hapham: function view account
 
     public UsersDTO viewAccount(int userId) throws SQLException;

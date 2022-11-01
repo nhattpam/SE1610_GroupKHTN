@@ -123,7 +123,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "Select full_name, user_name , email, phone\n"
+                String sql = "Select full_name, user_name , email, phone,edited_date\n"
                         + "from users\n"
                         + "where user_id = ?";
                 stm = con.prepareStatement(sql);
@@ -134,7 +134,8 @@ public class UserDAOImpl implements UserDAO {
                     String username = rs.getString("user_name");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
-                    result = new UsersDTO(userId, fullname, username, email, phone);
+                    String edited_date = rs.getString("edited_date");
+                    result = new UsersDTO(userId, fullname, username, phone, email, phone, edited_date);
                 }
             }
         } finally {
@@ -152,7 +153,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void editAccount(UsersDTO us) throws SQLException {
+    public void editAccount(UsersDTO us, String edited_date) throws SQLException {
         boolean f = false;
         Connection con = null;
         PreparedStatement stm = null;
@@ -163,14 +164,16 @@ public class UserDAOImpl implements UserDAO {
                         + "SET full_name = ?,\n"
                         + "user_name = ?,\n"
                         + "email = ?,\n"
+                        + "edited_date = ?,\n"
                         + "phone = ?\n"
                         + "WHERE user_id = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, us.getFull_name());
                 stm.setString(2, us.getUser_name());
                 stm.setString(3, us.getEmail());
-                stm.setString(4, us.getPhone());
-                stm.setInt(5, us.getUser_id());
+                stm.setString(4, edited_date);
+                stm.setString(5, us.getPhone());
+                stm.setInt(6, us.getUser_id());
                 stm.executeUpdate();
                 f = true;
             }

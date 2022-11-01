@@ -8,6 +8,8 @@ package controllers;
 import daos.UserDAOImpl;
 import dtos.UsersDTO;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,13 +45,9 @@ public class EditStaffController extends HttpServlet {
 //            System.out.println(uid);
 
 //            UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
-            
 //            UsersDTO u = dao.viewAccountStaff(uid);
-            
 //            System.out.println(u.getUser_id()+ ", " + u.getFull_name() + ". " + u.getUser_name() + ". " + u.getEmail() + ", " + u.getPhone());
 //            req.setAttribute("u", u);
-
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,9 +68,9 @@ public class EditStaffController extends HttpServlet {
             String phone = req.getParameter("phone");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
-            
+
             UserDAOImpl daoEdit = new UserDAOImpl(DBUtils.getConnection());
-            
+
             //gán mái ng dùng nhập vô 1 object user
             UsersDTO u = new UsersDTO();
             u.setFull_name(full_name);
@@ -81,8 +79,11 @@ public class EditStaffController extends HttpServlet {
             u.setPhone(phone);
             u.setEmail(email);
             u.setUser_id(uid);
-            daoEdit.editAccount(u);
-            
+            Date now = new Date();
+            SimpleDateFormat x = new SimpleDateFormat();
+            String edited_date = x.format(now);
+            daoEdit.editAccount(u, edited_date);
+
             //update xong thì quay lại trang manage-user
             resp.sendRedirect("manage-user");
         } catch (Exception e) {
