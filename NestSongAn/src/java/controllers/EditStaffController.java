@@ -10,6 +10,7 @@ import dtos.UsersDTO;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,7 +68,7 @@ public class EditStaffController extends HttpServlet {
             String user_name = req.getParameter("user_name");
             String phone = req.getParameter("phone");
             String email = req.getParameter("email");
-            String password = req.getParameter("password");
+//            String password = req.getParameter("password");
 
             UserDAOImpl daoEdit = new UserDAOImpl(DBUtils.getConnection());
 
@@ -75,15 +76,45 @@ public class EditStaffController extends HttpServlet {
             UsersDTO u = new UsersDTO();
             u.setFull_name(full_name);
             u.setUser_name(user_name);
-            u.setPassword(password);
+//            u.setPassword(password);
             u.setPhone(phone);
             u.setEmail(email);
             u.setUser_id(uid);
-            Date now = new Date();
-            SimpleDateFormat x = new SimpleDateFormat();
-            String edited_date = x.format(now);
-            daoEdit.editAccount(u, edited_date);
-
+            HttpSession session = req.getSession();
+            HttpSession sessionValidate = req.getSession();
+            Pattern fullNameCheck = Pattern.compile("^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]+$");
+            boolean check = true;
+            if (full_name == null || "".equals(full_name.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
+                sessionValidate.setAttribute("wrongFullName", "Họ và tên không được trống và không chứa kí tự đặc biệt");
+                check = false;
+            }
+            if (!full_name.matches(fullNameCheck.pattern())) {
+                sessionValidate.setAttribute("wrongFullName", "Họ và tên không được trống và không chứa kí tự đặc biệt");
+                check = false;
+            }
+            Pattern userNameCheck = Pattern.compile("^[A-Za-z0-9]+$");
+            if (user_name == null || "".equals(user_name.trim())) { //k chứa dấu cách đầu dòng và bắt buộc phải có cả chữ chứ k được mỗi dáu cách
+                sessionValidate.setAttribute("wrongUser_name", "Tên đăng nhập không được trống và không chứa kí tự đặc biệt");
+                check = false;
+            }
+            if (!user_name.matches(userNameCheck.pattern())) {
+                sessionValidate.setAttribute("wrongUser_name", "Tên đăng nhập không được trống và không chứa kí tự đặc biệt và dấu cách");
+                check = false;
+            }
+            Pattern phoneCheck = Pattern.compile("^[0][0-9]{9}$");
+            if (!phone.matches(phoneCheck.pattern())) { // dấu ! là phủ định có nghĩa là k đúng định dạng
+                sessionValidate.setAttribute("wrongPhone", "Số điện thoại phải bắt đầu là số 0 và dài 10 kí tự");
+                check = false;
+            }  
+            if(check){
+                Date now = new Date();
+                SimpleDateFormat x = new SimpleDateFormat();
+                String edited_date = x.format(now);
+                daoEdit.editAccount(u, edited_date);
+                session.setAttribute("succMsg", "Cập nhập tài khoản thành công...");
+            } else{
+                 resp.sendRedirect("edit-staff?uid="+ uid + "&full_name="+ full_name +"&user_name="+ user_name +"&phone="+ phone +"&email=" + email+  "");
+            }
             //update xong thì quay lại trang manage-user
             resp.sendRedirect("manage-user");
         } catch (Exception e) {
