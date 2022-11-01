@@ -214,10 +214,10 @@
                             <c:forEach items="${requestScope.list}" var="map">
                                 <tr>
                                     <td class="cart_product">
-                                        <a href=""><img src="products/${map.key.photo}" alt="" style="width: 50px; height: 60px;"></a>
+                                        <img src="products/${map.key.photo}" alt="" style="width: 50px; height: 60px;">
                                     </td>
                                     <td class="cart_description">
-                                        <h4><a href="">${map.key.name}</a></h4>
+                                        <h4>${map.key.name}</h4>
                                         <p>Code: ${map.key.code}</p>
                                     </td>
                                     <td class="cart_price">
