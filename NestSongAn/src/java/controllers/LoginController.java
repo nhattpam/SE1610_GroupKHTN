@@ -34,9 +34,9 @@ public class LoginController extends HttpServlet {
     
     private static final String LOGIN_PAGE = "loginPage";
     private static final String HOME_PAGE = "";
-    private static final String STAFF_PAGE = "staffPage";
+    private static final String STAFF_PAGE = "list-products";
     private static final String ADMIN_PAGE = "ViewSuccesfulDeliveryController";
-    private static final String SHIPPER_PAGE = "shipperPage";
+    private static final String SHIPPER_PAGE = "shipper-dashboard";
     private static final String SUPPLIER_PAGE = "supplierPage";
 
     /**
@@ -81,7 +81,8 @@ public class LoginController extends HttpServlet {
                 }
             }
             if (result != null && result.getRole_id().getRole().equals("staff")) {          // Role name = staff 
-                url = siteMaps.getProperty(STAFF_PAGE);                                                       // to staff page
+                url = STAFF_PAGE;                                                       // to staff page
+                response.sendRedirect(url);
             }
             if (result != null && result.getRole_id().getRole().equals("admin")) {             // Role name = admin 
                 url = ADMIN_PAGE;                                                      // to admin page
@@ -91,7 +92,8 @@ public class LoginController extends HttpServlet {
                 url = siteMaps.getProperty(SUPPLIER_PAGE);                                                        // to supplier page
             }
             if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role name = shipper 
-                url = siteMaps.getProperty(SHIPPER_PAGE);                                                     // to shipper page
+                url = SHIPPER_PAGE;                                                     // to shipper page
+                response.sendRedirect(url);
             }            
         } catch (NamingException ex) {            
             log("LoginServlet_Naming" + ex.getMessage());
