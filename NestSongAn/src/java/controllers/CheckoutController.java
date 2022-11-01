@@ -64,8 +64,30 @@ public class CheckoutController extends HttpServlet {
         
         float totalSum= 0f;
         
+        HttpSession sCheckk = request.getSession();
+        if (sCheckk.getAttribute("USER") == null) {
+            request.getRequestDispatcher("checkout.jsp").forward(request, response);
+        } else {
+            //redirect if not customer
+            HttpSession sessionn = request.getSession();
+            UsersDTO uu = (UsersDTO) sessionn.getAttribute("USER");
+            System.out.println("DDya la: " + uu.getRole_id().getRole());
+            if (uu.getRole_id().getRole().equals("staff")) {
+                request.getRequestDispatcher("checkout.jsp").forward(request, response);
+            }
+            if (uu.getRole_id().getRole().equals("admin")) {
+                response.sendRedirect("admin-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("supplier")) {
+                response.sendRedirect("ViewProductSupplierController");
+            }
+            if (uu.getRole_id().getRole().equals("shipper")) {
+                response.sendRedirect("shipper-dashboard");
+            }if (uu.getRole_id().getRole().equals("customer")) {
+                request.getRequestDispatcher("checkout.jsp").forward(request, response);
+            }
+        }
         
-        request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
 
     @Override
