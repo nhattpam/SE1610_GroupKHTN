@@ -63,7 +63,7 @@ public class EditStaffController extends HttpServlet {
 //        System.out.println(full_name + user_name + phone + email + password);
         try {
             int uid = (req.getParameter("user_id") != null ? Integer.parseInt(req.getParameter("user_id")) : 0);
-            System.out.println(uid);
+//            System.out.println(uid);
 
             String full_name = req.getParameter("full_name");
             String user_name = req.getParameter("user_name");

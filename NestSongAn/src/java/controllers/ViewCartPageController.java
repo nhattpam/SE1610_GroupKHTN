@@ -50,14 +50,14 @@ public class ViewCartPageController extends HttpServlet {
 //        System.out.println("request: " + branch_id);
 //        System.out.println("session: " + branch_id1);
 
-HttpSession sCheckk = req.getSession();
+        HttpSession sCheckk = req.getSession();
         if (sCheckk.getAttribute("USER") == null) {
              req.getRequestDispatcher("cart.jsp").forward(req, resp);
         } else {
             //redirect if not customer
             HttpSession sessionn = req.getSession();
             UsersDTO uu = (UsersDTO) sessionn.getAttribute("USER");
-            System.out.println("DDya la: " + uu.getRole_id().getRole());
+//            System.out.println("DDya la: " + uu.getRole_id().getRole());
             if (uu.getRole_id().getRole().equals("staff")) {
                 resp.sendRedirect("staff-dashboard");
             }

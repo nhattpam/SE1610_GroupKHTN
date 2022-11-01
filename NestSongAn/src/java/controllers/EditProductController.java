@@ -37,7 +37,7 @@ public class EditProductController extends HttpServlet {
         try {
             int id = (request.getParameter("product_id") != null ? Integer.parseInt(request.getParameter("product_id")) : 0);
 
-            System.out.println(id);
+//            System.out.println(id);
             String name = request.getParameter("name");
             String code = request.getParameter("code");
             String short_description = request.getParameter("short_description");
@@ -93,16 +93,16 @@ public class EditProductController extends HttpServlet {
                 if (f) {
                     String path = getServletContext().getRealPath("") + "\\products";
 
-                    System.out.println(path);
+//                    System.out.println(path);
                     File file = new File(path);
 
                     part.write(path + File.separator + fileName);
                     response.sendRedirect("list-products");
-                    System.out.println("ok");
+//                    System.out.println("ok");
                 } else {
                     session.setAttribute("failedMsg", "Có lỗi trên hệ thống");
                     response.sendRedirect("list-products");
-                    System.out.println("fail");
+//                    System.out.println("fail");
                 }
             }
 

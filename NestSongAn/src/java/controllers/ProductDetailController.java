@@ -90,7 +90,7 @@ public class ProductDetailController extends HttpServlet {
             cart = new CartDTO();
             sCart.setAttribute("cart", cart);
         }
-        System.out.println(cart);
+//        System.out.println(cart);
         
         //check branch
         HttpSession sBranch = request.getSession();
@@ -125,7 +125,7 @@ public class ProductDetailController extends HttpServlet {
             //redirect if not customer
             HttpSession sessionn = request.getSession();
             UsersDTO uu = (UsersDTO) sessionn.getAttribute("USER");
-            System.out.println("DDya la: " + uu.getRole_id().getRole());
+//            System.out.println("DDya la: " + uu.getRole_id().getRole());
             if (uu.getRole_id().getRole().equals("staff")) {
                 response.sendRedirect("staff-dashboard");
             }

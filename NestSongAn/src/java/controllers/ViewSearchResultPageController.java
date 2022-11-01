@@ -38,7 +38,7 @@ public class ViewSearchResultPageController extends HttpServlet{
         //get character tu nguoi dung
         String character = req.getParameter("character");
         
-        System.out.println(character);
+//        System.out.println(character);
         
         List<ProductDTO> listSearch = searchDAO.getProductBySearch(character);
         if(!listSearch.isEmpty() && !character.equals("")){
@@ -62,7 +62,7 @@ public class ViewSearchResultPageController extends HttpServlet{
             cart = new CartDTO();
             sCart.setAttribute("cart", cart);
         }
-        System.out.println(cart);
+//        System.out.println(cart);
         HttpSession sCheckk = req.getSession();
         if (sCheckk.getAttribute("USER") == null) {
             req.getRequestDispatcher("search.jsp").forward(req, resp);
@@ -70,7 +70,7 @@ public class ViewSearchResultPageController extends HttpServlet{
             //redirect if not customer
             HttpSession sessionn = req.getSession();
             UsersDTO uu = (UsersDTO) sessionn.getAttribute("USER");
-            System.out.println("DDya la: " + uu.getRole_id().getRole());
+//            System.out.println("DDya la: " + uu.getRole_id().getRole());
             if (uu.getRole_id().getRole().equals("staff")) {
                 resp.sendRedirect("staff-dashboard");
             }
