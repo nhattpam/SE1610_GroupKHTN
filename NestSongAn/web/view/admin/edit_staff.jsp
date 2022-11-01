@@ -220,6 +220,10 @@
 
                                 <form action="edit-staff" method="post">
                                      <input type="hidden" name="user_id" value="${user_id}"/>
+                                     <c:if test="${ not empty wrongFullName }">
+                                         <p class="text-danger" style="color: red;">${wrongFullName}</p>   
+                                         <c:remove var="wrongFullName" scope="session"/>
+                                     </c:if>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -227,7 +231,10 @@
                                         </div>
                                     </div>
 
-                                       
+                                            <c:if test="${ not empty wrongUser_name }">
+                                                <p class="text-danger" style="color: red;">${wrongUser_name}</p>     
+                                                <c:remove var="wrongUser_name" scope="session"/>
+                                            </c:if>      
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
@@ -235,7 +242,10 @@
                                         </div>
                                     </div>
 
-                             
+                                            <c:if test="${ not empty wrongPhone }">
+                                                <p class="text-danger" style="color: red;">${wrongPhone}</p>   
+                                                <c:remove var="wrongPhone" scope="session"/>
+                                            </c:if>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
@@ -252,12 +262,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+<!--                                    <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                             <input type="text" class="form-control" name="password" placeholder="Mật khẩu" required="required">
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-dark btn-block btn-lg">Lưu Thay Đổi</button>
                                     </div>
