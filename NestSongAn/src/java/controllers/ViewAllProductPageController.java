@@ -9,6 +9,7 @@ import daos.ProductDAOImpl;
 import dtos.CartDTO;
 import dtos.CategoryDTO;
 import dtos.ProductDTO;
+import dtos.UsersDTO;
 import java.io.IOException;
 import java.util.List;
 import java.util.TreeMap;
@@ -34,18 +35,17 @@ public class ViewAllProductPageController extends HttpServlet {
         List<ProductDTO> listAllProduct = dao.getAllProduct();
 
         req.setAttribute("listAllProduct", listAllProduct);
-        
+
         ProductDAOImpl dao2 = new ProductDAOImpl(DBUtils.getConnection());
         List<CategoryDTO> l = dao2.getAllCategory();
 
         req.setAttribute("cList", l);
-        
-        
+
         //phan trang
         ProductDAOImpl dao3 = new ProductDAOImpl(DBUtils.getConnection());
         int count = dao3.getTotalProduct();
         int endPage = count / 3; //moi trang 12 sp
-        if(count % 3 != 0){
+        if (count % 3 != 0) {
             endPage++;
         }
 
@@ -53,15 +53,14 @@ public class ViewAllProductPageController extends HttpServlet {
         req.setAttribute("endPage", endPage);
         //get index 
         String indexPage = req.getParameter("index");
-        if(indexPage == null){
-           indexPage = "1";
+        if (indexPage == null) {
+            indexPage = "1";
         }
         int index = Integer.parseInt(indexPage);
         ProductDAOImpl dao4 = new ProductDAOImpl(DBUtils.getConnection());
         List<ProductDTO> listPaging = dao4.pagingProduct(index);
         req.setAttribute("listPaging", listPaging);
-        
-        
+
         //check empty cart
         HttpSession sCart = req.getSession();
         CartDTO cart = (CartDTO) sCart.getAttribute("cart");
@@ -73,8 +72,30 @@ public class ViewAllProductPageController extends HttpServlet {
         TreeMap<ProductDTO, Integer> list = cart.getList();
         req.setAttribute("list", list);
         sCart.setAttribute("numlist", list);
+        HttpSession sCheckk = req.getSession();
+        if (sCheckk.getAttribute("USER") == null) {
+            req.getRequestDispatcher("shop_all_product.jsp").forward(req, resp);
+        } else {
+            //redirect if not customer
+            HttpSession sessionn = req.getSession();
+            UsersDTO uu = (UsersDTO) sessionn.getAttribute("USER");
+            System.out.println("DDya la: " + uu.getRole_id().getRole());
+            if (uu.getRole_id().getRole().equals("staff")) {
+                resp.sendRedirect("staff-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("admin")) {
+                resp.sendRedirect("admin-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("supplier")) {
+                resp.sendRedirect("ViewProductSupplierController");
+            }
+            if (uu.getRole_id().getRole().equals("shipper")) {
+                resp.sendRedirect("shipper-dashboard");
+            }if (uu.getRole_id().getRole().equals("customer")) {
+                req.getRequestDispatcher("shop_all_product.jsp").forward(req, resp);
+            }
+        }
 
-        req.getRequestDispatcher("shop_all_product.jsp").forward(req, resp);
     }
 
 }

@@ -5,12 +5,14 @@
  */
 package controllers;
 
+import dtos.UsersDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -21,7 +23,30 @@ public class ViewBuyGuideController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("huong_dan_mua_hang.jsp").forward(req, resp);
+        HttpSession sCheckk = req.getSession();
+        if (sCheckk.getAttribute("USER") == null) {
+            req.getRequestDispatcher("huong_dan_mua_hang.jsp").forward(req, resp);
+        } else {
+            //redirect if not customer
+            HttpSession sessionn = req.getSession();
+            UsersDTO uu = (UsersDTO) sessionn.getAttribute("USER");
+            System.out.println("DDya la: " + uu.getRole_id().getRole());
+            if (uu.getRole_id().getRole().equals("staff")) {
+                resp.sendRedirect("staff-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("admin")) {
+                resp.sendRedirect("admin-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("supplier")) {
+                resp.sendRedirect("ViewProductSupplierController");
+            }
+            if (uu.getRole_id().getRole().equals("shipper")) {
+                resp.sendRedirect("shipper-dashboard");
+            }if (uu.getRole_id().getRole().equals("customer")) {
+                req.getRequestDispatcher("huong_dan_mua_hang.jsp").forward(req, resp);
+            }
+        }
+        
     }
     
 }
