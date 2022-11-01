@@ -33,7 +33,7 @@ public class AddFeedbackGGController extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        request.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("utf-8");
 //        String oid = (String) request.getAttribute("oid");
 //        HttpSession session = request.getSession();
 //        int uid = (int) session.getAttribute("usergg");

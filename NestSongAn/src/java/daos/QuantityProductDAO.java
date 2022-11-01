@@ -14,7 +14,11 @@ import dtos.QuantityProductDTO;
 public interface QuantityProductDAO {
     //get branch name
     public QuantityProductDTO getBranch(int product_id, int branch_id);
-    
+    //get product has quantity < 5
+
+   
+    //count product has quantity < 5
+    public int getQuantityProduct();
     //sub the quantity after buy
     public QuantityProductDTO subQuantityAfterBuy(int quantity, int product_id, int branch_id);
     

@@ -88,6 +88,9 @@
                                 <c:if test = "${status == 4}">
                                     <td>Đơn hàng bị huỷ</td>
                                 </c:if>
+                                <c:if test = "${status == 5}">
+                                    <td>Giao hàng không thành công</td>
+                                </c:if>
                                 <td><a href="order-details?order_id=${l.order_id}" style="color: #6a0e13">Chi tiết</a></td>
                             </tr>
                         </c:forEach>

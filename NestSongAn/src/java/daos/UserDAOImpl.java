@@ -617,7 +617,7 @@ public class UserDAOImpl implements UserDAO {
                         + "ON u.role_id = ur.role_id\n"
                         + "WHERE u.full_name like ?";
                 PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, fullname);
+                ps.setString(1, "%" + fullname + "%");
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     UsersDTO u = new UsersDTO();
