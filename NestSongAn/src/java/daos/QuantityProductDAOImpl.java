@@ -100,6 +100,7 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
         }
         return q;
     }
+
     //Hung
     public List<QuantityProductDTO> getProduct() throws SQLException {
         Connection con = null;
@@ -142,6 +143,37 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
         return result;
     }
 
+    public List<QuantityProductDTO> getProductbyquantity() {
+        List<QuantityProductDTO> result = new ArrayList<QuantityProductDTO>();
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT p.product_id, p.name, p.code, p.weight, p.price, p.photo, p.category_id, c.name as category_name, qp.branch_id, qp.quantity,b.name as branch_name\n"
+                        + "FROM product p inner JOIN category c\n"
+                        + "on p.category_id=c.category_id\n"
+                        + "inner JOIN quantity_product qp\n"
+                        + "on p.product_id=qp.product_id\n"
+                        + "inner JOIN branch b\n"
+                        + "on qp.branch_id=b.branch_id\n"
+                        + "WHERE qp.quantity < 5";
+                PreparedStatement stm = conn.prepareStatement(sql);
+                ResultSet rs = stm.executeQuery();
+                while (rs.next()) {
+                    CategoryDTO categoryDTO = new CategoryDTO(rs.getInt("category_id"), rs.getString("category_name"));
+                    ProductDTO productDTO
+                            = new ProductDTO(rs.getInt("product_id"), rs.getString("name"), rs.getString("code"),
+                                    rs.getFloat("price"), rs.getInt("weight"), rs.getString("photo"), categoryDTO);
+                    BranchDTO branchDTO = new BranchDTO(rs.getInt("branch_id"), rs.getString("branch_name"));
+                    QuantityProductDTO quantityProductDTO = new QuantityProductDTO(productDTO, branchDTO, rs.getInt("quantity"));
+                    result.add(quantityProductDTO);
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return result;
+    }
+
     //Hung
     public boolean importProduct(int quantity, int productID, int branchID) throws SQLException {
         Connection con = null;
@@ -157,9 +189,9 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
                 stm.setInt(1, quantity);
                 stm.setInt(2, productID);
                 stm.setInt(3, branchID);
-                int i=stm.executeUpdate();
-                if (i>0) {
-                    result=true;
+                int i = stm.executeUpdate();
+                if (i > 0) {
+                    result = true;
                 }
             }
         } finally {
@@ -172,11 +204,11 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
         }
         return result;
     }
-    
+
     @Override
     //insert into quantity_product
     public void addProductQuantity(QuantityProductDTO q) {
-        
+
         try {
             String sql = "INSERT INTO quantity_product (product_id, branch_id, quantity)\n"
                     + "VALUES(?,?,?)";
@@ -186,7 +218,6 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
             ps.setInt(3, q.getQuantity());
 
             ps.executeUpdate();
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -199,15 +230,14 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT COUNT (*) from product where category_id = ?";
+                String sql = "SELECT COUNT (*) from quantity_product WHERE quantity < 5";
                 PreparedStatement stm = conn.prepareStatement(sql);
                 ResultSet rs = stm.executeQuery();
                 while (rs.next()) {
-                    result = rs.getInt(0);
+                    result = rs.getInt(1);
                 }
             }
-        } catch(Exception e){
-            
+        } catch (Exception e) {
 
         }
         return result;

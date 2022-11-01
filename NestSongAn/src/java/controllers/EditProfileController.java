@@ -17,6 +17,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -76,20 +78,22 @@ public class EditProfileController extends HttpServlet {
                 sessionValidate.setAttribute("wrongPhone", "Số điện thoại phải bắt đầu là số 0 và dài 10 kí tự");
                 check = false;
             }
-            
+
             if (check) {
 //                String checkPassword = toHexString(getSHA(password));
-                
+                Date now = new Date();
+                SimpleDateFormat x = new SimpleDateFormat();
+                String edited_date = x.format(now);
                 UserDAOImpl user = new UserDAOImpl();
                 UsersDTO us = new UsersDTO(uid, fullname, username, email, phone);
-                user.editAccount(us);
+                user.editAccount(us, edited_date);
                 session.setAttribute("succMsg", "Cập nhập tài khoản thành công...");
             }
             response.sendRedirect("MyProfile?uid=" + uid);
 
         } catch (SQLException ex) {
             Logger.getLogger(MyProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

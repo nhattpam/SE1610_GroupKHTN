@@ -21,10 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author HUNG
+ * @author haph1
  */
-@WebServlet(name = "ViewProductSupplierController", urlPatterns = {"/ViewProductSupplierController"})
-public class ViewProductSupplierController extends HttpServlet {
+@WebServlet(name = "ViewProdcutSupplierByQuantity", urlPatterns = {"/product-quantity"})
+public class ViewProdcutSupplierByQuantity extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,19 +38,14 @@ public class ViewProductSupplierController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url="view/supplier/view_product.jsp";
-        try {
-            QuantityProductDAOImpl dao = new QuantityProductDAOImpl();
-            List<QuantityProductDTO> listProduct;
-            listProduct = dao.getProduct();
-            int q = dao.getQuantityProduct();
-            request.setAttribute("quantity", q);
-            request.setAttribute("listProduct", listProduct);
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewProductSupplierController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+         String url="view/supplier/view_product.jsp";
+         QuantityProductDAOImpl dao = new QuantityProductDAOImpl();
+         List<QuantityProductDTO> listProduct;
+         listProduct = dao.getProductbyquantity();
+         int q = dao.getQuantityProduct();
+         request.setAttribute("quantity", q);
+         request.setAttribute("listProduct", listProduct);
+         request.getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
