@@ -176,7 +176,7 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
     @Override
     //insert into quantity_product
     public void addProductQuantity(QuantityProductDTO q) {
-
+        
         try {
             String sql = "INSERT INTO quantity_product (product_id, branch_id, quantity)\n"
                     + "VALUES(?,?,?)";
@@ -191,5 +191,25 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public int getQuantityProduct() {
+        int result = 0;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT (*) from product where category_id = ?";
+                PreparedStatement stm = conn.prepareStatement(sql);
+                ResultSet rs = stm.executeQuery();
+                while (rs.next()) {
+                    result = rs.getInt(0);
+                }
+            }
+        } catch(Exception e){
+            
+
+        }
+        return result;
     }
 }
