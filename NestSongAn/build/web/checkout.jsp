@@ -220,7 +220,7 @@
                                                 <h5 class="text-center text-danger">${notiCheckout}</h5>
                                                 <c:remove var="notiCheckout" scope="session"/>
                                             </c:if>
-                                            <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;">Thông Tin Đặt Hàng</h4><br>
+                                            <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;font-family: Tahoma, Verdana, Segoe, sans-serif;">Thông Tin Đặt Hàng</h4><br>
 
 
                                             <form action="checkout?bid=${sessionScope.branch_id}" method="post">
@@ -319,7 +319,7 @@
                                                 <br>
 
                                                 <div class="form-group">
-                                                    <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết" value="${address}">
+                                                    <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết" value="${delivery_address}">
                                                 </div> 
                                                 <div class="form-group">
                                                     <select name="payment_method" required=""> 
@@ -343,7 +343,7 @@
                                                 <h5 class="text-center text-danger">${notiCheckout}</h5>
                                                 <c:remove var="notiCheckout" scope="session"/>
                                             </c:if>
-                                            <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;">Thông Tin Đặt Hàng</h4><br>
+                                            <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;font-family: Tahoma, Verdana, Segoe, sans-serif;">Thông Tin Đặt Hàng</h4><br>
 
 
                                             <form action="checkoutgg?bid=${sessionScope.branch_id}" method="post">
@@ -446,7 +446,7 @@
                                                 <br>
 
                                                 <div class="form-group">
-                                                    <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết">
+                                                    <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết" value="${delivery_address}">
                                                 </div> 
                                                 <div class="form-group">
                                                     <select name="payment_method" required=""> 
