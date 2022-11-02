@@ -57,6 +57,10 @@
                 color: white;
                 background: #6a0e13;
             }
+            #button{
+                background: #6a0e13;
+                color: white;
+            }
         </style>
     </head>
     <body>
@@ -185,6 +189,45 @@
                 <div class="row featured__filter">
                     <c:forEach items="${listPaging}" var="l">
                         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                            <c:if test="${ not empty overQuantity }">
+                                <div class="modal fade right" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                     aria-hidden="true" data-backdrop="false">
+                                    <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+                                        <!--Content-->
+                                        <div class="modal-content">
+                                            <!--Header-->
+                                            <div class="modal-header" style="background-color:#6a0e13">
+                                                <p class="heading text-white">THÔNG BÁO
+                                                </p>
+
+                                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true" class="white-text">&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <!--Body-->
+                                            <div class="modal-body">
+
+                                                <div class="row">
+
+                                                    <div class="col-12 text-center">
+                                                        <p class="text-danger">${overQuantity}</p>
+                                                        <!--<p>No pressure, your product will be waiting for you in the cart.</p>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Footer-->
+                                            <div class="modal-footer justify-content-center">
+                                                <!--<a type="button" class="btn btn-info">Go to cart</a>-->
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal" id="button">OK</button>
+                                            </div>
+                                        </div>
+                                        <!--/.Content-->
+                                    </div>
+                                </div>
+                                <c:remove var="overQuantity" scope="session"/>
+                            </c:if>
                             <div class="featured__item">
 
                                 <div class="featured__item__pic set-bg" data-setbg="products/${l.photo}">
@@ -247,5 +290,13 @@
         </section>
         <!-- Featured Section End -->
         <jsp:include page="footer.jsp" />
+        <script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus');
+    });
+    $('#exampleModal').modal({
+  show: true
+})
+        </script>
     </body>
 </html>
