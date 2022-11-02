@@ -179,7 +179,17 @@
                 background: #6a0e13;
                 color: white;
             }
-
+            .cart_quantity_button a {
+                background: #F0F0E9;
+                color: #696763;
+                display: inline-block;
+                font-size: 16px;
+                height: 28px;
+                overflow: hidden;
+                text-align: center;
+                width: 20px;
+                float: left;
+            }
         </style>
     </head>
     <body>

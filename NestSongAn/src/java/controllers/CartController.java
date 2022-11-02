@@ -79,24 +79,32 @@ public class CartController extends HttpServlet {
                         listBuy = new ArrayList<>();
                         session.setAttribute("cartID", listBuy);
                     }
-                    if (listBuy.indexOf(idBuy) == -1) {
-                        cart.addToCart(p, 1);
-                        TreeMap<ProductDTO, Integer> list = cart.getList();
-                        QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
+                    QuantityProductDAOImpl daoCh = new QuantityProductDAOImpl(DBUtils.getConnection());
+                    QuantityProductDTO pC = daoCh.getBranch(product_id, branch_id1);
+                    if (pC.getQuantity() == 0) {
+                        response.sendRedirect("shop-products?bid=" + branch_id1 +"");
+                        session.setAttribute("overQuantity", "Sản phẩm này tại tạm hết hàng! Quý khách vui lòng chọn sản phẩm khác.");
+                    } else {
+                        if (listBuy.indexOf(idBuy) == -1) {
+                            cart.addToCart(p, 1);
+                            TreeMap<ProductDTO, Integer> list = cart.getList();
+                            QuantityProductDAOImpl daoCheck = new QuantityProductDAOImpl(DBUtils.getConnection());
 
-                        for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
+                            for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
 //                            System.out.println("Hello: " + ds.getKey().getProduct_id());
-                            QuantityProductDTO q = daoCheck.getBranch(ds.getKey().getProduct_id(), branch_id1);
+                                QuantityProductDTO q = daoCheck.getBranch(ds.getKey().getProduct_id(), branch_id1);
 //                            System.out.println(ds.getKey().getProduct_id() + ", so luong dang chon: " + ds.getValue() + " co so luong trong kho: " + q.getQuantity());
-                            if (ds.getValue() > q.getQuantity()) {
+                                if (ds.getValue() > q.getQuantity()) {
 //                                System.out.println(ds.getKey().getProduct_id() + " Vuot qua so luong trong kho");
-                                session.setAttribute("wrongQuantity", "Vượt quá số lượng trong kho");
+                                    session.setAttribute("wrongQuantity", "Vượt quá số lượng trong kho");
+                                }
                             }
+                            listBuy.add(idBuy);
                         }
-                        listBuy.add(idBuy);
-                    }
 //                    url = "/cart.jsp";
-                    url = "shop-products";
+                        url = "shop-products";
+                    }
+                    
                     break;
                 case "plus":
                     if (listBuy == null) {
