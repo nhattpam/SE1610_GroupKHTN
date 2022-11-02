@@ -119,7 +119,11 @@ public class CheckoutController extends HttpServlet {
             
             float total = (float) tt;
 //            System.out.println("this is t1: " + total);
-            
+             HttpSession keepInput = request.getSession();
+//            keepInput.setAttribute("phone", phone);
+            keepInput.setAttribute("province", request.getParameter("province"));
+            keepInput.setAttribute("delivery_address", address);
+            keepInput.setAttribute("payment_method", payment_method);
 
 
             HttpSession session = request.getSession();

@@ -106,7 +106,12 @@ public class CheckoutGoogleController extends HttpServlet {
             String payment_method = request.getParameter("payment_method");
 //        System.out.println("User_id: " + getUser_id + ", " + "branch: " + branch_id + ", " + "Address: " +delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
 //            System.out.println("User_id: " + getUser_id + ", " + "Address: " + delivery_address + ", " + "Phương thức thanh toán: " + payment_method);
-
+            HttpSession keepInput = request.getSession();
+//            keepInput.setAttribute("phone", phone);
+            keepInput.setAttribute("province", request.getParameter("province"));
+            keepInput.setAttribute("delivery_address", address);
+            keepInput.setAttribute("payment_method", payment_method);
+            
             HttpSession sessin = request.getSession();
 //            float totalPrice = (float) sessin.getAttribute("TotalPriceAll");
 //            System.out.println(totalPrice);
@@ -185,7 +190,7 @@ public class CheckoutGoogleController extends HttpServlet {
             }
         } catch (Exception e) {
         } finally{
-            response.sendRedirect("checkout");
+            response.sendRedirect("checkoutgg");
         }
 
     }
