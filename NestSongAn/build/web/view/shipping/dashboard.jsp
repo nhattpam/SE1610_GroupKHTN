@@ -190,6 +190,14 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="delivery_order?uid=${USER.user_id}" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Đơn Hàng Đang Giao
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="deliveried-order" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>

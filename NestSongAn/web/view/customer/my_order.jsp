@@ -77,10 +77,10 @@
                                 <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
                                 <c:set var = "status" scope = "session" value = "${l.status}"/>
                                 <c:if test = "${status == 1}">
-                                    <td>Đang chờ lấy hàng</td>
+                                    <td>Đang xác nhận hàng</td>
                                 </c:if>
                                 <c:if test = "${status == 2}">
-                                    <td>Đang giao hàng</td>
+                                    <td>Đang chờ lấy hàng</td>
                                 </c:if>
                                 <c:if test = "${status == 3}">
                                     <td>Giao hàng thành công</td>
@@ -90,6 +90,9 @@
                                 </c:if>
                                 <c:if test = "${status == 5}">
                                     <td>Giao hàng không thành công</td>
+                                </c:if>
+                                <c:if test = "${status == 6}">
+                                    <td>Đang giao hàng</td>
                                 </c:if>
                                 <td><a href="order-details?order_id=${l.order_id}" style="color: #6a0e13">Chi tiết</a></td>
                             </tr>
@@ -132,10 +135,10 @@
                                 <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
                                 <c:set var = "status" scope = "session" value = "${l.status}"/>
                                 <c:if test = "${status == 1}">
-                                    <td>Đang chờ lấy hàng</td>
+                                    <td>Đang xác nhận hàng</td>
                                 </c:if>
                                 <c:if test = "${status == 2}">
-                                    <td>Đang giao hàng</td>
+                                    <td>Đang chờ lấy hàng</td>
                                 </c:if>
                                 <c:if test = "${status == 3}">
                                     <td>Giao hàng thành công</td>
@@ -145,6 +148,9 @@
                                 </c:if>
                                 <c:if test = "${status == 5}">
                                     <td>Giao hàng không thành công</td>
+                                </c:if>
+                                <c:if test = "${status == 6}">
+                                    <td>Đang giao hàng</td>
                                 </c:if>
                                 <td><a href="order-details?order_id=${l.order_id}" style="color: #6a0e13">Chi tiết</a></td>
                             </tr>

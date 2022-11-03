@@ -197,6 +197,14 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="delivery_order?uid=${USER.user_id}" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Đơn Hàng Đang Giao
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="deliveried-order" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
@@ -247,8 +255,7 @@
 
                                         <td>                                           
                                             <c:if test = "${l.status == 2}">
-                                                <a href="successdelivery?orderid=${l.order_id}" class="btn btn-sm btn-success">Thành công</a>
-                                                <a href="faildelivery?orderid=${l.order_id}" class="btn btn-sm btn-danger">Thất bại</a>
+                                                <a href="choose_order?orderid=${l.order_id}&uid=${USER.user_id}" class="btn btn-sm btn-primary">Lấy hàng</a>
                                             </c:if>
                                         </td>
                                     </tr>
