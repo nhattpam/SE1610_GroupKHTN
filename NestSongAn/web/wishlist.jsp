@@ -60,7 +60,11 @@
             .featured span .row            
             {
                 padding-bottom: 30px;
-            }            
+            }
+            h4{
+                text-align: center;
+                padding-bottom: 30px;
+            }
         </style>
     </head>
     <body>

@@ -163,8 +163,15 @@
                                 <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
                             </c:if>
                             </c:if>
-                            
-                            <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                            <c:if test="${empty USER && empty USERG}">
+                            <a href="loginController" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                            </c:if>
+                            <c:if test="${ not empty USER }">
+                                <a href="AddToWishlistController?product_id=${detail.product_id}&user_id=${USER.user_id}" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                            </c:if>
+                            <c:if test="${ not empty USERG }">
+                                <a href="AddToWishlistController?product_id=${detail.product_id}&user_id=${USERG.id}" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                            </c:if>
                             <ul>
                                 <c:if test="${q.quantity == 0}">
                                     <li><b>Số lượng còn lại</b> <span style="color: red; font-style: italic">Hết hàng</span></li>

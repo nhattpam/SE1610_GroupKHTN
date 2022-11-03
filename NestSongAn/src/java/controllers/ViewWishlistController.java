@@ -60,8 +60,8 @@ public class ViewWishlistController extends HttpServlet {
                 //count item in wishlist
                 int count = wishListDAO.getNumsOfItem(user.getUser_id());
                 // set number of page
-                int endPage = count / 5;
-                if (endPage % 5 != 0) {
+                int endPage = count / 5;                
+                if (count % 5 != 0) {
                     endPage++;
                 }
                 //load list
@@ -82,7 +82,7 @@ public class ViewWishlistController extends HttpServlet {
                 int count = wishListDAO.getNumsOfItem(processDTO.getUser_id());
                 // set number of page
                 int endPage = count / 5;
-                if (endPage % 5 != 0) {
+                if (count % 5 != 0) {
                     endPage++;
                 }
                 //load list
