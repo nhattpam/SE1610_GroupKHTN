@@ -432,7 +432,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     //display in product details
-//    @Override
+    @Override
     public List<ProductDTO> getAllProductLastest() {
 
         List<ProductDTO> list = new ArrayList<>();
@@ -678,6 +678,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     //Hung count product by category
+     @Override
     public int getCountByCategory(int categoryID) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;

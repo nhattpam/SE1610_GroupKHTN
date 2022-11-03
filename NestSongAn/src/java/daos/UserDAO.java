@@ -68,4 +68,8 @@ public interface UserDAO {
     
     //khang tran: function delete staff account
     public void deteleStaffAccount(int user_id);
+    
+    public boolean updateStatus(int status, String email) throws SQLException;
+    
+    public UsersDTO viewAccountStaff(int userId) throws SQLException;
 }

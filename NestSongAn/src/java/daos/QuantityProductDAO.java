@@ -6,6 +6,8 @@
 package daos;
 
 import dtos.QuantityProductDTO;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -21,4 +23,10 @@ public interface QuantityProductDAO {
     
      //insert into quantity_product
     public void addProductQuantity(QuantityProductDTO q);
+    
+    public List<QuantityProductDTO> getProduct() throws SQLException;
+    
+    public List<QuantityProductDTO> getProductbyquantity();
+    
+    public boolean importProduct(int quantity, int productID, int branchID) throws SQLException;
 }
