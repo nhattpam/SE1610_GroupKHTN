@@ -280,7 +280,7 @@
                                                     </div>
                                                 </c:if>
                                                 <c:if test = "${o.location_id.location_id != 0}">
-                                                    <h5 style="color: #00ff66"> Đang giao cho khách</h5>
+                                                    <h5 style="color: #00ff66"> Đang chờ lấy hàng</h5>
                                                 </c:if>
                                             </c:if>
                                             <c:if test = "${o.status == 3}">
@@ -291,6 +291,9 @@
                                             </c:if>
                                             <c:if test = "${o.status == 5}">
                                                 <h5 style="color: red"> Không giao được cho khách</h5>
+                                            </c:if>
+                                            <c:if test = "${o.status == 6}">
+                                                <h5 style="color: red"> Đang giao cho kháchh</h5>
                                             </c:if>
                                         </td>
                                     </tr>
