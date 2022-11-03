@@ -58,7 +58,9 @@ public class ViewShipperDashboardPageController extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession sCheckk = request.getSession();
-        
+        if(sCheckk.getAttribute("USERG") != null){
+            response.sendRedirect("home");
+        }
         if (sCheckk.getAttribute("USER") == null){
             response.sendRedirect("loginController");
         }else{

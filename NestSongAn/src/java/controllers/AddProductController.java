@@ -144,7 +144,9 @@ public class AddProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession sCheckk = req.getSession();
-        
+        if(sCheckk.getAttribute("USERG") != null){
+            resp.sendRedirect("home");
+        }
         if (sCheckk.getAttribute("USER") == null){
             resp.sendRedirect("loginController");
         }else{
