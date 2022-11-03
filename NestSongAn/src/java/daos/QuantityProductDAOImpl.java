@@ -102,6 +102,7 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
     }
 
     //Hung
+    @Override
     public List<QuantityProductDTO> getProduct() throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -142,7 +143,8 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
         }
         return result;
     }
-
+    
+    @Override
     public List<QuantityProductDTO> getProductbyquantity() {
         List<QuantityProductDTO> result = new ArrayList<QuantityProductDTO>();
         try {
@@ -175,6 +177,7 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
     }
 
     //Hung
+    @Override
     public boolean importProduct(int quantity, int productID, int branchID) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;

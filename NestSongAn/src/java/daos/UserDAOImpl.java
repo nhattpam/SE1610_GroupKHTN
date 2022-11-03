@@ -214,7 +214,8 @@ public class UserDAOImpl implements UserDAO {
         return f;
     }
 //Minh thanh 
-
+    
+    @Override
     public boolean resetPassword(String password, String email) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -338,7 +339,7 @@ public class UserDAOImpl implements UserDAO {
         return check;
     }
 //    @Override
-
+    @Override
     public boolean updateStatus(int status, String email) throws SQLException {
         boolean check = false;
         Connection con = null;
@@ -523,7 +524,6 @@ public class UserDAOImpl implements UserDAO {
 
     //Minh Thanh
     @Override
-
     public List<UsersDTO> getUserList() {
 
         List<UsersDTO> list = new ArrayList<>();
@@ -661,6 +661,7 @@ public class UserDAOImpl implements UserDAO {
         return u;
     }
 
+    @Override
     public UsersDTO viewAccountStaff(int userId) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;

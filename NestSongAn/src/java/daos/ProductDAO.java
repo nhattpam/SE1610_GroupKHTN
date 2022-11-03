@@ -64,4 +64,8 @@ public interface ProductDAO {
      
      //check product_id by name
     public int checkProductId(String name);
+    
+    public int getCountByCategory(int categoryID) throws SQLException;
+    
+    public List<ProductDTO> getAllProductLastest();
 }
