@@ -5,7 +5,9 @@
  */
 package daos;
 
+import dtos.ImportInvoiceDTO;
 import java.sql.SQLException;
+import java.util.List;
 
 
 /**
@@ -15,4 +17,6 @@ import java.sql.SQLException;
 public interface ImportInvoiceDAO {
    //Hung: add new import invoice to import_invoice table
     public boolean addNewInvoice(int quantity, int productID, int branchID)throws SQLException;
+    //Hung: load from DB
+    public List<ImportInvoiceDTO> getInvoice() throws SQLException ;
 }

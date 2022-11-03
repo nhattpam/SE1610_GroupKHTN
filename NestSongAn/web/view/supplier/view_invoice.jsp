@@ -1,6 +1,6 @@
 <%-- 
-    Document   : view_product
-    Created on : Oct 18, 2022, 8:26:21 PM
+    Document   : view_invoice
+    Created on : Nov 3, 2022, 9:24:33 PM
     Author     : HUNG
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,7 +10,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Sản Phẩm</title>
+        <title>Lịch sử nhập hàng</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -207,42 +207,44 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <div class="container">
-                    <div class="row crd-ho">
-                        <table class="table table-striped">
-                            <thead class="bg-dark text-white">
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Ảnh</th>
-                                    <th scope="col">Tên sản phẩm</th>
-                                    <th scope="col">Trọng lượng</th>                                    
-                                    <th scope="col">Số lượng</th>
-                                    <th scope="col">Chi nhánh</th>
-                                    <th scope="col">Danh mục</th>
-                                    <th scope="col">Hành động</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${listProduct}" var="l">                               
-                                    <tr>                                    
-                                        <td>${l.product_id.product_id}</td>
-                                        <td><img src="products/${l.product_id.photo}" style="width: 50px; height: 50px;"></td>
-                                        <td>${l.product_id.name}</td>
-                                        <td>${l.product_id.weight}</td>                                        
-                                        <td>${l.quantity}</td>
-                                        <td>${l.branch_id.name}</td>
-                                        <td>${l.product_id.category_id.name}</td>
-                                        <td>                                           
-                                            <a href="ImportProductController?product_id=${l.product_id.product_id}&branch_id=${l.branch_id.branch_id}&branch_name=${l.branch_id.name}" class="btn btn-sm btn-primary"> 
-                                                Nhập hàng
-                                            </a>                                            
-                                        </td>
+                <c:if test="${not empty list}">
+                    <div class="container">
+                        <div class="row crd-ho">
+                            <table class="table table-striped">
+                                <thead class="bg-dark text-white">
+                                    <tr>
+                                        <th scope="col">Id Đơn</th>
+                                        <th scope="col">Ảnh</th>
+                                        <th scope="col">Tên sản phẩm</th>
+                                        <th scope="col">Trọng lượng</th>                                    
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Chi nhánh</th>
+                                        <th scope="col">Danh mục</th>
+                                        <th scope="col">Ngày nhập </th>
                                     </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${list}" var="l">                               
+                                        <tr>                                    
+                                            <td>${l.invoiceId}</td>
+                                            <td><img src="products/${l.product.photo}" style="width: 50px; height: 50px;"></td>
+                                            <td>${l.product.name}</td>
+                                            <td>${l.product.weight}</td>                                        
+                                            <td>${l.quantity}</td>
+                                            <td>${l.branch.name}</td>
+                                            <td>${l.product.category_id.name}</td>
+                                            <td>${l.importDate}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                </c:if>
+                <c:if test="${empty list}">
+                    <br>
+                    <h2>Không có lịch sử nhập hàng</h2>                
+                </c:if>                    
             </div>
 
             <!-- /.content-wrapper -->

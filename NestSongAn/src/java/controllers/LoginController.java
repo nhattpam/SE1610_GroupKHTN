@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
     private static final String STAFF_PAGE = "list-products";
     private static final String ADMIN_PAGE = "ViewSuccesfulDeliveryController";
     private static final String SHIPPER_PAGE = "shipper-dashboard";
-    private static final String SUPPLIER_PAGE = "supplierPage";
+    private static final String SUPPLIER_PAGE = "ViewProductSupplierController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -89,7 +89,8 @@ public class LoginController extends HttpServlet {
                 response.sendRedirect(url);
             }
             if (result != null && result.getRole_id().getRole().equals("supplier")) {          // Role name = supplier 
-                url = siteMaps.getProperty(SUPPLIER_PAGE);                                                        // to supplier page
+                url = SUPPLIER_PAGE;                                                        // to supplier page
+                response.sendRedirect(url);
             }
             if (result != null && result.getRole_id().getRole().equals("shipper")) {          // Role name = shipper 
                 url = SHIPPER_PAGE;                                                     // to shipper page
