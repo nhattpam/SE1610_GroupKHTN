@@ -36,7 +36,9 @@ public class ViewListProductStaffController extends HttpServlet{
         
         
         HttpSession sCheckk = req.getSession();
-        
+        if(sCheckk.getAttribute("USERG") != null){
+            resp.sendRedirect("home");
+        }
         if (sCheckk.getAttribute("USER") == null){
             resp.sendRedirect("loginController");
         }else{
