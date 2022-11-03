@@ -48,4 +48,14 @@ public interface OrderDAO {
     public int getCountFailOrder();
     
     public int getPendingOrder();
+    
+    public void editShipperid(String order_id, int index);
+    
+    public List<OrderDTO> viewOrderDeliveryList(int index) throws SQLException;
+    
+    public float viewIncome();
+    
+    public List<OrderDTO> viewCompleOrder() throws SQLException;
+    
+    public float GetOrderTotalPrice(String order_id);
 }

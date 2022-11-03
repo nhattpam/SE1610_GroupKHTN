@@ -163,13 +163,11 @@
                                         </ul>
                                     </div>
                                 </c:if>
-                                <!--<% GoogleDTO us = (GoogleDTO) session.getAttribute("USERG");%>-->
                                 <c:if test="${not empty USERG}">
                                     <div class="header__top__right__language">
                                         <a href="" style="color: white;"><i class="fa fa-user"></i> ${USERG.name}</a>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
-                                            <li><a href="MyProfile?uid=${USERG.id}" style="color: white;">Tài Khoản</a></li>
                                             <li><a href="my-order-gg" style="color: white;">Lịch sử mua</a></li>
                                                 <c:url var="logout" value="logoutController"/>
                                             <li><a href="${logout}" style="color: white;">Đăng xuất</a></li>

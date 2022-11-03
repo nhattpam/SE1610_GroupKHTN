@@ -154,6 +154,7 @@ public class OrderDAOImpl implements OrderDAO {
         return o;
     }
     //edit shipper id
+    @Override
     public void editShipperid(String order_id, int index){
         try {
             conn = DBUtils.getConnection();
@@ -188,6 +189,8 @@ public class OrderDAOImpl implements OrderDAO {
             Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @Override
     public List<OrderDTO> viewOrderDeliveryList(int index) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -280,6 +283,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     //income
+    @Override
     public float viewIncome() {
         try {
             String sql = "SELECT SUM(total_price) AS income\n"
@@ -389,6 +393,7 @@ public class OrderDAOImpl implements OrderDAO {
         return 0;
     }
 
+    @Override
     public List<OrderDTO> viewCompleOrder() throws SQLException {
         List<OrderDTO> result = new ArrayList<>();
         OrderDTO o = null;
@@ -424,6 +429,7 @@ public class OrderDAOImpl implements OrderDAO {
         return result;
     }
 
+    @Override
     public int getTotalDeliveryByStatus(int status, String currentMonth) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -460,6 +466,7 @@ public class OrderDAOImpl implements OrderDAO {
     public OrderDAOImpl() {
     }   
     
+    @Override
     public float GetOrderTotalPrice(String order_id){
         String sql = "SELECT total_price FROM [order] where order_id = '" + order_id + "'";
         try {
