@@ -7,6 +7,7 @@ package controllers;
 
 import daos.QuantityProductDAOImpl;
 import dtos.QuantityProductDTO;
+import dtos.UsersDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -65,7 +67,31 @@ public class ViewProductSupplierController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        HttpSession sCheckk = request.getSession();
+        
+        if (sCheckk.getAttribute("USER") == null){
+            response.sendRedirect("loginController");
+        }else{
+            UsersDTO uu = (UsersDTO) sCheckk.getAttribute("USER");
+            if (uu.getRole_id().getRole().equals("staff")) {
+                response.sendRedirect("list-products");
+            }
+            if (uu.getRole_id().getRole().equals("shipper")) {
+                response.sendRedirect("shipper-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("admin")) {
+                response.sendRedirect("admin-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("customer")) {
+                response.sendRedirect("home");
+            }
+            if (uu.getRole_id().getRole().equals("supplier")) {
+                processRequest(request, response);
+            }
+            
+        }
+        
     }
 
     /**

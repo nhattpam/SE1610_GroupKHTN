@@ -11,6 +11,7 @@ import dtos.BranchDTO;
 import dtos.CategoryDTO;
 import dtos.ProductDTO;
 import dtos.QuantityProductDTO;
+import dtos.UsersDTO;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -142,7 +143,30 @@ public class AddProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("view/staff/add_product.jsp").forward(req, resp);
+        HttpSession sCheckk = req.getSession();
+        
+        if (sCheckk.getAttribute("USER") == null){
+            resp.sendRedirect("loginController");
+        }else{
+            UsersDTO uu = (UsersDTO) sCheckk.getAttribute("USER");
+            if (uu.getRole_id().getRole().equals("staff")) {
+                req.getRequestDispatcher("view/staff/add_product.jsp").forward(req, resp);
+            }
+            if (uu.getRole_id().getRole().equals("shipper")) {
+                resp.sendRedirect("shipper-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("admin")) {
+                resp.sendRedirect("admin-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("customer")) {
+                resp.sendRedirect("home");
+            }
+            if (uu.getRole_id().getRole().equals("supplier")) {
+                resp.sendRedirect("ViewProductSupplierController");
+            }
+            
+        }
+        
     }
 
 }

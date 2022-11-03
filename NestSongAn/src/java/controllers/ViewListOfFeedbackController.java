@@ -7,6 +7,7 @@ package controllers;
 
 import daos.FeedbackDAOImpl;
 import dtos.FeedbackDTO;
+import dtos.UsersDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.DBUtils;
 
 /**
@@ -39,7 +41,31 @@ public class ViewListOfFeedbackController extends HttpServlet {
         FeedbackDAOImpl dao = new FeedbackDAOImpl(DBUtils.getConnection());
         List<FeedbackDTO> flist = dao.viewAllfeedback();
         request.setAttribute("listFeedback", flist);
-        request.getRequestDispatcher("view/staff/list_feedback.jsp").forward(request, response);
+        
+        
+        HttpSession sCheckk = request.getSession();
+        
+        if (sCheckk.getAttribute("USER") == null){
+            response.sendRedirect("loginController");
+        }else{
+            UsersDTO uu = (UsersDTO) sCheckk.getAttribute("USER");
+            if (uu.getRole_id().getRole().equals("staff")) {
+                request.getRequestDispatcher("view/staff/list_feedback.jsp").forward(request, response);
+            }
+            if (uu.getRole_id().getRole().equals("shipper")) {
+                response.sendRedirect("shipper-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("admin")) {
+                response.sendRedirect("admin-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("customer")) {
+                response.sendRedirect("home");
+            }
+            if (uu.getRole_id().getRole().equals("supplier")) {
+                response.sendRedirect("ViewProductSupplierController");
+            }
+            
+        }
         
     }
 

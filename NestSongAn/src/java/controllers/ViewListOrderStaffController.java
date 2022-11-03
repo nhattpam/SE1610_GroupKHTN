@@ -10,6 +10,7 @@ import daos.OrderDetailsDAOImpl;
 import dtos.LocationDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
+import dtos.UsersDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -50,7 +51,31 @@ public class ViewListOrderStaffController extends HttpServlet {
             List<OrderDTO> listOrder = dao.viewUserOrder();
             request.setAttribute("listOrder", listOrder);
             request.setAttribute("location", listlocate);
-            request.getRequestDispatcher("view/staff/list_order.jsp").forward(request, response);
+            
+            
+            HttpSession sCheckk = request.getSession();
+        
+        if (sCheckk.getAttribute("USER") == null){
+            response.sendRedirect("loginController");
+        }else{
+            UsersDTO uu = (UsersDTO) sCheckk.getAttribute("USER");
+            if (uu.getRole_id().getRole().equals("staff")) {
+                request.getRequestDispatcher("view/staff/list_order.jsp").forward(request, response);
+            }
+            if (uu.getRole_id().getRole().equals("shipper")) {
+                response.sendRedirect("shipper-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("admin")) {
+                response.sendRedirect("admin-dashboard");
+            }
+            if (uu.getRole_id().getRole().equals("customer")) {
+                response.sendRedirect("home");
+            }
+            if (uu.getRole_id().getRole().equals("supplier")) {
+                response.sendRedirect("ViewProductSupplierController");
+            }
+            
+        }
         } catch (SQLException ex) {
             Logger.getLogger(ViewListOrderStaffController.class.getName()).log(Level.SEVERE, null, ex);
         }
