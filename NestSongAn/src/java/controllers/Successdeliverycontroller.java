@@ -8,6 +8,8 @@ package controllers;
 import daos.OrderDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,9 +38,13 @@ public class Successdeliverycontroller extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String order_id = request.getParameter("orderid");
         int d = 3;
+        Date now = new Date();
+        SimpleDateFormat x = new SimpleDateFormat();
+        String deliveried_day = x.format(now);
         OrderDAOImpl dao = new OrderDAOImpl(DBUtils.getConnection());
         dao.editOrderStatus(order_id, d);
-        response.sendRedirect("manage-shipper");
+        dao.editDeliveryDay(order_id, deliveried_day);
+        response.sendRedirect("deliveried-orders");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

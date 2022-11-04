@@ -171,6 +171,22 @@ public class OrderDAOImpl implements OrderDAO {
             Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public void editDeliveryDay(String order_id, String index){
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE [order]\n"
+                        + "SET [delivery_date]=?\n"
+                        + "WHERE order_id LIKE ?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, index);
+                ps.setString(2, order_id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 // edit order status
     @Override
     public void editOrderStatus(String order_id, int index) {
