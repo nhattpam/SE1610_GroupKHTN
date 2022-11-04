@@ -336,7 +336,7 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="products/${p.photo}">
                                     <ul class="product__item__pic__hover">
-                                        <<c:if test="${empty USER && empty USERG}">
+                                        <c:if test="${empty USER && empty USERG}">
                                             <li><a href="loginController"><i class="fa fa-heart"></i></a></li>
                                                 </c:if>
                                                 <c:if test="${ not empty USER }">
