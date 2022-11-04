@@ -142,43 +142,43 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="product__details__text">
                             <h3  style="font-family: Tahoma, Verdana, Segoe, sans-serif;">${detail.name}</h3>
-<!--                            <div class="product__details__rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <span>(18 reviews)</span>
-                            </div>-->
+                            <!--                            <div class="product__details__rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half-o"></i>
+                                                            <span>(18 reviews)</span>
+                                                        </div>-->
                             <div class="product__details__price"><fmt:formatNumber type="number" groupingUsed="true" value="${detail.price}" /> VNĐ</div>
                             <p>${detail.short_description}</p>
                             <c:if test="${q.quantity > 0}">
                                 <c:if test="${empty USER && empty USERG}">
-                                <a href="loginController" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
-                            </c:if>
-                            <c:if test="${ not empty USER }">
-                                <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
-                            </c:if>
-                            <c:if test="${ not empty USERG }">
-                                <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
-                            </c:if>
+                                    <a href="loginController" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                                </c:if>
+                                <c:if test="${ not empty USER }">
+                                    <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                                </c:if>
+                                <c:if test="${ not empty USERG }">
+                                    <a href="add-cart?command=insert&product_id=${detail.product_id}&cartID=${System.currentTimeMillis()}" class="primary-btn" style="background: #6a0e13;">THÊM VÀO GIỎ</a>
+                                </c:if>
                             </c:if>
                             <c:if test="${empty USER && empty USERG}">
-                            <a href="loginController" class="heart-icon"><span class="icon_heart_alt"></span></a>
-                            </c:if>
-                            <c:if test="${ not empty USER }">
+                                <a href="loginController" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                                </c:if>
+                                <c:if test="${ not empty USER }">
                                 <a href="AddToWishlistController?product_id=${detail.product_id}&user_id=${USER.user_id}" class="heart-icon"><span class="icon_heart_alt"></span></a>
-                            </c:if>
-                            <c:if test="${ not empty USERG }">
+                                </c:if>
+                                <c:if test="${ not empty USERG }">
                                 <a href="AddToWishlistController?product_id=${detail.product_id}&user_id=${USERG.id}" class="heart-icon"><span class="icon_heart_alt"></span></a>
-                            </c:if>
+                                </c:if>
                             <ul>
                                 <c:if test="${q.quantity == 0}">
                                     <li><b>Số lượng còn lại</b> <span style="color: red; font-style: italic">Hết hàng</span></li>
-                                </c:if>
+                                    </c:if>
                                     <c:if test="${q.quantity > 0}">
                                     <li><b>Số lượng còn lại</b> <span>${q.quantity}</span></li>
-                                </c:if>
+                                    </c:if>
                                 <li><b>Vận chuyển</b> <span><samp>Miễn Phí Vận Chuyển Toàn Quốc</samp></span></li>
                                 <li><b>Trọng lượng</b> <span>${detail.weight} gam</span></li>
                                 <!--                                <li><b>Share on</b>
@@ -291,7 +291,15 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="products/${l.photo}">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <c:if test="${empty USER && empty USERG}">
+                                            <li><a href="loginController"><i class="fa fa-heart"></i></a></li>
+                                                </c:if>
+                                                <c:if test="${ not empty USER }">
+                                            <li><a href="AddToWishlistController?product_id=${l.product_id}&user_id=${USER.user_id}"><i class="fa fa-heart"></i></a></li>
+                                                </c:if>
+                                                <c:if test="${ not empty USERG }">
+                                            <li><a href="AddToWishlistController?product_id=${l.product_id}&user_id=${USERG.id}"><i class="fa fa-heart"></i></a></li>
+                                                </c:if>
                                                 <c:if test="${empty USER && empty USERG}">
                                             <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
                                                 </c:if>
@@ -328,7 +336,15 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="products/${p.photo}">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <<c:if test="${empty USER && empty USERG}">
+                                            <li><a href="loginController"><i class="fa fa-heart"></i></a></li>
+                                                </c:if>
+                                                <c:if test="${ not empty USER }">
+                                            <li><a href="AddToWishlistController?product_id=${l.product_id}&user_id=${USER.user_id}"><i class="fa fa-heart"></i></a></li>
+                                                </c:if>
+                                                <c:if test="${ not empty USERG }">
+                                            <li><a href="AddToWishlistController?product_id=${l.product_id}&user_id=${USERG.id}"><i class="fa fa-heart"></i></a></li>
+                                                </c:if>
                                                 <c:if test="${empty USER && empty USERG}">
                                             <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
                                                 </c:if>
