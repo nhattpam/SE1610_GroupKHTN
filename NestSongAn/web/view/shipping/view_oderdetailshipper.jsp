@@ -1,6 +1,3 @@
-<%@page import="java.text.NumberFormat"%>
-<%@page import="java.util.List"%>
-<%@page import="dtos.ProductDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page isELIgnored="false" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -11,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Danh Sách Đơn Hàng</title>
+        <title>Chỉnh Sửa Sản Phẩm</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -175,7 +172,7 @@
                     </div>
 
                     <!-- Sidebar Menu -->
-                    <nav class="mt-2">
+                   <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
@@ -221,54 +218,44 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <div class="container-fluid">
-                    <div class="row crd-ho">
-                        <table class="table table-striped">
-                            <thead class="bg-dark text-white">
-                                <tr>
-                                    <th scope="col">Tên</th>
-                                    <th scope="col">Số điện thoại</th>
-                                    <th scope="col">Địa chỉ</th>
-                                    <th scope="col">Tổng tiền</th>
-                                    <th scope="col">Mã đơn hàng</th>
-                                    <th scope="col">Thông tin chi tiết</th>
-                                    <th scope="col">Trạng thái</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${listShip}" var="l">
-                                    <tr>
-                                        <td>
-                                            ${l.user_id.full_name}
-                                        </td>
-                                        <td>
-                                            ${l.user_id.phone}
-                                        </td>
-                                        <td>
-                                            ${l.delivery_address}
-                                        </td>
-                                        <td>
-                                            <fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}"/> VNĐ
-                                        </td>
-                                        <td>
-                                            ${l.order_id}
-                                        </td>
-                                        <td>
-                                            <a href="shipperorder_details?order_id=${l.order_id}&sd=1" style="color: #6a0e13">chi tiết</a>
-                                        </td>
-                                        
+                <div class="container">
+                    <h4 style="color: #6a0e13">Chi tiết đơn hàng</h4>
+                    <p><span style="font-weight: bold">Mã Hóa Đơn: </span>${order_id}</p>
+                    <p><span style="font-weight: bold">Địa Chỉ Giao Hàng: </span>${delivery_address}</p>
+                    <p><span style="font-weight: bold">Phương Thức Thanh Toán: </span>${payment_method}</p>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Đơn giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${listDetails}" var="d">
 
-                                        <td>                                           
-                                            <c:if test = "${l.status == 2}">
-                                                <a href="choose_order?orderid=${l.order_id}&uid=${USER.user_id}" class="btn btn-sm btn-primary">Lấy hàng</a>
-                                            </c:if>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
+                                <tr>
+                                    <td>${d.product_id.name}</td>
+                                    <td>${d.quantity}</td>
+                                    <td><fmt:formatNumber type="number" groupingUsed="true" value="${d.total_price}" /> VNĐ</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <c:if test="${sd==1}">
+                        <a href="manage-shipper" class="btn btn-primary">Close</a>
+                    </c:if>
+                    <c:if test="${sd==2}">
+                        <a href="delivery_order?uid=${USER.user_id}" class="btn btn-primary">Close</a>
+                    </c:if>
+                    <c:if test="${sd==3}">
+                        <a href="deliveried-order" class="btn btn-primary">Close</a>
+                    </c:if>
                 </div>
+
+
+
+
             </div>
 
             <!-- /.content-wrapper -->

@@ -231,6 +231,7 @@
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Tổng tiền</th>
                                     <th scope="col">Mã đơn hàng</th>
+                                    <th scope="col">Thông tin chi tiết</th>
                                     <th scope="col">Trạng thái</th>
                                 </tr>
                             </thead>
@@ -252,7 +253,9 @@
                                         <td>
                                             ${l.order_id}
                                         </td>
-
+                                        <td>
+                                            <a href="shipperorder_details?order_id=${l.order_id}&sd=2" style="color: #6a0e13">chi tiết</a>
+                                        </td>
                                         <td>                                           
                                             <c:if test = "${l.status == 6}">
                                                 <a href="successdelivery?orderid=${l.order_id}" class="btn btn-sm btn-success">Thành công</a>
