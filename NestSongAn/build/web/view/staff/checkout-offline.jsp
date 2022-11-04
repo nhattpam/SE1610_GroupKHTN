@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Danh Sách Sản Phẩm</title>
+        <title>Tạo Đơn Hàng</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -236,54 +236,29 @@
             </aside>
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <div class="container-fluid">
-                    <div class="row crd-ho">
+            <div class="content-wrapper" >
+                <div class="container-fluid" >
+                    <div class="row crd-ho" >
                         <table class="table table-striped">
                             <thead class="bg-dark text-white">
                                 <tr>
                                     <th scope="col">Id</th>
-                                    <th scope="col">Ảnh</th>
                                     <th scope="col">Tên sản phẩm</th>
-                                    <!--<th scope="col">Code</th>-->
-                                    <!--                                    <th scope="col">M.Tả Ngắn</th>
-                                                                        <th scope="col">M.Tả dài</th>-->
-                                    <th scope="col">Trọng lượng</th>
-                                    <th scope="col">Giá</th>
-                                    <th scope="col">Ngày tạo</th>
-                                    <th scope="col">Ngày sửa</th>
-                                    <th scope="col">Danh mục</th>
+                                    <th scope="col">Đơn giá</th>
+                                    <th scope="col">Số lượng</th>
                                     <th scope="col">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:if test="${ not empty failedMsg }">
-                                <h5 class="text-center text-danger">${failedMsg}</h5>
-                                <c:remove var="failedMsg" scope="session"/>
-                            </c:if>
+                                <c:forEach items="${listCHECKOUT}" var="l">
 
-                            <c:forEach items="${listProduct}" var="l">
-                                <%--<c:set var="price" value="123.2" />--%>  
-                                <tr>
-                                    <!--<th scope="row">1</th>-->
-                                    <td>${l.product_id}</td>
-                                    <td><img src="products/${l.photo}" style="width: 50px; height: 50px;"></td>
-                                    <td>${l.name}</td>
-                                    <!--<td>${l.code}</td>-->
-<!--                                        <td>${l.short_description}</td>
-                                    <td>${l.full_description}</td>-->
-                                    <td>${l.weight}</td>
-                                    <td> 
-                                        <fmt:formatNumber type="number" groupingUsed="true" value="${l.price}" /> VNĐ
-                                    </td>
-                                    <td>${l.create_date}</td>
-                                    <td>${l.edit_date}</td>
-                                    <td>${l.category_id.category_id}</td>
-                                    <td>
-                                        <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary"> Sửa</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                                    <tr>
+                                        <td>${l.product_id}</td>
+                                        <td>${l.name}</td>
+                                        <td>${l.price}</td>
+                                        <td><input type="number" name="quantity"/></td>
+                                    </tr>
+                                </c:forEach>  
                             </tbody>
                         </table>
                     </div>

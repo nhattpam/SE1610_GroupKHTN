@@ -216,11 +216,18 @@
                                 <a href="list-feedback" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
-                                        Danh Sách đánh giá sản phẩm
+                                        Danh Sách Đánh Giá Sản Phẩm
                                     </p>
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a href="offline-order" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Tạo Đơn Hàng
+                                    </p>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -230,7 +237,7 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row crd-ho">
                         <table class="table table-striped">
                             <thead class="bg-dark text-white">
