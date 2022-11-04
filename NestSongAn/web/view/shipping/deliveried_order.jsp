@@ -233,6 +233,7 @@
                                     <th scope="col">Giá trị đơn hàng</th>
                                     <th scope="col">Mã khách hàng</th>
                                     <th scope="col">Nơi lấy hàng</th>
+                                    <th scope="col">Thông tin chi tiết</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -245,6 +246,9 @@
                                         <td><fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}" /> VNĐ</td>
                                         <td>${l.user_id.user_id}</td>  
                                         <td>${l.location_id.name}</td>
+                                        <td>
+                                            <a href="shipperorder_details?order_id=${l.order_id}&sd=3" style="color: #6a0e13">chi tiết</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
