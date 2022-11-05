@@ -34,6 +34,167 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/summernote/summernote-bs4.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <style>
+            .breadcrumbs {
+
+            }
+
+            .breadcrumbs .breadcrumb {
+                background:transparent;
+                margin-bottom: 75px;
+                padding-left: 0;
+            }
+
+            .breadcrumbs .breadcrumb li a {
+                background: #6a0e13;
+                color: #FFFFFF;
+                padding: 3px 7px;
+            }
+
+            .breadcrumbs .breadcrumb li a:after {
+                content:"";
+                height:auto;
+                width: auto;
+                border-width: 8px;
+                border-style: solid;
+                border-color:transparent transparent transparent #6a0e13;
+                position: absolute;
+                top: 11px;
+                left:48px;
+
+            }
+
+            .breadcrumbs .breadcrumb > li + li:before {
+                content: " ";
+            }
+
+            #cart_items .cart_info {
+                border: 1px solid #E6E4DF;
+                margin-bottom: 50px
+            }
+
+
+            #cart_items .cart_info .cart_menu {
+                background: #6a0e13;
+                color: #fff;
+                font-size: 16px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: normal;
+            }
+
+            #cart_items .cart_info .table.table-condensed thead tr {
+                height: 51px;
+            }
+
+
+            #cart_items .cart_info .table.table-condensed tr {
+                border-bottom: 1px solid#F7F7F0
+            }
+
+            #cart_items .cart_info .table.table-condensed tr:last-child {
+                border-bottom: 0
+            }
+
+            .cart_info table tr td {
+                border-top: 0 none;
+                vertical-align: inherit;
+            }
+
+
+            #cart_items .cart_info .image {
+                padding-left: 30px;
+            }
+
+
+            #cart_items .cart_info .cart_description h4 {
+                margin-bottom: 0
+            }
+
+            #cart_items .cart_info .cart_description h4 a {
+                color: #363432;
+                font-family: 'Roboto',sans-serif;
+                font-size: 20px;
+                font-weight: normal;
+
+            }
+
+            #cart_items .cart_info .cart_description p {
+                color:#696763
+            }
+
+
+            #cart_items .cart_info .cart_price p {
+                color:#696763;
+                font-size: 18px
+            }
+
+
+            #cart_items .cart_info .cart_total_price {
+                color: #6a0e13;
+                font-size: 24px;
+            }
+
+            .cart_product {
+                display: block;
+                margin: 15px -70px 10px 25px;
+            }
+
+            .cart_quantity_button a {
+                background:#F0F0E9;
+                color: #696763;
+                display: inline-block;
+                font-size: 16px;
+                height: 28px;
+                overflow: hidden;
+                text-align: center;
+                width: 35px;
+                float: left;
+            }
+
+
+            .cart_quantity_input {
+                color: #696763;
+                float: left;
+                font-size: 16px;
+                text-align: center;
+                font-family: 'Roboto',sans-serif;
+
+            }
+
+
+            .cart_delete  {
+                display: block;
+                margin-right: -12px;
+                overflow: hidden;
+            }
+
+
+            .cart_delete a {
+                background:#6a0e13;
+                color: #FFFFFF;
+                padding: 5px 7px;
+                font-size: 16px
+            }
+
+            .cart_delete a:hover {
+                background:#FE980F
+            }
+            #button{
+                background: #6a0e13;
+                color: white;
+            }
+            .cart_quantity_button a {
+                background: #F0F0E9;
+                color: #696763;
+                display: inline-block;
+                font-size: 16px;
+                height: 28px;
+                overflow: hidden;
+                text-align: center;
+                width: 20px;
+                float: left;
+            }
+        </style>
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
@@ -41,10 +202,9 @@
             <!-- Navbar -->
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <div class="navbar-nav ml-auto">
-                    <a href="my-cart-offline?bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag fa-2x text-dark" aria-hidden="true" style="background:dark"></i></a>
+                     <a href="offline-order?bid=${sessionScope.branch_id}"><i class="fa fa-list fa-2x text-dark" aria-hidden="true"></i></a>
                 </div>
-                
-                
+               
 <!--                 Left navbar links 
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -243,55 +403,108 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper" >
                 <div class="container-fluid">
-                    <div class="row crd-ho">
-                        <table class="table table-striped">
-                            <thead class="bg-dark text-white">
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Ảnh</th>
-                                    <th scope="col">Tên sản phẩm</th>
-                                    <th scope="col">Trọng lượng</th>
-                                    <th scope="col">Số lượng trong kho</th>
-                                    <th scope="col">Giá</th>
-                                    <th scope="col">Hành động</th>
+                    <div class="table-responsive cart_info">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr class="cart_menu">
+                                    <td class="image">Sản Phẩm</td>
+                                    <td class="description"></td>
+                                    <td class="price">Giá</td>
+                                    <td class="quantity">Số Lượng</td>
+                                    <td class="total">Tổng</td>
+                                    <td></td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:if test="${ not empty failedMsg }">
-                                <h5 class="text-center text-danger">${failedMsg}</h5>
-                                <c:remove var="failedMsg" scope="session"/>
-                            </c:if>
+                                <c:set var="TotalPriceAll" scope="session" value="0" />
+                                <c:set var="noti" scope="session" value="${wrongQuantity}" />
 
-                            <c:forEach items="${listProduct}" var="l">
-                                <%--<c:set var="price" value="123.2" />--%>  
+                                <c:forEach items="${requestScope.list}" var="map">
+                                    <tr>
+                                        <td class="cart_product">
+                                            <img src="products/${map.key.photo}" alt="" style="width: 50px; height: 60px;">
+                                        </td>
+                                        <td class="cart_description">
+                                            <h4>${map.key.name}</h4>
+                                            <p>Code: ${map.key.code}</p>
+                                        </td>
+                                        <td class="cart_price">
+                                            <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price}" /> VNĐ</p>
+                                        </td>
+
+                                        <td class="cart_quantity">
+
+                                            <div class="cart_quantity_button">
+                                                <c:if test="${ not empty wrongQuantity }">
+                                                    <!--<p class="text-danger">${wrongQuantity}</p>-->
+                                                    <!-- Modal: modalAbandonedCart-->
+                                                    <div class="modal fade right" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                         aria-hidden="true" data-backdrop="false">
+                                                        <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+                                                            <!--Content-->
+                                                            <div class="modal-content">
+                                                                <!--Header-->
+                                                                <div class="modal-header" style="background-color:#6a0e13">
+                                                                    <p class="heading text-white">THÔNG BÁO
+                                                                    </p>
+
+                                                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true" class="white-text">&times;</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <!--Body-->
+                                                                <div class="modal-body">
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-12 text-center">
+                                                                            <p class="text-danger">Số lượng sản phẩm đã vượt mức tối đa trong kho</p>
+                                                                            <!--<p>No pressure, your product will be waiting for you in the cart.</p>-->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--Footer-->
+                                                                <div class="modal-footer justify-content-center">
+                                                                    <!--<a type="button" class="btn btn-info">Go to cart</a>-->
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="button">OK</button>
+                                                                </div>
+                                                            </div>
+                                                            <!--/.Content-->
+                                                        </div>
+                                                    </div>
+                                                    <!-- Modal: modalAbandonedCart-->
+                                                    <c:remove var="wrongQuantity" scope="session"/>
+                                                </c:if>
+                                                <a class="cart_quantity_up" href="add-cart-offline?command=plus&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"> + </a>
+                                                <input class="cart_quantity_input" type="text" value="${map.value}" autocomplete="off" size="2" disabled="">
+                                                <a class="cart_quantity_down" href="add-cart-offline?command=sub&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"> - </a>
+
+                                            </div>
+                                        </td>
+                                        <td class="cart_total">
+                                            <c:set var="TotalPriceAll" scope="session" value="${TotalPriceAll+(map.value * map.key.price)}" />
+                                            <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price * map.value}" /> VNĐ</p>
+                                        </td>
+                                        <td class="cart_delete">
+                                            <a class="cart_quantity_delete" href="add-cart-offline?command=remove&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
+
                                 <tr>
-                                    <!--<th scope="row">1</th>-->
-                                    <td>${l.product_id.product_id}</td>
-                                    <td><img src="products/${l.product_id.photo}" style="width: 50px; height: 50px;"></td>
-                                    <td>${l.product_id.name}</td>
-                                    <td>${l.product_id.weight}</td>
-                                    <td>
-                                        <c:if test="${l.quantity == 0}">
-                                            Hết hàng
-                                        </c:if>
-                                        <c:if test="${l.quantity != 0}">
-                                            ${l.quantity}
-                                        </c:if>
-                                    </td>
-                                    <td> 
-                                        <fmt:formatNumber type="number" groupingUsed="true" value="${l.product_id.price}" /> VNĐ
-                                    </td>
-                                    <td>
-                                        <c:if test="${l.quantity != 0}">
-                                            <a href="add-cart-offline?command=insert&product_id=${l.product_id.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"><i class="fa fa-plus-square fa-2x text-dark" aria-hidden="true" style=""></i></a>
-                                        </c:if>
-                                    </td> 
-                                        
-                                        
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-weight: bold;">Tiền tạm tính: </td>
+                                    <td style="color: green; font-size: large; font-weight: bold;"><fmt:formatNumber type="number" groupingUsed="true" value="${TotalPriceAll}" /> VNĐ</td>
                                 </tr>
-                            </c:forEach>
                             </tbody>
+
                         </table>
+
                     </div>
                 </div>
             </div>

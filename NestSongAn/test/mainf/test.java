@@ -16,6 +16,7 @@ import dtos.FeedbackDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import dtos.ProductDTO;
+import dtos.QuantityProductDTO;
 import dtos.UsersDTO;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,10 +31,10 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) throws SQLException {
-        OrderDAOImpl dao = new  
-            OrderDAOImpl(DBUtils.getConnection());
-        
-        int ketqua = dao.getCountSuccOrder();
-        System.out.println(ketqua);
+        QuantityProductDAOImpl dao = new QuantityProductDAOImpl(DBUtils.getConnection());
+        List<QuantityProductDTO> listQ = dao.listProductWithQuantity(1);
+        for (QuantityProductDTO q : listQ) {
+            System.out.println(q.getProduct_id());
+        }
     }
 }
