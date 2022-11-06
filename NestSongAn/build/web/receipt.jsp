@@ -30,33 +30,33 @@
     <body>
         <jsp:include page="header.jsp"/> 
         <div align="center">
-            <h4>Giao dịch thành công. Cảm ơn đã sử dụng dịch vụ!</h4>
+            <h4 style="color: #00457C; font-family: Tahoma, Verdana, Segoe, sans-serif; font-weight: bold;">Giao dịch thành công. Cảm ơn đã sử dụng dịch vụ!</h4>
             <br/>
-            <h2>Biên Lai:</h2>
+            <h2 style="color: #00457C; font-family: Tahoma, Verdana, Segoe, sans-serif; font-weight: bold;">Biên Lai:</h2>
             <table>
                 <tr>
-                    <td><b>Người thanh toán: </b></td>
+                    <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;"><b>Người thanh toán: </b></td>
                     <td>${payer.firstName} ${payer.lastName}</td>      
                 </tr>
                 <tr>
-                    <td><b>Mô tả: </b></td>
+                    <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;"><b>Mô tả: </b></td>
                     <td>${transaction.description}</td>
                 </tr>
                 <tr>
-                    <td><b>Thành tiền: </b></td>
-                    <td>${transaction.amount.details.subtotal} USD</td>
+                    <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;"><b>Thành tiền: </b></td>
+                    <td>${transaction.amount.details.subtotal} VNĐ</td>
                 </tr>
                 <tr>
-                    <td><b>Phí vận chuyển: </b></td>
-                    <td>${transaction.amount.details.shipping} USD</td>
+                    <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;"><b>Phí vận chuyển: </b></td>
+                    <td>${transaction.amount.details.shipping} VNĐ</td>
                 </tr>
                 <tr>
-                    <td><b>Thuế:</b></td>
-                    <td>${transaction.amount.details.tax} USD</td>
+                    <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;"><b>Thuế:</b></td>
+                    <td>${transaction.amount.details.tax} VNĐ</td>
                 </tr>
                 <tr>
-                    <td><b>Tổng</b></td>
-                    <td>${transaction.amount.total} USD</td>
+                    <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;"><b>Tổng</b></td>
+                    <td>${transaction.amount.total} VNĐ</td>
                 </tr>                    
             </table>
         </div>
