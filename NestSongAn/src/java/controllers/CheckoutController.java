@@ -143,10 +143,21 @@ public class CheckoutController extends HttpServlet {
             }
             if (check && !request.getParameter("province").equals("chooseCity") && !request.getParameter("payment_method").equals("choosePay")) {
                 try {
+                    OrderDTO od = null;
                     Date date = new Date();
                     String order_id = "" + date.getTime();
-                    OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date, total, 1, user_id);
+                    if(request.getParameter("payment_method").equals("cod")){
+                        payment_method = "cod";
+                    } 
+                    if(request.getParameter("payment_method").equals("paypal")){
+                        payment_method = "paypal";
+                        HttpSession sPayPal = request.getSession();
+                        sPayPal.setAttribute("order_id", order_id);
+                        sPayPal.setAttribute("subtotal", total);
+                        response.sendRedirect("checkout-paypal");
+                    }
                     
+                    od = new OrderDTO(order_id, delivery_address, payment_method, order_date, total, 1, user_id);
 
                     //status = 1: order pending
                     od.setOrder_id(order_id);
@@ -157,16 +168,9 @@ public class CheckoutController extends HttpServlet {
                         ProductDTO p = new ProductDTO();
                         p.setProduct_id(ds.getKey().getProduct_id());
                         orderDetailsDAO.addOrderDetails(new OrderDetailsDTO(od, p, ds.getKey().getPrice(), ds.getValue()));
-//                        System.out.println("odID: " + od.getOrder_id());
-//                        OrderDetailsDAOImpl dao2 = new OrderDetailsDAOImpl(DBUtils.getConnection());
-//                        List<OrderDetailsDTO> odtls = dao2.getOrderDetailsToSubQuantity(od.getOrder_id());
+//              
                         HttpSession getUid = request.getSession();
-//                        for (OrderDetailsDTO odtl : odtls) {
-//                            System.out.println("---------------------");
-//                            System.out.println("checkout-pid: " + odtl.getProduct_id().getProduct_id());
-//                            System.out.println("checkout-quantity: " + odtl.getQuantity());
-//                            
-//                        }
+//        
                         QuantityProductDAOImpl dao3 = new QuantityProductDAOImpl(DBUtils.getConnection());
                         dao3.subQuantityAfterBuy(ds.getValue(), ds.getKey().getProduct_id(), (int) getUid.getAttribute("branch_id"));
                     }
