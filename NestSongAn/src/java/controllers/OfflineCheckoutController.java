@@ -122,10 +122,11 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
             
             String full_name = request.getParameter("full_name");
             String phone = request.getParameter("phone");
-            String address = request.getParameter("delivery_address");
+//            String address = request.getParameter("delivery_address");
             
-            String delivery_address = address + ", " + request.getParameter("province");
-            
+//            String delivery_address = address + ", " + request.getParameter("province");
+            String delivery_address = "tai-cua-hang";
+
             String payment_method = "truc-tiep";
             
             HttpSession sessin = request.getSession();
@@ -137,9 +138,9 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
             HttpSession keepInput = request.getSession();
             keepInput.setAttribute("full_name", full_name);
             keepInput.setAttribute("phone", phone);
-            keepInput.setAttribute("province", request.getParameter("province"));
-            keepInput.setAttribute("delivery_address", address);
-            keepInput.setAttribute("payment_method", payment_method);
+//            keepInput.setAttribute("province", request.getParameter("province"));
+//            keepInput.setAttribute("delivery_address", address);
+//            keepInput.setAttribute("payment_method", payment_method);
             
             HttpSession session = request.getSession();
             CartDTO cart = (CartDTO) session.getAttribute("cart");
@@ -171,14 +172,14 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
             }
             
             
-            if (address == null || "".equals(address.trim())) {
-                sessionValidate.setAttribute("wrongAddress", "Địa chỉ không được rỗng");
-                check = false;
-            }
+//            if (address == null || "".equals(address.trim())) {
+//                sessionValidate.setAttribute("wrongAddress", "Địa chỉ không được rỗng");
+//                check = false;
+//            }
             
             
             
-            if (check && !request.getParameter("province").equals("chooseCity")) {
+            if (check) {
                 try {
                     UsersDTO user_id1 = null;
                     Date date = new Date();
