@@ -176,29 +176,35 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
                 check = false;
             }
             
-            //check duplicate
-            UserDAOImpl daoCheckDup = new UserDAOImpl(DBUtils.getConnection());
-            if (daoCheckDup.checkDuplicatePhone(phone)) {
-                sessionValidate.setAttribute("wrongPhone", "Số điện thoại đã tồn tại!");
-                check = false;
-            }
+            
             
             if (check && !request.getParameter("province").equals("chooseCity")) {
                 try {
+                    UsersDTO user_id1 = null;
                     Date date = new Date();
                     String order_id = "" + date.getTime();
                     
                     //create account auto
                     UserDAOImpl daoCreate = new UserDAOImpl(DBUtils.getConnection());
                     UserRoleDTO role_id = new UserRoleDTO(1);
+                    
+                    //check duplicate
+                    UserDAOImpl daoCheckDup = new UserDAOImpl(DBUtils.getConnection());
+                    if (daoCheckDup.checkDuplicatePhone(phone)) {
+//                        sessionValidate.setAttribute("wrongPhone", "Số điện thoại đã tồn tại!");
+                         user_id1 = daoCreate.getUserIdByPhone(phone);
+                    }
+                    else{
                     String password = toHexString(getSHA(phone));
                     UsersDTO uCreate = new UsersDTO(full_name, phone, password, phone, 1, order_date, order_date, role_id);
                     
 //                    System.out.println("day la create: " + uCreate);
                     daoCreate.userRegisterOffline(uCreate);
-                    UsersDTO user_id1 = daoCreate.getUserIdByPhone(phone);
+                    user_id1 = daoCreate.getUserIdByPhone(phone);
                     
-                    System.out.println("DAADY: " + user_id1.getUser_id());
+//                    System.out.println("DAADY: " + user_id1.getUser_id());
+                    }
+                   
                     
                     
                     
@@ -223,6 +229,10 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
                     session.setAttribute("order_id", od.getOrder_id());
                     response.sendRedirect("offline-order?bid=" + sessin.getAttribute("branch_id") +"");
                     session.setAttribute("succMsg", "Tạo hoá đơn thành công");
+                    //remove checkInput
+                    session.removeAttribute("full_name");
+                    session.removeAttribute("phone");
+                    session.removeAttribute("delivery_address");
                     
                     
                 }catch(Exception ex){
