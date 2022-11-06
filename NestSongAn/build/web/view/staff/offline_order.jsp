@@ -243,6 +243,10 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper" >
                 <div class="container-fluid">
+                    <c:if test="${ not empty succMsg }">
+                        <h5 class="text-center text-success">${succMsg}</h5>
+                        <c:remove var="succMsg" scope="session"/>
+                    </c:if>
                     <div class="row crd-ho">
                         <table class="table table-striped">
                             <thead class="bg-dark text-white">
