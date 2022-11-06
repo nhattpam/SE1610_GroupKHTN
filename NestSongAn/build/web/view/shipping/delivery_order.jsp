@@ -254,7 +254,7 @@
                                             ${l.order_id}
                                         </td>
                                         <td>
-                                            <a href="shipperorder_details?order_id=${l.order_id}&sd=2" style="color: #6a0e13">chi tiết</a>
+                                            <a href="shipperorder_details?order_id=${l.order_id}&sd=2" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i></a>
                                         </td>
                                         <td>                                           
                                             <c:if test = "${l.status == 6}">

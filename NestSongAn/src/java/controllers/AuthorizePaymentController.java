@@ -17,7 +17,7 @@ import dtos.OrderDTO;
 @WebServlet("/authorize_payment")
 public class AuthorizePaymentController extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     public AuthorizePaymentController() {
     }

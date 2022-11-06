@@ -17,7 +17,7 @@ import com.paypal.base.rest.PayPalRESTException;
 @WebServlet("/review_payment")
 public class ReviewPaymentController extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     public ReviewPaymentController() {
     }

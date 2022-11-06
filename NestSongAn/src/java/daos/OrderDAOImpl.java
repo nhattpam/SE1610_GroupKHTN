@@ -50,7 +50,7 @@ public class OrderDAOImpl implements OrderDAO {
         } catch (SQLException e) {
         }
     }
-    
+
     //addOrderOffline
     public void addOrderOffline(OrderDTO od) {
         String sql = "INSERT INTO [order] (order_id,user_id,delivery_address,payment_method,order_date,total_price,status,note,location_id,delivery_date) VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -67,7 +67,7 @@ public class OrderDAOImpl implements OrderDAO {
             ps.setString(8, od.getNote());
             ps.setInt(9, od.getLocation_id().getLocation_id());
             ps.setString(10, od.getDelivery_date());
-            
+
             ps.executeUpdate();
         } catch (SQLException e) {
         }
@@ -130,7 +130,7 @@ public class OrderDAOImpl implements OrderDAO {
             if (con != null) {
                 String sql = "SELECT u.full_name, u.user_name, u.email, u.phone, o.order_date, o.status, o.order_id, o.user_id,o.location_id\n"
                         + "FROM [order] o inner join users u on o.user_id = u.user_id\n"
-                        +"Order by o.order_id DESC";
+                        + "Order by o.order_id DESC";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -176,9 +176,10 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return o;
     }
+
     //edit shipper id
     @Override
-    public void editShipperid(String order_id, int index){
+    public void editShipperid(String order_id, int index) {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -194,7 +195,8 @@ public class OrderDAOImpl implements OrderDAO {
             Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     public void editDeliveryDay(String order_id, String index){
+
+    public void editDeliveryDay(String order_id, String index) {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -211,6 +213,7 @@ public class OrderDAOImpl implements OrderDAO {
         }
     }
 // edit order status
+
     @Override
     public void editOrderStatus(String order_id, int index) {
         try {
@@ -228,7 +231,7 @@ public class OrderDAOImpl implements OrderDAO {
             Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public List<OrderDTO> viewOrderDeliveryList(int index) throws SQLException {
         Connection con = null;
@@ -285,14 +288,14 @@ public class OrderDAOImpl implements OrderDAO {
 
         OrderDTO o = null;
         UsersDTO u = null;
+        LocationDTO l = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "SELECT u.full_name,u.phone,\n"
-                        + "       o.delivery_address, o.total_price\n"
-                        + "      ,o.status,o.order_id\n"
-                        + "FROM  users u inner join [order] o on u.user_id = o.user_id\n"
-                        + "WHERE o.status = 2";
+                String sql = "SELECT u.full_name,u.phone,o.delivery_address, o.total_price,o.status,o.order_id, l.name\n"
+                        + "                        FROM  users u inner join [order] o on u.user_id = o.user_id\n"
+                        + "										inner join location l on l.location_id = o.location_id\n"
+                        + "                        WHERE o.status = 2";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -303,7 +306,9 @@ public class OrderDAOImpl implements OrderDAO {
                     String delivery_address = rs.getString(3);
                     int status = rs.getInt(5);
                     String order_id = rs.getString(6);
-                    OrderDTO odr = new OrderDTO(order_id, delivery_address, total_price, status, u);
+                    l = new LocationDTO();
+                    l.setName(rs.getString(7));
+                    OrderDTO odr = new OrderDTO(order_id, delivery_address, total_price, status, u,l);
                     result.add(odr);
                 }
             }
@@ -482,10 +487,10 @@ public class OrderDAOImpl implements OrderDAO {
                         + "where status=? and order_date like ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, status);
-                stm.setString(2, currentMonth+"%");
+                stm.setString(2, currentMonth + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    result=rs.getInt("number");
+                    result = rs.getInt("number");
                 }
             }
         } finally {
@@ -503,15 +508,15 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     public OrderDAOImpl() {
-    }   
-    
+    }
+
     @Override
-    public float GetOrderTotalPrice(String order_id){
+    public float GetOrderTotalPrice(String order_id) {
         String sql = "SELECT total_price FROM [order] where order_id = '" + order_id + "'";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 return rs.getFloat(1);
             }
         } catch (Exception e) {
@@ -527,7 +532,7 @@ public class OrderDAOImpl implements OrderDAO {
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 //return ve ket qua int (boi vi no chi tra ve 1 so nguyen)
                 return rs.getInt(1);
             }
@@ -535,6 +540,7 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return 0; //neu khong co ket qua thi tra ve 0
     }
+
     @Override
     public int getCountFailOrder() {//status = 5
         String sql = "SELECT COUNT(*) as sp\n"
@@ -543,7 +549,7 @@ public class OrderDAOImpl implements OrderDAO {
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 //return ve ket qua int (boi vi no chi tra ve 1 so nguyen)
                 return rs.getInt(1);
             }
@@ -551,16 +557,17 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return 0; //neu khong co ket qua thi tra ve 0
     }
+
     @Override
     public int getPendingOrder() {//status = 2
-        
+
         String sql = "SELECT COUNT(*) as sp\n"
                 + "FROM [order]\n"
                 + "where status = 2";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 //return ve ket qua int (boi vi no chi tra ve 1 so nguyen)
                 return rs.getInt(1);
             }
@@ -568,6 +575,5 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return 0; //neu khong co ket qua thi tra ve 0
     }
-    
-    
+
 }
