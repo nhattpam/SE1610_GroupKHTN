@@ -247,7 +247,7 @@
                                         <td>${l.user_id.user_id}</td>  
                                         <td>${l.location_id.name}</td>
                                         <td>
-                                            <a href="shipperorder_details?order_id=${l.order_id}&sd=3" style="color: #6a0e13">chi tiết</a>
+                                            <a href="shipperorder_details?order_id=${l.order_id}&sd=3" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>

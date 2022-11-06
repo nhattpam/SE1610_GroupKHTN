@@ -228,7 +228,8 @@
                                 <tr>
                                     <th scope="col">Tên</th>
                                     <th scope="col">Số điện thoại</th>
-                                    <th scope="col">Địa chỉ</th>
+                                    <th scope="col">Địa chỉ giao hàng</th>
+                                    <th scope="col">Địa chỉ nhận hàng</th>
                                     <th scope="col">Tổng tiền</th>
                                     <th scope="col">Mã đơn hàng</th>
                                     <th scope="col">Thông tin chi tiết</th>
@@ -248,19 +249,22 @@
                                             ${l.delivery_address}
                                         </td>
                                         <td>
+                                            ${l.location_id.name}
+                                        </td>
+                                        <td>
                                             <fmt:formatNumber type="number" groupingUsed="true" value="${l.total_price}"/> VNĐ
                                         </td>
                                         <td>
                                             ${l.order_id}
                                         </td>
                                         <td>
-                                            <a href="shipperorder_details?order_id=${l.order_id}&sd=1" style="color: #6a0e13">chi tiết</a>
+                                            <a href="shipperorder_details?order_id=${l.order_id}&sd=1" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i></a>
                                         </td>
                                         
 
                                         <td>                                           
                                             <c:if test = "${l.status == 2}">
-                                                <a href="choose_order?orderid=${l.order_id}&uid=${USER.user_id}" class="btn btn-sm btn-primary">Lấy hàng</a>
+                                                <a href="choose_order?orderid=${l.order_id}&uid=${USER.user_id}" class="btn btn-sm btn-primary">Nhận Hàng</a>
                                             </c:if>
                                         </td>
                                     </tr>
