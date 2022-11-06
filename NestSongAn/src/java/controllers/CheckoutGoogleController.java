@@ -152,9 +152,22 @@ public class CheckoutGoogleController extends HttpServlet {
 
             if (check && !request.getParameter("province").equals("chooseCity") && !request.getParameter("payment_method").equals("choosePay")) {
                 try {
+                    OrderDTO od = null;
                     Date date = new Date();
                     String order_id = "" + date.getTime();
-                    OrderDTO od = new OrderDTO(order_id, delivery_address, payment_method, order_date, total, 1, user_id);
+                    
+                    if(request.getParameter("payment_method").equals("cod")){
+                        payment_method = "cod";
+                    } 
+                    if(request.getParameter("payment_method").equals("paypal")){
+                        payment_method = "paypal";
+                        HttpSession sPayPal = request.getSession();
+                        sPayPal.setAttribute("order_id", order_id);
+                        sPayPal.setAttribute("subtotal", total);
+                        response.sendRedirect("checkout-paypal");
+                    }
+                    
+                    od = new OrderDTO(order_id, delivery_address, payment_method, order_date, total, 1, user_id);
 
                     //status = 1: order pending
                     od.setOrder_id(order_id);
