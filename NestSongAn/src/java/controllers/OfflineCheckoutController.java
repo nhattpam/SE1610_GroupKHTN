@@ -5,6 +5,8 @@
  */
 package controllers;
 
+import static controllers.RegisterAccountController.getSHA;
+import static controllers.RegisterAccountController.toHexString;
 import daos.OrderDAOImpl;
 import daos.OrderDetailsDAOImpl;
 import daos.QuantityProductDAOImpl;
@@ -18,6 +20,10 @@ import dtos.UserRoleDTO;
 import dtos.UsersDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -101,7 +107,17 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
             int getUser_id = (request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0);
             UsersDTO user_id = new UsersDTO(getUser_id);
             
-            int getLocation_id = 3;
+            HttpSession sCheckLocation = request.getSession();
+            int getLocation_id = 0;
+            if((int) sCheckLocation.getAttribute("branch_id") == 1){
+                getLocation_id = 1;
+            }
+            if((int) sCheckLocation.getAttribute("branch_id") == 2){
+                getLocation_id = 2;
+            }
+            if((int) sCheckLocation.getAttribute("branch_id") == 3){
+                getLocation_id = 3;
+            }
             LocationDTO location_id = new LocationDTO(getLocation_id);
             
             String full_name = request.getParameter("full_name");
@@ -160,12 +176,12 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
                 check = false;
             }
             
-//            //check duplicate
-//            UserDAOImpl daoCheckDup = new UserDAOImpl(DBUtils.getConnection());
-//            if (daoCheckDup.checkDuplicatePhone(phone)) {
-//                sessionValidate.setAttribute("wrongPhone", "Số điện thoại đã tồn tại!");
-//                check = false;
-//            }
+            //check duplicate
+            UserDAOImpl daoCheckDup = new UserDAOImpl(DBUtils.getConnection());
+            if (daoCheckDup.checkDuplicatePhone(phone)) {
+                sessionValidate.setAttribute("wrongPhone", "Số điện thoại đã tồn tại!");
+                check = false;
+            }
             
             if (check && !request.getParameter("province").equals("chooseCity")) {
                 try {
@@ -175,7 +191,8 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
                     //create account auto
                     UserDAOImpl daoCreate = new UserDAOImpl(DBUtils.getConnection());
                     UserRoleDTO role_id = new UserRoleDTO(1);
-                    UsersDTO uCreate = new UsersDTO(full_name, phone, phone, phone, 1, order_date, order_date, role_id);
+                    String password = toHexString(getSHA(phone));
+                    UsersDTO uCreate = new UsersDTO(full_name, phone, password, phone, 1, order_date, order_date, role_id);
                     
 //                    System.out.println("day la create: " + uCreate);
                     daoCreate.userRegisterOffline(uCreate);
@@ -205,7 +222,7 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
                     session.removeAttribute("numlist");
                     session.setAttribute("order_id", od.getOrder_id());
                     response.sendRedirect("offline-order?bid=" + sessin.getAttribute("branch_id") +"");
-                    
+                    session.setAttribute("succMsg", "Tạo hoá đơn thành công");
                     
                     
                 }catch(Exception ex){
@@ -222,4 +239,30 @@ private OrderDAOImpl orderDAO = new OrderDAOImpl(DBUtils.getConnection());
         
     }
 
+     //hàm mã hóa sha256
+    public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
+        // Static getInstance method is called with hashing SHA
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+        // digest() method called
+        // to calculate message digest of an input
+        // and return array of byte
+        return md.digest(input.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String toHexString(byte[] hash) {
+        // Convert byte array into signum representation
+        BigInteger number = new BigInteger(1, hash);
+
+        // Convert message digest into hex value
+        StringBuilder hexString = new StringBuilder(number.toString(16));
+
+        // Pad with leading zeros
+        while (hexString.length() < 64) {
+            hexString.insert(0, '0');
+        }
+
+        return hexString.toString();
+    }
+    //hàm mã hóa sha256
 }
