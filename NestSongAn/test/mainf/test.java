@@ -13,10 +13,12 @@ import daos.QuantityProductDAOImpl;
 import daos.UserDAOImpl;
 import dtos.CategoryDTO;
 import dtos.FeedbackDTO;
+import dtos.LocationDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailsDTO;
 import dtos.ProductDTO;
 import dtos.QuantityProductDTO;
+import dtos.UserRoleDTO;
 import dtos.UsersDTO;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,10 +33,9 @@ import utils.DBUtils;
 public class test {
 
     public static void main(String[] args) throws SQLException {
-        QuantityProductDAOImpl dao = new QuantityProductDAOImpl(DBUtils.getConnection());
-        List<QuantityProductDTO> listQ = dao.listProductWithQuantity(1);
-        for (QuantityProductDTO q : listQ) {
-            System.out.println(q.getProduct_id());
-        }
+       
+        UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
+        UsersDTO u = dao.getUserIdByPhone("0987444787");
+        System.out.println(u.getUser_id());
     }
 }
