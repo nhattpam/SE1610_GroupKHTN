@@ -300,15 +300,8 @@
                                                 <c:if test="${ not empty USERG }">
                                             <li><a href="AddToWishlistController?product_id=${l.product_id}&user_id=${USERG.id}"><i class="fa fa-heart"></i></a></li>
                                                 </c:if>
-                                                <c:if test="${empty USER && empty USERG}">
-                                            <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </c:if>
-                                                <c:if test="${ not empty USER }">
-                                            <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>   
-                                                </c:if>    
-                                                <c:if test="${ not empty USERG }">
-                                            <li><a href="add-cart?command=insert&product_id=${l.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>    
-                                                </c:if>
+                                               
+                                            <li><a href="detail?product_id=${l.product_id}&bid=${sessionScope.branch_id}"><i class="fa fa-eye" aria-hidden="true"></i></a></a></li>
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
@@ -345,15 +338,7 @@
                                                 <c:if test="${ not empty USERG }">
                                             <li><a href="AddToWishlistController?product_id=${l.product_id}&user_id=${USERG.id}"><i class="fa fa-heart"></i></a></li>
                                                 </c:if>
-                                                <c:if test="${empty USER && empty USERG}">
-                                            <li><a href="loginController"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </c:if>
-                                                <c:if test="${ not empty USER }">
-                                            <li><a href="add-cart?command=insert&product_id=${p.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>   
-                                                </c:if>    
-                                                <c:if test="${ not empty USERG }">
-                                            <li><a href="add-cart?command=insert&product_id=${p.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-shopping-cart"></i></a></li>    
-                                                </c:if>
+                                                <li><a href="detail?product_id=${p.product_id}&bid=${sessionScope.branch_id}"><i class="fa fa-eye" aria-hidden="true"></i></a></a></li>
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
