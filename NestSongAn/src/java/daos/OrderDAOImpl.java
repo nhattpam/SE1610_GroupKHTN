@@ -129,7 +129,8 @@ public class OrderDAOImpl implements OrderDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "SELECT u.full_name, u.user_name, u.email, u.phone, o.order_date, o.status, o.order_id, o.user_id,o.location_id\n"
-                        + "FROM [order] o inner join users u on o.user_id = u.user_id";
+                        + "FROM [order] o inner join users u on o.user_id = u.user_id\n"
+                        +"Order by o.order_id DESC";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {

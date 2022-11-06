@@ -206,7 +206,7 @@ public class ProductDAOImpl implements ProductDAO {
         List<ProductDTO> list = new ArrayList<>();
         ProductDTO p = null;
         try {
-            String sql = "SELECT product_id, name, code, short_description, full_description, weight, price, photo, category_id, quantity FROM product WHERE name like ?";
+            String sql = "SELECT product_id, name, code, short_description, full_description, weight, price, photo, category_id, quantity, create_date,edit_date FROM product WHERE name like ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + character + "%");
 
@@ -224,6 +224,8 @@ public class ProductDAOImpl implements ProductDAO {
                 p.setPhoto(rs.getString("photo"));
                 p.setQuantity(rs.getInt("quantity"));
                 p.setPrice(rs.getFloat("price"));
+                p.setCreate_date(rs.getString("create_date"));
+                p.setEdit_date(rs.getString("edit_date"));
                 list.add(p);
             }
         } catch (Exception e) {
