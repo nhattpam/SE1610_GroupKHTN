@@ -54,8 +54,8 @@
                 <div class="col-md-12 text-center">
                     
                     <i class="fa fa-check-circle fa-4x fa-success" aria-hidden="true"></i>
-                    <h3>Cảm ơn bạn đã đặt hàng tại chúng tôi!</h3>
-                    <h4>Đơn hàng của bạn : #${requestScope.order_id}</h4>
+                    <h3 style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Cảm ơn bạn đã đặt hàng tại chúng tôi!</h3>
+                    <h4 style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Đơn hàng của bạn : #${requestScope.order_id}</h4>
                      <table class="table table-striped">
                          <thead>
                              <tr>
@@ -78,11 +78,14 @@
 
                          </tbody>
                      </table>
-                     <h5>Phí giao hàng : <span style="color:green;">0đ</span></h5>
-                    <h5>Tổng giá trị đơn hàng: <span style="color:green;"><fmt:formatNumber type="number" groupingUsed="true" value="${total_price}" /> VNĐ</span></h5>
+                     <h5 style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Phí giao hàng : <span style="color:green;">0đ</span></h5>
+                    <h5 style="font-family: Tahoma, Verdana, Segoe, sans-serif;">Tổng giá trị đơn hàng: <span style="color:green;"><fmt:formatNumber type="number" groupingUsed="true" value="${total_price}" /> VNĐ</span></h5>
                 </div>
             </div>
         </div>
+                <div style="margin-bottom: 20px;">
+                    
+                </div>
         <jsp:include page="../../footer.jsp" />
     </body>
 </html>
