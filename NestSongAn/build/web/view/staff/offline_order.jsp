@@ -40,6 +40,11 @@
 
             <!-- Navbar -->
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                <div class="navbar-nav ml-auto">
+                    <a href="my-cart-offline?bid=${sessionScope.branch_id}"><i class="fa fa-shopping-bag fa-2x text-dark" aria-hidden="true" style="background:dark"></i></a>
+                </div>
+                
+                
 <!--                 Left navbar links 
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -237,20 +242,56 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper" >
-                <div class="container " >
-                    <div class="row text-center" >
-                        <div class="col-md-12" style="margin-top: 60px">
-                            <form method="post" action="checkout-offline">
-                                <select name="product" multiple size="10">
-                                    <c:forEach items="${listProduct}" var="l">
-                                        <option value="${l.name}">${l.name}</option>
-                                    </c:forEach>
-                                   
-                                </select><br>
-                                <input type="submit" class="btn btn-dark" value="Chọn">
-                            </form>
-                        </div>
-                        
+                <div class="container-fluid">
+                    <div class="row crd-ho">
+                        <table class="table table-striped">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Ảnh</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col">Trọng lượng</th>
+                                    <th scope="col">Số lượng trong kho</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:if test="${ not empty failedMsg }">
+                                <h5 class="text-center text-danger">${failedMsg}</h5>
+                                <c:remove var="failedMsg" scope="session"/>
+                            </c:if>
+
+                            <c:forEach items="${listProduct}" var="l">
+                                <%--<c:set var="price" value="123.2" />--%>  
+                                <tr>
+                                    <!--<th scope="row">1</th>-->
+                                    <td>${l.product_id.product_id}</td>
+                                    <td><img src="products/${l.product_id.photo}" style="width: 50px; height: 50px;"></td>
+                                    <td>${l.product_id.name}</td>
+                                    <td>${l.product_id.weight}</td>
+                                    <td>
+                                        <c:if test="${l.quantity == 0}">
+                                            Hết hàng
+                                        </c:if>
+                                        <c:if test="${l.quantity != 0}">
+                                            ${l.quantity}
+                                        </c:if>
+                                    </td>
+                                    <td> 
+                                        <fmt:formatNumber type="number" groupingUsed="true" value="${l.product_id.price}" /> VNĐ
+                                    </td>
+                                    <td>
+                                        <c:if test="${l.quantity != 0}">
+                                            <a href="add-cart-offline?command=insert&product_id=${l.product_id.product_id}&cartID=${System.currentTimeMillis()}&bid=${sessionScope.branch_id}"><i class="fa fa-plus-square fa-2x text-dark" aria-hidden="true" style=""></i></a>
+                                        </c:if>
+                                    </td> 
+                                        
+                                        
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -259,13 +300,13 @@
             <footer class="main-footer">
                 <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
                 All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
+<!--                <div class="float-right d-none d-sm-inline-block">
 
                     <form action="ExcelController">
                         <input type="submit" name="action" value="Export Product to Excel">
                     </form>
                     <b>Version</b> 3.0.4
-                </div>
+                </div>-->
             </footer>
 
             <!-- Control Sidebar -->
@@ -310,5 +351,13 @@
         <script src="${pageContext.request.contextPath}/dist/js/pages/dashboard.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
+        <script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus');
+    });
+    $('#exampleModal').modal({
+  show: true
+})
+        </script>
     </body>
 </html>

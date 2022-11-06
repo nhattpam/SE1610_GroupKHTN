@@ -245,4 +245,49 @@ public class QuantityProductDAOImpl implements QuantityProductDAO {
         }
         return result;
     }
+    
+    //List product with branch and quantity
+    public List<QuantityProductDTO> listProductWithQuantity(int branch_id){
+        List<QuantityProductDTO> listProduct = new ArrayList<>();;
+        
+        QuantityProductDTO q = null;
+        ProductDTO p = null;
+        BranchDTO b = null;
+        String sql = "SELECT p.product_id, p.name, p.category_id, p.code, p.create_date, p.edit_date, p.full_description, p.short_description, p.photo, p.price, p.weight, q.quantity, b.branch_id \n"
+                + "FROM quantity_product q \n"
+                + "INNER JOIN product p ON q.product_id = p.product_id\n"
+                + "INNER JOIN branch b ON b.branch_id = q.branch_id\n"
+                + "WHERE q.branch_id = " + branch_id + "";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                //product
+                p = new ProductDTO();
+                CategoryDTO c = new CategoryDTO(rs.getInt("category_id"));
+                p.setProduct_id(rs.getInt("product_id"));
+                p.setName(rs.getString("name"));
+                p.setCode(rs.getString("code"));
+                p.setCreate_date(rs.getString("create_date"));
+                p.setEdit_date(rs.getString("edit_date"));
+                p.setFull_description(rs.getString("full_description"));
+                p.setShort_description(rs.getString("short_description"));
+                p.setPhoto(rs.getString("photo"));
+                p.setPrice(rs.getFloat("price"));
+                p.setWeight(rs.getInt("weight"));
+                p.setCategory_id(c);
+               
+                //branch
+                b = new BranchDTO(rs.getInt("branch_id"));
+                //quantity
+                q = new QuantityProductDTO();
+                q.setProduct_id(p);
+                q.setBranch_id(b);
+                q.setQuantity(rs.getInt("quantity"));
+                listProduct.add(q);
+            }
+        } catch (Exception e) {
+        }
+        return listProduct;
+    }
 }
