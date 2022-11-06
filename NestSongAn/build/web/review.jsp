@@ -25,61 +25,65 @@
         <style type="text/css">
             table { border: 0; }
             table td { padding: 5px; }
+            .buttonCheckOut{
+                background: #00457C;
+                color:white;
+            }
         </style>
     </head>
     <body>
         <jsp:include page="header.jsp"/> 
         <div align="center">
-            <h4>Làm ơn kiểm tra lại trước khi thanh toán</h4>
+            <h4 style="color: #00457C; font-family: Tahoma, Verdana, Segoe, sans-serif; font-weight: bold;">Vui lòng kiểm tra lại trước khi thanh toán</h4>
             <form action="execute_payment" method="post">
                 <table>
                     <tr>
-                        <td colspan="2"><b>Chi tiết giao dịch:</b></td>
+                        <td colspan="2" style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;"><b>Chi tiết giao dịch:</b></td>
                         <td>
                             <input type="hidden" name="paymentId" value="${param.paymentId}" />
                             <input type="hidden" name="PayerID" value="${param.PayerID}" />
                         </td>
                     </tr>
                     <tr>
-                        <td>Mô tả</td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Mô tả</td>
                         <td>${transaction.description}</td>
                     </tr>
                     <tr>
-                        <td>Subtotal:</td>
-                        <td>${transaction.amount.details.subtotal} USD</td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Thành tiền:</td>
+                        <td>${transaction.amount.details.subtotal} VNĐ</td>
                     </tr>
                     <tr>
-                        <td>Phí vận chuyển</td>
-                        <td>${transaction.amount.details.shipping} USD</td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Phí vận chuyển</td>
+                        <td>${transaction.amount.details.shipping} VNĐ</td>
                     </tr>
                     <tr>
-                        <td>Thuế:</td>
-                        <td>${transaction.amount.details.tax} USD</td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Thuế:</td>
+                        <td>${transaction.amount.details.tax} VNĐ</td>
                     </tr>
                     <tr>
-                        <td>Tổng giá trị:</td>
-                        <td>${transaction.amount.total} USD</td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Tổng giá trị:</td>
+                        <td>${transaction.amount.total} VNĐ</td>
                     </tr>
                     <tr><td><br/></td></tr>
                     <tr>
-                        <td colspan="2"><b>Thông tin người thanh toán:</b></td>
+                        <td colspan="2" style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;"><b>Thông tin người thanh toán:</b></td>
                     </tr>
                     <tr>
-                        <td>Họ:</td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Họ:</td>
                         <td>${payer.firstName}</td>
                     </tr>
                     <tr>
-                        <td>Tên:</td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Tên:</td>
                         <td>${payer.lastName}</td>
                     </tr>
                     <tr>
-                        <td>Email:</td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Email:</td>
                         <td>${payer.email}</td>
                     </tr>
 
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value="Thanh Toán Ngay" />
+                            <input type="submit" value="Thanh Toán Ngay" class="buttonCheckOut"/>
                         </td>
                     </tr>    
                 </table>

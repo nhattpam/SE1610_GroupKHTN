@@ -27,38 +27,44 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <style>
+            .buttonCheckOut{
+                background: #00457C;
+                color:white;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="header.jsp"/>   
         
         <div align="center">
-            <h4>Đơn Hàng Của Bạn</h4>
+            <h4 style="color: #00457C; font-family: Tahoma, Verdana, Segoe, sans-serif; font-weight: bold;">Đơn Hàng Của Bạn</h4>
             <br/>
             <form action="authorize_payment" method="post">
                 <table>
                     <tr>
-                        <td>Mã đơn hàng</td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Mã đơn hàng</td>
                         <td><input type="text" name="product" value="${sessionScope.order_id}" /></td>
                     </tr>
                     <tr>
-                        <td>Thành tiền:</td>
-                        <td><input type="text" name="subtotal" value="${sessionScope.subtotal}" /></td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Thành tiền:</td>
+                        <td><input type="text" name="subtotal" value="${sessionScope.subtotal}" /> VNĐ</td>
                     </tr>
                     <tr>
-                        <td>Phí vận chuyển: </td>
-                        <td><input type="text" name="shipping" value="0" /></td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Phí vận chuyển: </td>
+                        <td><input type="text" name="shipping" value="0" /> VNĐ</td>
                     </tr>    
                     <tr>
-                        <td>Thuế:</td>
-                        <td><input type="text" name="tax" value="0" /></td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Thuế:</td>
+                        <td><input type="text" name="tax" value="0" /> VNĐ</td>
                     </tr>    
                     <tr>
-                        <td>Tổng giá trị:</td>
-                        <td><input type="text" name="total" value="${sessionScope.subtotal}" /></td>
+                        <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Tổng giá trị:</td>
+                        <td><input type="text" name="total" value="${sessionScope.subtotal}" /> VNĐ</td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value="Thanh toán" />
+                            <input type="submit" value="Thanh toán" class="buttonCheckOut"/>
                         </td>
                     </tr>
                 </table>
