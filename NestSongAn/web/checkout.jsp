@@ -453,6 +453,7 @@
                                                     <select name="payment_method" required=""> 
                                                         <option value="choosePay" selected="">--Phương Thức Thanh Toán--</option>
                                                         <option value="cod">Thanh toán khi nhận hàng</option>
+                                                        <option value="paypal">Thanh toán bằng Paypal/MasterCard/Visa</option>
                                                     </select><br>
                                                 </div> <br>
                                                 <div  class="form-group">
