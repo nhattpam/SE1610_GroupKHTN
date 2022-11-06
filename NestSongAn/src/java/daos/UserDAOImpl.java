@@ -714,4 +714,47 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    //offline-order : if phone number exist, no create account, if phone not exits, auto create account
+    public boolean userRegisterOffline(UsersDTO us) {
+        boolean f = false;
+
+        try {
+            String sql = "INSERT INTO users(full_name,user_name,password,phone,status,create_date,edited_date,role_id) VALUES (?,?,?,?,?,?,?,?)";
+            conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, us.getFull_name());
+            ps.setString(2, us.getUser_name());
+            ps.setString(3, us.getPassword());
+            ps.setString(4, us.getPhone());
+            ps.setInt(5, us.getStatus());
+            ps.setString(6, us.getCreate_date());
+            ps.setString(7, us.getEdit_date());
+            ps.setInt(8, us.getRole_id().getRole_id());
+            int i = ps.executeUpdate();
+            if (i > 0) {
+                f = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+    
+    //get uid by phone
+    public UsersDTO getUserIdByPhone(String phone){
+        UsersDTO u = null;
+        String sql = "SELECT user_id FROM users\n"
+                + "\n"
+                + "WHERE phone = " +  phone +"";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                u = new UsersDTO();
+                u.setUser_id(rs.getInt("user_id"));
+            }
+        } catch (Exception e) {
+        }
+        return u ;
+    }
 }

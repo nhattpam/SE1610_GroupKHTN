@@ -50,6 +50,28 @@ public class OrderDAOImpl implements OrderDAO {
         } catch (SQLException e) {
         }
     }
+    
+    //addOrderOffline
+    public void addOrderOffline(OrderDTO od) {
+        String sql = "INSERT INTO [order] (order_id,user_id,delivery_address,payment_method,order_date,total_price,status,note,location_id,delivery_date) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+//            LocationDTO
+            ps.setString(1, od.getOrder_id());
+            ps.setInt(2, od.getUser_id().getUser_id());
+            ps.setString(3, od.getDelivery_address());
+            ps.setString(4, od.getPayment_method());
+            ps.setString(5, od.getOrder_date());
+            ps.setFloat(6, od.getTotal_price());
+            ps.setInt(7, od.getStatus());
+            ps.setString(8, od.getNote());
+            ps.setInt(9, od.getLocation_id().getLocation_id());
+            ps.setString(10, od.getDelivery_date());
+            
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
 
     @Override
     public List<OrderDTO> getAllListOrder(int user_id) {

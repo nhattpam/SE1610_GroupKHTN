@@ -122,6 +122,19 @@ public class UsersDTO implements Serializable{
         this.role_id = role_id;
     }
 
+    //offline order account
+    
+    public UsersDTO(String full_name, String user_name, String password, String phone, int status, String create_date, String edit_date, UserRoleDTO role_id) {
+        this.full_name = full_name;
+        this.user_name = user_name;
+        this.password = password;
+        this.phone = phone;
+        this.status = status;
+        this.create_date = create_date;
+        this.edit_date = edit_date;
+        this.role_id = role_id;
+    }
+
     public int getUser_id() {
         return user_id;
     }

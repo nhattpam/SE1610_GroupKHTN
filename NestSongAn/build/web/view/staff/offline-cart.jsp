@@ -506,6 +506,14 @@
                         </table>
 
                     </div>
+                    <div  class="container-fluid mb-5" style="color: white">
+                         <c:if test="${ empty requestScope.list }" >
+                            Giỏ hàng trống
+                        </c:if>
+                        <c:if test="${ not empty requestScope.list && empty sessionScope.noti}">
+                            <a class="btn btn-custom btn-lg btn-block" href="checkout-offline?bid=${sessionScope.branch_id}" id="button">TẠO ĐƠN HÀNG</a>
+                        </c:if>
+                    </div>
                 </div>
             </div>
 

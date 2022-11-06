@@ -34,12 +34,168 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/summernote/summernote-bs4.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <style>
+            .breadcrumbs {
+
+            }
+
+            .breadcrumbs .breadcrumb {
+                background:transparent;
+                margin-bottom: 75px;
+                padding-left: 0;
+            }
+
+            .breadcrumbs .breadcrumb li a {
+                background: #6a0e13;
+                color: #FFFFFF;
+                padding: 3px 7px;
+            }
+
+            .breadcrumbs .breadcrumb li a:after {
+                content:"";
+                height:auto;
+                width: auto;
+                border-width: 8px;
+                border-style: solid;
+                border-color:transparent transparent transparent #6a0e13;
+                position: absolute;
+                top: 11px;
+                left:48px;
+
+            }
+
+            .breadcrumbs .breadcrumb > li + li:before {
+                content: " ";
+            }
+
+            #cart_items .cart_info {
+                border: 1px solid #E6E4DF;
+                margin-bottom: 50px
+            }
+
+
+            #cart_items .cart_info .cart_menu {
+                background: #6a0e13;
+                color: #fff;
+                font-size: 16px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: normal;
+            }
+
+            #cart_items .cart_info .table.table-condensed thead tr {
+                height: 51px;
+            }
+
+
+            #cart_items .cart_info .table.table-condensed tr {
+                border-bottom: 1px solid#F7F7F0
+            }
+
+            #cart_items .cart_info .table.table-condensed tr:last-child {
+                border-bottom: 0
+            }
+
+            .cart_info table tr td {
+                border-top: 0 none;
+                vertical-align: inherit;
+            }
+
+
+            #cart_items .cart_info .image {
+                padding-left: 30px;
+            }
+
+
+            #cart_items .cart_info .cart_description h4 {
+                margin-bottom: 0
+            }
+
+            #cart_items .cart_info .cart_description h4 a {
+                color: #363432;
+                font-family: 'Roboto',sans-serif;
+                font-size: 20px;
+                font-weight: normal;
+
+            }
+
+            #cart_items .cart_info .cart_description p {
+                color:#696763
+            }
+
+
+            #cart_items .cart_info .cart_price p {
+                color:#696763;
+                font-size: 18px
+            }
+
+
+            #cart_items .cart_info .cart_total_price {
+                color: #6a0e13;
+                font-size: 24px;
+            }
+
+            .cart_product {
+                display: block;
+                margin: 15px -70px 10px 25px;
+            }
+
+            .cart_quantity_button a {
+                background: #F0F0E9;
+                color: #696763;
+                display: inline-block;
+                font-size: 16px;
+                height: 28px;
+                overflow: hidden;
+                text-align: center;
+                width: 20px;
+                float: left;
+            }
+
+
+            .cart_quantity_input {
+                color: #696763;
+                float: left;
+                font-size: 16px;
+                text-align: center;
+                font-family: 'Roboto',sans-serif;
+
+            }
+
+
+            .cart_delete  {
+                display: block;
+                margin-right: -12px;
+                overflow: hidden;
+            }
+
+
+            .cart_delete a {
+                background:#6a0e13;
+                color: #FFFFFF;
+                padding: 5px 7px;
+                font-size: 16px
+            }
+
+            .cart_delete a:hover {
+                background:#FE980F
+            }
+
+            #button{
+                background: #6a0e13;
+                color: white;
+            }
+
+        </style>
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
 
             <!-- Navbar -->
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                <div class="navbar-nav ml-auto">
+                     <a href="offline-order?bid=${sessionScope.branch_id}"><i class="fa fa-list fa-2x text-dark" aria-hidden="true"></i></a>
+                </div>
+               
 <!--                 Left navbar links 
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -236,46 +392,215 @@
             </aside>
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper" >
-                <div class="container-fluid" >
-                    <div class="row crd-ho" >
-                        <table class="table table-striped">
-                            <thead class="bg-dark text-white">
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Tên sản phẩm</th>
-                                    <th scope="col">Đơn giá</th>
-                                    <th scope="col">Số lượng</th>
-                                    <th scope="col">Hành động</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${listCHECKOUT}" var="l">
+            <div class="content-wrapper " style="margin-bottom: 50px;">
+                    <div class="container">
+                        <div class="row crd-ho">
+                            <div class="col-md-6 offset-md-3" style="margin-top: 10px;">
+                                <c:if test="${not empty user }">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <c:if test="${ not empty notiCheckout }">
+                                                <h5 class="text-center text-danger">${notiCheckout}</h5>
+                                                <c:remove var="notiCheckout" scope="session"/>
+                                            </c:if>
+                                            <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;font-family: Tahoma, Verdana, Segoe, sans-serif;">Thông Tin Thanh Toán</h4><br>
+
+
+                                            <form action="checkout-offline?bid=${sessionScope.branch_id}" method="post">
+                                                <!--<input type="hidden" value="${user.user_id}" name="id">-->
+                                                <c:if test="${ not empty wrongFullName }">
+                                                    <p class="text-danger">${wrongFullName}</p>   
+                                                    <c:remove var="wrongFullName" scope="session"/>
+                                                </c:if>
+                                                <div class="form-group" style="font-weight: bold;">
+                                                    Họ và tên<input name="full_name" type="text" class="form-control" id="exampleInputPassword1" value="${full_name}" >
+                                                </div> 
+                                                    <c:if test="${ not empty wrongPhone }">
+                                                        <p class="text-danger">${wrongPhone}</p>   
+                                                        <c:remove var="wrongPhone" scope="session"/>
+                                                    </c:if>      
+                                                <div class="form-group" style="font-weight: bold;">
+                                                    Số điện thoại<input name="phone" type="number" class="form-control" id="exampleInputPassword1" value="${phone}" >
+                                                </div> 
+                                                
+                                                <div style="font-weight: bold;" class="form-group">
+                                                    Địa chỉ giao hàng
+                                                </div>
+                                                <div class="form-row" >
+                                                    <c:set var = "tp" scope = "session" value = "${branch_id}"/>
+                                                    <div class="col-12">
+                                                        <select name="province" class="form-select selectpicker" required="">
+                                                            <option value="chooseCity" selected="">--Tỉnh/Thành Phố--</option>
+                                                            <c:if test="${tp == 1}">
+                                                                <option value="Hoà Bình">Hoà Bình</option>
+                                                                <option value="Sơn La">Sơn La</option>
+                                                                <option value="Điện Biên">Điện Biên</option>
+                                                                <option value="Lai Châu">Lai Châu</option>
+                                                                <option value="Lào Cai">Lào Cai</option>
+                                                                <option value="Yên Bái">Yên Bái</option>
+                                                                <option value="Phú Thọ">Phú Thọ</option>
+                                                                <option value="Hà Giang">Hà Giang</option>
+                                                                <option value="Tuyên Quang">Tuyên Quang</option>
+                                                                <option value="Cao Bằng">Cao Bằng</option>
+                                                                <option value="Bắc Kạn">Bắc Kạn</option>
+                                                                <option value="Thái Nguyên">Thái Nguyên</option>
+                                                                <option value="Lạng Sơn">Lạng Sơn</option>
+                                                                <option value="Bắc Giang">Bắc Giang</option>
+                                                                <option value="Quảng Ninh">Quảng Ninh</option>
+                                                                <option value="Hà Nội">Hà Nội</option>
+                                                                <option value="Bắc Ninh">Bắc Ninh</option>
+                                                                <option value="Hà Nam">Hà Nam</option>
+                                                                <option value="Hải Dương">Hải Dương</option>
+                                                                <option value="Hải Phòng">Hải Phòng</option>
+                                                                <option value="Hưng Yên">Hưng Yên</option>
+                                                                <option value="Nam Định">Nam Định</option>
+                                                                <option value="Thái Bình">Thái Bình</option>
+                                                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                                                <option value="Ninh Bình">Ninh Bình</option>
+                                                            </c:if>
+                                                            <c:if test="${tp == 2}">
+                                                                <option value="Thanh Hoá">Thanh Hoá</option>
+                                                                <option value="Nghệ An">Nghệ An</option>
+                                                                <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                                                <option value="Quảng Bình">Quảng Bình</option>
+                                                                <option value="Quảng Trị">Quảng Trị</option>
+                                                                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                                                                <option value="Đà Nẵng">Đà Nẵng</option>
+                                                                <option value="Quảng Nam">Quảng Nam</option>
+                                                                <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                                                <option value="Bình Định">Bình Định</option>
+                                                                <option value="Phú Yên">Phú Yên</option>
+                                                                <option value="Khánh Hoà">Khánh Hoà</option>
+                                                                <option value="Ninh Thuận">Ninh Thuận</option>
+                                                                <option value="Bình Thuận">Bình Thuận</option>
+                                                                <option value="Kon Tum">Kon Tum</option>
+                                                                <option value="Gia Lai">Gia Lai</option>
+                                                                <option value="Đắk Lắk">Đắk Lắk</option>
+                                                                <option value="Đắk Nông">Đắk Nông</option>
+                                                                <option value="Lâm Đồng">Lâm Đồng</option>
+                                                            </c:if>
+                                                            <c:if test="${tp == 3}">
+                                                                <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
+                                                                <option value="Bà Rịa Vũng Tàu">Bà Rịa Vũng Tàu</option>
+                                                                <option value="Bình Dương">Bình Dương</option>
+                                                                <option value="Bình Phước">Bình Phước</option>
+                                                                <option value="Đồng Nai">Đồng Nai</option>
+                                                                <option value="Tây Ninh">Tây Ninh</option>
+                                                                <option value="An Giang">An Giang</option>
+                                                                <option value="Bạc Liêu">Bạc Liêu</option>
+                                                                <option value="Bến Tre">Bến Tre</option>
+                                                                <option value="Cà Mau">Cà Mau</option>
+                                                                <option value="Cần Thơ">Cần Thơ</option>
+                                                                <option value="Đồng Tháp">Đồng Tháp</option>
+                                                                <option value="Hậu Giang">Hậu Giang</option>
+                                                                <option value="Kiên Giang">Kiên Giang</option>
+                                                                <option value="Long An">Long An</option>
+                                                                <option value="Sóc Trăng">Sóc Trăng</option>
+                                                                <option value="Tiền Giang">Tiền Giang</option>
+                                                                <option value="Trà Vinh">Trà Vinh</option>
+                                                                <option value="Vĩnh Long">Vĩnh Long</option>
+                                                            </c:if>
+
+                                                        </select>
+                                                    </div>
+                                                </div>  
+                                                <br>
+                                                <c:if test="${ not empty wrongAddress }">
+                                                    <p class="text-danger">${wrongAddress}</p>
+                                                    <c:remove var="wrongAddress" scope="session"/>
+                                                </c:if>
+                                                <div class="form-group">
+                                                    <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết" value="${delivery_address}">
+                                                </div> 
+<!--                                                <div class="form-group">
+                                                    <select name="payment_method" required=""> 
+                                                        <option value="choosePay" selected="">--Phương Thức Thanh Toán--</option>
+                                                        <option value="cod">Thanh toán bằng tiền mặt</option>
+                                                    </select><br>
+                                                </div> <br>-->
+                                                <div  class="form-group">
+                                                    <input type="submit" value="Xác nhận thanh toán" class="btn btn-custom btn-lg btn-block" id="button">
+                                                </div>
+
+                                            </form>
+                                        </div> 
+                                    </div>
+                                </c:if>
+
+
+                            </div>
+                        </div>
+                        <div class="table-responsive cart_info">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr class="cart_menu">
+                                        <td class="image">Sản Phẩm</td>
+                                        <td class="description"></td>
+                                        <td class="price">Giá</td>
+                                        <td class="quantity">Số Lượng</td>
+                                        <td class="total">Tổng</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:set var="TotalPriceAll" scope="session" value="0" />
+                                    <c:forEach items="${requestScope.list}" var="map">
+                                        <tr>
+                                            <td class="cart_product">
+                                                <a href=""><img src="products/${map.key.photo}" alt="" style="width: 50px; height: 60px;"></a>
+                                            </td>
+                                            <td class="cart_description">
+                                                <h4><a href="">${map.key.name}</a></h4>
+                                                <p>Code: ${map.key.code}</p>
+                                            </td>
+                                            <td class="cart_price">
+                                                <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price}" /> VNĐ</p>
+                                            </td>
+                                            <td class="cart_quantity">
+                                                <div class="cart_quantity_button">
+                                                    <a class="cart_quantity_up" href="add-cart-offline?command=plus&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"> + </a>
+                                                    <input class="cart_quantity_input" type="text" value="${map.value}" autocomplete="off" size="2" disabled="">
+                                                    <a class="cart_quantity_down" href="add-cart-offline?command=sub&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"> - </a>
+                                                </div>
+                                            </td>
+                                            <td class="cart_total">
+                                                <c:set var="TotalPriceAll" scope="session" value="${TotalPriceAll+(map.value * map.key.price)}" />
+                                                <p><fmt:formatNumber type="number" groupingUsed="true" value="${map.key.price * map.value}" /> VNĐ</p>
+                                            </td>
+                                            <td class="cart_delete">
+                                                <a class="cart_quantity_delete" href="add-cart-offline?command=remove&product_id=${map.key.product_id}&cartID=${System.currentTimeMillis()}"><i class="fa fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+
 
                                     <tr>
-                                        <td>${l.product_id}</td>
-                                        <td>${l.name}</td>
-                                        <td>${l.price}</td>
-                                        <td><input type="number" name="quantity"/></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="font-weight: bold;">Tiền tạm tính: </td>
+                                        <td style="color: green; font-size: large; font-weight: bold;"><fmt:formatNumber type="number" groupingUsed="true" value="${TotalPriceAll}" /> VNĐ</td>
                                     </tr>
-                                </c:forEach>  
-                            </tbody>
-                        </table>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
                     </div>
                 </div>
-            </div>
 
             <!-- /.content-wrapper -->
             <footer class="main-footer">
                 <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
                 All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
+<!--                <div class="float-right d-none d-sm-inline-block">
 
                     <form action="ExcelController">
                         <input type="submit" name="action" value="Export Product to Excel">
                     </form>
                     <b>Version</b> 3.0.4
-                </div>
+                </div>-->
             </footer>
 
             <!-- Control Sidebar -->
@@ -320,5 +645,13 @@
         <script src="${pageContext.request.contextPath}/dist/js/pages/dashboard.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
+        <script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus');
+    });
+    $('#exampleModal').modal({
+  show: true
+})
+        </script>
     </body>
 </html>

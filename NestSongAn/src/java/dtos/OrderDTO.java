@@ -82,6 +82,21 @@ public class OrderDTO {
         this.location_id = location_id;
     }
 
+    //offline-order
+    
+    public OrderDTO(String order_id, String delivery_address, String payment_method, String order_date, String delivery_date, float total_price, int status, UsersDTO user_id, String note, LocationDTO location_id) {
+        this.order_id = order_id;
+        this.delivery_address = delivery_address;
+        this.payment_method = payment_method;
+        this.order_date = order_date;
+        this.delivery_date = delivery_date;
+        this.total_price = total_price;
+        this.status = status;
+        this.user_id = user_id;
+        this.note = note;
+        this.location_id = location_id;
+    }
+
     public String getOrder_id() {
         return order_id;
     }
