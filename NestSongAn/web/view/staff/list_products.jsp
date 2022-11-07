@@ -232,7 +232,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="offline-order" class="nav-link">
+                                <a href="offline-order?bid=${sessionScope.branch_id}" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Tạo Đơn Hàng
@@ -266,7 +266,7 @@
                                     <th scope="col">Giá</th>
                                     <th scope="col">Ngày tạo</th>
                                     <th scope="col">Ngày sửa</th>
-                                    <th scope="col">Danh mục</th>
+                                    <!--<th scope="col">Danh mục</th>-->
                                     <th scope="col">Hành động</th>
                                 </tr>
                             </thead>
@@ -292,7 +292,7 @@
                                     </td>
                                     <td>${l.create_date}</td>
                                     <td>${l.edit_date}</td>
-                                    <td>${l.category_id.category_id}</td>
+                                    <!--<td>${l.category_id.category_id}</td>-->
                                     <td>
                                         <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-warning"> Sửa</a>
                                     </td>

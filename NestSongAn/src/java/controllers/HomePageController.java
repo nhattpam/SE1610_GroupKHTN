@@ -53,7 +53,7 @@ public class HomePageController extends HttpServlet{
             UsersDTO uu = (UsersDTO) sessionn.getAttribute("USER");
 //            System.out.println("DDya la: " + uu.getRole_id().getRole());
             if (uu.getRole_id().getRole().equals("staff")) {
-                resp.sendRedirect("staff-dashboard");
+                resp.sendRedirect("list-products");
             }
             if (uu.getRole_id().getRole().equals("admin")) {
                 resp.sendRedirect("admin-dashboard");

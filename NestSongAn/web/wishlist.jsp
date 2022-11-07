@@ -101,6 +101,11 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-8">
+                        <style>
+                            .primary-btn:hover{
+                                color: yellow;
+                            }
+                        </style>
                         <div class="product__details__text">
                             <h3>${dto.product_id.name}</h3>                        
                             <div class="product__details__price"><fmt:formatNumber type="number" groupingUsed="true" value="${dto.product_id.price}" /> VNĐ</div>
