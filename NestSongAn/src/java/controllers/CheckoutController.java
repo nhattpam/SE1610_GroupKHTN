@@ -177,7 +177,7 @@ public class CheckoutController extends HttpServlet {
                     session.removeAttribute("cart");
                     session.removeAttribute("numlist");
                     session.setAttribute("order_id", od.getOrder_id());
-                    response.sendRedirect("success-order");
+//                    response.sendRedirect("success-order");
 
                 } catch (Exception e) {
                     e.printStackTrace();

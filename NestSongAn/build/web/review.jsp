@@ -44,10 +44,10 @@
                             <input type="hidden" name="PayerID" value="${param.PayerID}" />
                         </td>
                     </tr>
-                    <tr>
+<!--                    <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Mô tả</td>
                         <td>${transaction.description}</td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Thành tiền:</td>
                         <td>${transaction.amount.details.subtotal} VNĐ</td>
