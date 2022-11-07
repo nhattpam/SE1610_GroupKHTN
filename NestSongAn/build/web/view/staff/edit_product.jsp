@@ -289,10 +289,11 @@
                                                 <label for="exampleInputPassword1">Trọng Lượng*</label>
                                                 <input name="weight" type="number" class="form-control" id="exampleInputPassword1" required="required" value="${p.weight}">
                                             </div> 
-
+                                            
                                             <div class="form-group">
                                                 <label for="exampleFormControlFile1">Upload Ảnh</label>
                                                 <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1" required="required"/>
+                                                <img src="products/${p.photo}" style="width: 100px; height: 100px;">
                                             </div>
 
                                             <div class="form-group">
