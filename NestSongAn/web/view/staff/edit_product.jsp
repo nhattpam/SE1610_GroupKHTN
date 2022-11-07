@@ -218,7 +218,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="offline-order" class="nav-link">
+                                <a href="offline-order?bid=${sessionScope.branch_id}" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Tạo Đơn Hàng
