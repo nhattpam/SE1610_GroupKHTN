@@ -79,7 +79,12 @@
                     <c:forEach items="${listFeature}" var="l">
                         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                             <div class="featured__item">
-
+                                <style>
+                                    #hello:hover{
+                                        font-weight: bold;
+                                        color: #6a0e13;
+                                    }
+                                </style>
                                 <div class="featured__item__pic set-bg" data-setbg="products/${l.photo}">
                                      <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -95,7 +100,7 @@
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
-                                    <h6><a href="detail?product_id=${l.product_id}&bid=${sessionScope.branch_id}">${l.name}</a></h6>
+                                    <h6><a href="detail?product_id=${l.product_id}&bid=${sessionScope.branch_id}" id="hello">${l.name}</a></h6>
                                     <h5><fmt:formatNumber type="number" groupingUsed="true" value="${l.price}" /> VNĐ</h5>
                                 </div>
 

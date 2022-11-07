@@ -28,7 +28,12 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
-
+        <style>
+            #ola:hover{
+                font-weight: bold;
+                color: #6a0e13;
+            }
+        </style>
     </head>
     <body>
         <div class="col-lg-3">
@@ -39,7 +44,7 @@
                 </div>
                 <ul>
                     <c:forEach items="${cList}" var="l">
-                        <li><a href="SortPriceController?cateId=${l.category_id}">${l.name}</a></li>
+                        <li><a href="SortPriceController?cateId=${l.category_id}" id="ola">${l.name}</a></li>
                     </c:forEach>
                 </ul>
             </div>

@@ -49,7 +49,13 @@
                 border-color: #6a0e13;
             }
 
-
+            #timKiem2:hover{
+                color: yellow;
+            }
+            #cajj:hover{
+                color: #6a0e13;
+                font-weight: bold;
+            }
         </style>
     </head>
 
@@ -74,7 +80,7 @@
                             </div>
                             <ul>
                                 <c:forEach items="${CList}" var="l">
-                                    <li><a href="danh-muc?cateId=${l.category_id}">${l.name}</a></li>
+                                    <li><a href="danh-muc?cateId=${l.category_id}" id="cajj">${l.name}</a></li>
                                     </c:forEach>
                             </ul>
                         </div>
@@ -88,7 +94,7 @@
                                         <!--<span class="arrow_carrot-down"></span>-->
                                     </div>
                                     <input type="text" placeholder="Bạn tìm gì?" name="character">
-                                    <button type="submit" class="site-btn" style="background: #6a0e13;">TÌM KIẾM</button>
+                                    <button type="submit" class="site-btn" style="background: #6a0e13;" id="timKiem2">TÌM KIẾM</button>
                                 </form>
                             </div>
                             <div class="hero__search__phone">
@@ -115,7 +121,7 @@
                         <div class="breadcrumb__text">
                             <h2>Sản Phẩm Chính Hãng</h2>
                             <div class="breadcrumb__option">
-                                <a href="home">Trang Chủ</a>
+                                <a href="trang-chu?bid=${sessionScope.branch_id}">Trang Chủ</a>
                                 <span>Chi Tiết Sản Phẩm</span>
                             </div>
                         </div>
@@ -142,14 +148,15 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="product__details__text">
                             <h3  style="font-family: Tahoma, Verdana, Segoe, sans-serif;">${detail.name}</h3>
-                            <!--                            <div class="product__details__rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-half-o"></i>
-                                                            <span>(18 reviews)</span>
-                                                        </div>-->
+                            <style>
+                                .heart-icon:hover{
+                                    background: #6a0e13;
+                                    color: yellow;
+                                }
+                                .primary-btn:hover{
+                                    color:yellow;
+                                }
+                            </style>
                             <div class="product__details__price"><fmt:formatNumber type="number" groupingUsed="true" value="${detail.price}" /> VNĐ</div>
                             <p>${detail.short_description}</p>
                             <c:if test="${q.quantity > 0}">
@@ -181,14 +188,7 @@
                                     </c:if>
                                 <li><b>Vận chuyển</b> <span><samp>Miễn Phí Vận Chuyển Toàn Quốc</samp></span></li>
                                 <li><b>Trọng lượng</b> <span>${detail.weight} gam</span></li>
-                                <!--                                <li><b>Share on</b>
-                                                                    <div class="share">
-                                                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                                                        <a href="#"><i class="fa fa-instagram"></i></a>
-                                                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                                                    </div>
-                                                                </li>-->
+
                             </ul>
                         </div>
                     </div>

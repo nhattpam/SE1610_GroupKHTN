@@ -27,7 +27,11 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css" />
-        
+        <style>
+            #timKiem1:hover{
+                color: yellow;
+            }
+        </style>
     </head>
     <body>
         <!--<div class="col-lg-9">-->
@@ -39,7 +43,7 @@
                             <!--<span class="arrow_carrot-down"></span>-->
                         </div>
                         <input type="text" placeholder="Bạn tìm gì?" name="character">
-                        <button type="submit" class="site-btn" style="background: #6a0e13;">TÌM KIẾM</button>
+                        <button type="submit" class="site-btn" style="background: #6a0e13;" id="timKiem1">TÌM KIẾM</button>
                     </form>
                 </div>
                 <div class="hero__search__phone">

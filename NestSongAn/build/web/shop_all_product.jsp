@@ -123,7 +123,7 @@
                         <div class="breadcrumb__text">
                             <h2>Sản Phẩm Của Nest Song Ân</h2>
                             <div class="breadcrumb__option">
-                                <a href="home">Trang chủ</a>
+                                <a href="trang-chu?bid=${sessionScope.branch_id}">Trang chủ</a>
                                 <span>Sản phẩm</span>
                             </div>
                         </div>
@@ -153,6 +153,10 @@
                                 .featured__controls a{
                                     color: black;
                                 }
+                                .featured__controls a:hover{
+                                    color: #6a0e13;
+                                    font-weight: bold;
+                                }
                                 .featured__controls ul li:after {
                                     position: absolute;
                                     left: 0;
@@ -167,9 +171,9 @@
                         </div>
                         <div class="featured__controls">
                             <ul>
-                                <li class="active" data-filter="*"><a href="shop-products?bid=${sessionScope.branch_id}">All</a></li>
+                                <li ><a href="shop-products?bid=${sessionScope.branch_id}">Tất cả</a></li>
                                     <c:forEach items="${cList}" var="l">
-                                    <li><a href="SortPriceController?cateId=${l.category_id}&bid=${sessionScope.branch_id}">${l.name}</a></li>
+                                    <li ><a href="SortPriceController?cateId=${l.category_id}&bid=${sessionScope.branch_id}">${l.name}</a></li>
                                     </c:forEach>
                             </ul>
                             </br>
