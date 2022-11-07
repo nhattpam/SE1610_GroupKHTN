@@ -319,7 +319,7 @@
                                                 <br>
 
                                                 <div class="form-group">
-                                                    <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết" value="${delivery_address}">
+                                                    <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết (Ghi chú nếu có)" value="${delivery_address}">
                                                 </div> 
                                                 <div class="form-group">
                                                     <select name="payment_method" required=""> 
@@ -447,7 +447,7 @@
                                                 <br>
 
                                                 <div class="form-group">
-                                                    <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết" value="${delivery_address}">
+                                                    <input name="delivery_address" type="text" class="form-control" id="exampleInputPassword1" required="required" placeholder="Địa chỉ chi tiết (Ghi chú nếu có)" value="${delivery_address}">
                                                 </div> 
                                                 <div class="form-group">
                                                     <select name="payment_method" required=""> 
