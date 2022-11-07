@@ -42,15 +42,11 @@ public class ViewSuccesfulDeliveryController extends HttpServlet {
         try{
             //call dao
             OrderDAO dao=new OrderDAOImpl();
-            //get current month
-            Date now = new Date();
-            SimpleDateFormat x = new SimpleDateFormat("M");
-            String currentMonth = x.format(now);
-            session.setAttribute("currentMonth", currentMonth);
+            //get current month            
             //
-            int waitOrder=dao.getTotalDeliveryByStatus(1, currentMonth);
+            int waitOrder=dao.getTotalDeliveryByStatus(1);
             session.setAttribute("waitOrder", waitOrder);
-            int successOrder=dao.getTotalDeliveryByStatus(3, currentMonth);
+            int successOrder=dao.getTotalDeliveryByStatus(3);
             session.setAttribute("successOrder", successOrder);
         }catch(Exception e){
             

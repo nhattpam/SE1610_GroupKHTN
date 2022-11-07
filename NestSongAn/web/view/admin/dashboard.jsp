@@ -261,16 +261,16 @@
                                 <h5>Doanh thu cửa hàng</h5>
                                 <h6 style="color: green; font-weight: bold;"><fmt:formatNumber type="number" groupingUsed="true" value="${income}" /> VNĐ</h6>
                                 <div>
-                                    <h4>Thống kê tháng ${currentMonth}</h4>
-                                    <c:remove var="currentMonth" scope="session"></c:remove>
+                                    <br/>
+                                    <h4>Thống kê </h4>                                    
                                     <h5>Đơn hàng đã giao</h5>
                                     <h6 style="color: green; font-weight: bold;">${successOrder}</h6>
                                     <c:remove var="successOrder" scope="session"></c:remove>
                                     <h5>Đơn hàng đang chờ</h5>
                                     <h6 style="color: green; font-weight: bold;">${waitOrder}</h6>
                                     <c:remove var="waitOrder" scope="session"></c:remove>
-                                </div>                            </div>
-
+                                </div>                            
+                            </div>
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->

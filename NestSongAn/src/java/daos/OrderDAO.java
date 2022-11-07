@@ -39,7 +39,7 @@ public interface OrderDAO {
     //khang tran: function view list order deliverired
     public List<OrderDTO> vỉewDeliveriedOrders();
     //Hung: get number of order base on status and current month
-    public int getTotalDeliveryByStatus(int status, String currentMonth) throws SQLException;
+    public int getTotalDeliveryByStatus(int status) throws SQLException;
     
     //khang tran: sort order status
     //number of succes order (ship)

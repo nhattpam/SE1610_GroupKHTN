@@ -474,7 +474,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public int getTotalDeliveryByStatus(int status, String currentMonth) throws SQLException {
+    public int getTotalDeliveryByStatus(int status) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -484,10 +484,9 @@ public class OrderDAOImpl implements OrderDAO {
             if (con != null) {
                 String sql = "select COUNT(*) as number\n"
                         + "from [order]\n"
-                        + "where status=? and order_date like ?";
+                        + "where status=? ";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, status);
-                stm.setString(2, currentMonth + "%");
+                stm.setInt(1, status);                
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     result = rs.getInt("number");

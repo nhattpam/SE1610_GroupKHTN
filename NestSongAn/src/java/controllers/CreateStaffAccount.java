@@ -119,7 +119,8 @@ public class CreateStaffAccount extends HttpServlet {
 
                 boolean result = dao.userRegister(us);
                 if (result==true) {
-                    request.setAttribute("succMsg", "Tạo tài khoản thành công...");
+                    url="search-account?search="+full_name;
+                    response.sendRedirect(url);
                 }else{
                     request.setAttribute("failedMsg", "Có lỗi trên hệ thống...");
                 }
