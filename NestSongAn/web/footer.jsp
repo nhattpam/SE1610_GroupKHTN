@@ -42,7 +42,7 @@
                             <ul >
                                 <li style="color: white;">Địa chỉ: 60-49 Rạch Giá Kiên Giang</li>
                                 <li style="color: white;">Sđt:  +84 1235548 48</li>
-                                <li style="color: white;">Email: khtnholdings.work.gmail</li>
+                                <li style="color: white;">Email: khtnholdings.work@gmail.com</li>
                             </ul>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="footer__widget">
                             <h6 style="color: white;">Thông tin thêm</h6>
                             <ul>
-                                <li><a href="ve-song-an" style="color: white;">Về song ân</a></li>
+                                <li><a href="ve-song-an" style="color: white;">Về Song Ân</a></li>
                                 <li><a href="huong-dan-mua-hang" style="color: white;">Hướng dẫn mua hàng</a></li>
                                 <li><a href="huong-dan-mua-hang" style="color: white;">Thanh toán</a></li>
                             </ul>

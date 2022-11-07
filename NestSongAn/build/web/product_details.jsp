@@ -290,6 +290,13 @@
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="products/${l.photo}">
+                                    <style>
+                                        .product__item__pic__hover li:hover a {
+                                            background: #6a0e13;
+                                            border-color: #6a0e13
+                                                ;
+                                        }
+                                    </style>
                                     <ul class="product__item__pic__hover">
                                         <c:if test="${empty USER && empty USERG}">
                                             <li><a href="loginController"><i class="fa fa-heart"></i></a></li>
@@ -366,7 +373,7 @@
                             <ul >
                                 <li style="color: white;">Địa chỉ: 60-49 Rạch Giá Kiên Giang</li>
                                 <li style="color: white;">Sđt:  +84 1235548 48</li>
-                                <li style="color: white;">Email: khtnholdings.work.gmail</li>
+                                <li style="color: white;">Email: khtnholdings.work@gmail.com</li>
                             </ul>
                         </div>
                     </div>
@@ -374,7 +381,7 @@
                         <div class="footer__widget">
                             <h6 style="color: white;">Thông tin thêm</h6>
                             <ul>
-                                <li><a href="ve-song-an" style="color: white;">Về song ân</a></li>
+                                <li><a href="ve-song-an" style="color: white;">Về Song Ân</a></li>
                                 <li><a href="huong-dan-mua-hang" style="color: white;">Hướng dẫn mua hàng</a></li>
                                 <li><a href="huong-dan-mua-hang" style="color: white;">Thanh toán</a></li>
                             </ul>
