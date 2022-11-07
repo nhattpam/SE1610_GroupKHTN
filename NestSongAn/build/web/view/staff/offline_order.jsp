@@ -75,7 +75,7 @@
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="LogoutServlet">
-                            Logout
+                             Đăng xuất
                         </a>
 <!--                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <a href="#" class="dropdown-item">
@@ -301,17 +301,17 @@
             </div>
 
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
+<!--            <footer class="main-footer">
                 <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
                 All rights reserved.
-<!--                <div class="float-right d-none d-sm-inline-block">
+                <div class="float-right d-none d-sm-inline-block">
 
                     <form action="ExcelController">
                         <input type="submit" name="action" value="Export Product to Excel">
                     </form>
                     <b>Version</b> 3.0.4
-                </div>-->
-            </footer>
+                </div>
+            </footer>-->
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

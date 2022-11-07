@@ -69,7 +69,7 @@
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="LogoutServlet">
-                            Logout
+                            Đăng xuất
                         </a>
                         <!--                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                                     <a href="#" class="dropdown-item">
@@ -216,7 +216,7 @@
                     <div class="col-md-4 offset-md-4 mt-3 ">
                         <div class="card">
                             <div class="card-body">
-                                <h2 style="font-weight: bold; color:#6a0e13;" class="text-center">Tạo tài khoản</h2>
+                                <h2 style="font-weight: bold; color:black;" class="text-center">Tạo tài khoản</h2>
 
                                 <form action="CreateStaffAccount" method="post">
                                     <c:if test="${ not empty requestScope.succMsg }">
@@ -290,7 +290,7 @@
                                         </select>
                                     </div> 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-dark btn-block btn-lg">Đăng Ký</button>
+                                        <button type="submit" class="btn btn-dark btn-block btn-lg">Tạo</button>
                                     </div>
                                 </form>
                             </div> 
@@ -300,13 +300,13 @@
             </div>
         </div>                
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+<!--        <footer class="main-footer">
             <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.0.4
             </div>
-        </footer>
+        </footer>-->
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">

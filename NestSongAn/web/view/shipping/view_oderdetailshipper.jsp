@@ -67,7 +67,7 @@
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="LogoutServlet">
-                            Logout
+                             Đăng xuất
                         </a>
 <!--                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <a href="#" class="dropdown-item">
@@ -177,14 +177,14 @@
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
 
-                            <li class="nav-item">
+<!--                            <li class="nav-item">
                                 <a href="shipper-dashboard" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thống Kê
                                     </p>
                                 </a>
-                            </li>
+                            </li>-->
                             <li class="nav-item">
                                 <a href="manage-shipper" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
@@ -259,13 +259,13 @@
             </div>
 
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
+<!--            <footer class="main-footer">
                 <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
                 All rights reserved.
                 <div class="float-right d-none d-sm-inline-block">
                     <b>Version</b> 3.0.4
                 </div>
-            </footer>
+            </footer>-->
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

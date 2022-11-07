@@ -42,7 +42,7 @@
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <form class="form-inline ml-3" action="search-product">
                     <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control form-control-navbar" name="search" type="search" placeholder="Tìm kiếm" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-navbar" type="submit">
                                 <i class="fas fa-search"></i>
@@ -80,7 +80,7 @@
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="LogoutServlet">
-                            Logout
+                             Đăng xuất
                         </a>
 
                         <!--                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -294,7 +294,7 @@
                                     <td>${l.edit_date}</td>
                                     <td>${l.category_id.category_id}</td>
                                     <td>
-                                        <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-primary"> Sửa</a>
+                                        <a href="edit-page?product_id=${l.product_id}" class="btn btn-sm btn-warning"> Sửa</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -306,14 +306,14 @@
 
             <!-- /.content-wrapper -->
             <footer class="main-footer">
-                <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
-                All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
+<!--                <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
+                All rights reserved.-->
+                <div class="float-right d-none d-sm-inline-block mb-3">
 
                     <form action="ExcelController">
-                        <input type="submit" name="action" value="Export Product to Excel">
+                        <input type="submit" name="action" value="Xuất Danh Sách Sản Phẩm Excel">
                     </form>
-                    <b>Version</b> 3.0.4
+                    <!--<b>Version</b> 3.0.4-->
                 </div>
             </footer>
 

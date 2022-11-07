@@ -65,7 +65,7 @@
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="LogoutServlet">
-                            Logout
+                            Đăng xuất
                         </a>
                         <!--                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                                     <a href="#" class="dropdown-item">
@@ -209,28 +209,28 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-                <section class="content-header">
+<!--                <section class="content-header">
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <!--<h1>Widgets</h1>-->
+                                <h1>Widgets</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="admin-dashboard">Thống Kê</a></li>
-                                    <!--<li class="breadcrumb-item active">Quản Lý Người Dùng</li>-->
+                                    <li class="breadcrumb-item active">Quản Lý Người Dùng</li>
                                 </ol>
                             </div>
                         </div>
-                    </div><!-- /.container-fluid -->
-                </section>
+                    </div> /.container-fluid 
+                </section>-->
                 <!-- Main content -->
                 <section class="content">
                     <div class="container-fluid">
                         <!--<h5 class="mb-2">Quản Lý Người Dùng</h5>-->
                         <div class="row">
                             <div class="col-md-12">
-                                <h5>Sản phẩm bán chạy</h5>
+                                <h5 style="font-weight: bold;">Sản phẩm bán chạy</h5>
                                 <div class="row crd-ho">
                                     <table class="table table-striped">
                                         <thead class="bg-dark text-white">
@@ -280,13 +280,13 @@
         </div>
 
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+<!--        <footer class="main-footer">
             <strong>Copyright &copy; 2014-2019 <a href="">KHTN</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.0.4
             </div>
-        </footer>
+        </footer>-->
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">

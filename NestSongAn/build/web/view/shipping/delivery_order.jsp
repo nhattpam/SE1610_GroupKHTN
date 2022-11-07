@@ -70,7 +70,7 @@
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="LogoutServlet">
-                            Logout
+                             Đăng xuất
                         </a>
 <!--                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <a href="#" class="dropdown-item">
@@ -180,14 +180,14 @@
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
 
-                            <li class="nav-item">
+<!--                            <li class="nav-item">
                                 <a href="shipper-dashboard" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Thống Kê
                                     </p>
                                 </a>
-                            </li>
+                            </li>-->
                             <li class="nav-item">
                                 <a href="manage-shipper" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
