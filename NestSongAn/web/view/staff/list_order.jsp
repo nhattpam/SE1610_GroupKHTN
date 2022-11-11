@@ -217,7 +217,7 @@
                                 <a href="list-feedback" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
-                                        Danh Sách đánh giá sản phẩm
+                                        Danh Sách Đánh Giá Sản Phẩm
                                     </p>
                                 </a>
                             </li>
