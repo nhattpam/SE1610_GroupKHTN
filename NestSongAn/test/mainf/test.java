@@ -35,7 +35,7 @@ public class test {
     public static void main(String[] args) throws SQLException {
        
         UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
-        UsersDTO u = dao.getUserIdByPhone("0987444787");
-        System.out.println(u.getUser_id());
+        UsersDTO u = dao.getUserNameByPhone("0986438255");
+        System.out.println(u.getFull_name());
     }
 }

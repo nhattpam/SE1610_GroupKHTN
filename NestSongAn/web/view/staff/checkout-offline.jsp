@@ -404,8 +404,18 @@
                                                 <c:remove var="notiCheckout" scope="session"/>
                                             </c:if>
                                             <h4 class="text-center" style="color: #6a0e13; font-weight: bolder;font-family: Tahoma, Verdana, Segoe, sans-serif;">Thông Tin Thanh Toán</h4><br>
-
-
+                                            <form action="search-customer" method="post">
+                                                <h6>Tra cứu khách hàng: <input type="number" placeholder="Nhập sđt" name="phoneSearch" value="${keepPhoneSearch}"/></h6> <button type="submit">Tra cứu</button>
+                                                <c:if test="${ not empty customer_search }">
+                                                    <p class="text-dark">Khách hàng: ${customer_search}</p>   
+                                                    <c:remove var="customer_search" scope="session"/>
+                                                </c:if> 
+                                                    <c:if test="${ not empty customer_search_empty }">
+                                                        <p class="text-danger">${customer_search_empty}</p>   
+                                                        <c:remove var="customer_search_empty" scope="session"/>
+                                                    </c:if> 
+                                            </form>
+                                            
                                             <form action="checkout-offline?bid=${sessionScope.branch_id}" method="post">
                                                 <!--<input type="hidden" value="${user.user_id}" name="id">-->
                                                 <c:if test="${ not empty wrongFullName }">
