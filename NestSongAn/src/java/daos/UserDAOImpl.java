@@ -340,21 +340,18 @@ public class UserDAOImpl implements UserDAO {
     }
 //    @Override
     @Override
-    public boolean updateStatus(int status, String email) throws SQLException {
+    public boolean updateStatus(int status, int uid) throws SQLException {
         boolean check = false;
         Connection con = null;
         PreparedStatement stm = null;
-        ResultSet rs = null;
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "UPDATE users SET status = 1 WHERE email = ? ";
+                String sql = "UPDATE users SET status = ? WHERE [user_id] = ? ";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, email);
-                rs = stm.executeQuery();
-                if (rs.next()) {
-                    check = true;
-                }
+                stm.setInt(1, status);
+                stm.setInt(2, uid);
+                check = stm.executeUpdate()>0;
             }
         } catch (Exception e) {
             e.printStackTrace();

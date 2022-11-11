@@ -280,9 +280,17 @@
                                             <c:if test = "${l.role_id.role == 'admin'}">
                                                 <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
                                             </c:if>
-                                            <c:if test="${l.role_id.role != 'admin'}">
+                                            <c:if test="${l.role_id.role != 'admin'&&l.role_id.role != 'customer'}">
                                                 <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
                                                 <a href="delete-staff?uid=${l.user_id}" class="btn btn-sm btn-danger"> Xoá</a>
+                                            </c:if>
+                                            <c:if test="${l.role_id.role == 'customer'&& l.status == 1}">
+                                                <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
+                                                <a href="ban-staff?uid=${l.user_id}" class="btn btn-sm btn-danger"> Cấm</a>
+                                            </c:if>
+                                            <c:if test="${l.role_id.role == 'customer'&& l.status == 0}">
+                                                <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
+                                                <a href="removeban-staff?uid=${l.user_id}" class="btn btn-sm btn-secondary"> Gỡ</a>
                                             </c:if>
                                                 
 

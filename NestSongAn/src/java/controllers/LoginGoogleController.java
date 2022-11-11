@@ -49,14 +49,20 @@ public class LoginGoogleController extends HttpServlet {
 
                 UserRoleDTO role_id = new UserRoleDTO(1);
                 GoogleDTO us = new GoogleDTO((String) request.getAttribute("email"), (String) request.getAttribute("USER"), status, create_date, edited_date, role_id);
-
                 UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
 
                 boolean checkDuplicateEmail = dao.checkDuplicateEmail((String) request.getAttribute("email"));
                 if (checkDuplicateEmail) {
-                    session.setAttribute("USERG", us);
+                    if(us.getStatus()==1){
+                        session.setAttribute("USERG", us);
                     response.sendRedirect("home");
-                } else {
+                    }
+                    else{
+                        request.setAttribute("inactive", "Tài khoản này đã bị khóa");
+                        dis.forward(request, response);
+                    }
+                    
+                } else{
                     boolean checkInsert = dao.userRegister(us);
                     if (checkInsert) {
                         session.setAttribute("USERG", us);

@@ -76,7 +76,7 @@ public class LoginController extends HttpServlet {
                     url = siteMaps.getProperty(HOME_PAGE);   // to home page
                     response.sendRedirect(url);
                 } else {
-                    request.setAttribute("inactive", "Xin hãy xác thực email để kích hoạt tài khoản");
+                    request.setAttribute("inactive", "Tài khoản này đã bị khóa");
                     session.removeAttribute("USER");
                 }
             }
