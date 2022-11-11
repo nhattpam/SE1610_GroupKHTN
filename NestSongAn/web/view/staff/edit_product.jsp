@@ -238,12 +238,12 @@
                 <div class="content-wrapper">
                     <div class="container">
                         <div class="row crd-ho">
-                            <div class="col-md-4 offset-md-4 mt-3 ">
+                            <div class="col-md-12 offset-md-12 mt-3 ">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="text-center">Chỉnh Sửa Sản Phẩm</h4>
+                                        <h4 class="text-center" style="font-weight: bold;">Chỉnh Sửa Sản Phẩm</h4>
 
-                                        <form action="editProduct" enctype="multipart/form-data" method="post">
+                                        <form action="editProduct" enctype="multipart/form-data" method="post" id="edit_product">
                                             <input type="hidden" name="product_id" value="${p.product_id}"/>
                                             <div class="form-group">
                                                 <c:if test="${ not empty wrongName }">
@@ -277,7 +277,8 @@
                                                     <c:remove var="wrongFullDes" scope="session"/>
                                                 </c:if>
                                                 <label for="exampleInputPassword1">Mô Tả Dài*</label>
-                                                <input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required" value="${p.full_description}">
+                                                <!--<input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required" value="${p.full_description}">-->
+                                                <textarea id="exampleInputPassword1" class="text" cols="136" rows ="20" name="full_descripion" form="edit_product">${p.full_description}</textarea>
                                             </div> 
 
                                             <div class="form-group">
@@ -292,7 +293,7 @@
                                             
                                             <div class="form-group">
                                                 <label for="exampleFormControlFile1">Upload Ảnh</label>
-                                                <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1" required="required"/>
+                                                <input name="img" type="file" class="form-control-file" id="exampleFormControlFile1" required="required"/><p>${p.photo}</p>
                                                 <img src="products/${p.photo}" style="width: 100px; height: 100px;">
                                             </div>
 

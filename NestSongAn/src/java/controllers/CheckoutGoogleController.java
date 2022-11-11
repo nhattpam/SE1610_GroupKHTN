@@ -177,6 +177,8 @@ public class CheckoutGoogleController extends HttpServlet {
                     //status = 1: order pending
                     od.setOrder_id(order_id);
                     orderDAO.addOrder(od);
+                    keepInput.removeAttribute("delivery_address");
+                    
 
                     TreeMap<ProductDTO, Integer> list = cart.getList();
                     for (Map.Entry<ProductDTO, Integer> ds : list.entrySet()) {
