@@ -64,7 +64,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value="Thanh toán" class="buttonCheckOut"/>
+                            <input type="submit" value="Chuyển đến Paypal" class="buttonCheckOut"/>
                         </td>
                     </tr>
                 </table>
