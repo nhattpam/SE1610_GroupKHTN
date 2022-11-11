@@ -42,6 +42,8 @@ public class ExportExcelController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         HSSFWorkbook wb = new HSSFWorkbook();
         UserDAOImpl dao = new UserDAOImpl(DBUtils.getConnection());
         ProductDAOImpl daop = new ProductDAOImpl(DBUtils.getConnection());
