@@ -48,19 +48,19 @@
                     </tr>
                     <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Thành tiền:</td>
-                        <td><input type="text" name="subtotal" value="${sessionScope.subtotal}" readonly /> VNĐ</td>
+                        <td><input type="text" name="subtotal" value="${sessionScope.subtotal}" readonly /> USD</td>
                     </tr>
                     <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Phí vận chuyển: </td>
-                        <td><input type="text" name="shipping" value="0" readonly /> VNĐ</td>
+                        <td><input type="text" name="shipping" value="0" readonly /> USD</td>
                     </tr>    
                     <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Thuế:</td>
-                        <td><input type="text" name="tax" value="0" readonly /> VNĐ</td>
+                        <td><input type="text" name="tax" value="0" readonly /> USD</td>
                     </tr>    
                     <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Tổng giá trị:</td>
-                        <td><input type="text" name="total" value="${sessionScope.subtotal}" readonly/> VNĐ</td>
+                        <td><input type="text" name="total" value="${sessionScope.subtotal}" readonly/> USD</td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">

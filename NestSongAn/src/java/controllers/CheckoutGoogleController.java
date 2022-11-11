@@ -18,6 +18,8 @@ import dtos.UsersDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -163,7 +165,10 @@ public class CheckoutGoogleController extends HttpServlet {
                         payment_method = "paypal";
                         HttpSession sPayPal = request.getSession();
                         sPayPal.setAttribute("order_id", order_id);
-                        sPayPal.setAttribute("subtotal", total);
+                        NumberFormat formatter = new DecimalFormat("###,###,###.##");
+                        float convert = total / 24820;
+                        System.out.println("The Decimal Value is:" + formatter.format(convert));
+                        sPayPal.setAttribute("subtotal", formatter.format(convert));
                         response.sendRedirect("checkout-paypal");
                     }
                     

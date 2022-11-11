@@ -50,19 +50,19 @@
                     </tr>-->
                     <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Thành tiền:</td>
-                        <td>${transaction.amount.details.subtotal} VNĐ</td>
+                        <td>${transaction.amount.details.subtotal} USD</td>
                     </tr>
                     <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Phí vận chuyển</td>
-                        <td>${transaction.amount.details.shipping} VNĐ</td>
+                        <td>${transaction.amount.details.shipping} USD</td>
                     </tr>
                     <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Thuế:</td>
-                        <td>${transaction.amount.details.tax} VNĐ</td>
+                        <td>${transaction.amount.details.tax} USD</td>
                     </tr>
                     <tr>
                         <td style="color: #0079C1; font-family: Tahoma, Verdana, Segoe, sans-serif;">Tổng giá trị:</td>
-                        <td>${transaction.amount.total} VNĐ</td>
+                        <td>${transaction.amount.total} USD</td>
                     </tr>
                     <tr><td><br/></td></tr>
                     <tr>

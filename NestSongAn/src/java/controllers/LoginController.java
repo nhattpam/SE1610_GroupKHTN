@@ -58,7 +58,7 @@ public class LoginController extends HttpServlet {
         ServletContext context = this.getServletContext();
         Properties siteMaps = (Properties) context.getAttribute("SITE_MAP");
         String url = siteMaps.getProperty(LOGIN_PAGE);                                          // default to login page if error
-        String errorMessage = "Wrong username or password";
+        String errorMessage = "Kiểm tra lại tên đăng nhập hoặc mật khẩu";
         try {
             String hashedPassword = toHexString(getSHA(password));
             //1:call DAO

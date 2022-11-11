@@ -188,10 +188,10 @@
                 </div>
                 <!--<div class="or-seperator"><b></b></div>-->
                 <div class="form-group">
-                    <input type="text" class="form-control input-lg" name="txtUsername" placeholder="Username" required="required">
+                    <input type="text" class="form-control input-lg" name="txtUsername" placeholder="Tên đăng nhập" required="required">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control input-lg" name="txtPassword" placeholder="Password" required="required">
+                    <input type="password" class="form-control input-lg" name="txtPassword" placeholder="Mật khẩu" required="required">
                 </div>  
                 <div class="form-group">
                     <button type="submit" class="btn btn-danger btn-lg btn-block signin-btn" style="background: #6a0e13 !important;">Đăng nhập</button>
