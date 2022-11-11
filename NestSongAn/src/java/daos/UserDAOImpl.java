@@ -754,4 +754,21 @@ public class UserDAOImpl implements UserDAO {
         }
         return u ;
     }
+    
+    public UsersDTO getUserNameByPhone(String phone){
+        UsersDTO u = null;
+        String sql = "SELECT full_name FROM users\n"
+                + "\n"
+                + "WHERE phone =" +  phone +"";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                u = new UsersDTO();
+                u.setFull_name(rs.getString("full_name"));
+            }
+        } catch (Exception e) {
+        }
+        return u ;
+    }
 }
