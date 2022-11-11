@@ -131,7 +131,7 @@
                     <c:remove var="failedMsg" scope="session"/>
                 </c:if>
                 <h2 style="font-weight: bold; color:#6a0e13;">Đăng Ký</h2>
-                <p class="lead">Những sản phẩm tuyệt vời đang đợi bạn.</p>
+                <p class="lead" style="font-family: 'Roboto', sans-serif;">Những sản phẩm tuyệt vời đang đợi bạn.</p>
                 
                     
                 <c:if test="${ not empty wrongFullName }">
