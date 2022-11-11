@@ -191,6 +191,9 @@ public class CheckoutGoogleController extends HttpServlet {
                     session.removeAttribute("cart");
                     session.removeAttribute("numlist");
                     session.setAttribute("order_id", od.getOrder_id());
+                    if(request.getParameter("payment_method").equals("cod")){
+                        response.sendRedirect("success-order");
+                    }
 //                    response.sendRedirect("success-order");
 
                 } catch (Exception e) {

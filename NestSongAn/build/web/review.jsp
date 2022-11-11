@@ -34,7 +34,7 @@
     <body>
         <jsp:include page="header.jsp"/> 
         <div align="center">
-            <h4 style="color: #00457C; font-family: Tahoma, Verdana, Segoe, sans-serif; font-weight: bold;">Vui lòng kiểm tra lại trước khi thanh toán</h4>
+            <h4 style="color: #00457C; font-family: Tahoma, Verdana, Segoe, sans-serif; font-weight: bold;">Giao dịch thành công!</h4>
             <form action="execute_payment" method="post">
                 <table>
                     <tr>
@@ -83,7 +83,7 @@
 
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value="Thanh Toán Ngay" class="buttonCheckOut"/>
+                            <input type="submit" value="Hoàn thành" class="buttonCheckOut"/>
                         </td>
                     </tr>    
                 </table>
