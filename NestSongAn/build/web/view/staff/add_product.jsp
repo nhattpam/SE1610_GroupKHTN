@@ -235,10 +235,10 @@
             <div class="content-wrapper">
                 <div class="container">
                     <div class="row crd-ho">
-                        <div class="col-md-4 offset-md-4 mt-3 ">
+                        <div class="col-md-12 offset-md-12 mt-3 ">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="text-center">Thêm Sản Phẩm</h4>
+                                    <h4 class="text-center" style="font-weight: bold">Thêm Sản Phẩm</h4>
 
                                     <c:if test="${ not empty succMsg }">
                                         <h5 class="text-center text-success">${succMsg}</h5>
@@ -251,7 +251,7 @@
                                     </c:if>
 
 
-                                    <form action="add-product" method="post" enctype="multipart/form-data">
+                                    <form action="add-product" method="post" enctype="multipart/form-data" id="add_product">
                                         <div class="form-group">
                                             <c:if test="${ not empty wrongName }">
                                                 <p class="text-danger">${wrongName}</p>
@@ -284,7 +284,8 @@
                                                 <c:remove var="wrongFullDes" scope="session"/>
                                             </c:if>
                                             <label for="exampleInputPassword1">Mô Tả Dài*</label>
-                                            <input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required">
+                                            <!--<input name="full_descripion" type="text" class="form-control" id="exampleInputPassword1" required="required">-->
+                                             <textarea id="exampleInputPassword1" class="text" cols="136" rows ="20" name="full_descripion" form="add_product"></textarea>
                                         </div> 
 
                                         <div class="form-group">
