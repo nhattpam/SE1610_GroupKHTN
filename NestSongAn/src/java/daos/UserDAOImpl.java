@@ -585,7 +585,7 @@ public class UserDAOImpl implements UserDAO {
             String sql = "SELECT u.user_id, u.full_name, u.user_name,u.phone, u.email, u.create_date, u.edited_date,u.status, ur.role\n"
                     + " FROM USERS u INNER JOIN user_role ur\n"
                     + " ON u.role_id = ur.role_id\n"
-                    + " ";
+                    + " ORDER BY u.role_id";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

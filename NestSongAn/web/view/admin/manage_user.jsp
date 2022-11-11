@@ -277,12 +277,14 @@
                                             ${l.role_id.role}
                                         </td>
                                         <td>
-                                            <c:if test = "${l.role_id.role == 'staff'}">
+                                            <c:if test = "${l.role_id.role == 'admin'}">
                                                 <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
                                             </c:if>
-                                            <c:if test = "${l.role_id.role == 'staff'}">
+                                            <c:if test="${l.role_id.role != 'admin'}">
+                                                <a href="edit-staff?uid=${l.user_id}&full_name=${l.full_name}&user_name=${l.user_name}&phone=${l.phone}&email=${l.email}" class="btn btn-sm btn-primary"> Sửa</a>
                                                 <a href="delete-staff?uid=${l.user_id}" class="btn btn-sm btn-danger"> Xoá</a>
                                             </c:if>
+                                                
 
 
                                         </td>
